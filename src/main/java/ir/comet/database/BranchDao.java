@@ -1,0 +1,17 @@
+package ir.comet.database;
+
+import ir.comet.model.Branch;
+
+import java.util.List;
+
+/**
+ * Created by Mohammad on 2/28/2017.
+ */
+public interface BranchDao {
+
+    public void createBranch(Branch branch);
+    public Branch getBranch(long branchId);
+    public List<Branch> getAllBranches();
+    public void updateBranch(Branch branch);
+    public void deleteBranch(Branch branch);
+}

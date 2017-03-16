@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<!--<hibernate-configuration>-->
+    <!--<session-factory>-->
+        <!--<property name="connection.url">-->
+            <!--jdbc:postgresql://127.0.0.1:5432/test"-->
+        <!--</property>-->
+        <!--<property name="connection.driver_class">-->
+        <!--&lt;!&ndash; <property name="connection.username"/> &ndash;&gt;-->
+        <!--&lt;!&ndash; <property name="connection.password"/> &ndash;&gt;-->
+
+        <!--&lt;!&ndash; DB schema will be updated if needed &ndash;&gt;-->
+        <!--&lt;!&ndash; <property name="hbm2ddl.auto">update</property> &ndash;&gt;-->
+    <!--</session-factory>-->
+<!--</hibernate-configuration>-->
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/test</property>
+        <property name="hibernate.connection.username">comet</property>
+        <property name="hibernate.connection.password">comet</property>
+
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+
+        <!-- Print executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create all database on startup -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+         <!--Annotated entity classes-->
+        <mapping class="ir.comet.model.Brand"/>
+        <mapping class="ir.comet.model.Branch"/>
+        <mapping class="ir.comet.model.Category"/>
+        <mapping class="ir.comet.model.Comment"/>
+        <mapping class="ir.comet.model.Customer"/>
+        <mapping class="ir.comet.model.Order"/>
+        <mapping class="ir.comet.model.WareHouse"/>
+        <mapping class="ir.comet.model.SellingList"/>
+        <mapping class="ir.comet.model.Receipt"/>
+        <mapping class="ir.comet.model.Product"/>
+        <mapping class="ir.comet.model.Notification"/>
+        <mapping class="ir.comet.model.Article"/>
+
+    </session-factory>
+</hibernate-configuration>
