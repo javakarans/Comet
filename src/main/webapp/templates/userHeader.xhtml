@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+    <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"></link>
+</h:head>
+
+<h:body >
+
+    <ui:composition>
+
+        <b:container fluid="true">
+            <!-- Upper Header -->
+            <b:panel>
+                <b:row>
+                    <b:column colSm="10">
+                        <b:row>
+                            <b:column colSm="12">
+                                <h:panelGrid columns="2">
+                                    <b:iconAwesome name="lock">
+                                        <span>فروشگاه اینترنتی کامت،</span>
+                                        <span><a href="#">وارد شوید</a></span>
+                                    </b:iconAwesome>
+                                    <b:iconAwesome name="user" style="margin-right:30px;">
+                                        <span><a href="#">ثبت نام کنید</a></span>
+                                    </b:iconAwesome>
+                                </h:panelGrid>
+                                <br></br>
+                            </b:column>
+                            <b:column colSm="12">
+                                <h:panelGrid columns="2">
+                                    <h:form>
+                                        <b:commandButton style="width:150px;" look="success">
+                                            <b:iconAwesome name="shopping-cart" size=""></b:iconAwesome>
+                                            <span style="margin-right: 10px">سبد خرید</span>
+                                            <b:badge value="0" style="margin-right:10px;"></b:badge>
+                                        </b:commandButton>
+                                    </h:form>
+                                    <h:form style="margin-top: 10px;margin-right: 20px">
+                                        <b:inputText size="50" placeholder="محصول مورد نظرتان را جستجو کنید ...">
+                                            <f:facet name="append">
+                                                <b:iconAwesome name="search"></b:iconAwesome>
+                                            </f:facet>
+                                        </b:inputText>
+                                    </h:form>
+                                </h:panelGrid>
+                            </b:column>
+                        </b:row>
+                    </b:column>
+                    <b:column colSm="2">
+                        <b:image value="../resources/images/COMET-Logo.png" width="130"></b:image>
+                    </b:column>
+                </b:row>
+            </b:panel>
+
+            <!-- Menu -->
+            <b:navBar>
+                <b:navbarLinks>
+                    <b:navLink value="خانه" href="#"></b:navLink>
+                    <b:dropMenu value="لوازم الکترونیکی 1">
+                        <b:navLink header="برند 1"></b:navLink>
+                        <b:navLink value="نوع 1" href="#"></b:navLink>
+                        <b:navLink value="نوع 2" href="#"></b:navLink>
+                    </b:dropMenu>
+                    <b:dropMenu value="لوازم الکترونیکی 2">
+                        <b:navLink header="برند 2"></b:navLink>
+                        <b:navLink value="نوع 1" href="#"></b:navLink>
+                        <b:navLink value="نوع 2" href="#"></b:navLink>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>
+
+        </b:container>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
