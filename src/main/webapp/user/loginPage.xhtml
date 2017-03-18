@@ -2,46 +2,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="../resources/lib/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"/>
-    <link rel="stylesheet" href="../resources/css/loginPage.css"/>
-    <!-- Latest compiled and minified JavaScript -->
-    <script type="text/javascript" src="../resources/js/jquery.min.js"></script>
-    <script type="text/javascript" src="../resources/lib/bootstrap/js/bootstrap.min.js"></script>
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>User Template</title>
+    <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"></link>
+</h:head>
 
-</head>
-<body>
+<h:body>
 
-<div class="container">
+    <ui:composition>
+
+
+        <b:container>
             <h:form>
-                <div class="form-group">
-                    <span>پست الکترونیک</span>
-                    <h:inputText styleClass="form-control" a:placeholder="Email" style="width: 200px"></h:inputText>
-                </div>
-                <div class="form-group">
-                    <span>کلمه عبور</span>
-                    <h:inputSecret styleClass="form-control" a:placeholder="Pass" style="width: 200px"></h:inputSecret>
-                </div>
-                <div style="display: inline-block" class="form-group">
-                    <span style="float: right">مرا به خاطر بسپار
-                    </span>
-                    <h:selectBooleanCheckbox id="rememberPass" styleClass="checkbox "></h:selectBooleanCheckbox>
-                </div>
-                <div class="form-group">
-                    <a href="#">رمز عبور را فراموش کرده ام</a>
-                </div>
-                <div class="form-group">
-                    <h:commandLink styleClass="btn btn-info"><span>ورود به کامت</span></h:commandLink>
-                </div>
+                <h:panelGrid columns="2">
+                    <h:outputText value="پست الکترونیک"></h:outputText>
+                    <b:inputText style="margin-top:12px;margin-right:30px;"></b:inputText>
+                    <h:outputText value="کلمه عبور"></h:outputText>
+                    <b:inputText style="margin-top:12px;margin-right:30px;"></b:inputText>
+                    <h:outputText></h:outputText>
+                    <a href="#" style="margin-top:12px;margin-right:30px;">رمز عبورم را فراموش کرده ام</a>
+                    <h:outputText></h:outputText>
+                    <h:panelGrid columns="2" style="margin-top:12px;margin-right:30px;">
+                        <b:selectBooleanCheckbox value="#" style="margin-top:8px;"/>
+                        <h:outputText value="مرا به خاطر بسپار"></h:outputText>
+                    </h:panelGrid>
+                    <h:outputText></h:outputText>
+                    <b:commandButton value="ورود به کامت" style="margin-top:12px;margin-right:30px;"
+                                     look="info"></b:commandButton>
+                </h:panelGrid>
             </h:form>
+        </b:container>
+    </ui:composition>
+</h:body>
 
-        </div>
-</body>
 </html>
+
