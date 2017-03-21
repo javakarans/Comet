@@ -17,7 +17,7 @@ public class SqlHandler {
         session.beginTransaction();
         session.save(object);
         session.getTransaction().commit();
-        session.close();
+
     }
 
     public static <T> void update(T object){

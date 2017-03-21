@@ -4,14 +4,13 @@ import ir.comet.model.Brand;
 
 import java.util.List;
 
-/**
- * Created by Mohammad on 2/28/2017.
- */
+
 public class BrandDaoImp implements BrandDao {
 
+    private SqlHandler sqlHandler = new SqlHandler();
 
     public void createBrand(Brand brand) {
-
+         sqlHandler.create(brand);
     }
 
     public Brand getBrand(long brandId) {
