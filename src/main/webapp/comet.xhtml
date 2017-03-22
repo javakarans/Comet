@@ -2,135 +2,72 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="resources/lib/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="resources/lib/bootstrap-rtl.min.css"/>
-    <!-- Header CSS-->
-    <link rel="stylesheet" href="resources/css/header.css"/>
-    <!-- Header CSS-->
-    <!-- Footer CSS-->
-    <link rel="stylesheet" href="resources/css/footer.css"/>
-    <!-- Footer CSS-->
-    <link rel="stylesheet" href="resources/css/index.css"/>
-    <!-- Latest compiled and minified JavaScript -->
-    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
-    <script type="text/javascript" src="resources/lib/bootstrap/js/bootstrap.min.js"></script>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
 
-</head>
-<body>
+<h:body>
 
-    <!--Header-->
-    <div id="header">
-        <ui:include src="templates/header.xhtml"></ui:include>
-    </div>
-    <!--Header-->
+    <ui:composition template="templates/UserTemplate.xhtml">
 
+        <ui:define name="content">
 
-<!--Content-->
-    <div id="content" class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <span>تازه ترین خبرها</span>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="nav">
-                                    <ui:repeat value="#" var="articleItem">
-                                        <li>
-                                            <p>
-                                                <img alt="img" src="#"></img>
-                                                <span>عنوان مطلب</span>
-                                            </p>
-                                        </li>
-                                    </ui:repeat>
-                                </ul>
-                            </div>
-                            <div class="panel-footer text-left">
-                                <a href=""><span >خبرهای بیشتر</span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                panel-right-bottom
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-9">
-                <div class="row">
+            <link href="resources/css/comet.css" rel="stylesheet"></link>
 
-                    <!--Slide Panel-->
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <p class="text-center">اسلاید</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Slide Panel-->
+            <b:container style="margin-top:-8px;">
 
-                    <!--Most Selling Panel-->
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <span>پر فروش ترین ها</span>
-                            </div>
-                            <div class="panel-body">
-                                <p class="text-center">لیست اسلایدی</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Most Selling Panel-->
+                <b:row>
+                    <b:column colSm="3">
+                        <b:panel>
 
-                    <!--Most view Panel-->
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <span>پر بازدید ترین ها</span>
-                            </div>
-                            <div class="panel-body">
-                                <p class="text-center">لیست اسلایدی</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Most view Panel-->
+                        </b:panel>
+                    </b:column>
+                    <b:column colSm="9">
+                        <!-- SlidePanel -->
+                        <b:panel styleClass="slidePanel">
+                                <b:carousel id="parque">
+                                    <!-- Slide1 -->
+                                    <b:carouselItem>
+                                        <img src="resources/images/slide1.jpg" alt="Valladolid" style="width: 850px;height: 300px"/>
+                                    </b:carouselItem>
+                                    <!-- Slide2 -->
+                                    <b:carouselItem>
+                                        <img src="resources/images/slide2.gif" alt="Valladolid" style="width: 850px;height: 300px"/>
+                                    </b:carouselItem>
+                                    <!-- Slide3 -->
+                                    <b:carouselItem>
+                                        <img src="resources/images/slide3.jpg" alt="Valladolid" style="width: 850px;height: 300px"/>
+                                    </b:carouselItem>
+                                </b:carousel>
+                        </b:panel>
+                        <!-- MostSellingPanel -->
+                        <b:panel>
 
-                    <!--New Panel-->
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <span>جدید ترین ها</span>
-                            </div>
-                            <div class="panel-body">
-                                <p class="text-center">لیست اسلایدی</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--New Panel-->
+                        </b:panel>
+                        <!-- MostviewPanel -->
+                        <b:panel>
 
-                </div>
-            </div>
-        </div>
-    </div>
-<!--Content-->
+                        </b:panel>
+                        <!-- NewProductPanel -->
+                        <b:panel>
 
-    <!--Footer-->
-    <div id="footer" >
-        <ui:include src="templates/footer.xhtml"></ui:include>
-    </div>
-    <!--Footer-->
+                        </b:panel>
 
+                    </b:column>
+                </b:row>
 
-</body>
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
 </html>

@@ -1,0 +1,13 @@
+.slidePanel .panel-body{
+    padding: 0;
+}
+.slidePanel .carousel-control.right{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0) 100%);
+}
+.slidePanel .carousel-control.left{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0) 100%);
+}
+#parque{
+    border: solid rgba(79, 78, 79, 0.07) 5px;
+    border-radius: 2px;
+}
