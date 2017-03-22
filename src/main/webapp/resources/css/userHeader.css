@@ -1,0 +1,19 @@
+#loginModal .modal-dialog{
+    width: 400px;
+    margin: 200px auto;
+}
+#loginModal .modal-header{
+    font-family: YJ;
+    background: rgba(222, 222, 222, 0.13);
+    border-bottom: solid 2px rgba(224, 224, 224, 0.23);
+    padding: 10px;
+}
+#loginModal h4{
+    font-family: YJ;
+}
+.uhCol1{
+    width: 220px;
+}
+.uhCol2{
+    width: 82px;
+}

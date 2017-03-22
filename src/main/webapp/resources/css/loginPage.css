@@ -1,3 +1,6 @@
-.loginPanel{
-    /*padding: 30px 25px;*/
+.lgCol1{
+    width: 100px;
+}
+.lgCol2{
+    width: 250px;
 }
