@@ -24,7 +24,24 @@
 
                 <b:row>
                     <b:column colSm="3">
-                        <b:panel>
+                        <!-- Article -->
+                        <b:panel collapsible="false" styleClass="contentPanel">
+                            <f:facet name="heading">
+                                <span>تازه ترین خبر ها</span>
+                            </f:facet>
+                            <h:panelGrid columns="1">
+                                <b:image value="resources/images/slide1.jpg" styleClass="image">
+                                    <span style="margin-right: 20px">خبر شماره 1</span>
+                                </b:image>
+                                <br></br>
+                                <b:image value="resources/images/slide2.gif" styleClass="image">
+                                    <span style="margin-right: 20px">خبر شماره 2</span>
+                                </b:image>
+                                <br></br>
+                                <b:image value="resources/images/slide3.jpg" styleClass="image">
+                                    <span style="margin-right: 20px">خبر شماره 3</span>
+                                </b:image>
+                            </h:panelGrid>
 
                         </b:panel>
                     </b:column>
@@ -47,16 +64,22 @@
                                 </b:carousel>
                         </b:panel>
                         <!-- MostSellingPanel -->
-                        <b:panel>
-
+                        <b:panel collapsible="false" styleClass="contentPanel">
+                            <f:facet name="heading">
+                                <span>پر فروش ترین ها</span>
+                            </f:facet>
                         </b:panel>
                         <!-- MostviewPanel -->
-                        <b:panel>
-
+                        <b:panel collapsible="false" styleClass="contentPanel">
+                            <f:facet name="heading">
+                                <span>پر بازدید ترین ها</span>
+                            </f:facet>
                         </b:panel>
                         <!-- NewProductPanel -->
-                        <b:panel>
-
+                        <b:panel collapsible="false" styleClass="contentPanel">
+                            <f:facet name="heading">
+                                <span>جدید ترین ها</span>
+                            </f:facet>
                         </b:panel>
 
                     </b:column>
