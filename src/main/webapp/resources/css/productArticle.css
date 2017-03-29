@@ -1,0 +1,21 @@
+.pACol1{
+    width: 300px;
+}
+.pACol2{
+    width: 300px;
+}
+.post_info{
+    color: #aaaaaa;
+    margin-top: 20px;
+    text-align: right;
+}
+.article_img{
+    margin:auto;
+    display: block;
+    width: auto;
+
+}
+#content_panel .panel-footer{
+    border-top: solid #eeeeee 1px;
+    background-color: rgba(255, 255, 255, 0);
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body >
+
+    <ui:composition template="../templates/UserTemplate.xhtml">
+
+
+
+        <ui:define name="content">
+
+            <link rel="stylesheet" href="../resources/css/productArticle.css"></link>
+
+            <b:container>
+                <b:panel style="margin-top:-15px;" id="content_panel">
+                    <div class="page-header" style="text-align: center;margin-top: -10px">
+                        <h3 style="font-family: YJ, NYJ;text-align: right">
+                            <h:outputText value="موضوع"></h:outputText>
+                        </h3>
+                        <h5 style="font-family: YJ, NYJ;" class="post_info">
+                            <h:panelGrid columns="2" columnClasses="pACol1,pACol2">
+                                <h:outputText value="نویسنده:"></h:outputText>
+                                <h:outputText value="تاریخ"></h:outputText>
+                            </h:panelGrid>
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+
+                        <b:row>
+                            <b:column colSm="12">
+                                <h:outputText value="متن و عکس"></h:outputText>
+                                <br></br>
+                                <h:outputText value="متن و عکس"></h:outputText>
+                                <br></br>
+                                <h:outputText value="متن و عکس"></h:outputText>
+                                <br></br>
+                                <h:outputText value="متن و عکس"></h:outputText>
+                                <br></br>
+                                <h:outputText value="متن و عکس"></h:outputText>
+                                <br></br>
+                                <h:outputText value="متن و عکس"></h:outputText>
+                                <br></br>
+                                <h:outputText value="متن و عکس"></h:outputText>
+                                <br></br>
+                                <h:outputText value="متن و عکس"></h:outputText>
+                            </b:column>
+                        </b:row>
+
+                    </div>
+
+                    <f:facet name="footer">
+                        <b:socialShare shares="telegram,googleplus"
+                                       showLabel="false" show-count="false"
+                                       block-message="Click to unblock the share buttons" />
+                    </f:facet>
+
+                </b:panel>
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
