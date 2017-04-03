@@ -1,0 +1,37 @@
+#product_datagrid .ui-widget-header{
+    background: white;
+    border: 0;
+    font-family: NYJ;
+    float: left;
+}
+#product_datagrid .ui-widget-content{
+    border: 0;
+    margin-top: 20px;
+}
+#product_datagrid_paginator_top{
+    margin-bottom: 9px;
+}
+#product_datagrid_paginator_bottom{
+    margin-top: -10px;
+}
+#product_datagrid .ui-paginator .ui-paginator-current, .ui-paginator .ui-paginator-rpp-options{
+    font-family: NYJ;
+}
+#product_datagrid .ui-icon-seek-prev{
+    background: url("../images/prevPage.png") no-repeat center;
+    background-size: 60px;
+
+}
+#product_datagrid .ui-icon-seek-next{
+    background: url("../images/nextPage.png") no-repeat center;
+    background-size: 60px;
+    color: rgba(0, 0, 0, 0);
+}
+#product_datagrid .ui-icon{
+    width: 60px;
+}
+.contentPanel .page-header{
+    margin-top: 0px;
+    font-size: 12px;
+    color: #626262;
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body >
+
+    <ui:composition template="../templates/UserTemplate.xhtml">
+
+        <ui:define name="content">
+
+            <link rel="stylesheet" href="../resources/css/product.css"></link>
+
+            <b:container style="margin-top:-8px;">
+
+                <b:row>
+                    <b:column colSm="3">
+                        <b:panel collapsible="false" styleClass="contentPanel">
+                            <div class="page-header">
+                                <b:iconAwesome name="filter"></b:iconAwesome>
+                                <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
+                            </div>
+                        </b:panel>
+                    </b:column>
+                    <b:column colSm="9">
+                        <b:panel collapsible="false" styleClass="contentPanel">
+                            <div class="page-header">
+                                <b:iconAwesome name="th-large"></b:iconAwesome>
+                                <h:outputText value="لوازم الکترونیکی 1" style="margin-right: 10px"></h:outputText>
+                                <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                                <h:outputText value="برند 1" style="margin-right: 10px"></h:outputText>
+                                <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                                <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
+                            </div>
+                            <p:dataGrid id="product_datagrid" value="#{productBean.productList}" var="pro" paginator="true" layout="grid" columns="3"
+                                        paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                                        rowsPerPageTemplate="6,12,16">
+                                <b:panel>
+                                    <h:outputText value="#{pro.name}"></h:outputText>
+                                </b:panel>
+                            </p:dataGrid>
+                        </b:panel>
+                    </b:column>
+                </b:row>
+
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
