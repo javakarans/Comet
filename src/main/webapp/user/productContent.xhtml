@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body>
+
+    <ui:composition template="../templates/UserTemplate.xhtml">
+
+        <ui:define name="content">
+
+            <link rel="stylesheet" href="../resources/css/productContent.css"></link>
+
+            <b:container style="margin-top:-8px;">
+
+                <b:row>
+                    <b:column colSm="12">
+                        <b:panel collapsible="false" styleClass="topPanel">
+                            <b:iconAwesome name="th-large"></b:iconAwesome>
+                            <h:outputText value="لوازم الکترونیکی 1" style="margin-right: 10px"></h:outputText>
+                            <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                            <h:outputText value="برند 1" style="margin-right: 10px"></h:outputText>
+                            <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                            <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
+                            <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                            <h:outputText value="محصول 1" style="margin-right: 10px"></h:outputText>
+                        </b:panel>
+                    </b:column>
+
+                    <!-- First Panel -->
+                    <b:column colSm="12" style="margin-top:-11px;">
+
+                        <b:panel>
+                            <b:row>
+                                <b:column colSm="4">
+                                    <div id="panel_images">
+                                        <b:row>
+                                            <b:carousel id="product-img">
+                                                <!-- Slide1 -->
+                                                <b:carouselItem>
+                                                    <b:image value="../resources/images/sample1.jpg"
+                                                             colXs="12"></b:image>
+                                                </b:carouselItem>
+                                                <!-- Slide2 -->
+                                                <b:carouselItem>
+                                                    <b:image value="../resources/images/sample1.jpg"
+                                                             colXs="12"></b:image>
+                                                </b:carouselItem>
+                                                <!-- Slide3 -->
+                                                <b:carouselItem>
+                                                    <b:image value="../resources/images/sample1.jpg"
+                                                             colXs="12"></b:image>
+                                                </b:carouselItem>
+                                            </b:carousel>
+                                        </b:row>
+                                    </div>
+                                </b:column>
+
+                                <b:column colSm="8">
+                                    <b:form>
+                                        <b:panelGrid colSpans="12" size="xs">
+                                            <div id="product_header">
+                                                <span class="first">اسم محصول به زبان فارسی</span>
+                                                <h5><span>Product name by english</span></h5>
+                                            </div>
+                                            <b:row style="margin-top:25px;">
+                                                <b:selectOneMenu span="5" style="height:auto;" label="انتخاب رنگ"
+                                                                 labelStyle="color:#848484;">
+                                                    <f:selectItem itemLabel="لطفا انتخاب کنید" itemValue=""/>
+                                                    <f:selectItem itemLabel="رنگ 1" itemValue="1"/>
+                                                    <f:selectItem itemLabel="زنگ 2" itemValue="2"/>
+                                                </b:selectOneMenu>
+                                            </b:row>
+                                            <b:row style="margin-top:25px;">
+                                                <b:selectOneMenu span="5" style="height:auto;" label="انتخاب گارانتی"
+                                                                 labelStyle="color:#848484;">
+                                                    <f:selectItem itemLabel="لطفا انتخاب کنید" itemValue=""/>
+                                                    <f:selectItem itemLabel="گارانتی 1" itemValue="1"/>
+                                                    <f:selectItem itemLabel="گارانتی 2" itemValue="2"/>
+                                                </b:selectOneMenu>
+                                            </b:row>
+                                            <b:row style="margin-top:25px;">
+                                                <b:selectOneMenu span="5" style="height:auto;" label="انتخاب فروشنده"
+                                                                 labelStyle="color:#848484;">
+                                                    <f:selectItem itemLabel="کامت" itemValue=""/>
+                                                </b:selectOneMenu>
+                                            </b:row>
+                                            <b:row style="margin-top:25px;">
+                                                <b:column colSm="12">
+                                                    <span style="color:#848484;margin-left: 10px">قیمت : </span>
+                                                    <h:outputText value="1000"
+                                                                  style="margin-left: 20px;color:#848484;"></h:outputText>
+                                                    <b:label severity="danger" text="تخفیف : 1000"></b:label>
+                                                </b:column>
+                                            </b:row>
+                                            <b:row style="margin-top:50px;">
+                                                <b:column colSm="12">
+                                                    <span style="font-size: 20px">قیمت برای شما : </span>
+                                                    <h:outputText value="1000" style="font-size: 20px"></h:outputText>
+                                                    <span style="font-size: 20px">تومان </span>
+                                                </b:column>
+                                            </b:row>
+                                            <b:row style="margin-top:40px;">
+                                                <b:column colSm="12">
+                                                    <b:commandButton style="width:165px;" look="success">
+                                                        <b:iconAwesome name="cart-plus" size=""></b:iconAwesome>
+                                                        <span style="margin-right: 10px">افزودن به سبد خرید</span>
+                                                    </b:commandButton>
+                                                </b:column>
+                                            </b:row>
+                                        </b:panelGrid>
+                                    </b:form>
+                                </b:column>
+                            </b:row>
+
+                        </b:panel>
+                    </b:column>
+                    <!-- First Panel -->
+
+                    <!-- Second Panel -->
+                    <b:column colSm="12" style="margin-top:-11px;">
+                        <b:panel>
+                            <b:tabView activeIndex="1">
+
+                                <b:tab title="معرفی و بررسی محصول">
+                                    <f:facet name="anchor"><b:iconAwesome name="pencil-square-o"/></f:facet>
+                                    <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                </b:tab>
+
+                                <b:tab title="مشخصات فنی">
+                                    <f:facet name="anchor"><b:iconAwesome name="cog"/></f:facet>
+                                    <div style="margin-top: 30px">
+                                        <ui:repeat value="#" var="itemHeader">
+                                            <b:row>
+                                                <b:column colSm="12">
+                                                    <b:iconAwesome name="caret-left"
+                                                                   style="margin-left:20px;"></b:iconAwesome>
+                                                    <h:outputText value="نوع مشخصات"
+                                                                  style="font-size: 20px"></h:outputText>
+                                                </b:column>
+                                            </b:row>
+                                            <b:row style="margin-top:30px;margin-bottom:30px;">
+                                                <ui:repeat value="#" var="item">
+                                                    <div>
+                                                        <b:column colSm="3">
+                                                            <div class="item-right">
+                                                                <h:outputText value="آیتم"></h:outputText>
+                                                            </div>
+                                                        </b:column>
+                                                        <b:column colSm="9" style="margin-bottom:10px;">
+                                                            <div class="item-left">
+                                                                <h:outputText value="مقدار"></h:outputText>
+                                                            </div>
+                                                        </b:column>
+                                                    </div>
+                                                </ui:repeat>
+                                            </b:row>
+
+                                        </ui:repeat>
+                                    </div>
+                                </b:tab>
+
+                                <b:tab title="نظرات کاربران">
+                                    <f:facet name="anchor"><b:iconAwesome name="comments-o"/></f:facet>
+                                    <p>This is the second tab.</p>
+                                </b:tab>
+
+                            </b:tabView>
+                        </b:panel>
+                    </b:column>
+                    <!-- Second Panel -->
+
+                </b:row>
+
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
