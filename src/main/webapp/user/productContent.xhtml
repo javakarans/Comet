@@ -129,11 +129,13 @@
                     <!-- Second Panel -->
                     <b:column colSm="12" style="margin-top:-11px;">
                         <b:panel>
-                            <b:tabView activeIndex="1">
+                            <b:tabView activeIndex="0">
 
                                 <b:tab title="معرفی و بررسی محصول">
                                     <f:facet name="anchor"><b:iconAwesome name="pencil-square-o"/></f:facet>
-                                    <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                    <div style="margin-top: 30px">
+                                        <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                    </div>
                                 </b:tab>
 
                                 <b:tab title="مشخصات فنی">
@@ -171,7 +173,49 @@
 
                                 <b:tab title="نظرات کاربران">
                                     <f:facet name="anchor"><b:iconAwesome name="comments-o"/></f:facet>
-                                    <p>This is the second tab.</p>
+                                    <div style="margin-top: 30px">
+                                        <ui:repeat value="#" var="userComment">
+                                            <b:row>
+                                                <b:column colSm="12">
+                                                    <b:panel collapsible="false" styleClass="userComment-panel">
+                                                        <f:facet name="heading">
+                                                            <b:row>
+                                                                <b:column colSm="8">
+                                                                    <h:outputText value="یوزر کاربر"></h:outputText>
+                                                                    <h5>15 فروردین 96</h5>
+                                                                </b:column>
+                                                                <b:column colSm="4">
+                                                                    <b:form>
+                                                                        <h:panelGrid columns="3"
+                                                                                     columnClasses="uCPCol1,uCPCol2,uCPCol3"
+                                                                                     style="margin-top: 15px">
+
+                                                                            <h:outputText
+                                                                                    value="آیا این نظر مورد پسند شما بود؟"></h:outputText>
+
+                                                                            <b:commandButton value="0"
+                                                                                             iconAwesome="thumbs-o-up"
+                                                                                             look="success" size="xs">
+                                                                            </b:commandButton>
+
+                                                                            <b:commandButton value="0"
+                                                                                             iconAwesome="thumbs-o-down"
+                                                                                             look="danger" size="xs">
+                                                                            </b:commandButton>
+
+                                                                        </h:panelGrid>
+                                                                    </b:form>
+                                                                </b:column>
+                                                            </b:row>
+                                                        </f:facet>
+                                                        <div>
+                                                            <h:outputText value="متن نظر کابر"></h:outputText>
+                                                        </div>
+                                                    </b:panel>
+                                                </b:column>
+                                            </b:row>
+                                        </ui:repeat>
+                                    </div>
                                 </b:tab>
 
                             </b:tabView>
