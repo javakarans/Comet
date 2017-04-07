@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body>
+
+    <ui:composition template="../templates/UserTemplate.xhtml">
+
+        <ui:define name="content">
+
+            <link rel="stylesheet" href="../resources/css/userAccount.css"></link>
+
+            <b:container style="margin-top:-8px;">
+
+                <b:row>
+                    <b:column colSm="12">
+
+                        <b:panel>
+                            <div class="page-header" style="margin-top: -5px">
+                                <img src="../resources/images/house.png" alt="house" width="30px"
+                                     style="margin-left: 20px"/>
+                                <span style="font-size: 20px">اطلاعات کاربر</span>
+                            </div>
+                            <div id="user-info" class="panel-body" style="text-align: center">
+                                <b:row>
+                                    <b:column colSm="4">
+                                        <span>نام و نام خانوادگی : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                    <b:column colSm="4">
+                                        <span>آدرس الکترونیک : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                    <b:column colSm="4">
+                                        <span>کد ملی : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                </b:row>
+                                <b:row style="margin-top:20px;">
+                                    <b:column colSm="4">
+                                        <span>شماره تلفن ثابت : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                    <b:column colSm="4">
+                                        <span>شماره تلفن همراه : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                    <b:column colSm="4">
+                                        <span>تاریخ تولد : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                </b:row>
+                                <b:row style="margin-top:20px;">
+                                    <b:column colSm="4">
+                                        <span>جنسیت : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                </b:row>
+                            </div>
+                        </b:panel>
+
+                    </b:column>
+
+                    <b:column colSm="12" style="margin-top:-11px;">
+
+                        <b:panel>
+                            <div class="page-header" style="margin-top: -5px">
+                                <img src="../resources/images/invoice.png" alt="invoice" width="30px"
+                                     style="margin-left: 20px"/>
+                                <span style="font-size: 20px">گزارش عملکرد</span>
+                            </div>
+                            <div id="report-info" class="panel-body" style="text-align: center">
+                                <b:row>
+                                    <b:column colSm="4">
+                                        <span>تعداد کل سفارشات : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                    <b:column colSm="4">
+                                        <span>سفارشات در انتظار تایید : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                    <b:column colSm="4">
+                                        <span>سفارشات در حال پردازش : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                </b:row>
+                                <b:row style="margin-top:20px;">
+                                    <b:column colSm="4">
+                                        <span>سفارشات انصراف داده شده : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                    <b:column colSm="4">
+                                        <span>سفارشات ارسال شده : </span>
+                                        <h:outputText value="#"></h:outputText>
+                                    </b:column>
+                                </b:row>
+                            </div>
+                        </b:panel>
+
+                    </b:column>
+
+                    <b:column colSm="12" style="margin-top:-11px;">
+
+                        <b:panel>
+                            <b:tabView activeIndex="0">
+
+                                <b:tab title="سفارشات من">
+                                    <div style="margin-top: 30px">
+                                        <b:dataTable id="my-order" value="#" var="#" searching="false" paginated="false"
+                                                     border="false" fixedHeader="true">
+                                            <b:dataTableColumn label="ردیف">
+                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn label="کد">
+                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="تاریخ">
+                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="مبلغ کل">
+                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="وضعیت">
+                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="جزئیات">
+                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                            </b:dataTableColumn>
+                                        </b:dataTable>
+                                    </div>
+                                </b:tab>
+
+                                <b:tab title="لیست مورد علاقه">
+                                    <div style="margin-top: 30px">
+                                        <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                    </div>
+                                </b:tab>
+
+                                <b:tab title="اطلاع رسانی ها">
+                                    <div style="margin-top: 30px">
+                                        <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                    </div>
+                                </b:tab>
+
+                            </b:tabView>
+                        </b:panel>
+
+                    </b:column>
+                </b:row>
+
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>

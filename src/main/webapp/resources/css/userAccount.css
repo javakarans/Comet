@@ -1,0 +1,13 @@
+#user-info span{
+    color: #23527c;
+}
+#report-info span{
+    color: #23527c;
+}
+div.dataTables_wrapper div.dataTables_info{
+    color: transparent;
+}
+#my-order{
+    background-color: #141414;
+    color: #e1e1e1;
+}
