@@ -18,6 +18,25 @@
 
         <ui:define name="content">
 
+            <link rel="stylesheet" href="../resources/lib/persian-datapicker/persian-datepicker-0.4.5.min.css"></link>
+            <link rel="stylesheet" href="../resources/css/registerPage.css"></link>
+            <script type="text/javascript" src="../resources/lib/persian-datapicker/persian-date-0.1.8.min.js"></script>
+            <script type="text/javascript" src="../resources/lib/persian-datapicker/persian-datepicker-0.4.5.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(".date-picker").pDatepicker({
+                        format : "YYYY - MM - DD",
+                        navigator: {
+                            text: {
+                                enabled: true,
+                                btnNextText: ">",
+                                btnPrevText: "&lt;"
+                            }
+                        }
+                    });
+                });
+            </script>
+
             <b:container>
                 <b:panel style="margin-top:-15px;">
                     <div class="page-header" style="text-align: center">
@@ -30,29 +49,95 @@
                                 <b:column colSm="7">
                                     <b:panelGrid colSpans="3,9" size="xs">
                                         <h:outputText value="نام"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
+                                        <b:inputText id="firstName" span="8" value="#{registerBean.customer.firstName}"
+                                                     required="true" requiredMessage="*نام خود را وارد کنید"></b:inputText>
+                                        <b:column/>
+                                        <b:column span="8" styleClass="message">
+                                                <h:message for="firstName"></h:message>
+                                        </b:column>
+
+
                                         <h:outputText value="نام خانوادگی"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
+                                        <b:inputText id="lastName" span="8" value="#{registerBean.customer.lastName}"
+                                                     required="true" requiredMessage="*نام خانوادگی خود را وارد کنید"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="lastName"></h:message>
+                                        </b:column>
+
                                         <h:outputText value="ایمیل"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
+                                        <b:inputText id="email" span="8" value="#{registerBean.customer.email}"
+                                                     required="true" requiredMessage="*ایمیل خود را وارد کنید" type="email"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="email"></h:message>
+                                            <h:outputText value=""></h:outputText>
+                                        </b:column>
+
                                         <h:outputText value="کلمه عبور"></h:outputText>
-                                        <b:inputSecret span="8" style="margin-top:-5px;"></b:inputSecret>
+                                        <b:inputSecret id="pass" span="8" value="#{registerBean.customer.password}"
+                                                       required="true" requiredMessage="*کلمه عبور خود را وارد کنید"></b:inputSecret>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="pass"></h:message>
+                                        </b:column>
+
                                         <h:outputText value="شماره تلفن"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
+                                        <b:inputText id="phoneNumber" span="8" value="#{registerBean.customer.phoneNumber}"
+                                                     onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"
+                                                     required="true" requiredMessage="*شماره تلفن خود را وارد کنید"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="phoneNumber"></h:message>
+                                        </b:column>
+
                                         <h:outputText value="شماره همراه"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
+                                        <b:inputText id="mobileNumber" span="8" value="#{registerBean.customer.mobileNumber}"
+                                                     onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"
+                                                     required="true" requiredMessage="*شماره همراه خود را وارد کنید"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="mobileNumber"></h:message>
+                                        </b:column>
+
                                         <h:outputText value="تاریخ تولد"></h:outputText>
-                                        <b:datepicker span="8" style="margin-top:-5px;"></b:datepicker>
+                                        <b:inputText id="birthDate" span="8" styleClass="date-picker" value="#{registerBean.customer.birthDate}"
+                                                     required="true" requiredMessage="*تاریخ تولد خود را وارد کنید"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="birthDate"></h:message>
+                                        </b:column>
+
                                         <h:outputText value="شماره ملی"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
-                                        <h:outputText value="آدرس"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
+                                        <b:inputText id="securityNumber" span="8" value="#{registerBean.customer.securityNumber}"
+                                                     onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"
+                                                     required="true" requiredMessage="*شماره ملی خود را وارد کنید"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="securityNumber"></h:message>
+                                        </b:column>
+
+                                        <h:outputText value="آدرس" ></h:outputText>
+                                        <b:inputText id="address" span="8" value="#{registerBean.customer.address}"
+                                                     required="true" requiredMessage="*آدرس خود را وارد کنید"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="address"></h:message>
+                                        </b:column>
+
                                         <h:outputText value="کد پستی"></h:outputText>
-                                        <b:inputText span="8" style="margin-top:-5px;"></b:inputText>
+                                        <b:inputText id="postalCode" span="8" value="#{registerBean.customer.postalCode}"
+                                                     onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"
+                                                     required="true" requiredMessage="*کد پستی خود را وارد کنید"></b:inputText>
+                                        <b:column></b:column>
+                                        <b:column span="8" styleClass="message">
+                                            <h:message for="postalCode"></h:message>
+                                        </b:column>
+
                                     </b:panelGrid>
                                     <br></br>
                                         <h:panelGrid columns="2">
-                                            <b:selectBooleanCheckbox value="#{settingsBean.checkbox1}"></b:selectBooleanCheckbox>
+                                            <b:selectBooleanCheckbox value="#" required="true"></b:selectBooleanCheckbox>
                                             <span><a>شرایط و قوانین</a> استفاده از سرویس های سایت دیجی‌کالا را مطالعه نموده و با کلیه موارد آن موافقم.</span>
                                         </h:panelGrid>
                                 </b:column>
@@ -63,12 +148,13 @@
                             <b:row>
                                 <b:column colSm="12">
                                         <b:commandButton value="ثبت نام در کامت" style="margin-top:30px;width:150px;height:40px;"
-                                                         look="info"></b:commandButton>
+                                                         look="info" update="@form" action="#{registerBean.registerCustomer()}"></b:commandButton>
                                 </b:column>
                             </b:row>
                         </h:form>
                     </div>
                 </b:panel>
+
             </b:container>
 
         </ui:define>
