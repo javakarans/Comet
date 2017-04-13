@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="../templates/UserTemplate.xhtml">
+    <ui:composition template="#{applicationBean.loadTemplate(userAccountBean.customer)}">
 
         <ui:define name="content">
 
@@ -35,29 +35,29 @@
                                 <b:row>
                                     <b:column colSm="4">
                                         <span>نام و نام خانوادگی : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.firstName} #{userAccountBean.customer.lastName}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>آدرس الکترونیک : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.email}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>کد ملی : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.securityNumber}"></h:outputText>
                                     </b:column>
                                 </b:row>
                                 <b:row style="margin-top:20px;">
                                     <b:column colSm="4">
                                         <span>شماره تلفن ثابت : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.phoneNumber}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>شماره تلفن همراه : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.mobileNumber}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>تاریخ تولد : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.birthDate}"></h:outputText>
                                     </b:column>
                                 </b:row>
                                 <b:row style="margin-top:20px;">

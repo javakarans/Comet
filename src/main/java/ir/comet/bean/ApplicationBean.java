@@ -18,11 +18,11 @@ public class ApplicationBean {
 
         if(customer==null){
 
-            template="templates/CommonTemplate.xhtml";
+            template="/templates/CommonTemplate.xhtml";
 
         }else {
 
-            template="templates/UserTemplate.xhtml";
+            template="/templates/UserTemplate.xhtml";
 
         }
 

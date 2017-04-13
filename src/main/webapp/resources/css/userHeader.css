@@ -14,15 +14,15 @@
 .uhCol1{
     width: 220px;
 }
-#user-drop-menu a{
+.user-drop-menu a{
     color: rgba(91, 91, 91, 0.96);
     text-decoration: none;
     transition: 0.5s;
 }
-#user-drop-menu a:hover{
+.user-drop-menu a:hover{
     color: rgba(26, 26, 26, 0.96);
     transition: 0.5s;
 }
-#user-drop-menu .dropdown-menu{
+.user-drop-menu .dropdown-menu{
     text-align: right;
 }
