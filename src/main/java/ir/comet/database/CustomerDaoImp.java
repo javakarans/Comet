@@ -28,11 +28,29 @@ public class CustomerDaoImp implements CustomerDao {
     public Customer getCustomer(long customerId) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Branch.class);
+        Criteria criteria = session.createCriteria(Customer.class);
         criteria.add(Restrictions.eq("customerId",customerId));
         session.getTransaction().commit();
-        session.close();
         List<Customer> list = criteria.list();
+        session.close();
+        sessionFactory.close();
+        if(!list.isEmpty()){
+            return list.get(0);
+        }
+        return null;
+    }
+
+    public Customer getCustomerByUserNameAndPass(String userName,String password) {
+        Session session=sessionFactory.openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Customer.class);
+        criteria
+                .add(Restrictions.eq("userName",userName))
+                .add(Restrictions.eq("password",password));
+        session.getTransaction().commit();
+        List<Customer> list = criteria.list();
+        session.close();
+        sessionFactory.close();
         if(!list.isEmpty()){
             return list.get(0);
         }

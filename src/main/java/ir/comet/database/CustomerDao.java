@@ -11,6 +11,7 @@ public interface CustomerDao {
 
     public void createCustomer(Customer customer);
     public Customer getCustomer(long customerId);
+    public Customer getCustomerByUserNameAndPass(String userName,String password);
     public List<Customer> getAllCustomers();
     public void updateCustomer(Customer customer);
     public void deleteCustomer(Customer customer);

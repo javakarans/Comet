@@ -24,9 +24,9 @@
                 <h:form>
                     <h:panelGrid columns="2" columnClasses="lgCol1,lgCol2">
                         <h:outputText value="پست الکترونیک"></h:outputText>
-                        <b:inputText style="margin-top:12px;"></b:inputText>
+                        <b:inputText style="margin-top:12px;" value="#{loginBean.loginController.userName}"></b:inputText>
                         <h:outputText value="کلمه عبور"></h:outputText>
-                        <b:inputText style="margin-top:12px;"></b:inputText>
+                        <b:inputText style="margin-top:12px;" value="#{loginBean.loginController.password}"></b:inputText>
                         <h:outputText></h:outputText>
                         <a href="#" style="margin-top:12px;text-decoration: none">رمز عبورم را فراموش کرده ام</a>
                         <h:outputText></h:outputText>
@@ -36,7 +36,7 @@
                         </h:panelGrid>
                         <h:outputText></h:outputText>
                         <b:commandButton value="ورود به کامت" style="margin-top:12px;"
-                                         look="info"></b:commandButton>
+                                         look="info" action="#{loginBean.login()}"></b:commandButton>
                     </h:panelGrid>
                 </h:form>
             </b:container>

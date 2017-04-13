@@ -27,13 +27,15 @@
                     <b:column colSm="10">
                         <b:row>
                             <b:column colSm="12">
-                                <h:panelGrid columns="1" columnClasses="uhCol1">
-                                    <b:dropMenu
-                                            value="سلام ، #{userHeaderBean.customer.firstName} #{userHeaderBean.customer.lastName}"
-                                            iconAwesome="user-circle" id="user-drop-menu">
-                                        <b:navLink value="ورود به پروفایل"></b:navLink>
-                                        <b:navLink value="خروج"></b:navLink>
-                                    </b:dropMenu>
+                                <h:panelGrid columns="2" columnClasses="uhCol1,uhCol2">
+                                    <b:iconAwesome name="lock">
+                                        <span>فروشگاه اینترنتی کامت،</span>
+                                        <span><a href="#loginModal" data-toggle="modal"
+                                                 style="text-decoration: none">وارد شوید</a></span>
+                                    </b:iconAwesome>
+                                    <b:iconAwesome name="user">
+                                        <span><a href="../user/registerPage.xhtml" style="text-decoration: none">ثبت نام کنید</a></span>
+                                    </b:iconAwesome>
                                 </h:panelGrid>
                                 <br></br>
                             </b:column>

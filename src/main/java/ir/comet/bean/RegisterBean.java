@@ -36,6 +36,7 @@ public class RegisterBean {
         CustomerDaoImp customerDaoImp=new CustomerDaoImp();
         customerDaoImp.createCustomer(customer);
         try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customer",customer);
             FacesContext.getCurrentInstance().getExternalContext().redirect("../comet.xhtml");
         } catch (IOException e) {
             e.printStackTrace();

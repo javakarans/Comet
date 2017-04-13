@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="templates/UserTemplate.xhtml">
+    <ui:composition template="#{applicationBean.loadTemplate(customer)}">
 
         <ui:define name="content">
 
