@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body>
+
+    <ui:composition template="../templates/UserTemplate.xhtml">
+
+        <ui:define name="content">
+
+            <link rel="stylesheet" href="../resources/css/cart.css"></link>
+
+            <b:container style="margin-top:-8px;">
+
+                <b:row>
+                    <b:column colSm="12">
+                        <b:panel collapsible="false" styleClass="topPanel">
+                            <b:iconAwesome name="th-large"></b:iconAwesome>
+                            <h:outputText value="فروشگاه کامت" style="margin-right: 10px"></h:outputText>
+                            <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                            <h:outputText value="سبد خرید" style="margin-right: 10px"></h:outputText>
+                        </b:panel>
+                    </b:column>
+
+                    <!-- First Panel -->
+                    <b:column colSm="12" style="margin-top:-11px;">
+
+                        <b:panel>
+                            <b:form>
+                                <b:row>
+                                    <b:column colSm="12" style="margin-top:20px;">
+                                        <b:iconAwesome name="caret-left"
+                                                       style="margin-left:18px;"></b:iconAwesome>
+                                        <h:outputText value="سبد خرید شما"
+                                                      style="font-size: 18px"></h:outputText>
+                                    </b:column>
+
+                                    <b:column colSm="12" style="margin-top:15px;">
+                                        <h:outputText value="برای ثبت سفارش مراحل بعدی خرید را تکمیل نمایید."
+                                                      style="font-size: 12px"></h:outputText>
+                                        <b:commandButton value="مرحله بعد"
+                                                         style="margin-top:30px;width:150px;height:40px;float:left;"
+                                                         look="success" action="#" iconAwesome="arrow-left"
+                                                         iconAlign="right"></b:commandButton>
+                                    </b:column>
+
+                                    <b:column colSm="12">
+                                        <b:dataTable searching="false" paginated="false" styleClass="order-datatable">
+                                            <b:dataTableColumn label="حذف" orderable="false"
+                                                               style="width:2%;"></b:dataTableColumn>
+                                            <b:dataTableColumn label="قیمت کل" orderable="false"
+                                                               style="width:17%;"></b:dataTableColumn>
+                                            <b:dataTableColumn label="قیمت واحد" orderable="false"
+                                                               style="width:15%;"></b:dataTableColumn>
+                                            <b:dataTableColumn label="تعداد" orderable="false"
+                                                               style="width:6%;"></b:dataTableColumn>
+                                            <b:dataTableColumn label="فروشنده" orderable="false"
+                                                               style="width:7%;"></b:dataTableColumn>
+                                            <b:dataTableColumn label="شرح محصول" orderable="false"
+                                                               style="width:35%;"></b:dataTableColumn>
+                                        </b:dataTable>
+                                        <b:form>
+                                            <b:commandButton value="بازگشت به صفحه اصلی"
+                                                             style="margin-top:30px;width:150px;height:40px;float:left;"
+                                                             look="info" action="#"></b:commandButton>
+                                        </b:form>
+                                    </b:column>
+                                </b:row>
+                            </b:form>
+
+                        </b:panel>
+
+                    </b:column>
+                    <!-- First Panel -->
+
+                </b:row>
+
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
