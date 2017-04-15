@@ -35,3 +35,11 @@
     font-size: 12px;
     color: #626262;
 }
+.product-panel .product-image{
+    -webkit-filter: drop-shadow(0px 5px 0px rgba(44, 143, 12, 0.67));
+    filter: drop-shadow(0px 5px 0px rgba(44, 143, 12, 0.67));
+}
+.product-panel{
+    font-family: YJ, NYJ;
+    background-color: rgba(235, 235, 235, 0.18);
+}

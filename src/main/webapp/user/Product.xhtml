@@ -12,7 +12,7 @@
     <title>JSF 2.2 TUTORIALS</title>
 </h:head>
 
-<h:body >
+<h:body>
 
     <ui:composition template="../templates/UserTemplate.xhtml">
 
@@ -25,8 +25,8 @@
                 <b:row>
                     <b:column colSm="3">
                         <b:panel collapsible="false" styleClass="topPanel">
-                                <b:iconAwesome name="filter"></b:iconAwesome>
-                                <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
+                            <b:iconAwesome name="filter"></b:iconAwesome>
+                            <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
                         </b:panel>
                     </b:column>
                     <b:column colSm="9">
@@ -39,12 +39,44 @@
                                 <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
                                 <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
                             </div>
-                            <p:dataGrid id="product_datagrid" value="#{productBean.productList}" var="pro" paginator="true" layout="grid" columns="3"
+                            <p:dataGrid id="product_datagrid" value="#{productBean.productList}" var="productItem"
+                                        paginator="true" layout="grid" columns="3"
                                         paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                                         rowsPerPageTemplate="6,12,16">
-                                <b:panel>
-                                    <h:outputText value="#{pro.name}"></h:outputText>
-                                </b:panel>
+
+                                <b:thumbnail styleClass="product-panel">
+                                    <b:form>
+                                        <b:row>
+
+                                            <b:image value="#{productItem.imageUrl}" colXs="12"
+                                                     styleClass="product-image"></b:image>
+
+                                            <b:column colXs="12" style="margin-top:10px;">
+                                                <h:outputText value="#{productItem.name}"
+                                                              style="font-size: 17px;color: #555555"></h:outputText>
+                                            </b:column>
+
+                                            <b:column colXs="12" style="margin-top:15px;">
+                                                <h:outputText value="بدون تخفیف"
+                                                              style="font-size: 15px;color: rgba(139,0,0,0.82)"></h:outputText>
+                                                <br></br>
+                                                <h:outputText value="#{productItem.price} تومان"
+                                                              style="font-size: 19px;color: rgba(44, 143, 12, 0.67)"></h:outputText>
+                                            </b:column>
+
+                                            <b:column colXs="12" style="margin-top:10px;">
+                                                <p:rating value="#{'3'}"></p:rating>
+                                            </b:column>
+
+                                            <b:column colXs="12" style="margin-top:10px;">
+                                                <b:commandButton iconAwesome="cart-plus" look="success"
+                                                                 size="xs" style="float:left;"></b:commandButton>
+                                            </b:column>
+
+                                        </b:row>
+                                    </b:form>
+                                </b:thumbnail>
+
                             </p:dataGrid>
                         </b:panel>
                     </b:column>
