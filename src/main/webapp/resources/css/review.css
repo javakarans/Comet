@@ -1,0 +1,17 @@
+body .order_datatable{
+    direction: ltr;
+}
+div.dataTables_wrapper div.dataTables_info{
+    color: transparent;
+}
+table.dataTable{
+    vertical-align: middle;
+}
+.order_datatable .column_content{
+    text-align: center;
+    vertical-align: middle;
+}
+.table_address_col .table td{
+    border: 1px solid rgba(172, 172, 172, 0.5);
+    color: #666666;
+}
