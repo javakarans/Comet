@@ -3,6 +3,7 @@ package ir.comet.bean;
 import ir.comet.database.CustomerDaoImp;
 import ir.comet.model.Customer;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -17,7 +18,8 @@ public class RegisterBean {
 
     private Customer customer;
 
-    public RegisterBean(){
+    @PostConstruct
+    public void init(){
         customer=new Customer();
     }
 
