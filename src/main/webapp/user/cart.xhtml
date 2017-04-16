@@ -49,31 +49,93 @@
                                         <h:outputText value="برای ثبت سفارش مراحل بعدی خرید را تکمیل نمایید."
                                                       style="font-size: 12px"></h:outputText>
                                         <b:commandButton value="مرحله بعد"
-                                                         style="margin-top:30px;width:150px;height:40px;float:left;"
+                                                         style="width:150px;height:40px;float:left;"
                                                          look="success" action="#" iconAwesome="arrow-left"
                                                          iconAlign="right"></b:commandButton>
                                     </b:column>
 
                                     <b:column colSm="12">
-                                        <b:dataTable searching="false" paginated="false" styleClass="order-datatable">
+                                        <b:dataTable searching="false" paginated="false"
+                                                     styleClass="order_datatable" value="#{cartBean.addedToCart}"
+                                                     var="cartItem">
                                             <b:dataTableColumn label="حذف" orderable="false"
-                                                               style="width:2%;"></b:dataTableColumn>
+                                                               style="width:2%;" styleClass="column_content"
+                                                               contentStyle="background-color:rgb(255, 237, 238);">
+                                                <b:navCommandLink>
+                                                    <b:iconAwesome name="remove"></b:iconAwesome>
+                                                </b:navCommandLink>
+                                            </b:dataTableColumn>
+
                                             <b:dataTableColumn label="قیمت کل" orderable="false"
-                                                               style="width:17%;"></b:dataTableColumn>
+                                                               style="width:17%;" styleClass="column_content"
+                                                               contentStyle="direction:rtl;">
+                                                <h:outputText value="#{cartItem.price}"
+                                                              style="font-size: 25px"></h:outputText>
+                                                <span style="font-size: 10px">تومان</span>
+                                            </b:dataTableColumn>
+
                                             <b:dataTableColumn label="قیمت واحد" orderable="false"
-                                                               style="width:15%;"></b:dataTableColumn>
+                                                               style="width:15%;" styleClass="column_content"
+                                                               contentStyle="direction:rtl;">
+                                                <h:outputText value="#{cartItem.price}"
+                                                              style="font-size: 25px"></h:outputText>
+                                                <span style="font-size: 10px">تومان</span>
+                                            </b:dataTableColumn>
+
                                             <b:dataTableColumn label="تعداد" orderable="false"
-                                                               style="width:6%;"></b:dataTableColumn>
+                                                               style="width:6%;" styleClass="column_content">
+                                                <b:selectOneMenu style="height:auto;">
+                                                    <f:selectItem itemLabel="1"></f:selectItem>
+                                                    <f:selectItem itemLabel="2"></f:selectItem>
+                                                    <f:selectItem itemLabel="3"></f:selectItem>
+                                                    <f:selectItem itemLabel="4"></f:selectItem>
+                                                    <f:selectItem itemLabel="5"></f:selectItem>
+                                                </b:selectOneMenu>
+                                            </b:dataTableColumn>
+
                                             <b:dataTableColumn label="فروشنده" orderable="false"
-                                                               style="width:7%;"></b:dataTableColumn>
+                                                               style="width:7%;" styleClass="column_content">
+                                                <div style="align-items: center">
+                                                    <h:outputText value="#{'کامت'}"></h:outputText>
+                                                </div>
+
+                                            </b:dataTableColumn>
+
                                             <b:dataTableColumn label="شرح محصول" orderable="false"
-                                                               style="width:35%;"></b:dataTableColumn>
+                                                               style="width:35%;" headerStyle="text-align:center;">
+                                                <b:row dir="rtl">
+                                                    <b:column colXs="5">
+                                                        <b:image value="#{cartItem.imageUrl}" colXs="12"></b:image>
+                                                    </b:column>
+                                                    <b:column colXs="7" style="word-wrap:break-word;">
+                                                        <div style="color: rgba(19,19,19,0.88)">
+                                                            <h5 style="font-family: YJ, NYJ">
+                                                                #{cartItem.name}
+                                                            </h5>
+                                                            <h5>
+                                                                #{'by English'}
+                                                            </h5>
+                                                        </div>
+                                                        <div style="margin-top: 15px;color: #464646">
+                                                            <h:outputText value="رنگ : #{'زرد'}"
+                                                                          style="font-size: 12px"></h:outputText>
+                                                        </div>
+                                                    </b:column>
+                                                </b:row>
+                                            </b:dataTableColumn>
+
                                         </b:dataTable>
-                                        <b:form>
-                                            <b:commandButton value="بازگشت به صفحه اصلی"
-                                                             style="margin-top:30px;width:150px;height:40px;float:left;"
-                                                             look="info" action="#"></b:commandButton>
-                                        </b:form>
+                                    </b:column>
+
+                                    <b:column colSm="12" style="text-align:left;margin-top:-20px;">
+                                        <h:outputText value="مبلغ قابل پرداخت : #{'56000'} تومان"
+                                                      style="font-size: 20px;color: rgba(44, 143, 12, 0.67)"></h:outputText>
+                                    </b:column>
+
+                                    <b:column colSm="12">
+                                        <b:commandButton value="بازگشت به صفحه اصلی"
+                                                         style="margin-top:30px;width:150px;height:40px;float:left;"
+                                                         look="info" action="#"></b:commandButton>
                                     </b:column>
                                 </b:row>
                             </b:form>

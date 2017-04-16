@@ -1,9 +1,13 @@
-body .order-datatable{
+body .order_datatable{
     direction: ltr;
 }
 div.dataTables_wrapper div.dataTables_info{
     color: transparent;
 }
 table.dataTable{
-    margin-bottom: -52px !important;
+    vertical-align: middle;
+}
+.order_datatable .column_content{
+    text-align: center;
+    vertical-align: middle;
 }
