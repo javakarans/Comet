@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body>
+
+    <ui:composition template="../templates/UserTemplate.xhtml">
+
+        <ui:define name="content">
+
+            <link rel="stylesheet" href="../resources/css/shipping.css"></link>
+
+            <b:container style="margin-top:-8px;">
+
+                <b:row>
+                    <b:column colSm="12">
+                        <b:panel collapsible="false" styleClass="topPanel">
+                            <b:iconAwesome name="th-large"></b:iconAwesome>
+                            <h:outputText value="فروشگاه کامت" style="margin-right: 10px"></h:outputText>
+                            <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                            <h:outputText value="سبد خرید" style="margin-right: 10px"></h:outputText>
+                        </b:panel>
+                    </b:column>
+
+                    <!-- First Panel -->
+                    <b:column colSm="12" style="margin-top:-11px;">
+
+                        <b:panel>
+                            <b:form>
+                                <b:row>
+                                    <b:column colSm="12" style="margin-top:20px;">
+                                        <b:iconAwesome name="caret-left"
+                                                       style="margin-left:18px;"></b:iconAwesome>
+                                        <h:outputText value="انتخاب آدرس"
+                                                      style="font-size: 18px"></h:outputText>
+                                    </b:column>
+
+                                    <b:column colSm="12" style="margin-top:15px;">
+                                        <h:outputText value="آدرس را با دقت بررسی نمایید و در صورت نیاز تغییر دهید."
+                                                      style="font-size: 12px"></h:outputText>
+                                    </b:column>
+
+                                    <b:column colSm="12" style="margin-top:10px;">
+                                        <b:dataTable searching="false" paginated="false"
+                                                     styleClass="order_datatable" value="#{cartBean.addedToCart}"
+                                                     var="cartItem">
+
+                                            <b:dataTableColumn label="" orderable="false"
+                                                               style="width:2%;" styleClass="column_content">
+                                                <b:navCommandLink ajax="true" update="@(.order_datatable)"
+                                                                  onclick="ajax:car.edit()">
+                                                    <b:iconAwesome name="edit"></b:iconAwesome>
+                                                </b:navCommandLink>
+
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="شماره تلفن همراه" orderable="false"
+                                                               style="width:10%;" styleClass="column_content">
+
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="شماره تلفن ثابت" orderable="false"
+                                                               style="width:10%;" styleClass="column_content"
+                                                               contentStyle="direction:rtl;">
+
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="آدرس" orderable="false"
+                                                               style="width:25%;" styleClass="column_content"
+                                                               contentStyle="direction:rtl;">
+
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="شهر" orderable="false"
+                                                               style="width:7%;" styleClass="column_content">
+
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="استان" orderable="false"
+                                                               style="width:7%;" styleClass="column_content">
+
+                                            </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="خریدار" orderable="false"
+                                                               style="width:9%;" headerStyle="text-align:center;">
+
+                                            </b:dataTableColumn>
+
+                                        </b:dataTable>
+                                    </b:column>
+
+                                    <b:column colSm="12" style="margin-top:20px;">
+                                        <b:iconAwesome name="caret-left"
+                                                       style="margin-left:18px;"></b:iconAwesome>
+                                        <h:outputText value="شیوه پرداخت"
+                                                      style="font-size: 18px"></h:outputText>
+                                    </b:column>
+                                    <b:form>
+                                        <b:column colSm="12" style="margin-top:15px;">
+
+                                            <table class="payment_table">
+                                                <tr>
+                                                    <th style="width: 5px;">
+                                                        <b:radiobutton value="#{''}" itemValue="6"
+                                                                       style="margin:auto;"/>
+                                                    </th>
+                                                    <th style="text-align: right">
+                                                        <h:outputText
+                                                                value="پرداخت اینترنتی ( با تمامی کارت عضو شتاب )"></h:outputText>
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <b:radiobutton value="#{''}" itemValue="6"
+                                                                       style="margin:auto;"/>
+                                                    </th>
+                                                    <th style="text-align: right">
+                                                        <h:outputText value="پرداخت نقدی"></h:outputText>
+                                                    </th>
+                                                </tr>
+                                            </table>
+
+                                        </b:column>
+
+                                        <b:column colSm="12" style="margin-top:30px;">
+
+                                            <b:commandButton value="بازگشت به سبد خرید"
+                                                             style="width:150px;height:40px;"
+                                                             look="info" action="#"></b:commandButton>
+                                            <b:commandButton value="ثبت اطلاعات و ادامه خرید"
+                                                             style="width:170px;height:40px;float:left;"
+                                                             look="success" action="#" iconAwesome="arrow-left"
+                                                             iconAlign="right"></b:commandButton>
+
+                                        </b:column>
+                                    </b:form>
+                                </b:row>
+                            </b:form>
+
+                        </b:panel>
+
+                    </b:column>
+                    <!-- First Panel -->
+
+                </b:row>
+
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
