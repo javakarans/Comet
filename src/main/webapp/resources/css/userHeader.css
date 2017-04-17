@@ -23,9 +23,6 @@
     color: rgba(26, 26, 26, 0.96);
     transition: 0.5s;
 }
-.user-drop-menu .dropdown-menu{
-    text-align: right;
-}
-.menu-bar-header .dropdown-menu{
+.dropdown-menu{
     text-align: right;
 }
