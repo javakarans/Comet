@@ -28,7 +28,7 @@ public class WareHouseDaoImp implements WareHouseDao {
     public WareHouse getWareHouse(long wareHouseId) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Branch.class);
+        Criteria criteria = session.createCriteria(WareHouse.class);
         criteria.add(Restrictions.eq("wareHouseId",wareHouseId));
         session.getTransaction().commit();
         session.close();

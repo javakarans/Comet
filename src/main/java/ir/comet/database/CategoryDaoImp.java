@@ -27,7 +27,7 @@ public class CategoryDaoImp implements CategoryDao {
     public Category getCategory(long categoryId) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Branch.class);
+        Criteria criteria = session.createCriteria(Category.class);
         criteria.add(Restrictions.eq("categoryId",categoryId));
         session.getTransaction().commit();
         session.close();

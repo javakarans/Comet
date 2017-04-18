@@ -28,7 +28,7 @@ public class OrderDaoImp implements OrderDao {
     public Order getOrder(long orderId) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Branch.class);
+        Criteria criteria = session.createCriteria(Order.class);
         criteria.add(Restrictions.eq("orderId",orderId));
         session.getTransaction().commit();
         session.close();

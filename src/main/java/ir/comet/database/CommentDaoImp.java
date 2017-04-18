@@ -27,7 +27,7 @@ public class CommentDaoImp implements CommentDao {
     public Comment getComment(long commentId) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(Branch.class);
+        Criteria criteria = session.createCriteria(Comment.class);
         criteria.add(Restrictions.eq("commentId",commentId));
         session.getTransaction().commit();
         session.close();
