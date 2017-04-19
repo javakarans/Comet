@@ -9,15 +9,21 @@
 <h:head>
     <title>JSF 2.2 TUTORIALS</title>
     <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"></link>
+    <link rel="stylesheet" href="../resources/css/userTemplate.css"></link>
 </h:head>
 
 <h:body>
 
-    <b:tabView tabPosition="left" contentStyle="border: 1px solid #ddd;padding:10px">
-        <b:tab  title="افزودن کالا">
-            <ui:include src="../admin/addProduct.xhtml"/>
-        </b:tab>
-    </b:tabView>
+    <div id="content">
+        <ui:insert name="content"></ui:insert>
+    </div>
+
+    <div id="footer">
+        <ui:insert name="footer">
+            <ui:include src="commonFooter.xhtml"/>
+        </ui:insert>
+    </div>
+
 </h:body>
 
 </html>
