@@ -9,89 +9,51 @@
 
 
 <ui:composition>
+    <b:container>
+        <h:form enctype="multipart/form-data">
+            <b:row>
+                <b:column colSm="7">
+                    <b:panelGrid colSpans="3,9" size="xs">
+                        <h:outputText value="نام کالا"/>
+                        <b:inputText value="#{dtAddProductBean.product.name}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="نام برند"/>
+                        <b:inputText value="#{dtAddProductBean.product.brandName}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="نامه دسته"/>
+                        <b:inputText value="#{dtAddProductBean.product.categoryName}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="توضیحات"/>
+                        <b:inputText value="#{dtAddProductBean.product.description}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="قیمت"/>
+                        <b:inputText value="#{dtAddProductBean.product.price}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="شرکت گارانتی کننده"/>
+                        <b:inputText value="#{dtAddProductBean.product.warranty}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="رنگ"/>
+                        <b:inputText value="#{dtAddProductBean.product.color}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="تخفیف"/>
+                        <b:inputText value="#{dtAddProductBean.product.discount}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="آپلود ایکون کالا"/>
+                        <p:fileUpload id="iconProduct" mode="simple" value="#{dtAddProductBean.uploadedFile}" />
+                    </b:panelGrid>
+                </b:column>
+                <b:column colSm="5">
 
-
-                <b:form>
-                    <b:container>
-
-                            <b:row >
-                                <b:column span="4">
-                                    <h:outputText value="نام محصول"/>
-                                </b:column>
-                                <b:column span="4" offset="4">
-                                    <b:inputText />
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-                                    <h:outputText value="دسته"/>
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-                            <b:row >
-                                <b:column span="4">
-
-                                </b:column>
-                                <b:column span="4" offset="4">
-
-                                </b:column>
-                            </b:row>
-
-                    </b:container>
-                </b:form>
-
-
-
+                </b:column>
+            </b:row>
+            <b:row>
+                <h:outputText value="آپلود عکس های کالا"/>
+                <p:fileUpload id="image1Product" mode="simple" value="#{dtAddProductBean.uploadedFile1}" />
+                <p:fileUpload  id="image2Product" mode="simple" value="#{dtAddProductBean.uploadedFile2}" />
+                <p:fileUpload   id="image3Product" mode="simple" value="#{dtAddProductBean.uploadedFile3}" />
+                <p:fileUpload  id="image4Product" mode="simple" value="#{dtAddProductBean.uploadedFile4}" />
+            </b:row>
+            <b:row>
+                <b:column colSm="12">
+                    <b:commandButton  ajax="false" actionListener="#{dtAddProductBean.save}" value="ذخیره" style="margin-top:30px;width:150px;height:40px;"
+                    />
+                </b:column>
+            </b:row>
+            <p:growl id="messages" showDetail="true" />
+        </h:form>
+    </b:container>
 </ui:composition>
 
 </html>

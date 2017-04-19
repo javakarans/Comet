@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+        <b:container>
+                    <h:form enctype="multipart/form-data">
+                        <b:row>
+                            <b:column colSm="7">
+                                <b:panelGrid colSpans="3,9" size="xs">
+                                    <h:outputText value="عنوان اسلاید"/>
+                                    <b:inputText value="#{dtSlideShowBean.slideShow.slideTitle}" span="8" style="margin-top:-5px;"/>
+                                    <h:outputText value="شماره اسلاید"/>
+                                    <b:inputText value="#{dtSlideShowBean.slideShow.slideNumber}" span="8" style="margin-top:-5px;"/>
+                                    <h:outputText value="متن اسلاید"/>
+                                    <b:inputTextarea  value="#{dtSlideShowBean.slideShow.slideText}" span="8" style="margin-top:-5px;"/>
+                                </b:panelGrid>
+                            </b:column>
+                            <b:column colSm="5">
+
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <p:fileUpload id="gholam" mode="simple" value="#{dtSlideShowBean.uploadedFile}" />
+                        </b:row>
+                        <b:row>
+                            <b:column colSm="12">
+                                <b:commandButton  ajax="false" actionListener="#{dtSlideShowBean.upload}" value="افزودن اسلاید" style="margin-top:30px;width:150px;height:40px;"
+                                                 />
+                            </b:column>
+                        </b:row>
+                        <p:growl id="messages" showDetail="true" />
+                    </h:form>
+        </b:container>
+</ui:composition>
+</html>

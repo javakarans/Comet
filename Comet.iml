@@ -59,5 +59,6 @@
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.0" level="project" />
     <orderEntry type="library" name="Maven: org.primefaces.themes:all-themes:1.0.10" level="project" />
     <orderEntry type="library" name="Maven: net.bootsfaces:bootsfaces:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20160810" level="project" />
   </component>
 </module>

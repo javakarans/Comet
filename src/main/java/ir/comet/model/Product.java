@@ -24,6 +24,15 @@ public class Product implements Serializable {
     private long stock;
     private long wareHouseId;
     private float score;
+    private String json;
+    private String categoryName;
+    private String brandName;
+    private String discount;
+   // private String[] fileAddress;
+    private String imageLocation1;
+    private String imageLocation2;
+    private String imageLocation3;
+    private String imageLocation4;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,5 +133,87 @@ public class Product implements Serializable {
 
     public void setWareHouseId(long wareHouseId) {
         this.wareHouseId = wareHouseId;
+    }
+
+    @Column
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
+
+    @Column
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    @Column
+    public String getBrandName() {
+        return brandName;
+    }
+
+    @Column
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+   /* @Column
+    @OneToMany
+    public String[] getFileAddress() {
+        return fileAddress;
+    }
+
+    public void setFileAddress(String[] fileAddress) {
+        this.fileAddress = fileAddress;
+    }*/
+
+   @Column
+    public String getImageLocation1() {
+        return imageLocation1;
+    }
+
+    public void setImageLocation1(String imageLocation1) {
+        this.imageLocation1 = imageLocation1;
+    }
+
+    @Column
+    public String getImageLocation2() {
+        return imageLocation2;
+    }
+
+    public void setImageLocation2(String imageLocation2) {
+        this.imageLocation2 = imageLocation2;
+    }
+
+    @Column
+    public String getImageLocation3() {
+        return imageLocation3;
+    }
+
+    public void setImageLocation3(String imageLocation3) {
+        this.imageLocation3 = imageLocation3;
+    }
+
+    @Column
+    public String getImageLocation4() {
+        return imageLocation4;
+    }
+
+    public void setImageLocation4(String imageLocation4) {
+        this.imageLocation4 = imageLocation4;
     }
 }
