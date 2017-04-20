@@ -12,6 +12,7 @@ public interface BranchDao {
     public void createBranch(Branch branch);
     public Branch getBranch(long branchId);
     public List<Branch> getAllBranches();
+    public List<Branch> getBranchesByCategoryId(long id);
     public void updateBranch(Branch branch);
     public void deleteBranch(Branch branch);
 }

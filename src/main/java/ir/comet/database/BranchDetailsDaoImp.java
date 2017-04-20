@@ -2,7 +2,9 @@ package ir.comet.database;
 
 
 import ir.comet.model.BranchDetails;
+import ir.comet.model.Brand;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BranchDetailsDaoImp implements BranchDetailsDao {
@@ -19,6 +21,17 @@ public class BranchDetailsDaoImp implements BranchDetailsDao {
         BranchDetails branchDetails = new BranchDetails();
         return SqlHandler.getAllObjects(branchDetails);
 
+    }
+
+    public List<Brand> getBrandsByBranchId(long id) {
+        BrandDaoImp brandDaoImp = new BrandDaoImp();
+        List<BranchDetails> branchDetailsList = SqlHandler.getObjectsBySpecialColumn(new BranchDetails(), "brandId", id);
+        List<Brand> brands = new ArrayList<Brand>(branchDetailsList.size());
+        for (BranchDetails branchDetails : branchDetailsList) {
+            Brand brand = brandDaoImp.getBrand(branchDetails.getBrandId());
+            brands.add(brand);
+        }
+        return brands;
     }
 
     public int updateBranchDetails(BranchDetails branchDetails) {

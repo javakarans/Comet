@@ -43,6 +43,10 @@ public class BranchDaoImp implements BranchDao{
         return SqlHandler.getAllObjects(branch);
     }
 
+    public List<Branch> getBranchesByCategoryId(long id) {
+        return SqlHandler.getObjectsBySpecialColumn(new Branch(),"categoryId",id);
+    }
+
     public void updateBranch(Branch branch) {
         SqlHandler.update(branch);
     }
