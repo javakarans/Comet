@@ -117,30 +117,48 @@
                                 <b:tab title="سفارشات من">
                                     <div style="margin-top: 30px">
                                         <b:dataTable id="my-order" value="#" var="#" searching="false" paginated="false"
-                                                     border="false" fixedHeader="true">
-                                            <b:dataTableColumn label="ردیف">
-                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn label="کد">
+                                                     border="false">
+                                            <b:dataTableColumn label="ردیف" orderable="false">
                                                 <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
-                                            <b:dataTableColumn label="تاریخ">
+                                            <b:dataTableColumn label="کد" orderable="false">
                                                 <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
-                                            <b:dataTableColumn label="مبلغ کل">
+                                            <b:dataTableColumn label="تاریخ" orderable="false">
                                                 <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
-                                            <b:dataTableColumn label="وضعیت">
+                                            <b:dataTableColumn label="مبلغ کل" orderable="false">
                                                 <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
-                                            <b:dataTableColumn label="جزئیات">
+                                            <b:dataTableColumn label="وضعیت" orderable="false">
                                                 <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
+
+                                            <b:dataTableColumn label="جزئیات" orderable="false">
+                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+
+                                                <tr style="background-color: #f5f4f5">
+                                                    <td colspan="12">
+                                                        <b:dataTable searching="false" paginated="false" style="color:#000;" styleClass="order_datatable">
+                                                            <b:dataTableColumn label="مبلغ کل" orderable="false"></b:dataTableColumn>
+                                                            <b:dataTableColumn label="تخفیف کل" orderable="false"></b:dataTableColumn>
+                                                            <b:dataTableColumn label="قیمت کل" orderable="false"></b:dataTableColumn>
+                                                            <b:dataTableColumn label="قیمت واحد" orderable="false"></b:dataTableColumn>
+                                                            <b:dataTableColumn label="تعداد" orderable="false"></b:dataTableColumn>
+                                                            <b:dataTableColumn label="کالا" orderable="false" style="width:35%;"></b:dataTableColumn>
+                                                        </b:dataTable>
+                                                    </td>
+                                                </tr>
+
+                                            </b:dataTableColumn>
+
+
                                         </b:dataTable>
+
                                     </div>
                                 </b:tab>
 

@@ -31,7 +31,7 @@
                                 <h:panelGrid columns="1" columnClasses="uhCol1">
                                     <h:form>
                                         <b:dropMenu
-                                                value="سلام ، #{userHeaderBean.customer.firstName} #{userHeaderBean.customer.lastName}"
+                                                value="سلام ، #{userSessionBean.customer.firstName} #{userSessionBean.customer.lastName}"
                                                 iconAwesome="user-circle" styleClass="user-drop-menu">
                                             <b:navCommandLink value="ورود به پروفایل" action="#{userHeaderBean.userAccountBtn()}"></b:navCommandLink>
                                             <b:navCommandLink value="خروج" action="#{userHeaderBean.logout()}"></b:navCommandLink>
