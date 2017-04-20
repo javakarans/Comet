@@ -20,7 +20,7 @@ public class Test {
     public static void main(String[] args) {
 
         Branch branch=new Branch();
-        branch.setBrandId(1);
+        //branch.setBrandId(1);
         branch.setBranchId(2);
         branch.setCategoryId(3);
         BranchDaoImp branchDaoImp=new BranchDaoImp();

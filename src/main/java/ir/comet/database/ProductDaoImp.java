@@ -27,7 +27,6 @@ public class ProductDaoImp implements ProductDao {
         Criteria criteria = session.createCriteria(Product.class);
         criteria.add(Restrictions.eq("productId",productId));
         session.getTransaction().commit();
-        session.close();
         List<Product> list = criteria.list();
         if(!list.isEmpty()){
             return list.get(0);
@@ -37,7 +36,9 @@ public class ProductDaoImp implements ProductDao {
 
     public List<Product> getAllProducts() {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
         Criteria criteria = session.createCriteria(Product.class);
+        session.getTransaction().commit();
         return criteria.list();
 
     }

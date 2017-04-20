@@ -38,7 +38,9 @@ public class BranchDaoImp implements BranchDao{
     }
 
     public List<Branch> getAllBranches() {
-        return null;
+
+        Branch branch = new Branch();
+        return SqlHandler.getAllObjects(branch);
     }
 
     public void updateBranch(Branch branch) {

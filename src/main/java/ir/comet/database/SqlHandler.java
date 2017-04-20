@@ -1,7 +1,11 @@
 package ir.comet.database;
 
+import ir.comet.model.Product;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import java.util.List;
 
 /**
  * Created by Mohammad on 3/9/2017.
@@ -24,14 +28,20 @@ public class SqlHandler {
         session.beginTransaction();
         session.update(object);
         session.getTransaction().commit();
-        session.close();
     }
 
     public static <T> void delete(T object){
         session.beginTransaction();
         session.delete(object);
         session.getTransaction().commit();
-        session.close();
+    }
+
+    public static <T> List getAllObjects(T object)
+    {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(object.getClass());
+        session.getTransaction().commit();
+        return criteria.list();
     }
 
 }

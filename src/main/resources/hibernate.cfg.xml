@@ -49,6 +49,8 @@
         <mapping class="ir.comet.model.Notification"/>
         <mapping class="ir.comet.model.Article"/>
         <mapping class="ir.comet.model.SlideShow"/>
+        <mapping class="ir.comet.model.BranchDetails"/>
+
 
     </session-factory>
 </hibernate-configuration>

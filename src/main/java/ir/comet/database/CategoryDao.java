@@ -11,7 +11,7 @@ public interface CategoryDao {
 
     public void createCategory(Category category);
     public Category getCategory(long categoryId);
-    public List<Category> getAllCategories(long categoryId);
+    public List<Category> getAllCategories();
     public void updateCategory(Category category);
     public void deleteCategory(Category category);
 

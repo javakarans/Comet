@@ -2,6 +2,7 @@ package ir.comet.database;
 
 import ir.comet.model.Branch;
 import ir.comet.model.Category;
+import ir.comet.model.Product;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,8 +39,9 @@ public class CategoryDaoImp implements CategoryDao {
         return null;
     }
 
-    public List<Category> getAllCategories(long categoryId) {
-        return null;
+    public List<Category> getAllCategories() {
+        Category category = new Category();
+        return SqlHandler.getAllObjects(category) ;
     }
 
     public void updateCategory(Category category) {

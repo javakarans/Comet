@@ -18,14 +18,15 @@ public class BrandDaoImp implements BrandDao {
     }
 
     public List<Brand> getAllBrands() {
-        return null;
+        Brand brand = new Brand();
+        return SqlHandler.getAllObjects(brand);
     }
 
     public void updateBrand(Brand brand) {
-
+        SqlHandler.update(brand);
     }
 
     public void deleteBrand(Brand brand) {
-
+        SqlHandler.delete(brand);
     }
 }

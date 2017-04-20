@@ -13,8 +13,8 @@ import java.util.Set;
 public class Branch implements Serializable {
 
     private long branchId;
-    private long brandId;
     private long categoryId;
+    private String branchName;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +28,20 @@ public class Branch implements Serializable {
     }
 
     @Column
-    public long getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(long brandId) {
-        this.brandId = brandId;
-    }
-
-    @Column
     public long getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Column
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
     }
 }
