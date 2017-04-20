@@ -32,7 +32,7 @@
                         <h:outputText value="نام زیر دسته"/>
                         <b:inputText  value="#{dtAddBrandAndCategory.branch.branchName}" span="8" style="margin-top:-5px;"/>
                         <h:outputText value="انتخاب دسته اصلی"/>
-                        <b:selectOneMenu id="selectCategory" value="#{dtAddBrandAndCategory.selectedCategory}"  >
+                        <b:selectOneMenu id="selectCategory" value="#{dtAddBrandAndCategory.selectedCategory}"  style="height:auto;">
                             <f:selectItems value="#{dtAddBrandAndCategory.categoryList}" var="c" itemValue="#{c}" itemLabel="#{c.name}"/>
                         </b:selectOneMenu>
                     </b:panelGrid>
@@ -63,11 +63,11 @@
                     <b:panelGrid colSpans="4,2,2,2,2" size="xs">
                         <h:outputText value="افزودن برندها در زیر  دسته ها"/>
                         <h:outputText value="انتخاب زیر دسته"/>
-                        <b:selectOneMenu id="selectedBranch" value="#{dtAddBrandAndCategory.selectedBranch}"  >
+                        <b:selectOneMenu id="selectedBranch" value="#{dtAddBrandAndCategory.selectedBranch}"  style="height:auto;">
                             <f:selectItems value="#{dtAddBrandAndCategory.branchList}" var="branch" itemValue="#{branch}" itemLabel="#{branch.branchName}"/>
                         </b:selectOneMenu>
                         <h:outputText value="انتخاب برند"/>
-                        <b:selectOneMenu id="selectBran" value="#{dtAddBrandAndCategory.selectedBrand}"  >
+                        <b:selectOneMenu id="selectBran" value="#{dtAddBrandAndCategory.selectedBrand}"  style="height:auto;">
                             <f:selectItems value="#{dtAddBrandAndCategory.brandList}" var="brand" itemValue="#{brand}" itemLabel="#{brand.name}"/>
                         </b:selectOneMenu>
                     </b:panelGrid>
