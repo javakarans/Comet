@@ -70,11 +70,18 @@
             <b:navBar style="margin-top:-20px;">
                 <b:navbarLinks>
                     <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
-                    <b:dropMenu value="دسته اصلی">
-                        <b:navLink header="زیر دسته" styleClass="menu-bar-header"></b:navLink>
-                        <b:navLink value="برند 1" href="#"></b:navLink>
-                        <b:navLink value="برند 2" href="#"></b:navLink>
-                    </b:dropMenu>
+                    <ui:repeat value="#{applicationBean.menuController.allCategoryList}" var="category">
+                        <b:dropMenu value="#{category.name}">
+                            <ui:repeat value="#{applicationBean.menuController.getBranchesByCategoryId(category.categoryId)}" var="branch">
+                                <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
+                                <ui:repeat value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}" var="brand">
+                                    <b:navLink value="#{brand.name}" styleClass="menu-bar-header" contentClass="dropdown_link"></b:navLink>
+                                </ui:repeat>
+                            </ui:repeat>
+                        </b:dropMenu>
+
+                    </ui:repeat>
+
                 </b:navbarLinks>
             </b:navBar>
 
