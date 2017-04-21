@@ -29,7 +29,6 @@ public class BranchDaoImp implements BranchDao{
         Criteria criteria = session.createCriteria(Branch.class);
         criteria.add(Restrictions.eq("branchId",branchId));
         session.getTransaction().commit();
-        session.close();
         List<Branch> list = criteria.list();
         if(!list.isEmpty()){
             return list.get(0);

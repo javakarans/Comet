@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
 <ui:composition>
@@ -16,10 +16,10 @@
                     <b:panelGrid colSpans="3,9" size="xs">
                         <h:outputText value="نام کالا"/>
                         <b:inputText value="#{dtAddProductBean.product.name}" span="8" style="margin-top:-5px;"/>
-                        <h:outputText value="نام برند"/>
-                        <b:inputText value="#{dtAddProductBean.product.brandName}" span="8" style="margin-top:-5px;"/>
-                        <h:outputText value="نامه دسته"/>
-                        <b:inputText value="#{dtAddProductBean.product.categoryName}" span="8" style="margin-top:-5px;"/>
+                        <h:outputText value="انتخاب طبقه بندی کالا"/>
+                        <b:selectOneMenu id="selectCategory" value=""  style="height:auto;">
+                            <f:selectItems value="#{dtAddProductBean.branchDetailsWrapperList}" var="c" itemValue="#{c}" itemLabel="#{c.toString()}"/>
+                        </b:selectOneMenu>
                         <h:outputText value="توضیحات"/>
                         <b:inputText value="#{dtAddProductBean.product.description}" span="8" style="margin-top:-5px;"/>
                         <h:outputText value="قیمت"/>

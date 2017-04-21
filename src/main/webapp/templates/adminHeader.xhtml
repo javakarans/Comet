@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+    <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"/>
+
+</h:head>
+
+<h:body>
+    <ui:composition>
+        <link rel="stylesheet" href="../resources/css/userHeader.css"/>
+        <b:container fluid="true">
+            <b:navBar brand="کامت" brandHref="#">
+                <b:navbarLinks>
+                    <b:navLink value="افزودن داده ها" href="../admin/adminPage.xhtml"/>
+                    <b:navLink value="تنظیمات" href="#"/>
+                    <b:navLink value="نمودارها"  href="../admin/tables.xhtml"/>
+                </b:navbarLinks>
+            </b:navBar>
+        </b:container>
+    </ui:composition>
+</h:body>
+</html>

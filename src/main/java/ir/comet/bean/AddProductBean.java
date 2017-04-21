@@ -1,7 +1,10 @@
 package ir.comet.bean;
 
+import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.database.ProductDaoImp;
+import ir.comet.model.BranchDetails;
 import ir.comet.model.Product;
+import ir.comet.wrapper.BranchDetailsWrapper;
 import org.primefaces.model.UploadedFile;
 import org.primefaces.model.UploadedFileWrapper;
 
@@ -12,6 +15,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.hibernate.internal.util.io.StreamCopier.BUFFER_SIZE;
@@ -26,12 +31,20 @@ public class AddProductBean implements Serializable {
     private  UploadedFile uploadedFile2;
     private  UploadedFile uploadedFile3;
     private  UploadedFile uploadedFile4;
+    private List<BranchDetailsWrapper> branchDetailsWrapperList;
+    private BranchDetailsDaoImp branchDetailsDaoImp;
 
 
     @PostConstruct
     public void init() {
         product = new Product();
         productDaoImp = new ProductDaoImp();
+        branchDetailsDaoImp = new BranchDetailsDaoImp();
+        List<BranchDetails> branchDetailsList = branchDetailsDaoImp.getAlBranchDetails();
+        branchDetailsWrapperList = new ArrayList<BranchDetailsWrapper>(branchDetailsList.size());
+        for (BranchDetails branchDetails : branchDetailsList) {
+            branchDetailsWrapperList.add(new BranchDetailsWrapper(branchDetails));
+        }
     }
 
     public void save()
@@ -147,5 +160,13 @@ public class AddProductBean implements Serializable {
 
     public void setUploadedFile4(UploadedFile uploadedFile4) {
         this.uploadedFile4 = uploadedFile4;
+    }
+
+    public List<BranchDetailsWrapper> getBranchDetailsWrapperList() {
+        return branchDetailsWrapperList;
+    }
+
+    public void setBranchDetailsWrapperList(List<BranchDetailsWrapper> branchDetailsWrapperList) {
+        this.branchDetailsWrapperList = branchDetailsWrapperList;
     }
 }
