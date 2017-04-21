@@ -12,30 +12,29 @@
     <b:container>
         <h:form enctype="multipart/form-data">
             <b:row>
-                <b:column colSm="7">
+                <b:column colSm="12">
                     <b:panelGrid colSpans="3,9" size="xs">
                         <h:outputText value="نام کالا"/>
-                        <b:inputText value="#{dtAddProductBean.product.name}" span="8" style="margin-top:-5px;"/>
+                        <b:inputText value="#{dtAddProductBean.product.name}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="انتخاب طبقه بندی کالا"/>
                         <b:selectOneMenu id="selectCategory" value=""  style="height:auto;">
                             <f:selectItems value="#{dtAddProductBean.branchDetailsWrapperList}" var="c" itemValue="#{c}" itemLabel="#{c.toString()}"/>
                         </b:selectOneMenu>
-                        <h:outputText value="توضیحات"/>
-                        <b:inputText value="#{dtAddProductBean.product.description}" span="8" style="margin-top:-5px;"/>
                         <h:outputText value="قیمت"/>
-                        <b:inputText value="#{dtAddProductBean.product.price}" span="8" style="margin-top:-5px;"/>
+                        <b:inputText value="#{dtAddProductBean.product.price}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="شرکت گارانتی کننده"/>
-                        <b:inputText value="#{dtAddProductBean.product.warranty}" span="8" style="margin-top:-5px;"/>
+                        <b:inputText value="#{dtAddProductBean.product.warranty}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="رنگ"/>
-                        <b:inputText value="#{dtAddProductBean.product.color}" span="8" style="margin-top:-5px;"/>
+                        <b:inputText value="#{dtAddProductBean.product.color}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="تخفیف"/>
-                        <b:inputText value="#{dtAddProductBean.product.discount}" span="8" style="margin-top:-5px;"/>
+                        <b:inputText value="#{dtAddProductBean.product.discount}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="آپلود ایکون کالا"/>
                         <p:fileUpload id="iconProduct" mode="simple" value="#{dtAddProductBean.uploadedFile}" />
                     </b:panelGrid>
                 </b:column>
-                <b:column colSm="5">
-
+                <b:column colSm="12">
+                    <h:outputText value="توضیحات"/>
+                    <p:textEditor></p:textEditor>
                 </b:column>
             </b:row>
             <b:row>
