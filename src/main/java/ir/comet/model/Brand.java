@@ -15,7 +15,7 @@ public class Brand implements Serializable {
 
 
     private long brandId;
-    private String name ;
+    private String name;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
