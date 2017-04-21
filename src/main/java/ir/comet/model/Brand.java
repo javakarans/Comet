@@ -14,7 +14,7 @@ import java.util.Set;
 public class Brand implements Serializable {
 
 
-    protected long brandId;
+    private long brandId;
     private String name ;
 
     @Id

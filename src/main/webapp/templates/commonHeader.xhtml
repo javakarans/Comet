@@ -34,7 +34,8 @@
                                                  style="text-decoration: none">وارد شوید</a></span>
                                     </b:iconAwesome>
                                     <b:iconAwesome name="user">
-                                        <span><a href="../user/registerPage.xhtml" style="text-decoration: none">ثبت نام کنید</a></span>
+                                        <span><a href="../user/registerPage.xhtml"
+                                                 style="text-decoration: none">ثبت نام کنید</a></span>
                                     </b:iconAwesome>
                                 </h:panelGrid>
                                 <br></br>
@@ -69,15 +70,22 @@
             <b:navBar style="margin-top:-20px;">
                 <b:navbarLinks>
                     <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
-                    <ui:repeat value="#{applicationBean.categoryList}" var="category">
+                    <ui:repeat value="#{applicationBean.menuController.allCategoryList}" var="category">
+
                         <b:dropMenu value="#{category.name}">
-                            <!--<ui:repeat value="#{applicationBean.getBranchesByCategory(category.categoryId)}" var="branch">-->
-                                <!--<b:navLink header="#{branch.name}" styleClass="menu-bar-header"></b:navLink >-->
-                                <!--<ui:repeat value=" #{applicationBean.getBrandByBranches(branch.branchId)}" var="brand">-->
-                                    <!--<b:navLink value="#{brand.name}" href="#"></b:navLink>-->
-                                <!--</ui:repeat>-->
-                            <!--</ui:repeat>-->
+
+                            <ui:repeat value="#{applicationBean.menuController.getBranchesByCategoryId(category.categoryId)}" var="branch">
+
+                                <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
+
+                                <ui:repeat value=" #{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}" var="brand2">
+                                    <h:outputText value="#{brand2.brandId}"></h:outputText>
+                                </ui:repeat>
+
+                            </ui:repeat>
+
                         </b:dropMenu>
+
                     </ui:repeat>
 
                 </b:navbarLinks>
