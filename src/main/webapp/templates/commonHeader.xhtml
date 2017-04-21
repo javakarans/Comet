@@ -78,8 +78,12 @@
 
                                 <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
 
-                                <ui:repeat value=" #{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}" var="brand2">
-                                    <h:outputText value="#{brand2.brandId}"></h:outputText>
+                                <ui:repeat value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}" var="brand">
+
+                                    <b:navLink>
+                                        <b:navCommandLink value="asd"></b:navCommandLink>
+                                    </b:navLink>
+
                                 </ui:repeat>
 
                             </ui:repeat>
