@@ -33,16 +33,16 @@
                         <b:panel collapsible="false" styleClass="contentPanel">
                             <div class="page-header">
                                 <b:iconAwesome name="th-large"></b:iconAwesome>
-                                <h:outputText value="لوازم الکترونیکی 1" style="margin-right: 10px"></h:outputText>
+                                <h:outputText value="#{productBean.branchDetailsWrapper.categoryName}" style="margin-right: 10px"></h:outputText>
                                 <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                                <h:outputText value="برند 1" style="margin-right: 10px"></h:outputText>
+                                <h:outputText value="#{productBean.branchDetailsWrapper.branchName}" style="margin-right: 10px"></h:outputText>
                                 <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                                <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
+                                <h:outputText value="#{productBean.branchDetailsWrapper.brandName}" style="margin-right: 10px"></h:outputText>
                             </div>
                             <p:dataGrid id="product_datagrid" value="#{productBean.productList}" var="productItem"
                                         paginator="true" layout="grid" columns="3"
                                         paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
-                                        rowsPerPageTemplate="6,12,16">
+                                        rowsPerPageTemplate="6,12,16" rendered="true">
 
                                 <b:thumbnail styleClass="product-panel">
                                     <b:form>
@@ -65,7 +65,7 @@
                                             </b:column>
 
                                             <b:column colXs="12" style="margin-top:10px;">
-                                                <p:rating value="#{'3'}"></p:rating>
+                                                <p:rating value="#{'3'}" readonly="true"></p:rating>
                                             </b:column>
 
                                             <b:column colXs="12" style="margin-top:10px;">

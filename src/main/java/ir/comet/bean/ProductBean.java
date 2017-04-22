@@ -1,11 +1,12 @@
 package ir.comet.bean;
 
-import ir.comet.controller.ProductController;
 import ir.comet.model.Product;
+import ir.comet.wrapper.BranchDetailsWrapper;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.util.List;
 
 /**
@@ -15,14 +16,23 @@ import java.util.List;
 @ViewScoped
 public class ProductBean {
 
-   private List<Product> productList;
+    private List<Product> productList;
+    private BranchDetailsWrapper branchDetailsWrapper;
 
-   @PostConstruct
-   public void init(){
+    @PostConstruct
+    public void init() {
 
-       ProductController productController=new ProductController();
-       setProductList(productController.loadProductList());
-   }
+        loadProductList();
+    }
+
+    public void loadProductList() {
+
+        this.productList = (List<Product>) FacesContext.getCurrentInstance().getExternalContext()
+                .getSessionMap().get("productList");
+        this.setBranchDetailsWrapper((BranchDetailsWrapper) FacesContext.getCurrentInstance().getExternalContext()
+                .getSessionMap().get("branchDetailsWrapper"));
+
+    }
 
     public List<Product> getProductList() {
         return productList;
@@ -30,5 +40,13 @@ public class ProductBean {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public BranchDetailsWrapper getBranchDetailsWrapper() {
+        return branchDetailsWrapper;
+    }
+
+    public void setBranchDetailsWrapper(BranchDetailsWrapper branchDetailsWrapper) {
+        this.branchDetailsWrapper = branchDetailsWrapper;
     }
 }
