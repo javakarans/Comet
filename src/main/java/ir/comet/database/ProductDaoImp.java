@@ -43,6 +43,10 @@ public class ProductDaoImp implements ProductDao {
 
     }
 
+    public List<Product> getProductListByBrandId(long brandId){
+        return SqlHandler.getObjectsBySpecialColumn(new Product(), "branchId", brandId);
+    }
+
     public void updateProduct(Product product) {
 
         SqlHandler.update(product);

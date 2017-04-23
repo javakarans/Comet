@@ -25,6 +25,10 @@ public class BranchDetailsWrapper {
         fill();
     }
 
+    public BranchDetailsWrapper(long branchId,long brandId){
+
+    }
+
     public BranchDetails convertToOrginalClass(BranchDetailsWrapper branchDetailsWrapper)
     {
         BranchDetails branchDetails = new BranchDetails();

@@ -68,21 +68,30 @@
 
             <!-- Menu -->
             <b:navBar style="margin-top:-20px;">
-                <b:navbarLinks>
-                    <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
-                    <ui:repeat value="#{applicationBean.menuController.allCategoryList}" var="category">
-                        <b:dropMenu value="#{category.name}">
-                            <ui:repeat value="#{applicationBean.menuController.getBranchesByCategoryId(category.categoryId)}" var="branch">
-                                <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
-                                <ui:repeat value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}" var="brand">
-                                    <b:navLink value="#{brand.name}" styleClass="menu-bar-header" contentClass="dropdown_link"></b:navLink>
+                <b:form>
+                    <b:navbarLinks>
+
+                        <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
+
+                        <ui:repeat value="#{applicationBean.menuController.allCategoryList}" var="category">
+                            <b:dropMenu value="#{category.name}">
+                                <ui:repeat
+                                        value="#{applicationBean.menuController.getBranchesByCategoryId(category.categoryId)}"
+                                        var="branch">
+                                    <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
+                                    <ui:repeat
+                                            value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}"
+                                            var="brand">
+                                            <b:navCommandLink contentClass="dropdown_link" value="#{brand.name}"
+                                            action="#{userSessionBean.redirectToProductPage(branch.branchId,brand.brandId)}"></b:navCommandLink>
+                                    </ui:repeat>
                                 </ui:repeat>
-                            </ui:repeat>
-                        </b:dropMenu>
+                            </b:dropMenu>
 
-                    </ui:repeat>
+                        </ui:repeat>
 
-                </b:navbarLinks>
+                    </b:navbarLinks>
+                </b:form>
             </b:navBar>
 
         </b:container>

@@ -1,12 +1,17 @@
 package ir.comet.bean;
 
+import ir.comet.database.BranchDetailsDaoImp;
+import ir.comet.model.BranchDetails;
 import ir.comet.model.Product;
 import ir.comet.wrapper.BranchDetailsWrapper;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,6 +23,8 @@ public class ProductBean {
 
     private List<Product> productList;
     private BranchDetailsWrapper branchDetailsWrapper;
+    private long branchDetailsId;
+
 
     @PostConstruct
     public void init() {
@@ -26,12 +33,19 @@ public class ProductBean {
     }
 
     public void loadProductList() {
-
-        this.productList = (List<Product>) FacesContext.getCurrentInstance().getExternalContext()
-                .getSessionMap().get("productList");
+        getParametersFromUrl();
+        BranchDetailsDaoImp branchDetailsDaoImp = new BranchDetailsDaoImp();
         this.setBranchDetailsWrapper((BranchDetailsWrapper) FacesContext.getCurrentInstance().getExternalContext()
                 .getSessionMap().get("branchDetailsWrapper"));
+    }
 
+    public HashMap<String,Long> getParametersFromUrl(){
+        long branchId = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("branchId"));
+        long brandId = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("brandId"));
+        HashMap<String,Long> hashMap=new HashMap<String, Long>();
+        hashMap.put("branchId",branchId);
+        hashMap.put("brandId",brandId);
+        return hashMap;
     }
 
     public List<Product> getProductList() {
@@ -49,4 +63,13 @@ public class ProductBean {
     public void setBranchDetailsWrapper(BranchDetailsWrapper branchDetailsWrapper) {
         this.branchDetailsWrapper = branchDetailsWrapper;
     }
+
+    public long getBranchDetailsId() {
+        return branchDetailsId;
+    }
+
+    public void setBranchDetailsId(long branchDetailsId) {
+        this.branchDetailsId = branchDetailsId;
+    }
+
 }
