@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class ProductController {
 
-    public List<Product> getProductList(long brandId){
-        ProductDaoImp productDaoImp=new ProductDaoImp();
-        List<Product> productListByBrandId = productDaoImp.getProductListByBrandId(brandId);
-        return productListByBrandId;
-    }
+//    public List<Product> getProductList(long brandId){
+//        ProductDaoImp productDaoImp=new ProductDaoImp();
+//        List<Product> productListByBrandId = productDaoImp.getProductListByBrandId(brandId);
+//        return productListByBrandId;
+//    }
 }

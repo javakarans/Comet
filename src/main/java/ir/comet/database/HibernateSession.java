@@ -38,11 +38,10 @@ public class HibernateSession {
      * This method creates a session factory to connect to DB
      * @return session
      */
-    public Session getSession(){
+    public SessionFactory getSession(){
         Configuration configuration=new Configuration().configure();
         StandardServiceRegistryBuilder builder=new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         SessionFactory sessionFactory=configuration.buildSessionFactory(builder.build());
-        Session session = sessionFactory.openSession();
-        return session;
+        return sessionFactory;
     }
 }

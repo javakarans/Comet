@@ -15,28 +15,18 @@ import java.util.List;
  */
 public class OrderDaoImp implements OrderDao {
 
-    private SessionFactory sessionFactory;
+    private SqlHandler sqlHandler;
 
     public OrderDaoImp(){
-        sessionFactory = HibernateSession.getInstance().getSession().getSessionFactory();
+        sqlHandler=SqlHandler.getInstance();
     }
 
     public void createOrder(Order order) {
-        SqlHandler.create(order);
+        sqlHandler.create(order);
     }
 
     public Order getOrder(long orderId) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Order.class);
-        criteria.add(Restrictions.eq("orderId",orderId));
-        session.getTransaction().commit();
-        session.close();
-        List<Order> list = criteria.list();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (Order) sqlHandler.getObjectsBySpecialColumn(this.getClass(), "orderId", orderId).get(0);
     }
 
     public List<Order> getAllOrders() {
@@ -44,10 +34,10 @@ public class OrderDaoImp implements OrderDao {
     }
 
     public void updateOrder(Order order) {
-        SqlHandler.update(order);
+        sqlHandler.update(order);
     }
 
     public void deleteOrder(Order order) {
-        SqlHandler.delete(order);
+        sqlHandler.delete(order);
     }
 }

@@ -14,28 +14,18 @@ import java.util.List;
  */
 public class CommentDaoImp implements CommentDao {
 
-    private SessionFactory sessionFactory;
+    private SqlHandler sqlHandler;
 
     public CommentDaoImp(){
-        sessionFactory = HibernateSession.getInstance().getSession().getSessionFactory();
+        sqlHandler=SqlHandler.getInstance();
     }
 
     public void createComment(Comment comment) {
-        SqlHandler.create(comment);
+        sqlHandler.create(comment);
     }
 
     public Comment getComment(long commentId) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Comment.class);
-        criteria.add(Restrictions.eq("commentId",commentId));
-        session.getTransaction().commit();
-        session.close();
-        List<Comment> list = criteria.list();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (Comment) sqlHandler.getObjectsBySpecialColumn(new Comment(),"commentId",commentId).get(0);
     }
 
     public List<Comment> getAllComments(long commentId) {
@@ -43,10 +33,10 @@ public class CommentDaoImp implements CommentDao {
     }
 
     public void updateComment(Comment comment) {
-        SqlHandler.update(comment);
+        sqlHandler.update(comment);
     }
 
     public void deleteComment(Comment comment) {
-        SqlHandler.delete(comment);
+        sqlHandler.delete(comment);
     }
 }

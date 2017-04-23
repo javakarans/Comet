@@ -1,6 +1,7 @@
 package ir.comet.bean;
 
 import ir.comet.database.BranchDetailsDaoImp;
+import ir.comet.database.ProductDaoImp;
 import ir.comet.model.BranchDetails;
 import ir.comet.model.Product;
 import ir.comet.wrapper.BranchDetailsWrapper;
@@ -8,6 +9,7 @@ import ir.comet.wrapper.BranchDetailsWrapper;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
@@ -24,19 +26,18 @@ public class ProductBean {
     private List<Product> productList;
     private BranchDetailsWrapper branchDetailsWrapper;
     private long branchDetailsId;
-
+    private HashMap<String, Long> urlParams;
 
     @PostConstruct
     public void init() {
-
+        urlParams = getParametersFromUrl();
+        loadBranchDetailsWrapper();
         loadProductList();
     }
 
     public void loadProductList() {
-        getParametersFromUrl();
-        BranchDetailsDaoImp branchDetailsDaoImp = new BranchDetailsDaoImp();
-        this.setBranchDetailsWrapper((BranchDetailsWrapper) FacesContext.getCurrentInstance().getExternalContext()
-                .getSessionMap().get("branchDetailsWrapper"));
+        ProductDaoImp productDaoImp=new ProductDaoImp();
+        this.productList=productDaoImp.getProductListBybranchDetailsId(branchDetailsWrapper.getBranchDetailsWrapperId());
     }
 
     public HashMap<String,Long> getParametersFromUrl(){
@@ -46,6 +47,12 @@ public class ProductBean {
         hashMap.put("branchId",branchId);
         hashMap.put("brandId",brandId);
         return hashMap;
+    }
+
+    public void loadBranchDetailsWrapper(){
+        BranchDetailsDaoImp branchDetailsDaoImp=new BranchDetailsDaoImp();
+        branchDetailsWrapper=new BranchDetailsWrapper(branchDetailsDaoImp
+                .getBranchDetails(urlParams.get("branchId"),urlParams.get("brandId")).get(0));
     }
 
     public List<Product> getProductList() {

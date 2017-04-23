@@ -12,40 +12,30 @@ import java.util.List;
 
 public class BrandDaoImp implements BrandDao {
 
-    private SessionFactory sessionFactory;
-
+    private SqlHandler sqlHandler;
     public BrandDaoImp()
     {
-        sessionFactory = HibernateSession.getInstance().getSession().getSessionFactory();
+        sqlHandler=SqlHandler.getInstance();
     }
 
     public void createBrand(Brand brand) {
-          SqlHandler.create(brand);
+          sqlHandler.create(brand);
     }
 
     public Brand getBrand(long brandId) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Brand.class);
-        criteria.add(Restrictions.eq("brandId",brandId));
-        session.getTransaction().commit();
-        List<Brand> list = criteria.list();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (Brand) sqlHandler.getObjectsBySpecialColumn(new Brand(),"brandId",brandId).get(0);
     }
 
     public List<Brand> getAllBrands() {
         Brand brand = new Brand();
-        return SqlHandler.getAllObjects(brand);
+        return sqlHandler.getAllObjects(brand);
     }
 
     public void updateBrand(Brand brand) {
-        SqlHandler.update(brand);
+        sqlHandler.update(brand);
     }
 
     public void deleteBrand(Brand brand) {
-        SqlHandler.delete(brand);
+        sqlHandler.delete(brand);
     }
 }

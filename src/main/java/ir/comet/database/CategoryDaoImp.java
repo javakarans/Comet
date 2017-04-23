@@ -15,39 +15,30 @@ import java.util.List;
  */
 public class CategoryDaoImp implements CategoryDao {
 
-    private SessionFactory sessionFactory;
+    private SqlHandler sqlHandler;
 
     public CategoryDaoImp(){
-        sessionFactory = HibernateSession.getInstance().getSession().getSessionFactory();
+        sqlHandler=SqlHandler.getInstance();
     }
 
     public void createCategory(Category category) {
-        SqlHandler.create(category);
+        sqlHandler.create(category);
     }
 
     public Category getCategory(long categoryId) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Category.class);
-        criteria.add(Restrictions.eq("categoryId",categoryId));
-        session.getTransaction().commit();
-        List<Category> list = criteria.list();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (Category) sqlHandler.getObjectsBySpecialColumn(new Category(),"categoryId",categoryId).get(0);
     }
 
     public List<Category> getAllCategories() {
         Category category = new Category();
-        return SqlHandler.getAllObjects(category) ;
+        return sqlHandler.getAllObjects(category) ;
     }
 
     public void updateCategory(Category category) {
-        SqlHandler.update(category);
+        sqlHandler.update(category);
     }
 
     public void deleteCategory(Category category) {
-        SqlHandler.delete(category);
+        sqlHandler.delete(category);
     }
 }

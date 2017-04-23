@@ -8,8 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BranchDetailsDaoImp implements BranchDetailsDao {
+
+    private SqlHandler sqlHandler;
+
+    public BranchDetailsDaoImp(){
+        sqlHandler=SqlHandler.getInstance();
+    }
+
     public int createBranchDetails(BranchDetails branchDetails) {
-        SqlHandler.create(branchDetails);
+        sqlHandler.create(branchDetails);
         return 0;
     }
 
@@ -19,13 +26,13 @@ public class BranchDetailsDaoImp implements BranchDetailsDao {
 
     public List<BranchDetails> getAlBranchDetails() {
         BranchDetails branchDetails = new BranchDetails();
-        return SqlHandler.getAllObjects(branchDetails);
+        return sqlHandler.getAllObjects(branchDetails);
 
     }
 
     public List<Brand> getBrandsByBranchId(long id) {
         BrandDaoImp brandDaoImp = new BrandDaoImp();
-        List<BranchDetails> branchDetailsList = SqlHandler.getObjectsBySpecialColumn(new BranchDetails(), "brandId", id);
+        List<BranchDetails> branchDetailsList = sqlHandler.getObjectsBySpecialColumn(new BranchDetails(), "brandId", id);
         List<Brand> brands = new ArrayList<Brand>(branchDetailsList.size());
         for (BranchDetails branchDetails : branchDetailsList) {
             Brand brand = brandDaoImp.getBrand(branchDetails.getBrandId());
@@ -34,13 +41,18 @@ public class BranchDetailsDaoImp implements BranchDetailsDao {
         return brands;
     }
 
+    public List<BranchDetails> getBranchDetails(long branchId,long brandId){
+        return sqlHandler.getObjectsBySpecialColumn(new BranchDetails(), "branchId", branchId, "brandId", brandId);
+    }
+
     public int updateBranchDetails(BranchDetails branchDetails) {
-        SqlHandler.update(branchDetails);
+        sqlHandler.update(branchDetails);
         return 0;
     }
 
     public int deleteBranchDetails(BranchDetails branchDetails) {
-        SqlHandler.delete(branchDetails);
+        sqlHandler.delete(branchDetails);
         return 0;
     }
+
 }

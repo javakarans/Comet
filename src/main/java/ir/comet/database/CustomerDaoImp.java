@@ -15,46 +15,23 @@ import java.util.List;
  */
 public class CustomerDaoImp implements CustomerDao {
 
-    private SessionFactory sessionFactory;
+    private SqlHandler sqlHandler;
 
     public CustomerDaoImp(){
-        sessionFactory = HibernateSession.getInstance().getSession().getSessionFactory();
+        sqlHandler=SqlHandler.getInstance();
     }
 
     public void createCustomer(Customer customer) {
-        SqlHandler.create(customer);
+        sqlHandler.create(customer);
     }
 
     public Customer getCustomer(long customerId) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Customer.class);
-        criteria.add(Restrictions.eq("customerId",customerId));
-        session.getTransaction().commit();
-        List<Customer> list = criteria.list();
-        session.close();
-        sessionFactory.close();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (Customer) sqlHandler.getObjectsBySpecialColumn(new Customer(),"customerId",customerId);
     }
 
     public Customer getCustomerByUserNameAndPass(String userName,String password) {
-        Session session=sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Customer.class);
-        criteria
-                .add(Restrictions.eq("userName",userName))
-                .add(Restrictions.eq("password",password));
-        session.getTransaction().commit();
-        List<Customer> list = criteria.list();
-        session.close();
-        sessionFactory.close();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (Customer) sqlHandler.getObjectsBySpecialColumn
+                (new Customer(),"userName",userName,"password",password).get(0);
     }
 
     public List<Customer> getAllCustomers() {
@@ -62,10 +39,10 @@ public class CustomerDaoImp implements CustomerDao {
     }
 
     public void updateCustomer(Customer customer) {
-        SqlHandler.update(customer);
+        sqlHandler.update(customer);
     }
 
     public void deleteCustomer(Customer customer) {
-        SqlHandler.delete(customer);
+        sqlHandler.delete(customer);
     }
 }

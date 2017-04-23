@@ -11,48 +11,35 @@ import org.hibernate.criterion.Restrictions;
 import java.util.List;
 
 public class ProductDaoImp implements ProductDao {
-    private SessionFactory sessionFactory;
+
+    private SqlHandler sqlHandler;
+
     public ProductDaoImp(){
-        sessionFactory = HibernateSession.getInstance().getSession().getSessionFactory();
+        sqlHandler=SqlHandler.getInstance();
     }
 
     public void createProduct(Product product) {
-        SqlHandler.create(product);
+        sqlHandler.create(product);
     }
 
     public Product getProduct(long productId) {
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Product.class);
-        criteria.add(Restrictions.eq("productId",productId));
-        session.getTransaction().commit();
-        List<Product> list = criteria.list();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (Product) sqlHandler.getObjectsBySpecialColumn(this.getClass(),"productId",productId);
     }
 
     public List<Product> getAllProducts() {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(Product.class);
-        session.getTransaction().commit();
-        return criteria.list();
-
+        return sqlHandler.getAllObjects(new Product());
     }
 
-    public List<Product> getProductListByBrandId(long brandId){
-        return SqlHandler.getObjectsBySpecialColumn(new Product(), "branchId", brandId);
+    public List<Product> getProductListBybranchDetailsId(long branchDetailsId){
+        return sqlHandler.getObjectsBySpecialColumn(new Product(),"branchDetailsId",branchDetailsId);
     }
 
     public void updateProduct(Product product) {
 
-        SqlHandler.update(product);
+        sqlHandler.update(product);
     }
 
     public void deleteProduct(Product product) {
-        SqlHandler.delete(product);
+        sqlHandler.delete(product);
     }
 }

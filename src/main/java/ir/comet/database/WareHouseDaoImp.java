@@ -15,35 +15,25 @@ import java.util.List;
  */
 public class WareHouseDaoImp implements WareHouseDao {
 
-    private SessionFactory sessionFactory;
+    private SqlHandler sqlHandler;
 
     public WareHouseDaoImp(){
-        sessionFactory = HibernateSession.getInstance().getSession().getSessionFactory();
+        sqlHandler=SqlHandler.getInstance();
     }
 
     public void createWareHouse(WareHouse wareHouse) {
-        SqlHandler.create(wareHouse);
+        sqlHandler.create(wareHouse);
     }
 
     public WareHouse getWareHouse(long wareHouseId) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(WareHouse.class);
-        criteria.add(Restrictions.eq("wareHouseId",wareHouseId));
-        session.getTransaction().commit();
-        session.close();
-        List<WareHouse> list = criteria.list();
-        if(!list.isEmpty()){
-            return list.get(0);
-        }
-        return null;
+        return (WareHouse) sqlHandler.getObjectsBySpecialColumn(this.getClass(),"wareHouseId",wareHouseId).get(0);
     }
 
     public void updateWareHouse(WareHouse wareHouse) {
-        SqlHandler.update(wareHouse);
+        sqlHandler.update(wareHouse);
     }
 
     public void deleteWareHouse(WareHouse wareHouse) {
-        SqlHandler.delete(wareHouse);
+        sqlHandler.delete(wareHouse);
     }
 }

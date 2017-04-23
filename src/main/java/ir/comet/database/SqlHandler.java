@@ -14,44 +14,88 @@ import java.util.List;
  */
 public class SqlHandler {
 
-    private static Session session;
+    private SessionFactory sessionFactory;
+    private static SqlHandler sqlHandler;
 
-    static {
-        session = HibernateSession.getInstance().getSession();
+    private SqlHandler(){
+        sessionFactory = HibernateSession.getInstance().getSession();
     }
-    public static <T> void create(T object){
+
+    public static SqlHandler getInstance(){
+        if (sqlHandler == null) {
+            // Thread Safe. Might be costly operation in some case
+            synchronized (SqlHandler.class) {
+                if (sqlHandler == null) {
+                    sqlHandler = new SqlHandler();
+                }
+            }
+        }
+        return sqlHandler;
+    }
+
+    public <T> void create(T object){
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(object);
         session.getTransaction().commit();
-
+        session.flush();
+        session.close();
     }
 
-    public static <T> void update(T object){
+    public <T> void update(T object){
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(object);
         session.getTransaction().commit();
+        session.flush();
+        session.close();
     }
 
-    public static <T> void delete(T object){
+    public <T> void delete(T object){
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(object);
         session.getTransaction().commit();
+        session.flush();
+        session.close();
     }
 
-    public static <T> List getAllObjects(T object)
+    public <T> List getAllObjects(T object)
     {
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(object.getClass());
         session.getTransaction().commit();
-        return criteria.list();
+        List<T> list=criteria.list();
+        session.flush();
+        session.close();
+        return list;
+
     }
 
-    public static <T> List getObjectsBySpecialColumn(T object,String column,long id){
+    public <T> List getObjectsBySpecialColumn(T object,String column,Object value){
+        Session session = sessionFactory.openSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(object.getClass());
-        criteria.add(Restrictions.eq(column,id));
+        criteria.add(Restrictions.eq(column,value));
         session.getTransaction().commit();
-        return criteria.list();
+        List<T> list=criteria.list();
+        session.flush();
+        session.close();
+        return list;
+    }
+
+    public <T> List getObjectsBySpecialColumn(T object,String firstColumn,Object firstValue,String secondColumn,Object secondValue){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(object.getClass());
+        criteria.add(Restrictions.eq(firstColumn,firstValue));
+        criteria.add(Restrictions.eq(secondColumn,secondValue));
+        session.getTransaction().commit();
+        List<T> list=criteria.list();
+        session.flush();
+        session.close();
+        return list;
     }
 
 }
