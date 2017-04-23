@@ -7,18 +7,22 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
- 
-<h:head>
-    <title>JSF 2.2 TUTORIALS</title>
-</h:head>
+<ui:composition>
+    <b:container>
+        <b:row>
+            <b:column>
+                <b:panelGrid colSpans="3,9" size="xs">
+                    <b:form>
+                        <p:textEditor></p:textEditor>
+                    </b:form>
 
-<h:body>
+                </b:panelGrid>
 
-    <ui:composition template="../templates/adminTemplate.xhtml">
-        <ui:define name="content">
-            <ui:include src="productTables.xhtml"/>
-        </ui:define>
-    </ui:composition>
-</h:body>
+            </b:column>
 
+        </b:row>
+
+    </b:container>
+
+</ui:composition>
 </html>

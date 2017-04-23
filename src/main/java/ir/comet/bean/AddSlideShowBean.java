@@ -14,14 +14,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.Part;
 import java.io.*;
-
+import java.util.UUID;
 
 
 import static org.hibernate.internal.util.io.StreamCopier.BUFFER_SIZE;
 
 
 @ManagedBean(name = "dtSlideShowBean")
-@SessionScoped
 public class AddSlideShowBean implements Serializable {
     private SlideShowDaoImp slideShowDaoImp = new SlideShowDaoImp();
     private SlideShow slideShow = new SlideShow();
@@ -30,7 +29,7 @@ public class AddSlideShowBean implements Serializable {
 
     public void addSlide() throws IOException {
 
-
+        System.out.println("33333333333333333333333333333333333333333333333333");
        // handleFileUpload(uploadedFile,String.valueOf(slideShow.getSlideId()));
         int result;
         result= slideShowDaoImp.createSlideShow(slideShow);
@@ -38,9 +37,18 @@ public class AddSlideShowBean implements Serializable {
     }
 
 
+    public void f(FileUploadEvent event) {
+        System.out.println("44444444444444444444444444444444444444444444444444444444");
+        String uniqueID = UUID.randomUUID().toString();
+        handleFileUpload(event.getFile(),uniqueID);
+        //FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        //FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+
     public void handleFileUpload(UploadedFile uploaded,String fileId) {
 
-
+        System.out.println("55555555555555555555555555555555555555");
 
         ExternalContext extContext=FacesContext.getCurrentInstance().getExternalContext();
 
@@ -82,6 +90,8 @@ public class AddSlideShowBean implements Serializable {
     }
 
     public void upload() throws Throwable {
+
+        System.out.println("666666666666666666666666666666666666666");
         //System.out.println("salam");
         handleFileUpload(uploadedFile,String.valueOf(slideShow.getSlideId()));
 

@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ir.comet.database.BranchDaoImp;
 import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.database.HibernateSession;
@@ -22,7 +24,23 @@ public class Test {
 
     public static void main(String[] args) {
 
-         List<BranchDetailsWrapper> branchDetailsWrapperList;
+
+        FilesLocations filesLocations = new FilesLocations();
+        filesLocations.setFileName("mobile");
+        filesLocations.getFilesList().add("1");
+        filesLocations.getFilesList().add("1zcx");
+        filesLocations.getFilesList().add("1zxcz");
+        filesLocations.getFilesList().add("1vczxvzxvzxcv");
+        filesLocations.getFilesList().add("1154");
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+
+        Gson gson = builder.create();
+
+        System.out.println(gson.toJson(filesLocations));
+
+        /* List<BranchDetailsWrapper> branchDetailsWrapperList;
          BranchDetailsDaoImp branchDetailsDaoImp;
 
         branchDetailsDaoImp = new BranchDetailsDaoImp();

@@ -1,6 +1,8 @@
 package ir.comet.model;
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,7 +11,6 @@ import java.io.Serializable;
 public class SlideShow implements Serializable {
     private long slideId;
     private String slideText;
-    private int slideNumber;
     private String slideTitle;
 
     @Id
@@ -23,22 +24,13 @@ public class SlideShow implements Serializable {
         this.slideId = slideId;
     }
 
-    @Column
+    @Type(type = "text")
     public String getSlideText() {
         return slideText;
     }
 
     public void setSlideText(String slideText) {
         this.slideText = slideText;
-    }
-
-    @Column
-    public int getSlideNumber() {
-        return slideNumber;
-    }
-
-    public void setSlideNumber(int slideNumber) {
-        this.slideNumber = slideNumber;
     }
 
     @Column
