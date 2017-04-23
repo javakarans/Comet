@@ -19,8 +19,8 @@
                         <h:outputText value="نام انگلیسی"/>
                         <b:inputText value="#{dtAddProductBean.product.englishName}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="انتخاب طبقه بندی کالا"/>
-                        <b:selectOneMenu id="selectCategory" value=""  style="height:auto;">
-                            <f:selectItems value="#{dtAddProductBean.branchDetailsWrapperList}" var="c" itemValue="#{c}" itemLabel="#{c.toString()}"/>
+                        <b:selectOneMenu id="selectCategory" value="#{dtAddProductBean.selectedBranchDetailsWrapper}"  style="height:auto;">
+                            <f:selectItems value="#{dtAddProductBean.selectedBranchDetailsWrapper}" var="branchDetailsWrapper" itemValue="#{branchDetailsWrapper}" itemLabel="#{branchDetailsWrapper.toString()}"/>
                         </b:selectOneMenu>
                         <h:outputText value="قیمت"/>
                         <b:inputText value="#{dtAddProductBean.product.price}" span="5" style="margin-top:-5px;"/>
@@ -43,7 +43,7 @@
             </b:row>
             <b:row>
                 <b:column colSm="12">
-                    <b:commandButton  ajax="false" actionListener="#{dtAddProductBean.save}" value="ذخیره" style="margin-top:30px;width:150px;height:40px;"
+                    <b:commandButton  ajax="false" actionListener="#{dtAddProductBean.save()}" value="ذخیره" style="margin-top:30px;width:150px;height:40px;"
                     />
                 </b:column>
             </b:row>
