@@ -36,10 +36,10 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
          <!--Annotated entity classes-->
+        <mapping class="ir.comet.model.Comment"/>
         <mapping class="ir.comet.model.Brand"/>
         <mapping class="ir.comet.model.Branch"/>
         <mapping class="ir.comet.model.Category"/>
-        <mapping class="ir.comet.model.Comment"/>
         <mapping class="ir.comet.model.Customer"/>
         <mapping class="ir.comet.model.Order"/>
         <mapping class="ir.comet.model.WareHouse"/>

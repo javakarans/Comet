@@ -23,7 +23,7 @@ public class ProductDaoImp implements ProductDao {
     }
 
     public Product getProduct(long productId) {
-        return (Product) sqlHandler.getObjectsBySpecialColumn(this.getClass(),"productId",productId);
+        return (Product) sqlHandler.getObjectsBySpecialColumn(new Product(),"productId",productId).get(0);
     }
 
     public List<Product> getAllProducts() {

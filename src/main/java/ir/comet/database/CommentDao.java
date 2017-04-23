@@ -12,7 +12,7 @@ public interface CommentDao {
 
     public void createComment(Comment comment);
     public Comment getComment(long commentId);
-    public List<Comment> getAllComments(long commentId);
+    public List<Comment> getAllCommentsByProductId(long productId);
     public void updateComment(Comment comment);
     public void deleteComment(Comment comment);
 }

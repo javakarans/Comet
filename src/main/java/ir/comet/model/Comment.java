@@ -1,6 +1,7 @@
 package ir.comet.model;
 
 import javax.persistence.*;
+import java.io.PrintStream;
 import java.io.Serializable;
 
 /**
@@ -15,6 +16,10 @@ public class Comment implements Serializable {
     private long productId;
     private String text;
     private String createdDate;
+    private String customerName;
+    private int likeCount;
+    private int disLikeCount;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,5 +66,32 @@ public class Comment implements Serializable {
 
     public void setProductId(long productId) {
         this.productId = productId;
+    }
+
+    @Column
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    @Column
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    @Column
+    public int getDisLikeCount() {
+        return disLikeCount;
+    }
+
+    public void setDisLikeCount(int disLikeCount) {
+        this.disLikeCount = disLikeCount;
     }
 }

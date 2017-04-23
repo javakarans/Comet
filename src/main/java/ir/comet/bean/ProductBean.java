@@ -55,6 +55,10 @@ public class ProductBean {
                 .getBranchDetails(urlParams.get("branchId"),urlParams.get("brandId")).get(0));
     }
 
+    public String redirectToProductContent(long productId){
+        return "productContent.xhtml?faces-redirect=true&productId="+productId;
+    }
+
     public List<Product> getProductList() {
         return productList;
     }

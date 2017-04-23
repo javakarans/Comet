@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="../templates/UserTemplate.xhtml">
+    <ui:composition template="#{applicationBean.loadTemplate(customer)}">
 
         <ui:define name="content">
 
@@ -69,8 +69,8 @@
                                     <b:form>
                                         <b:panelGrid colSpans="12" size="xs">
                                             <div id="product_header">
-                                                <span class="first">اسم محصول به زبان فارسی</span>
-                                                <h5><span>Product name by english</span></h5>
+                                                <span class="first">#{productContentBean.product.name}</span>
+                                                <h5><span>#{productContentBean.product.englishName}</span></h5>
                                             </div>
                                             <b:row style="margin-top:25px;">
                                                 <b:selectOneMenu span="5" style="height:auto;" label="انتخاب رنگ"
@@ -84,22 +84,23 @@
                                                 <b:selectOneMenu span="5" style="height:auto;" label="انتخاب گارانتی"
                                                                  labelStyle="color:#848484;">
                                                     <f:selectItem itemLabel="لطفا انتخاب کنید" itemValue=""/>
-                                                    <f:selectItem itemLabel="گارانتی 1" itemValue="1"/>
-                                                    <f:selectItem itemLabel="گارانتی 2" itemValue="2"/>
+                                                    <f:selectItem itemLabel="#{productContentBean.product.warranty}"
+                                                                  itemValue="#{productContentBean.product.warranty}"/>
                                                 </b:selectOneMenu>
                                             </b:row>
                                             <b:row style="margin-top:25px;">
                                                 <b:selectOneMenu span="5" style="height:auto;" label="انتخاب فروشنده"
                                                                  labelStyle="color:#848484;">
-                                                    <f:selectItem itemLabel="کامت" itemValue=""/>
+                                                    <f:selectItem itemLabel="کامت" itemValue="کامت"/>
                                                 </b:selectOneMenu>
                                             </b:row>
                                             <b:row style="margin-top:25px;">
                                                 <b:column colSm="12">
                                                     <span style="color:#848484;margin-left: 10px">قیمت : </span>
-                                                    <h:outputText value="1000"
+                                                    <h:outputText value="#{productContentBean.product.price} تومان"
                                                                   style="margin-left: 20px;color:#848484;"></h:outputText>
-                                                    <b:label severity="danger" text="تخفیف : 1000"></b:label>
+                                                    <b:label severity="danger"
+                                                             text="تخفیف : #{productContentBean.product.discount}"></b:label>
                                                 </b:column>
                                             </b:row>
                                             <b:row style="margin-top:50px;">
@@ -134,7 +135,7 @@
                                 <b:tab title="معرفی و بررسی محصول">
                                     <f:facet name="anchor"><b:iconAwesome name="pencil-square-o"/></f:facet>
                                     <div style="margin-top: 30px">
-                                        <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                        <h:outputText value="#{productContentBean.product.description}"></h:outputText>
                                     </div>
                                 </b:tab>
 
@@ -173,19 +174,38 @@
 
                                 <b:tab title="نظرات کاربران">
                                     <f:facet name="anchor"><b:iconAwesome name="comments-o"/></f:facet>
-                                    <div style="margin-top: 30px">
-                                        <ui:repeat value="#" var="userComment">
-                                            <b:row>
-                                                <b:column colSm="12">
-                                                    <b:panel collapsible="false" styleClass="userComment-panel">
-                                                        <f:facet name="heading">
-                                                            <b:row>
-                                                                <b:column colSm="8">
-                                                                    <h:outputText value="یوزر کاربر"></h:outputText>
-                                                                    <h5>15 فروردین 96</h5>
-                                                                </b:column>
-                                                                <b:column colSm="4">
-                                                                    <b:form>
+                                    <b:row style="margin-top: 30px" rendered="false">
+                                        <b:column colSm="12">
+                                            <span>برای ثبت نظر جدید ابتدا وارد کامت شوید!</span>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row style="margin-top: 20px" rendered="true">
+                                        <b:column colSm="12">
+                                            <b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
+                                                <p>Modal body</p>
+                                                <f:facet name="footer">
+                                                    <b:button value="close" dismiss="modal" onclick="return false;"/>
+                                                    <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
+                                                </f:facet>
+                                            </b:modal>
+                                            <b:button value="Trigger (JSF passthrough)" look="warning" p:data-target="#amodal" p:data-toggle="modal" onclick="return false;" size="lg"/>
+                                        </b:column>
+                                    </b:row>
+                                    <div style="margin-top: 20px">
+                                        <b:form>
+                                            <ui:repeat value="#{productContentBean.loadComments()}" var="userComment">
+                                                <b:row style="margin-top:20px;">
+                                                    <b:column colSm="12">
+                                                        <b:panel collapsible="false" styleClass="userComment-panel">
+                                                            <f:facet name="heading">
+                                                                <b:row>
+                                                                    <b:column colSm="8">
+                                                                        <h:outputText
+                                                                                value="#{userComment.customerName}"></h:outputText>
+                                                                        <h5>#{userComment.createdDate}</h5>
+                                                                    </b:column>
+                                                                    <b:column colSm="4">
+
                                                                         <h:panelGrid columns="3"
                                                                                      columnClasses="uCPCol1,uCPCol2,uCPCol3"
                                                                                      style="margin-top: 15px">
@@ -193,39 +213,54 @@
                                                                             <h:outputText
                                                                                     value="آیا این نظر مورد پسند شما بود؟"></h:outputText>
 
-                                                                            <b:commandButton value="0"
-                                                                                             iconAwesome="thumbs-o-up"
-                                                                                             look="success" size="xs">
+                                                                            <b:commandButton
+                                                                                    value="#{userComment.likeCount}"
+                                                                                    iconAwesome="thumbs-o-up"
+                                                                                    look="success" size="xs"
+                                                                                    update="@form"
+                                                                                    action="#{productContentBean.commentController.increaseLike(userComment.commentId)}">
                                                                             </b:commandButton>
 
-                                                                            <b:commandButton value="0"
-                                                                                             iconAwesome="thumbs-o-down"
-                                                                                             look="danger" size="xs">
+                                                                            <b:commandButton
+                                                                                    value="#{userComment.disLikeCount}"
+                                                                                    iconAwesome="thumbs-o-down"
+                                                                                    look="danger" size="xs"
+                                                                                    update="@form"
+                                                                                    action="#{productContentBean.commentController.increaseDisLike(userComment.commentId)}">
                                                                             </b:commandButton>
 
                                                                         </h:panelGrid>
-                                                                    </b:form>
-                                                                </b:column>
-                                                            </b:row>
-                                                        </f:facet>
-                                                        <div>
-                                                            <h:outputText value="متن نظر کابر"></h:outputText>
-                                                        </div>
-                                                    </b:panel>
-                                                </b:column>
-                                            </b:row>
-                                        </ui:repeat>
+
+                                                                    </b:column>
+                                                                </b:row>
+                                                            </f:facet>
+                                                            <div>
+                                                                <h:outputText
+                                                                        value="#{userComment.text}"></h:outputText>
+                                                            </div>
+                                                        </b:panel>
+                                                    </b:column>
+                                                </b:row>
+                                            </ui:repeat>
+                                        </b:form>
                                     </div>
                                 </b:tab>
 
                             </b:tabView>
+
                         </b:panel>
+
                     </b:column>
                     <!-- Second Panel -->
 
                 </b:row>
 
             </b:container>
+
+            <!-- LoginModal -->
+            <!--<b:modal id="amodal" title="ثبت نظر">-->
+                <!--asd-->
+            <!--</b:modal>-->
 
         </ui:define>
 

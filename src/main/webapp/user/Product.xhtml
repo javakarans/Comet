@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="../templates/UserTemplate.xhtml">
+    <ui:composition template="#{applicationBean.loadTemplate(customer)}">
 
         <ui:define name="content">
 
@@ -70,7 +70,8 @@
 
                                             <b:column colXs="12" style="margin-top:10px;">
                                                 <b:commandButton iconAwesome="cart-plus" look="success"
-                                                                 size="xs" style="float:left;"></b:commandButton>
+                                                                 size="xs" style="float:left;"
+                                                                 action="#{productBean.redirectToProductContent(productItem.productId)}"></b:commandButton>
                                             </b:column>
 
                                         </b:row>

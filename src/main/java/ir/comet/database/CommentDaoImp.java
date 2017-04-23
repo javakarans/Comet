@@ -28,8 +28,8 @@ public class CommentDaoImp implements CommentDao {
         return (Comment) sqlHandler.getObjectsBySpecialColumn(new Comment(),"commentId",commentId).get(0);
     }
 
-    public List<Comment> getAllComments(long commentId) {
-        return null;
+    public List<Comment> getAllCommentsByProductId(long productId) {
+        return sqlHandler.getObjectsBySpecialColumn(new Comment(),"productId",productId);
     }
 
     public void updateComment(Comment comment) {
