@@ -5,10 +5,12 @@ import java.util.List;
 
 public class Item {
     private String ItemName;
-    private List<String> subItems;
+    private String keys;
+    private String values;
+
 
     public Item() {
-        subItems = new ArrayList<String>();
+
     }
 
     public String getItemName() {
@@ -19,11 +21,19 @@ public class Item {
         ItemName = itemName;
     }
 
-    public List<String> getSubItems() {
-        return subItems;
+    public String getKeys() {
+        return keys;
     }
 
-    public void setSubItems(List<String> subItems) {
-        this.subItems = subItems;
+    public void setKeys(String keys) {
+        this.keys = keys;
+    }
+
+    public String getValues() {
+        return values;
+    }
+
+    public void setValues(String values) {
+        this.values = values;
     }
 }

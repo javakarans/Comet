@@ -7,14 +7,15 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OtherDetails {
-    private List<Item> items;
+public class Colors {
+    private List<String> colorsList;
 
-    public OtherDetails() {
-        items = new ArrayList<Item>();
+    public Colors()
+    {
+        colorsList = new ArrayList<String>();
     }
 
-    public String otherDetailsToJson()
+    public String colorsToJson()
     {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
@@ -23,7 +24,7 @@ public class OtherDetails {
         return gson.toJson(this);
     }
 
-    public OtherDetails otherDetailsFromJson(String json)
+    public Colors colorsFromJson(String json)
     {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
@@ -32,11 +33,11 @@ public class OtherDetails {
         return gson.fromJson(json,this.getClass());
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<String> getColorsList() {
+        return colorsList;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setColorsList(List<String> colorsList) {
+        this.colorsList = colorsList;
     }
 }

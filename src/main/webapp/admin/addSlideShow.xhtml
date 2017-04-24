@@ -10,21 +10,21 @@
         <b:container>
                     <h:form >
                         <b:row>
-                            <b:column colSm="7">
+                            <b:column colSm="12">
                                 <b:panelGrid colSpans="3,9" size="xs">
                                     <h:outputText value="عنوان اسلاید"/>
                                     <b:inputText value="#{dtSlideShowBean.slideShow.slideTitle}" span="8" style="margin-top:-5px;"/>
                                     <h:outputText value="متن اسلاید"/>
-                                    <b:inputTextarea  value="#{dtSlideShowBean.slideShow.slideText}" span="8" style="margin-top:-5px;"/>
+                                    <b:commandButton value="برای وارد کردن متن کلیک کنید" type="button" onclick="PF('dlg1').show();" />
+                                    <h:outputText value="انتخاب عکس"/>
+                                    <p:fileUpload id="gholam" mode="simple" value="#{dtSlideShowBean.uploadedFile}" />
+                                    <p:dialog  header="متن اسلاید" widgetVar="dlg1" modal="true" height="700">
+                                        <p:textEditor  value="#{dtSlideShowBean.slideShow.slideText}" height="600"/>
+                                    </p:dialog>
                                 </b:panelGrid>
                             </b:column>
-                            <b:column colSm="5">
-                                <p:fileUpload fileUploadListener="#{dtSlideShowBean.f}" mode="advanced" dragDropSupport="false"
-                                              multiple="true" update="messages" sizeLimit="100000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
-                            </b:column>
-                        </b:row>
-                        <b:row>
-                            <p:fileUpload id="gholam" mode="simple" value="#{dtSlideShowBean.uploadedFile}" />
+
+
                         </b:row>
                         <b:row>
                             <b:column colSm="12">

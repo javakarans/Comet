@@ -1,6 +1,9 @@
 package ir.comet.model;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,24 @@ public class FilesLocations {
                 "fileName='" + fileName + '\'' +
                 ", filesList=" + filesList +
                 '}';
+    }
+
+    public String filesLocationsToJson()
+    {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+
+        Gson gson = builder.create();
+        return gson.toJson(this);
+    }
+
+    public FilesLocations filesLocationsFromJson(String json)
+    {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+
+        Gson gson = builder.create();
+        return gson.fromJson(json,this.getClass());
     }
 
     public List<String> getFilesList() {

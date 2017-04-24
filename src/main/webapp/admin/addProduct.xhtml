@@ -5,13 +5,12 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:P="http://java.sun.com/jsf/html">
 
 
 <ui:composition>
-    <b:container>
         <h:form enctype="multipart/form-data">
-            <b:row>
                 <b:column colSm="12">
                     <b:panelGrid colSpans="3,9" size="xs">
                         <h:outputText value="نام کالا"/>
@@ -19,28 +18,70 @@
                         <h:outputText value="نام انگلیسی"/>
                         <b:inputText value="#{dtAddProductBean.product.englishName}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="انتخاب طبقه بندی کالا"/>
-                        <b:selectOneMenu id="selectCategory" value="#{dtAddProductBean.selectedBranchDetailsWrapper}"  style="height:auto;">
-                            <f:selectItems value="#{dtAddProductBean.selectedBranchDetailsWrapper}" var="branchDetailsWrapper" itemValue="#{branchDetailsWrapper}" itemLabel="#{branchDetailsWrapper.toString()}"/>
+                        <b:selectOneMenu id="selectedBranchDetails" value="#{dtAddProductBean.selectedBranchDetailsWrapper}"  style="height:auto;">
+                            <f:selectItems value="#{dtAddProductBean.branchDetailsWrapperList}" var="branchDetailsWrapper" itemValue="#{branchDetailsWrapper}" itemLabel="#{branchDetailsWrapper.toString()}"/>
                         </b:selectOneMenu>
                         <h:outputText value="قیمت"/>
                         <b:inputText value="#{dtAddProductBean.product.price}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="شرکت گارانتی کننده"/>
                         <b:inputText value="#{dtAddProductBean.product.warranty}" span="5" style="margin-top:-5px;"/>
                         <h:outputText value="رنگ"/>
-                        <b:inputText value="#{dtAddProductBean.product.colorJson}" span="5" style="margin-top:-5px;"/>
+                        <b:inputText tags="true" value="#{dtAddProductBean.product.colorJson}" tiny-screen="full-width"
+                                     render-label="true"/>
                         <h:outputText value="تخفیف"/>
                         <b:inputText value="#{dtAddProductBean.product.discount}" span="5" style="margin-top:-5px;"/>
+                        <h:outputText value="توضیحات"/>
+                        <b:commandButton value="برای وارد کردن توضیحات  کلیک کنید" type="button" onclick="PF('dlg3').show();" />
+                        <h:outputText value="افزودن مشخصات فنی"/>
+                        <b:commandButton value="برای وارد کردن مشخصات فنی  کلیک کنید" type="button" onclick="PF('dlg2').show();" />
                         <h:outputText value="آپلود ایکون کالا"/>
-                        <p:fileUpload id="iconProduct" mode="simple" value="#{dtAddProductBean.uploadedFile}" />
-                    </b:panelGrid>
-                </b:column>
-                <b:column colSm="12">
-                </b:column>
-            </b:row>
-            <b:row>
-                <h:outputText value="آپلود عکس های کالا"/>
+                        <p:fileUpload style="width: auto"  fileUploadListener="#{dtAddProductBean.iconLoadFile}" mode="advanced" dragDropSupport="false"
+                                      multiple="true" update="messages" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                        <h:outputText value="افزودن عکس ها"/>
+                        <p:fileUpload style="width: auto"  fileUploadListener="#{dtAddProductBean.loadFile}" mode="advanced" dragDropSupport="false"
+                                      multiple="true" update="messages" sizeLimit="100000" fileLimit="4" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
-            </b:row>
+                    </b:panelGrid>
+                    <p:dialog id="dialog"  header="افزودن مشخصات فنی" widgetVar="dlg2" height="400" width="400" >
+                            <b:row id="detailsDialog">
+                                <b:column colSm="3">
+                                    <h:outputText value="نام مشخصه"/>
+                                </b:column>
+                                <b:column colSm="9">
+                                    <h:inputText  value="#{dtAddProductBean.item.itemName}"/>
+                                    <p:commandButton update="detailsDialog,f" value="اضافه کردن"  ajax="true" actionListener="#{dtAddProductBean.addItem}"/>
+                                </b:column>
+                            </b:row>
+                            <b:row id="f">
+
+                                    <b:column colSm="3" >
+                                        <p:panelGrid>
+                                            <ui:repeat value="#{dtAddProductBean.otherDetails.items}" var="item">
+                                                <h:inputText value="#{item.keys}"/>
+                                            </ui:repeat>
+                                        </p:panelGrid>
+                                    </b:column>
+                                <b:column colSm="3">
+                                    <p:panelGrid>
+                                        <ui:repeat value="#{dtAddProductBean.otherDetails.items}" var="item">
+                                            <h:inputText value="#{item.keys}"/>
+                                        </ui:repeat>
+                                    </p:panelGrid>
+                                </b:column>
+                                <b:column colSm="6">
+                                    <p:panelGrid>
+                                            <ui:repeat value="#{dtAddProductBean.otherDetails.items}" var="item">
+                                                <p:commandButton  value="اضافه کردن"  ajax="true" actionListener="#{dtAddProductBean.removeItem(item)}"/>
+                                            </ui:repeat>
+                                    </p:panelGrid>
+                                </b:column>
+                            </b:row>
+                    </p:dialog>
+                    <p:dialog closable="false"  header="توضیحات" widgetVar="dlg3"  height="350" >
+                        <p:textEditor  value="#{dtAddProductBean.product.description}" height="300"/>
+                        <b:commandButton ajax="true" value="ذخیره" type="button" onclick="PF('dlg3').hide();" />
+                    </p:dialog>
+                </b:column>
             <b:row>
                 <b:column colSm="12">
                     <b:commandButton  ajax="false" actionListener="#{dtAddProductBean.save()}" value="ذخیره" style="margin-top:30px;width:150px;height:40px;"
@@ -49,7 +90,5 @@
             </b:row>
             <p:growl id="messages" showDetail="true" />
         </h:form>
-    </b:container>
 </ui:composition>
-
 </html>

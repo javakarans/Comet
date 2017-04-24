@@ -2,10 +2,7 @@ package ir.comet.bean;
 
 import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.database.ProductDaoImp;
-import ir.comet.model.BranchDetails;
-import ir.comet.model.Item;
-import ir.comet.model.OtherDetails;
-import ir.comet.model.Product;
+import ir.comet.model.*;
 import ir.comet.wrapper.BranchDetailsWrapper;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -36,14 +33,15 @@ public class AddProductBean implements Serializable {
     private BranchDetailsWrapper selectedBranchDetailsWrapper;
     private OtherDetails otherDetails;
     private Item item;
+    private UploadedFile imageUploadedFile;
+    private FilesLocations filesLocations;
+    private String temp;
 
-
-
-       @PostConstruct
+    @PostConstruct
        public void init() {
+            filesLocations = new FilesLocations();
             otherDetails = new OtherDetails();
             item = new Item();
-            System.out.println("gholammmmmmmmmmmmmmmmmmmmmmmmm");
             product = new Product();
             productDaoImp = new ProductDaoImp();
             branchDetailsDaoImp = new BranchDetailsDaoImp();
@@ -56,41 +54,49 @@ public class AddProductBean implements Serializable {
 
     public void addItem()
     {
-        //otherDetails.getItems().add(item);
-        //item = new Item();
+
+        otherDetails.getItems().add(item);
+        System.out.println(otherDetails.getItems().size());
+        temp= item.getItemName();
+        item = new Item();
+    }
+
+    public void removeItem(Item item)
+    {
+        otherDetails.getItems().remove(item);
     }
 
 
     public void loadFile(FileUploadEvent event) {
-        System.out.println("salammmmmmmmmmmmmmmmmmmmmmmm");
         String uniqueID = UUID.randomUUID().toString();
-        handleFileUpload(event.getFile(),"C:\\Users\\amir\\IdeaProjects\\Comet\\image\\".concat(uniqueID));
+        filesLocations.getFilesList().add("C:\\Users\\amir\\IdeaProjects\\Comet\\image\\".concat(uniqueID).concat(event.getFile().getFileName()));
+        handleFileUpload(event.getFile(),"C:\\Users\\amir\\IdeaProjects\\Comet\\image\\".concat(uniqueID).concat(event.getFile().getFileName()));
+    }
+
+    public void iconLoadFile(FileUploadEvent event) {
+        String uniqueID = UUID.randomUUID().toString();
+        product.setImageUrl("C:\\Users\\amir\\IdeaProjects\\Comet\\image\\".concat(uniqueID).concat(event.getFile().getFileName()));
+        handleFileUpload(event.getFile(),"C:\\Users\\amir\\IdeaProjects\\Comet\\image\\".concat(uniqueID).concat(event.getFile().getFileName()));
     }
 
     public void save()
     {
-        System.out.println("1111111111111111111111111111111111111");
+        filesLocations.setFileName(String.valueOf(product.getProductId()));
+        product.setImageLocationJson(filesLocations.filesLocationsToJson());
+        product.setOtherDetailsJson(otherDetails.otherDetailsToJson());
         String uniqueID = UUID.randomUUID().toString();
         String icon = "C:\\Users\\amir\\IdeaProjects\\Comet\\image\\product\\icon\\";
-        String image = "C:\\Users\\amir\\IdeaProjects\\Comet\\image\\product\\image\\";
-        if (uploadedFile != null){
-            handleFileUpload(uploadedFile,icon.concat(uniqueID));
-            product.setImageUrl(icon.concat(uniqueID));
-
-        }
-
         product.setBranchDetailsId(selectedBranchDetailsWrapper.getBranchDetailsWrapperId());
         productDaoImp.createProduct(product);
         product = new Product();
+        otherDetails = new OtherDetails();
+        filesLocations = new FilesLocations();
     }
 
 
 
     private void handleFileUpload(UploadedFile uploaded, String location) {
-        System.out.println("22222222222222222222222222222222222222222");
         File result = new File(location);
-
-
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(result);
@@ -132,14 +138,6 @@ public class AddProductBean implements Serializable {
         this.product = product;
     }
 
-    public UploadedFile getUploadedFile() {
-        return uploadedFile;
-    }
-
-    public void setUploadedFile(UploadedFile uploadedFile) {
-        this.uploadedFile = uploadedFile;
-    }
-
     public List<BranchDetailsWrapper> getBranchDetailsWrapperList() {
         return branchDetailsWrapperList;
     }
@@ -170,5 +168,22 @@ public class AddProductBean implements Serializable {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+
+    public UploadedFile getImageUploadedFile() {
+        return imageUploadedFile;
+    }
+
+    public void setImageUploadedFile(UploadedFile imageUploadedFile) {
+        this.imageUploadedFile = imageUploadedFile;
+    }
+
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
     }
 }
