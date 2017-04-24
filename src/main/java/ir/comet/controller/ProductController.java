@@ -12,9 +12,8 @@ import java.util.List;
  */
 public class ProductController {
 
-//    public List<Product> getProductList(long brandId){
-//        ProductDaoImp productDaoImp=new ProductDaoImp();
-//        List<Product> productListByBrandId = productDaoImp.getProductListByBrandId(brandId);
-//        return productListByBrandId;
-//    }
+    public double calProductPriceByDiscount(double productPrice,double discount){
+        double finalPrice=productPrice-discount;
+        return finalPrice;
+    }
 }

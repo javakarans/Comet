@@ -1,17 +1,14 @@
 package ir.comet.bean;
 
-import ir.comet.controller.ProductController;
-import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.model.BranchDetails;
 import ir.comet.model.Customer;
 import ir.comet.model.Product;
-import ir.comet.wrapper.BranchDetailsWrapper;
+import ir.comet.wrapper.UserProductCart;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +20,13 @@ import java.util.List;
 public class UserSessionBean {
 
     private Customer customer;
-    private List<Product> userCartList;
+    private List<UserProductCart> userProductCartList;
     private BranchDetails selectedBranchDetails;
 
     @PostConstruct
     public void init(){
         loadCustomer();
-        loadUserCartList();
+        userProductCartList=new ArrayList<UserProductCart>();
     }
 
     public void loadCustomer(){
@@ -37,9 +34,14 @@ public class UserSessionBean {
         this.customer= (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
     }
 
-    public void loadUserCartList(){
-        userCartList=new ArrayList<Product>();
-        this.userCartList= (List<Product>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userCartList");
+//    public void loadUserCartList(){
+//        userCartList=new ArrayList<Product>();
+//        this.userCartList= (List<Product>) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("userCartList");
+//    }
+
+    public String addProductToCart(Product product){
+        userProductCartList.add(new UserProductCart(product));
+        return "cart.xhtml?faces-redirect=true";
     }
 
     public long loadBranchDetailId(long branchId,long brandId){
@@ -68,11 +70,11 @@ public class UserSessionBean {
         this.customer = customer;
     }
 
-    public List<Product> getUserCartList() {
-        return userCartList;
+    public List<UserProductCart> getUserProductCartList() {
+        return userProductCartList;
     }
 
-    public void setUserCartList(List<Product> userCartList) {
-        this.userCartList = userCartList;
+    public void setUserProductCartList(List<UserProductCart> userProductCartList) {
+        this.userProductCartList = userProductCartList;
     }
 }

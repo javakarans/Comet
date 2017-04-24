@@ -1,6 +1,7 @@
 package ir.comet.bean;
 
 import ir.comet.controller.CommentController;
+import ir.comet.controller.ProductController;
 import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.database.CommentDao;
 import ir.comet.database.CommentDaoImp;
@@ -28,6 +29,7 @@ public class ProductContentBean {
     private BranchDetailsWrapper branchDetailsWrapper;
     private Product product;
     private CommentController commentController;
+    private ProductController productController;
 
     @PostConstruct
     public void init(){
@@ -35,6 +37,7 @@ public class ProductContentBean {
         loadProduct();
         loadComments();
         commentController=new CommentController();
+        productController=new ProductController();
     }
 
     public HashMap<String,Long> getParametersFromUrl(){
@@ -73,5 +76,13 @@ public class ProductContentBean {
 
     public void setCommentController(CommentController commentController) {
         this.commentController = commentController;
+    }
+
+    public ProductController getProductController() {
+        return productController;
+    }
+
+    public void setProductController(ProductController productController) {
+        this.productController = productController;
     }
 }

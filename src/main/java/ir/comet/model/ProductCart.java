@@ -9,9 +9,9 @@ import java.io.Serializable;
 
 @Entity
 @Table
-public class SellingList implements Serializable {
+public class ProductCart implements Serializable {
 
-    private  long sellingListId;
+    private long productCartId;
     private long productId;
     private long orderId;
     private int quantity;
@@ -21,12 +21,12 @@ public class SellingList implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true,nullable = false)
-    public long getSellingListId() {
-        return sellingListId;
+    public long getProductCartId() {
+        return productCartId;
     }
 
-    public void setSellingListId(long sellingListId) {
-        this.sellingListId = sellingListId;
+    public void setProductCartId(long productCartId) {
+        this.productCartId = productCartId;
     }
 
     @Column

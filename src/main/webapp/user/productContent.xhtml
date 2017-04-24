@@ -98,21 +98,30 @@
                                                 <b:column colSm="12">
                                                     <span style="color:#848484;margin-left: 10px">قیمت : </span>
                                                     <h:outputText value="#{productContentBean.product.price} تومان"
-                                                                  style="margin-left: 20px;color:#848484;"></h:outputText>
+                                                                  style="margin-left: 20px;color:#848484;">
+                                                        <f:convertNumber pattern="#"></f:convertNumber>
+                                                    </h:outputText>
                                                     <b:label severity="danger"
-                                                             text="تخفیف : #{productContentBean.product.discount}"></b:label>
+                                                             text="تخفیف : #{productContentBean.product.discount}">
+                                                        <!--<f:convertNumber pattern="#"></f:convertNumber>-->
+                                                    </b:label>
                                                 </b:column>
                                             </b:row>
                                             <b:row style="margin-top:50px;">
                                                 <b:column colSm="12">
                                                     <span style="font-size: 20px">قیمت برای شما : </span>
-                                                    <h:outputText value="1000" style="font-size: 20px"></h:outputText>
+                                                    <h:outputText value="#{productContentBean.productController
+                                                    .calProductPriceByDiscount(productContentBean.product.price
+                                                    ,productContentBean.product.discount)}"
+                                                                  style="font-size: 20px">
+                                                        <f:convertNumber pattern="#"></f:convertNumber>
+                                                    </h:outputText>
                                                     <span style="font-size: 20px">تومان </span>
                                                 </b:column>
                                             </b:row>
                                             <b:row style="margin-top:40px;">
                                                 <b:column colSm="12">
-                                                    <b:commandButton style="width:165px;" look="success">
+                                                    <b:commandButton style="width:165px;" look="success" action="#{userSessionBean.addProductToCart(productContentBean.product)}">
                                                         <b:iconAwesome name="cart-plus" size=""></b:iconAwesome>
                                                         <span style="margin-right: 10px">افزودن به سبد خرید</span>
                                                     </b:commandButton>
@@ -181,14 +190,11 @@
                                     </b:row>
                                     <b:row style="margin-top: 20px" rendered="true">
                                         <b:column colSm="12">
-                                            <b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
-                                                <p>Modal body</p>
-                                                <f:facet name="footer">
-                                                    <b:button value="close" dismiss="modal" onclick="return false;"/>
-                                                    <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
-                                                </f:facet>
-                                            </b:modal>
-                                            <b:button value="Trigger (JSF passthrough)" look="warning" p:data-target="#amodal" p:data-toggle="modal" onclick="return false;" size="lg"/>
+                                            <button id="btrigger" class="btn btn-info btn-md"
+                                                    onclick="PF('dlg2').show();">
+                                                <b:iconAwesome name="edit"></b:iconAwesome>
+                                                <span>ثبت نظر</span>
+                                            </button>
                                         </b:column>
                                     </b:row>
                                     <div style="margin-top: 20px">
@@ -254,13 +260,7 @@
                     <!-- Second Panel -->
 
                 </b:row>
-
             </b:container>
-
-            <!-- LoginModal -->
-            <!--<b:modal id="amodal" title="ثبت نظر">-->
-                <!--asd-->
-            <!--</b:modal>-->
 
         </ui:define>
 

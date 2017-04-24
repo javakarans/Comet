@@ -43,7 +43,7 @@
         <mapping class="ir.comet.model.Customer"/>
         <mapping class="ir.comet.model.Order"/>
         <mapping class="ir.comet.model.WareHouse"/>
-        <mapping class="ir.comet.model.SellingList"/>
+        <mapping class="ir.comet.model.ProductCart"/>
         <mapping class="ir.comet.model.Receipt"/>
         <mapping class="ir.comet.model.Product"/>
         <mapping class="ir.comet.model.Notification"/>

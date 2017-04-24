@@ -19,13 +19,13 @@ public class Product implements Serializable {
     private String name;
     private String englishName;
     private String warranty;
-    private double price;
+    private long price;
     private String imageUrl;
     private String description;
     private long stock;
     private long wareHouseId;
     private int score;
-    private double discount;
+    private long discount;
     private String imageLocationJson;
     private String otherDetailsJson;
     private long branchDetailsId;
@@ -61,11 +61,11 @@ public class Product implements Serializable {
     }
 
     @Column
-    public double getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
@@ -115,11 +115,11 @@ public class Product implements Serializable {
     }
 
     @Column
-    public double getDiscount() {
+    public long getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(long discount) {
         this.discount = discount;
     }
 
