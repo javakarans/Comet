@@ -33,7 +33,7 @@
                         <h:outputText value="توضیحات"/>
                         <b:commandButton value="برای وارد کردن توضیحات  کلیک کنید" type="button" onclick="PF('dlg3').show();" />
                         <h:outputText value="افزودن مشخصات فنی"/>
-                        <b:commandButton value="برای وارد کردن مشخصات فنی  کلیک کنید" type="button" onclick="PF('dlg2').show();" />
+                        <b:button value="Trigger (JavaScript)" look="success" onclick="$('.modalPseudoClass').modal();return false;" size="lg"/>
                         <h:outputText value="آپلود ایکون کالا"/>
                         <p:fileUpload style="width: auto"  fileUploadListener="#{dtAddProductBean.iconLoadFile}" mode="advanced" dragDropSupport="false"
                                       multiple="true" update="messages" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
@@ -90,5 +90,34 @@
             </b:row>
             <p:growl id="messages" showDetail="true" />
         </h:form>
+    <b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass" size="600">
+        <b:container>
+            <b:form>
+                <b:row id="detailsDialog3">
+                    <b:column colSm="3">
+                        <h:outputText value="نام مشخصه"/>
+                    </b:column>
+                    <b:column colSm="3">
+                        <h:inputText  value="#{dtAddProductBean.item.itemName}"/>
+                    </b:column>
+                    <b:column colSm="6">
+                        <p:commandButton update="detailsDialog3,f3" value="اضافه کردن"  ajax="true" actionListener="#{dtAddProductBean.addItem}"/>
+                    </b:column>
+                </b:row>
+                <b:row id="f3">
+                    <ui:repeat value="#{dtAddProductBean.otherDetails.items}" var="item">
+                        <b:row>
+                            <b:panelGrid colSpans="3,3,3,3">
+                                <b:inputText value="#{item.itemName}" style="width: auto"/>
+                                <h:inputText value="#{item.keys}" style="width: auto"/>
+                                <b:inputText value="#{item.values}" style="width: auto"/>
+                                <b:commandButton ajax="false" update="@form" actionListener="#{dtAddProductBean.removeItem(item)}" value="حذف"/>
+                            </b:panelGrid>
+                        </b:row>
+                    </ui:repeat>
+                </b:row>
+            </b:form>
+        </b:container>
+    </b:modal>
 </ui:composition>
 </html>
