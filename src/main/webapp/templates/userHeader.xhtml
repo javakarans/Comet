@@ -33,8 +33,8 @@
                                         <b:dropMenu
                                                 value="سلام ، #{userSessionBean.customer.firstName} #{userSessionBean.customer.lastName}"
                                                 iconAwesome="user-circle" styleClass="user-drop-menu">
-                                            <b:navCommandLink value="ورود به پروفایل" action="#{userHeaderBean.userAccountBtn()}"></b:navCommandLink>
-                                            <b:navCommandLink value="خروج" action="#{userHeaderBean.logout()}"></b:navCommandLink>
+                                            <b:navCommandLink value="ورود به پروفایل" action="#{headerBean.userAccountBtn()}"></b:navCommandLink>
+                                            <b:navCommandLink value="خروج" action="#{headerBean.logout()}"></b:navCommandLink>
                                         </b:dropMenu>
                                     </h:form>
                                 </h:panelGrid>
@@ -43,10 +43,10 @@
                             <b:column colSm="12">
                                 <h:panelGrid columns="2">
                                     <h:form>
-                                        <b:commandButton style="width:150px;" look="success">
+                                        <b:commandButton style="width:150px;" look="success" action="#{headerBean.redirectToCartPage()}">
                                             <b:iconAwesome name="shopping-cart" size=""></b:iconAwesome>
                                             <span style="margin-right: 10px">سبد خرید</span>
-                                            <b:badge value="0" style="margin-right:10px;"></b:badge>
+                                            <b:badge value="#{sessionBean.userProductCartList.size()}" style="margin-right:10px;"></b:badge>
                                         </b:commandButton>
                                     </h:form>
                                     <h:form style="margin-top: 10px;margin-right: 20px">
@@ -68,21 +68,30 @@
 
             <!-- Menu -->
             <b:navBar style="margin-top:-20px;">
-                <b:navbarLinks>
-                    <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
-                    <ui:repeat value="#{applicationBean.menuController.allCategoryList}" var="category">
-                        <b:dropMenu value="#{category.name}">
-                            <ui:repeat value="#{applicationBean.menuController.getBranchesByCategoryId(category.categoryId)}" var="branch">
-                                <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
-                                <ui:repeat value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}" var="brand">
-                                    <b:navLink value="#{brand.name}" styleClass="menu-bar-header" contentClass="dropdown_link"></b:navLink>
+                <b:form>
+                    <b:navbarLinks>
+
+                        <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
+
+                        <ui:repeat value="#{applicationBean.menuController.allCategoryList}" var="category">
+                            <b:dropMenu value="#{category.name}">
+                                <ui:repeat
+                                        value="#{applicationBean.menuController.getBranchesByCategoryId(category.categoryId)}"
+                                        var="branch">
+                                    <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
+                                    <ui:repeat
+                                            value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}"
+                                            var="brand">
+                                        <b:navCommandLink contentClass="dropdown_link" value="#{brand.name}"
+                                                          action="#{headerBean.redirectToProductPage(branch.branchId,brand.brandId)}"></b:navCommandLink>
+                                    </ui:repeat>
                                 </ui:repeat>
-                            </ui:repeat>
-                        </b:dropMenu>
+                            </b:dropMenu>
 
-                    </ui:repeat>
+                        </ui:repeat>
 
-                </b:navbarLinks>
+                    </b:navbarLinks>
+                </b:form>
             </b:navBar>
 
         </b:container>

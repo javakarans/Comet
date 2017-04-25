@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="../templates/UserTemplate.xhtml">
+    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
 
         <ui:define name="content">
 
@@ -50,18 +50,18 @@
                                                       style="font-size: 12px"></h:outputText>
                                         <b:commandButton value="مرحله بعد"
                                                          style="width:150px;height:40px;float:left;"
-                                                         look="success" action="#" iconAwesome="arrow-left"
+                                                         look="success" action="#{cartBean.redirectToShippingPage()}" iconAwesome="arrow-left"
                                                          iconAlign="right"></b:commandButton>
                                     </b:column>
 
                                     <b:column colSm="12">
                                         <b:dataTable searching="false" paginated="false"
-                                                     styleClass="order_datatable" value="#{cartBean.userSessionBean.userProductCartList}"
+                                                     styleClass="order_datatable" value="#{cartBean.userProductCartList}"
                                                      var="cartItem">
                                             <b:dataTableColumn label="حذف" orderable="false"
                                                                style="width:2%;" styleClass="column_content"
                                                                contentStyle="background-color:rgb(255, 237, 238);">
-                                                <b:navCommandLink>
+                                                <b:navCommandLink action="#{cartBean.removeItem(cartItem)}">
                                                     <b:iconAwesome name="remove"></b:iconAwesome>
                                                 </b:navCommandLink>
                                             </b:dataTableColumn>

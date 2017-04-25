@@ -45,4 +45,5 @@ public class CustomerDaoImp implements CustomerDao {
     public void deleteCustomer(Customer customer) {
         sqlHandler.delete(customer);
     }
+
 }

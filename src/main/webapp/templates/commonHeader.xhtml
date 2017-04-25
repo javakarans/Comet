@@ -43,10 +43,10 @@
                             <b:column colSm="12">
                                 <h:panelGrid columns="2">
                                     <h:form>
-                                        <b:commandButton style="width:150px;" look="success">
+                                        <b:commandButton style="width:150px;" look="success" action="#{headerBean.redirectToCartPage()}">
                                             <b:iconAwesome name="shopping-cart" size=""></b:iconAwesome>
                                             <span style="margin-right: 10px">سبد خرید</span>
-                                            <b:badge value="0" style="margin-right:10px;"></b:badge>
+                                            <b:badge value="#{sessionBean.userProductCartList.size()}" style="margin-right:10px;"></b:badge>
                                         </b:commandButton>
                                     </h:form>
                                     <h:form style="margin-top: 10px;margin-right: 20px">
@@ -83,7 +83,7 @@
                                             value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}"
                                             var="brand">
                                             <b:navCommandLink contentClass="dropdown_link" value="#{brand.name}"
-                                            action="#{userSessionBean.redirectToProductPage(branch.branchId,brand.brandId)}"></b:navCommandLink>
+                                            action="#{headerBean.redirectToProductPage(branch.branchId,brand.brandId)}"></b:navCommandLink>
                                     </ui:repeat>
                                 </ui:repeat>
                             </b:dropMenu>

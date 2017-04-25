@@ -1,6 +1,7 @@
 package ir.comet.bean;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -10,5 +11,17 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class ShippingBean {
 
+    private String paymentType;
 
+    public String redirectToReviewPage(){
+        return "review.xhtml?faces-redirect=true";
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
 }

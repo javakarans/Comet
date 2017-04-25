@@ -1,9 +1,12 @@
 package ir.comet.bean;
 
+import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.model.Customer;
+import ir.comet.wrapper.BranchDetailsWrapper;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -14,9 +17,11 @@ import java.io.IOException;
  */
 @ManagedBean
 @ViewScoped
-public class UserHeaderBean {
+public class HeaderBean {
 
     private Customer customer;
+    @ManagedProperty(value = "#{sessionBean}")
+    private SessionBean sessionBean;
 
     @PostConstruct
     public void init(){
@@ -50,11 +55,31 @@ public class UserHeaderBean {
         }
     }
 
+    public String redirectToProductPage(long branchId,long brandId){
+        BranchDetailsDaoImp branchDetailsDaoImp=new BranchDetailsDaoImp();
+        BranchDetailsWrapper branchDetailsWrapper=new BranchDetailsWrapper
+                (branchDetailsDaoImp.getBranchDetails(branchId,brandId).get(0));
+        sessionBean.setBranchDetailsWrapper(branchDetailsWrapper);
+        return "/user/Product.xhtml?faces-redirect=true";
+    }
+
+    public String redirectToCartPage(){
+        return "/user/cart.xhtml?faces-redirect=true";
+    }
+
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
     }
 }

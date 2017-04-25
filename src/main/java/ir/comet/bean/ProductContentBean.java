@@ -10,9 +10,11 @@ import ir.comet.model.BranchDetails;
 import ir.comet.model.Comment;
 import ir.comet.model.Product;
 import ir.comet.wrapper.BranchDetailsWrapper;
+import ir.comet.wrapper.UserProductCart;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.HashMap;
@@ -25,7 +27,8 @@ import java.util.List;
 @ViewScoped
 public class ProductContentBean {
 
-    private HashMap<String, Long> urlParams;
+    @ManagedProperty(value = "#{sessionBean}")
+    private SessionBean sessionBean;
     private BranchDetailsWrapper branchDetailsWrapper;
     private Product product;
     private CommentController commentController;
@@ -33,33 +36,20 @@ public class ProductContentBean {
 
     @PostConstruct
     public void init(){
-        urlParams = getParametersFromUrl();
-        loadProduct();
-        loadComments();
+        branchDetailsWrapper=sessionBean.getBranchDetailsWrapper();
+        product=sessionBean.getSelectedProduct();
         commentController=new CommentController();
         productController=new ProductController();
     }
 
-    public HashMap<String,Long> getParametersFromUrl(){
-        long productId = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("productId"));
-        HashMap<String,Long> hashMap=new HashMap<String, Long>();
-        hashMap.put("productId",productId);
-        return hashMap;
-    }
-
-    public void loadBranchDetailsWrapper(){
-
-    }
-
-    public void loadProduct(){
-        ProductDaoImp productDaoImp=new ProductDaoImp();
-        product = productDaoImp.getProduct(urlParams.get("productId"));
-
-    }
-
     public List<Comment> loadComments(){
         CommentDaoImp commentDaoImp=new CommentDaoImp();
-        return commentDaoImp.getAllCommentsByProductId(urlParams.get("productId"));
+        return commentDaoImp.getAllCommentsByProductId(product.getProductId());
+    }
+
+    public String addProductToCart(Product product){
+        sessionBean.getUserProductCartList().add(new UserProductCart(product));
+        return "cart.xhtml?faces-redirect=true";
     }
 
     public Product getProduct() {
@@ -84,5 +74,13 @@ public class ProductContentBean {
 
     public void setProductController(ProductController productController) {
         this.productController = productController;
+    }
+
+    public SessionBean getSessionBean() {
+        return sessionBean;
+    }
+
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
     }
 }

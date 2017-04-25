@@ -42,8 +42,6 @@ public class UserProductCart {
 
     private void fillProductCart(){
         productCart.setProductId(product.getProductId());
-        productCart.setTotalPriceAfterDiscountAndTax(product.getPrice());
-        productCart.setTotalPrice(product.getPrice());
         productCart.setQuantity(1);
     }
 

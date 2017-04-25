@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="../templates/UserTemplate.xhtml">
+    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
 
         <ui:define name="content">
 
@@ -52,8 +52,8 @@
 
                                     <b:column colSm="12" style="margin-top:10px;">
                                         <b:dataTable searching="false" paginated="false"
-                                                     styleClass="order_datatable" value="#{cartBean.addedToCart}"
-                                                     var="cartItem">
+                                                     styleClass="order_datatable"
+                                                     value="#{userSessionBean.customer}" var="customer">
 
                                             <b:dataTableColumn label="" orderable="false"
                                                                style="width:2%;" styleClass="column_content">
@@ -66,19 +66,19 @@
 
                                             <b:dataTableColumn label="شماره تلفن همراه" orderable="false"
                                                                style="width:10%;" styleClass="column_content">
-
+                                                <h:outputText value="#{customer.phoneNumber}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="شماره تلفن ثابت" orderable="false"
                                                                style="width:10%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;">
-
+                                                <h:outputText value="#{customer.phoneNumber}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="آدرس" orderable="false"
                                                                style="width:25%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;">
-
+                                                <h:outputText value="#{customer.address}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="شهر" orderable="false"
@@ -92,8 +92,8 @@
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="خریدار" orderable="false"
-                                                               style="width:9%;" headerStyle="text-align:center;">
-
+                                                               style="width:9%;" headerStyle="text-align:center;" styleClass="column_content">
+                                                <h:outputText value="#{customer.firstName} #{customer.lastName}"></h:outputText>
                                             </b:dataTableColumn>
 
                                         </b:dataTable>
@@ -111,17 +111,18 @@
                                             <table class="payment_table">
                                                 <tr>
                                                     <th style="width: 5px;">
-                                                        <b:radiobutton value="#{''}" itemValue="6"
+                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="ByCreditCard"
                                                                        style="margin:auto;"/>
                                                     </th>
                                                     <th style="text-align: right">
                                                         <h:outputText
                                                                 value="پرداخت اینترنتی ( با تمامی کارت عضو شتاب )"></h:outputText>
+                                                        <span style="color: darkgray">غیر فعال</span>
                                                     </th>
                                                 </tr>
                                                 <tr>
                                                     <th>
-                                                        <b:radiobutton value="#{''}" itemValue="6"
+                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="ByCash"
                                                                        style="margin:auto;"/>
                                                     </th>
                                                     <th style="text-align: right">

@@ -1,5 +1,6 @@
 package ir.comet.bean;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.database.ProductDaoImp;
 import ir.comet.model.BranchDetails;
@@ -7,11 +8,10 @@ import ir.comet.model.Product;
 import ir.comet.wrapper.BranchDetailsWrapper;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.*;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,17 +21,16 @@ import java.util.List;
  */
 @ManagedBean
 @ViewScoped
-public class ProductBean {
+public class ProductBean implements Serializable{
 
     private List<Product> productList;
     private BranchDetailsWrapper branchDetailsWrapper;
-    private long branchDetailsId;
-    private HashMap<String, Long> urlParams;
+    @ManagedProperty(value = "#{sessionBean}")
+    private SessionBean sessionBean;
 
     @PostConstruct
     public void init() {
-        urlParams = getParametersFromUrl();
-        loadBranchDetailsWrapper();
+        branchDetailsWrapper=sessionBean.getBranchDetailsWrapper();
         loadProductList();
     }
 
@@ -40,23 +39,9 @@ public class ProductBean {
         this.productList=productDaoImp.getProductListBybranchDetailsId(branchDetailsWrapper.getBranchDetailsWrapperId());
     }
 
-    public HashMap<String,Long> getParametersFromUrl(){
-        long branchId = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("branchId"));
-        long brandId = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("brandId"));
-        HashMap<String,Long> hashMap=new HashMap<String, Long>();
-        hashMap.put("branchId",branchId);
-        hashMap.put("brandId",brandId);
-        return hashMap;
-    }
-
-    public void loadBranchDetailsWrapper(){
-        BranchDetailsDaoImp branchDetailsDaoImp=new BranchDetailsDaoImp();
-        branchDetailsWrapper=new BranchDetailsWrapper(branchDetailsDaoImp
-                .getBranchDetails(urlParams.get("branchId"),urlParams.get("brandId")).get(0));
-    }
-
-    public String redirectToProductContent(long productId){
-        return "productContent.xhtml?faces-redirect=true&productId="+productId;
+    public String redirectToProductContent(Product product){
+        sessionBean.setSelectedProduct(product);
+        return "productContent.xhtml?faces-redirect=true";
     }
 
     public List<Product> getProductList() {
@@ -75,12 +60,11 @@ public class ProductBean {
         this.branchDetailsWrapper = branchDetailsWrapper;
     }
 
-    public long getBranchDetailsId() {
-        return branchDetailsId;
+    public SessionBean getSessionBean() {
+        return sessionBean;
     }
 
-    public void setBranchDetailsId(long branchDetailsId) {
-        this.branchDetailsId = branchDetailsId;
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
     }
-
 }

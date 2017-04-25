@@ -17,16 +17,16 @@ import java.util.List;
 @ViewScoped
 public class CartBean {
 
-    private List<Product> productCartList;
-    @ManagedProperty(value = "#{userSessionBean}")
-    private UserSessionBean userSessionBean;
+    @ManagedProperty(value = "#{sessionBean}")
+    private SessionBean sessionBean;
+    private List<UserProductCart> userProductCartList;
 
     @PostConstruct
     public void init(){
+        userProductCartList = sessionBean.getUserProductCartList();
     }
 
     public long calTotalPrice(){
-        List<UserProductCart> userProductCartList = userSessionBean.getUserProductCartList();
         Iterator<UserProductCart> iterator = userProductCartList.iterator();
         long totalPrice=0;
         while (iterator.hasNext()){
@@ -35,19 +35,27 @@ public class CartBean {
         return totalPrice;
     }
 
-    public List<Product> getProductCartList() {
-        return productCartList;
+    public void removeItem(UserProductCart userProductCart){
+        sessionBean.getUserProductCartList().remove(userProductCart);
     }
 
-    public void setProductCartList(List<Product> productCartList) {
-        this.productCartList = productCartList;
+    public String redirectToShippingPage(){
+        return "shipping.xhtml?faces-redirect=true";
     }
 
-    public UserSessionBean getUserSessionBean() {
-        return userSessionBean;
+    public SessionBean getSessionBean() {
+        return sessionBean;
     }
 
-    public void setUserSessionBean(UserSessionBean userSessionBean) {
-        this.userSessionBean = userSessionBean;
+    public void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
+    }
+
+    public List<UserProductCart> getUserProductCartList() {
+        return userProductCartList;
+    }
+
+    public void setUserProductCartList(List<UserProductCart> userProductCartList) {
+        this.userProductCartList = userProductCartList;
     }
 }
