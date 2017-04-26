@@ -17,7 +17,7 @@ public class Receipt implements Serializable {
     private double totalPrice;
     private String deliveryDate;
     private long totalPriceAfterDiscountAndTax;
-    private long orderId;
+    private String paymentType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,11 +76,11 @@ public class Receipt implements Serializable {
     }
 
     @Column
-    public long getOrderId() {
-        return orderId;
+    public String getPaymentType() {
+        return paymentType;
     }
 
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 }

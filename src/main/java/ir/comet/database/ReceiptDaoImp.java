@@ -6,8 +6,16 @@ import ir.comet.model.Receipt;
 import java.util.List;
 
 public class ReceiptDaoImp implements ReceiptDao {
-    public void createReceipt(Receipt receipt) {
 
+    private SqlHandler sqlHandler;
+
+    public ReceiptDaoImp(){
+        sqlHandler=SqlHandler.getInstance();
+    }
+
+    public int createReceipt(Receipt receipt) {
+        sqlHandler.create(receipt);
+        return 0;
     }
 
     public Receipt getReceipt(long receiptId) {

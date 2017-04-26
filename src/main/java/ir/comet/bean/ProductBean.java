@@ -25,12 +25,12 @@ public class ProductBean implements Serializable{
 
     private List<Product> productList;
     private BranchDetailsWrapper branchDetailsWrapper;
-    @ManagedProperty(value = "#{sessionBean}")
-    private SessionBean sessionBean;
+    @ManagedProperty(value = "#{userSessionBean}")
+    private UserSessionBean userSessionBean;
 
     @PostConstruct
     public void init() {
-        branchDetailsWrapper=sessionBean.getBranchDetailsWrapper();
+        branchDetailsWrapper=userSessionBean.getBranchDetailsWrapper();
         loadProductList();
     }
 
@@ -40,8 +40,8 @@ public class ProductBean implements Serializable{
     }
 
     public String redirectToProductContent(Product product){
-        sessionBean.setSelectedProduct(product);
-        return "productContent.xhtml?faces-redirect=true";
+        userSessionBean.setSelectedProduct(product);
+        return "/user/productContent.xhtml?faces-redirect=true";
     }
 
     public List<Product> getProductList() {
@@ -60,11 +60,11 @@ public class ProductBean implements Serializable{
         this.branchDetailsWrapper = branchDetailsWrapper;
     }
 
-    public SessionBean getSessionBean() {
-        return sessionBean;
+    public UserSessionBean getUserSessionBean() {
+        return userSessionBean;
     }
 
-    public void setSessionBean(SessionBean sessionBean) {
-        this.sessionBean = sessionBean;
+    public void setUserSessionBean(UserSessionBean userSessionBean) {
+        this.userSessionBean = userSessionBean;
     }
 }

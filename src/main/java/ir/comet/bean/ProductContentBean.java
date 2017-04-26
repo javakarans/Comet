@@ -27,8 +27,8 @@ import java.util.List;
 @ViewScoped
 public class ProductContentBean {
 
-    @ManagedProperty(value = "#{sessionBean}")
-    private SessionBean sessionBean;
+    @ManagedProperty(value = "#{userSessionBean}")
+    private UserSessionBean userSessionBean;
     private BranchDetailsWrapper branchDetailsWrapper;
     private Product product;
     private CommentController commentController;
@@ -36,10 +36,10 @@ public class ProductContentBean {
 
     @PostConstruct
     public void init(){
-        branchDetailsWrapper=sessionBean.getBranchDetailsWrapper();
-        product=sessionBean.getSelectedProduct();
-        commentController=new CommentController();
+        branchDetailsWrapper=userSessionBean.getBranchDetailsWrapper();
+        product=userSessionBean.getSelectedProduct();
         productController=new ProductController();
+        commentController=new CommentController();
     }
 
     public List<Comment> loadComments(){
@@ -48,8 +48,8 @@ public class ProductContentBean {
     }
 
     public String addProductToCart(Product product){
-        sessionBean.getUserProductCartList().add(new UserProductCart(product));
-        return "cart.xhtml?faces-redirect=true";
+        userSessionBean.getUserProductCartList().add(new UserProductCart(product));
+        return "/user/cart.xhtml?faces-redirect=true";
     }
 
     public Product getProduct() {
@@ -76,11 +76,11 @@ public class ProductContentBean {
         this.productController = productController;
     }
 
-    public SessionBean getSessionBean() {
-        return sessionBean;
+    public UserSessionBean getUserSessionBean() {
+        return userSessionBean;
     }
 
-    public void setSessionBean(SessionBean sessionBean) {
-        this.sessionBean = sessionBean;
+    public void setUserSessionBean(UserSessionBean userSessionBean) {
+        this.userSessionBean = userSessionBean;
     }
 }

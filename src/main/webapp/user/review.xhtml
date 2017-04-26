@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="../templates/UserTemplate.xhtml">
+    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
 
         <ui:define name="content">
 
@@ -47,7 +47,7 @@
 
                                     <b:column colSm="12" style="margin-top:20px;">
                                         <b:dataTable searching="false" paginated="false"
-                                                     styleClass="order_datatable" value="#{cartBean.addedToCart}"
+                                                     styleClass="order_datatable" value="#{reviewBean.userProductCartList}"
                                                      var="cartItem">
                                             <b:dataTableColumn label="قیمت کل" orderable="false"
                                                                style="width:17%;" styleClass="column_content"
@@ -67,7 +67,7 @@
 
                                             <b:dataTableColumn label="تعداد" orderable="false"
                                                                style="width:6%;" styleClass="column_content">
-                                                <h:outputText value="#{'1'}"></h:outputText>
+                                                <h:outputText value="#{cartItem.productCart.quantity}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="شرح محصول" orderable="false"
@@ -82,7 +82,7 @@
                                                                 #{cartItem.name}
                                                             </h5>
                                                             <h5>
-                                                                #{'by English'}
+                                                                #{cartItem.product.englishName}
                                                             </h5>
                                                         </div>
                                                         <div style="margin-top: 15px;color: #464646">
@@ -109,19 +109,19 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <h:outputText style="font-size: 17px" value="جمع کل خرید : #{'56000'}"></h:outputText>
+                                                    <h:outputText style="font-size: 17px" value="جمع کل خرید : #{reviewBean.totalPriceWithNoDiscount()}"></h:outputText>
                                                     <span style="font-size: 10px">تومان</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="color: rgba(139,0,0,0.82)">
-                                                    <h:outputText style="font-size: 17px" value="جمع کل تخفیف : #{'10000'}"></h:outputText>
+                                                    <h:outputText style="font-size: 17px" value="جمع کل تخفیف : #{reviewBean.totalDiscountPrice()}"></h:outputText>
                                                     <span style="font-size: 10px">تومان</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="color: rgba(44, 143, 12, 0.67)">
-                                                    <h:outputText style="font-size: 20px" value="جمع کل قابل پرداخت : #{'46000'}"></h:outputText>
+                                                    <h:outputText style="font-size: 20px" value="جمع کل قابل پرداخت : #{reviewBean.totalPriceByDiscount()}"></h:outputText>
                                                     <span style="font-size: 10px">تومان</span>
                                                 </td>
                                             </tr>
@@ -145,7 +145,7 @@
                                                     <b:iconAwesome name="location-arrow"></b:iconAwesome>
                                                 </td>
                                                 <td>
-                                                    <h:outputText value="#{'تهرانپارس،خیابان 107،خیابان 126 غربی ، پلاک 114 ، واحد 7'}"></h:outputText>
+                                                    <h:outputText value="#{userSessionBean.customer.address}"></h:outputText>
                                                 </td>
                                             </tr>
                                             </tbody>

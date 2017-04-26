@@ -14,7 +14,7 @@ public class ShippingBean {
     private String paymentType;
 
     public String redirectToReviewPage(){
-        return "review.xhtml?faces-redirect=true";
+        return "/user/review.xhtml?faces-redirect=true";
     }
 
     public String getPaymentType() {

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+<f:metadata>
+    <f:viewAction action="#{userPageBean.checkUserStatus(userSessionBean.customer)}"></f:viewAction>
+</f:metadata>
+<h:body>
+
+    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
+
+        <ui:define name="content">
+
+            <link rel="stylesheet" href="../resources/css/user.css"></link>
+
+            <b:container style="margin-top:-8px;">
+
+                <b:row>
+                    <b:column colSm="12">
+                        <b:panel collapsible="false" styleClass="topPanel">
+                            <b:iconAwesome name="th-large"></b:iconAwesome>
+                            <h:outputText value="فروشگاه کامت" style="margin-right: 10px"></h:outputText>
+                            <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                            <h:outputText value="ورود به کامت" style="margin-right: 10px"></h:outputText>
+                        </b:panel>
+                    </b:column>
+
+                    <!-- First Panel -->
+                    <b:column colSm="12" style="margin-top:-11px;">
+
+                        <b:panel>
+                                <b:row style="margin-top:20px;">
+                                    <b:column colSm="6">
+                                        <div style="text-align: center;color: #383838">
+                                            <b:iconAwesome name="lock" size="5x"></b:iconAwesome>
+                                            <p style="font-size: 18px">عضو کامت هستید؟</p>
+                                            <p style="font-size: 12px">برای تکمیل فرایند خرید خود وارد شوید</p>
+                                                <button id="btrigger" class="btn btn-info btn-md"
+                                                        data-target="#loginModal" data-toggle="modal">وارد شوید</button>
+                                        </div>
+                                    </b:column>
+
+                                    <b:column colSm="6">
+                                        <div style="text-align: center;color: #383838">
+                                            <b:iconAwesome name="user" size="5x"></b:iconAwesome>
+                                            <p style="font-size: 18px">تازه وارد هستید؟</p>
+                                            <p style="font-size: 12px">برای تکمیل فرآیند خرید خود ثبت نام کنید</p>
+                                            <b:form>
+                                                <b:commandButton look="info" value="ثبت نام در کامت" action="#{userPageBean.redirectToRegisterPage()}"></b:commandButton>
+                                            </b:form>
+                                        </div>
+                                    </b:column>
+                                </b:row>
+                        </b:panel>
+
+                    </b:column>
+                    <!-- First Panel -->
+
+                </b:row>
+
+            </b:container>
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>

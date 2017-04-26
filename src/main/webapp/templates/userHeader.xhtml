@@ -33,7 +33,7 @@
                                         <b:dropMenu
                                                 value="سلام ، #{userSessionBean.customer.firstName} #{userSessionBean.customer.lastName}"
                                                 iconAwesome="user-circle" styleClass="user-drop-menu">
-                                            <b:navCommandLink value="ورود به پروفایل" action="#{headerBean.userAccountBtn()}"></b:navCommandLink>
+                                            <b:navCommandLink value="ورود به پروفایل" action="#{headerBean.redirectToUserAccount()}"></b:navCommandLink>
                                             <b:navCommandLink value="خروج" action="#{headerBean.logout()}"></b:navCommandLink>
                                         </b:dropMenu>
                                     </h:form>
@@ -46,7 +46,7 @@
                                         <b:commandButton style="width:150px;" look="success" action="#{headerBean.redirectToCartPage()}">
                                             <b:iconAwesome name="shopping-cart" size=""></b:iconAwesome>
                                             <span style="margin-right: 10px">سبد خرید</span>
-                                            <b:badge value="#{sessionBean.userProductCartList.size()}" style="margin-right:10px;"></b:badge>
+                                            <b:badge value="#{userSessionBean.userProductCartList.size()}" style="margin-right:10px;"></b:badge>
                                         </b:commandButton>
                                     </h:form>
                                     <h:form style="margin-top: 10px;margin-right: 20px">
