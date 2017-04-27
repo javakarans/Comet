@@ -22,18 +22,18 @@ public class SqlHandler {
     }
 
     public static SqlHandler getInstance(){
-        if (sqlHandler == null) {
-            // Thread Safe. Might be costly operation in some case
-            synchronized (SqlHandler.class) {
-                if (sqlHandler == null) {
-                    sqlHandler = new SqlHandler();
-                }
-            }
-        }
-        return sqlHandler;
+//        if (sqlHandler == null) {
+//            // Thread Safe. Might be costly operation in some case
+//            synchronized (SqlHandler.class) {
+//                if (sqlHandler == null) {
+//                    sqlHandler = new SqlHandler();
+//                }
+//            }
+//        }
+        return new SqlHandler();
     }
 
-    public <T> void create(T object){
+    public synchronized  <T> void create(T object){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(object);
@@ -42,7 +42,7 @@ public class SqlHandler {
         session.close();
     }
 
-    public <T> void update(T object){
+    public synchronized  <T> void update(T object){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(object);
@@ -51,7 +51,7 @@ public class SqlHandler {
         session.close();
     }
 
-    public <T> void delete(T object){
+    public synchronized  <T> void delete(T object){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(object);
