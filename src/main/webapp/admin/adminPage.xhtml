@@ -15,6 +15,7 @@
 <h:body>
     <ui:composition template="../templates/adminTemplate.xhtml">
         <ui:define name="content">
+            <b:container>
             <b:tabView tabPosition="left" contentStyle="border: 1px solid #ddd;padding:10px">
                 <b:tab  title="افزودن محصولات">
                     <ui:include src="addProduct.xhtml"/>
@@ -25,8 +26,14 @@
                 <b:tab title="افزودن   اسلاید">
                     <ui:include src="addSlideShow.xhtml"/>
                 </b:tab>
+                <b:tab title="افزودن   مقالات">
+                    <ui:include src="addArticle.xhtml"/>
+                </b:tab>
+
             </b:tabView>
+            </b:container>
         </ui:define>
+
     </ui:composition>
 </h:body>
 

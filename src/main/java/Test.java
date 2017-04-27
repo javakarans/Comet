@@ -1,9 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ir.comet.database.BranchDaoImp;
-import ir.comet.database.BranchDetailsDaoImp;
-import ir.comet.database.HibernateSession;
-import ir.comet.database.ProductDaoImp;
+import ir.comet.database.*;
 import ir.comet.model.*;
 import ir.comet.wrapper.BranchDetailsWrapper;
 import org.apache.log4j.Logger;
@@ -22,6 +19,14 @@ public class Test {
 
     public static void main(String[] args) {
 
+        CategoryDaoImp categoryDaoImp = new CategoryDaoImp();
+        for (int i =0 ; i<100000000;i++)
+        {
+            Category category = new Category();
+            category.setName(String.valueOf(i));
+            categoryDaoImp.createCategory(category);
+            System.out.println(i);
+        }
 
 //        FilesLocations filesLocations = new FilesLocations();
 //        filesLocations.setFileName("mobile");
@@ -54,15 +59,6 @@ public class Test {
         BranchDaoImp branchDaoImp=new BranchDaoImp();
         branchDaoImp.createBranch(branch);*/
 
-        Scanner scanner = new Scanner(System.in);
-        while (true)
-        {
-            ProductDaoImp productDaoImp=new ProductDaoImp();
-            Product product = productDaoImp.getAllProducts().get(0);
-            System.out.println(product.getName());
-            scanner.next();
-
-        }
 
     }
 

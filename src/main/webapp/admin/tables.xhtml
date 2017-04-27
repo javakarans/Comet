@@ -16,8 +16,21 @@
 
     <ui:composition template="../templates/adminTemplate.xhtml">
         <ui:define name="content">
-            <ui:include src="productTables.xhtml"/>
+            <b:container>
+                <b:tabView tabPosition="left" contentStyle="border: 1px solid #ddd;padding:10px">
+                    <b:tab  title="افزودن محصولات">
+                        <ui:include src="addProduct.xhtml"/>
+                    </b:tab>
+                    <b:tab title="افزودن دسته ها و برندها">
+                        <ui:include src="addBrandAndCategory.xhtml"/>
+                    </b:tab>
+                    <b:tab title="افزودن   اسلاید">
+                        <ui:include src="addSlideShow.xhtml"/>
+                    </b:tab>
+                </b:tabView>
+            </b:container>
         </ui:define>
+
     </ui:composition>
 </h:body>
 

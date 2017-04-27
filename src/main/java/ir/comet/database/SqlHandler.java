@@ -15,7 +15,7 @@ import java.util.List;
 public class SqlHandler {
 
     private SessionFactory sessionFactory;
-    private static SqlHandler sqlHandler;
+    private SqlHandler sqlHandler;
 
     private SqlHandler(){
         sessionFactory = HibernateSession.getInstance().getSession();

@@ -17,7 +17,8 @@ public class Article implements Serializable {
     private String imageUrl;
     private String author;
     private String reference;
-    private long productId;
+    private String date;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,12 +76,11 @@ public class Article implements Serializable {
         this.reference = reference;
     }
 
-    @Column
-    public long getProductId() {
-        return productId;
+    public String getDate() {
+        return date;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setDate(String date) {
+        this.date = date;
     }
 }
