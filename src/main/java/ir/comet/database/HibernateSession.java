@@ -11,37 +11,26 @@ import org.hibernate.cfg.Configuration;
 public class HibernateSession {
 
     private static HibernateSession hibernateSession;
+    private SessionFactory sessionFactory;
 
-    protected HibernateSession() {
-
+    private HibernateSession() {
+        Configuration configuration=new Configuration().configure();
+        StandardServiceRegistryBuilder builder=new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+        sessionFactory=configuration.buildSessionFactory(builder.build());
     }
 
-    /**
-     * This method get an instance from HibernateSession Class
-     * to implement sigleton design pattern
-     * @return hibernateSession
-     */
     public static HibernateSession getInstance() {
-        if (hibernateSession == null) {
-            // Thread Safe. Might be costly operation in some case
             synchronized (HibernateSession.class) {
                 if (hibernateSession == null) {
                     hibernateSession = new HibernateSession();
                 }
             }
-        }
         return hibernateSession;
-
     }
 
-    /**
-     * This method creates a session factory to connect to DB
-     * @return session
-     */
-    public SessionFactory getSession(){
-        Configuration configuration=new Configuration().configure();
-        StandardServiceRegistryBuilder builder=new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-        SessionFactory sessionFactory=configuration.buildSessionFactory(builder.build());
-        return sessionFactory;
+    public static Session getSession(){
+        Session session = HibernateSession.getInstance().sessionFactory.openSession();
+        return session;
     }
+
 }

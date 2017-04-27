@@ -1,7 +1,5 @@
 package ir.comet.database;
 
-import ir.comet.model.Branch;
-import ir.comet.model.Product;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,27 +12,8 @@ import java.util.List;
  */
 public class SqlHandler {
 
-    private SessionFactory sessionFactory;
-    private SqlHandler sqlHandler;
-
-    public SqlHandler(){
-        sessionFactory = HibernateSession.getInstance().getSession();
-    }
-
-    public SqlHandler getInstance(){
-//        if (sqlHandler == null) {
-//            // Thread Safe. Might be costly operation in some case
-//            synchronized (SqlHandler.class) {
-//                if (sqlHandler == null) {
-//                    sqlHandler = new SqlHandler();
-//                }
-//            }
-//        }
-        return new SqlHandler();
-    }
-
-    public  <T> void create(T object){
-        Session session = sessionFactory.openSession();
+    public <T> void create(T object){
+        Session session = HibernateSession.getSession();
         session.beginTransaction();
         session.save(object);
         session.getTransaction().commit();
@@ -42,8 +21,8 @@ public class SqlHandler {
         session.close();
     }
 
-    public  <T> void update(T object){
-        Session session = sessionFactory.openSession();
+    public <T> void update(T object){
+        Session session = HibernateSession.getSession();
         session.beginTransaction();
         session.update(object);
         session.getTransaction().commit();
@@ -51,8 +30,8 @@ public class SqlHandler {
         session.close();
     }
 
-    public  <T> void delete(T object){
-        Session session = sessionFactory.openSession();
+    public <T> void delete(T object){
+        Session session = HibernateSession.getSession();
         session.beginTransaction();
         session.delete(object);
         session.getTransaction().commit();
@@ -62,7 +41,7 @@ public class SqlHandler {
 
     public <T> List getAllObjects(T object)
     {
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSession.getSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(object.getClass());
         session.getTransaction().commit();
@@ -74,7 +53,7 @@ public class SqlHandler {
     }
 
     public <T> List getObjectsBySpecialColumn(T object,String column,Object value){
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSession.getSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(object.getClass());
         criteria.add(Restrictions.eq(column,value));
@@ -86,7 +65,7 @@ public class SqlHandler {
     }
 
     public <T> List getObjectsBySpecialColumn(T object,String firstColumn,Object firstValue,String secondColumn,Object secondValue){
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSession.getSession();
         session.beginTransaction();
         Criteria criteria = session.createCriteria(object.getClass());
         criteria.add(Restrictions.eq(firstColumn,firstValue));
