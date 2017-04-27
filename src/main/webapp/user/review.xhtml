@@ -52,7 +52,7 @@
                                             <b:dataTableColumn label="قیمت کل" orderable="false"
                                                                style="width:17%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;">
-                                                <h:outputText value="#{cartItem.price}"
+                                                <h:outputText value="#{cartItem.productCart.totalPriceAfterDiscountAndTax}"
                                                               style="font-size: 25px"></h:outputText>
                                                 <span style="font-size: 10px">تومان</span>
                                             </b:dataTableColumn>
@@ -60,7 +60,7 @@
                                             <b:dataTableColumn label="قیمت واحد" orderable="false"
                                                                style="width:15%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;">
-                                                <h:outputText value="#{cartItem.price}"
+                                                <h:outputText value="#{cartItem.calPriceByDiscount()}"
                                                               style="font-size: 25px"></h:outputText>
                                                 <span style="font-size: 10px">تومان</span>
                                             </b:dataTableColumn>
@@ -74,12 +74,12 @@
                                                                style="width:35%;" headerStyle="text-align:center;">
                                                 <b:row dir="rtl">
                                                     <b:column colXs="5">
-                                                        <b:image value="#{cartItem.imageUrl}" colXs="12"></b:image>
+                                                        <b:image value="#{cartItem.product.imageUrl}" colXs="12"></b:image>
                                                     </b:column>
                                                     <b:column colXs="7" style="word-wrap:break-word;">
                                                         <div style="color: rgba(19,19,19,0.88)">
                                                             <h5 style="font-family: YJ, NYJ">
-                                                                #{cartItem.name}
+                                                                #{cartItem.product.name}
                                                             </h5>
                                                             <h5>
                                                                 #{cartItem.product.englishName}

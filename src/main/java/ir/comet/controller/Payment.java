@@ -9,7 +9,7 @@ public class Payment {
 
     }
 
-    public void ConfirmPaymentByCash(){
+    public void ConfirmPaymentByCash(long totalPriceByDiscount){
 
     }
 }
