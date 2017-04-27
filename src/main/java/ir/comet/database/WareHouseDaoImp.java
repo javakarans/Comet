@@ -18,7 +18,7 @@ public class WareHouseDaoImp implements WareHouseDao {
     private SqlHandler sqlHandler;
 
     public WareHouseDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler= new SqlHandler();
     }
 
     public void createWareHouse(WareHouse wareHouse) {

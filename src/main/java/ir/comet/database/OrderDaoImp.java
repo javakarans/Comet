@@ -18,7 +18,7 @@ public class OrderDaoImp implements OrderDao {
     private SqlHandler sqlHandler;
 
     public OrderDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public void createOrder(Order order) {

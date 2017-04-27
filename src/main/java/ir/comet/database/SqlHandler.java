@@ -17,11 +17,11 @@ public class SqlHandler {
     private SessionFactory sessionFactory;
     private SqlHandler sqlHandler;
 
-    private SqlHandler(){
+    public SqlHandler(){
         sessionFactory = HibernateSession.getInstance().getSession();
     }
 
-    public  SqlHandler getInstance(){
+    public SqlHandler getInstance(){
 //        if (sqlHandler == null) {
 //            // Thread Safe. Might be costly operation in some case
 //            synchronized (SqlHandler.class) {

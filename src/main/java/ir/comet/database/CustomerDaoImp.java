@@ -18,7 +18,7 @@ public class CustomerDaoImp implements CustomerDao {
     private SqlHandler sqlHandler;
 
     public CustomerDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public void createCustomer(Customer customer) {

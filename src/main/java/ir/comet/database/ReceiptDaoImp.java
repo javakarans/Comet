@@ -10,7 +10,7 @@ public class ReceiptDaoImp implements ReceiptDao {
     private SqlHandler sqlHandler;
 
     public ReceiptDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public int createReceipt(Receipt receipt) {

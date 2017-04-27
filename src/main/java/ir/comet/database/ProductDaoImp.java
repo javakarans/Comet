@@ -15,7 +15,7 @@ public class ProductDaoImp implements ProductDao {
     private SqlHandler sqlHandler;
 
     public ProductDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public void createProduct(Product product) {

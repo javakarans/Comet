@@ -18,7 +18,7 @@ public class CategoryDaoImp implements CategoryDao {
     private SqlHandler sqlHandler;
 
     public CategoryDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public void createCategory(Category category) {

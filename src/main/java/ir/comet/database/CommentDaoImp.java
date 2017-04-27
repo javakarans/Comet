@@ -17,7 +17,7 @@ public class CommentDaoImp implements CommentDao {
     private SqlHandler sqlHandler;
 
     public CommentDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public void createComment(Comment comment) {

@@ -15,7 +15,7 @@ public class BrandDaoImp implements BrandDao {
     private SqlHandler sqlHandler;
     public BrandDaoImp()
     {
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public void createBrand(Brand brand) {

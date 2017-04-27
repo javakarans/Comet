@@ -16,7 +16,7 @@ public class BranchDaoImp implements BranchDao{
     private SqlHandler sqlHandler;
 
     public BranchDaoImp(){
-        sqlHandler = SqlHandler.getInstance();
+        sqlHandler = new SqlHandler();
     }
 
     public void createBranch(Branch branch) {

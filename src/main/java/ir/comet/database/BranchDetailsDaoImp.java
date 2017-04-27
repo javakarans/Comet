@@ -12,7 +12,7 @@ public class BranchDetailsDaoImp implements BranchDetailsDao {
     private SqlHandler sqlHandler;
 
     public BranchDetailsDaoImp(){
-        sqlHandler=SqlHandler.getInstance();
+        sqlHandler=new SqlHandler();
     }
 
     public int createBranchDetails(BranchDetails branchDetails) {
