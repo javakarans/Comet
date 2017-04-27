@@ -33,7 +33,7 @@ public class SqlHandler {
         return new SqlHandler();
     }
 
-    public synchronized  <T> void create(T object){
+    public  <T> void create(T object){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(object);
@@ -42,7 +42,7 @@ public class SqlHandler {
         session.close();
     }
 
-    public synchronized  <T> void update(T object){
+    public  <T> void update(T object){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.update(object);
@@ -51,7 +51,7 @@ public class SqlHandler {
         session.close();
     }
 
-    public synchronized  <T> void delete(T object){
+    public  <T> void delete(T object){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.delete(object);
