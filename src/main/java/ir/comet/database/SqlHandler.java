@@ -21,7 +21,7 @@ public class SqlHandler {
         sessionFactory = HibernateSession.getInstance().getSession();
     }
 
-    public static SqlHandler getInstance(){
+    public  SqlHandler getInstance(){
 //        if (sqlHandler == null) {
 //            // Thread Safe. Might be costly operation in some case
 //            synchronized (SqlHandler.class) {
