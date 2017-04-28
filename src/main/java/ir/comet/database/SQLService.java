@@ -12,34 +12,40 @@ import java.util.List;
  */
 public class SQLService {
 
-    public <T> void create(T object){
+    public <T> boolean create(T object){
         try{
             HibernateUtil.beginTransaction();
             HibernateUtil.getSession().save(object);
             HibernateUtil.commitTransaction();
         }catch (HibernateException e){
             HibernateUtil.rollbackTransaction();
+            return false;
         }
+        return true;
     }
 
-    public <T> void update(T object){
+    public <T> boolean update(T object){
         try{
             HibernateUtil.beginTransaction();
             HibernateUtil.getSession().update(object);
             HibernateUtil.commitTransaction();
         }catch (HibernateException e){
             HibernateUtil.rollbackTransaction();
+            return false;
         }
+        return true;
     }
 
-    public <T> void delete(T object){
+    public <T> boolean delete(T object){
         try{
             HibernateUtil.beginTransaction();
             HibernateUtil.getSession().delete(object);
             HibernateUtil.commitTransaction();
         }catch (HibernateException e){
             HibernateUtil.rollbackTransaction();
+            return false;
         }
+        return true;
     }
 
     public <T> List getAllObjects(T object)
