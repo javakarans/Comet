@@ -9,14 +9,14 @@ import java.util.List;
 
 public class BranchDetailsDaoImp implements BranchDetailsDao {
 
-    private SqlHandler sqlHandler;
+    private SQLService SQLService;
 
     public BranchDetailsDaoImp(){
-        sqlHandler=new SqlHandler();
+        SQLService =new SQLService();
     }
 
     public int createBranchDetails(BranchDetails branchDetails) {
-        sqlHandler.create(branchDetails);
+        SQLService.create(branchDetails);
         return 0;
     }
 
@@ -26,13 +26,13 @@ public class BranchDetailsDaoImp implements BranchDetailsDao {
 
     public List<BranchDetails> getAlBranchDetails() {
         BranchDetails branchDetails = new BranchDetails();
-        return sqlHandler.getAllObjects(branchDetails);
+        return SQLService.getAllObjects(branchDetails);
 
     }
 
     public List<Brand> getBrandsByBranchId(long id) {
         BrandDaoImp brandDaoImp = new BrandDaoImp();
-        List<BranchDetails> branchDetailsList = sqlHandler.getObjectsBySpecialColumn(new BranchDetails(), "brandId", id);
+        List<BranchDetails> branchDetailsList = SQLService.getObjectsBySpecialColumn(new BranchDetails(), "brandId", id);
         List<Brand> brands = new ArrayList<Brand>(branchDetailsList.size());
         for (BranchDetails branchDetails : branchDetailsList) {
             Brand brand = brandDaoImp.getBrand(branchDetails.getBrandId());
@@ -42,16 +42,16 @@ public class BranchDetailsDaoImp implements BranchDetailsDao {
     }
 
     public List<BranchDetails> getBranchDetails(long branchId,long brandId){
-        return sqlHandler.getObjectsBySpecialColumn(new BranchDetails(), "branchId", branchId, "brandId", brandId);
+        return SQLService.getObjectsBySpecialColumn(new BranchDetails(), "branchId", branchId, "brandId", brandId);
     }
 
     public int updateBranchDetails(BranchDetails branchDetails) {
-        sqlHandler.update(branchDetails);
+        SQLService.update(branchDetails);
         return 0;
     }
 
     public int deleteBranchDetails(BranchDetails branchDetails) {
-        sqlHandler.delete(branchDetails);
+        SQLService.delete(branchDetails);
         return 0;
     }
 

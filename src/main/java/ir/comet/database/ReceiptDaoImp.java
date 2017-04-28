@@ -7,15 +7,15 @@ import java.util.List;
 
 public class ReceiptDaoImp implements ReceiptDao {
 
-    private SqlHandler sqlHandler;
+    private SQLService SQLService;
 
     public ReceiptDaoImp(){
-        sqlHandler=new SqlHandler();
+        SQLService =new SQLService();
     }
 
     public int createReceipt(Receipt receipt) {
-        sqlHandler.create(receipt);
-        return 0;
+        SQLService.create(receipt);
+        return 1;
     }
 
     public Receipt getReceipt(long receiptId) {

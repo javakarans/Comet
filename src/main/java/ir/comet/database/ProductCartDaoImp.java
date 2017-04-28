@@ -6,23 +6,24 @@ import ir.comet.model.ProductCart;
 import java.util.List;
 
 public class ProductCartDaoImp implements ProductCartDao {
-    public void createSellingList(ProductCart productCart) {
+
+    public void createProductCart(ProductCart productCart) {
 
     }
 
-    public ProductCart getSellingList(long sellingListId) {
+    public ProductCart getProductCart(long sellingListId) {
         return null;
     }
 
-    public List<ProductCart> getAllSellingLists() {
+    public List<ProductCart> getAllProductCarts() {
         return null;
     }
 
-    public void updateSellingList(ProductCart productCart) {
+    public void updateProductCart(ProductCart productCart) {
 
     }
 
-    public void deleteSellingList(ProductCart productCart) {
+    public void deleteProductCart(ProductCart productCart) {
 
     }
 }

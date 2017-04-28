@@ -1,11 +1,6 @@
 package ir.comet.database;
 
-import ir.comet.model.Branch;
 import ir.comet.model.Comment;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -14,29 +9,29 @@ import java.util.List;
  */
 public class CommentDaoImp implements CommentDao {
 
-    private SqlHandler sqlHandler;
+    private SQLService SQLService;
 
     public CommentDaoImp(){
-        sqlHandler=new SqlHandler();
+        SQLService =new SQLService();
     }
 
     public void createComment(Comment comment) {
-        sqlHandler.create(comment);
+        SQLService.create(comment);
     }
 
     public Comment getComment(long commentId) {
-        return (Comment) sqlHandler.getObjectsBySpecialColumn(new Comment(),"commentId",commentId).get(0);
+        return (Comment) SQLService.getObjectsBySpecialColumn(new Comment(),"commentId",commentId).get(0);
     }
 
     public List<Comment> getAllCommentsByProductId(long productId) {
-        return sqlHandler.getObjectsBySpecialColumn(new Comment(),"productId",productId);
+        return SQLService.getObjectsBySpecialColumn(new Comment(),"productId",productId);
     }
 
     public void updateComment(Comment comment) {
-        sqlHandler.update(comment);
+        SQLService.update(comment);
     }
 
     public void deleteComment(Comment comment) {
-        sqlHandler.delete(comment);
+        SQLService.delete(comment);
     }
 }

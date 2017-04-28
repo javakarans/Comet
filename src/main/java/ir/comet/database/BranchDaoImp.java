@@ -1,10 +1,6 @@
 package ir.comet.database;
 
 import ir.comet.model.Branch;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -13,36 +9,36 @@ import java.util.List;
  */
 public class BranchDaoImp implements BranchDao{
 
-    private SqlHandler sqlHandler;
+    private SQLService SQLService;
 
     public BranchDaoImp(){
-        sqlHandler = new SqlHandler();
+        SQLService = new SQLService();
     }
 
     public void createBranch(Branch branch) {
-        sqlHandler.create(branch);
+        SQLService.create(branch);
     }
 
     public Branch getBranch(long branchId) {
 
-        return (Branch) sqlHandler.getObjectsBySpecialColumn(new Branch(),"branchId",branchId).get(0);
+        return (Branch) SQLService.getObjectsBySpecialColumn(new Branch(),"branchId",branchId).get(0);
     }
 
     public List<Branch> getAllBranches() {
 
         Branch branch = new Branch();
-        return sqlHandler.getAllObjects(branch);
+        return SQLService.getAllObjects(branch);
     }
 
     public List<Branch> getBranchesByCategoryId(long id) {
-        return sqlHandler.getObjectsBySpecialColumn(new Branch(),"categoryId",id);
+        return SQLService.getObjectsBySpecialColumn(new Branch(),"categoryId",id);
     }
 
     public void updateBranch(Branch branch) {
-        sqlHandler.update(branch);
+        SQLService.update(branch);
     }
 
     public void deleteBranch(Branch branch) {
-        sqlHandler.delete(branch);
+        SQLService.delete(branch);
     }
 }

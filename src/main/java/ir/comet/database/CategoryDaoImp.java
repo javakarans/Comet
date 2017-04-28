@@ -1,12 +1,6 @@
 package ir.comet.database;
 
-import ir.comet.model.Branch;
 import ir.comet.model.Category;
-import ir.comet.model.Product;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -15,30 +9,30 @@ import java.util.List;
  */
 public class CategoryDaoImp implements CategoryDao {
 
-    private SqlHandler sqlHandler;
+    private SQLService SQLService;
 
     public CategoryDaoImp(){
-        sqlHandler=new SqlHandler();
+        SQLService =new SQLService();
     }
 
     public void createCategory(Category category) {
-        sqlHandler.create(category);
+        SQLService.create(category);
     }
 
     public Category getCategory(long categoryId) {
-        return (Category) sqlHandler.getObjectsBySpecialColumn(new Category(),"categoryId",categoryId).get(0);
+        return (Category) SQLService.getObjectsBySpecialColumn(new Category(),"categoryId",categoryId).get(0);
     }
 
     public List<Category> getAllCategories() {
         Category category = new Category();
-        return sqlHandler.getAllObjects(category) ;
+        return SQLService.getAllObjects(category) ;
     }
 
     public void updateCategory(Category category) {
-        sqlHandler.update(category);
+        SQLService.update(category);
     }
 
     public void deleteCategory(Category category) {
-        sqlHandler.delete(category);
+        SQLService.delete(category);
     }
 }

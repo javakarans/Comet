@@ -35,6 +35,9 @@
         <!-- Drop and re-create all database on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
 
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
          <!--Annotated entity classes-->
         <mapping class="ir.comet.model.Comment"/>
         <mapping class="ir.comet.model.Brand"/>
