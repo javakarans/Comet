@@ -1,6 +1,6 @@
 package ir.comet.database;
 
-import ir.comet.model.Order;
+import ir.comet.model.OrderDetail;
 
 import java.util.List;
 
@@ -9,29 +9,29 @@ import java.util.List;
  */
 public class OrderDaoImp implements OrderDao {
 
-    private SQLService SQLService;
+    private SQLService sqlService;
 
     public OrderDaoImp(){
-        SQLService =new SQLService();
+        sqlService =new SQLService();
     }
 
-    public void createOrder(Order order) {
-        SQLService.create(order);
+    public boolean createOrder(OrderDetail orderDetail) {
+        return sqlService.create(orderDetail);
     }
 
-    public Order getOrder(long orderId) {
-        return (Order) SQLService.getObjectsBySpecialColumn(this.getClass(), "orderId", orderId).get(0);
+    public OrderDetail getOrder(long orderId) {
+        return (OrderDetail) sqlService.getObjectsBySpecialColumn(this.getClass(), "orderId", orderId).get(0);
     }
 
-    public List<Order> getAllOrders() {
+    public List<OrderDetail> getAllOrders() {
         return null;
     }
 
-    public void updateOrder(Order order) {
-        SQLService.update(order);
+    public boolean updateOrder(OrderDetail orderDetail) {
+        return sqlService.update(orderDetail);
     }
 
-    public void deleteOrder(Order order) {
-        SQLService.delete(order);
+    public boolean deleteOrder(OrderDetail orderDetail) {
+        return sqlService.delete(orderDetail);
     }
 }

@@ -10,7 +10,7 @@ import java.util.Set;
  */
 @Entity
 @Table
-public class Order implements Serializable {
+public class OrderDetail implements Serializable {
 
     private long orderId;
     private long customerId;

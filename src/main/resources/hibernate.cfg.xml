@@ -22,7 +22,7 @@
 
         <!-- Connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost/test</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/comet</property>
         <property name="hibernate.connection.username">comet</property>
         <property name="hibernate.connection.password">comet</property>
 
@@ -44,7 +44,7 @@
         <mapping class="ir.comet.model.Branch"/>
         <mapping class="ir.comet.model.Category"/>
         <mapping class="ir.comet.model.Customer"/>
-        <mapping class="ir.comet.model.Order"/>
+        <mapping class="ir.comet.model.OrderDetail"/>
         <mapping class="ir.comet.model.WareHouse"/>
         <mapping class="ir.comet.model.ProductCart"/>
         <mapping class="ir.comet.model.Receipt"/>

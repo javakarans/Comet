@@ -7,15 +7,14 @@ import java.util.List;
 
 public class ReceiptDaoImp implements ReceiptDao {
 
-    private SQLService SQLService;
+    private SQLService sqlService;
 
     public ReceiptDaoImp(){
-        SQLService =new SQLService();
+        sqlService =new SQLService();
     }
 
-    public int createReceipt(Receipt receipt) {
-        SQLService.create(receipt);
-        return 1;
+    public boolean createReceipt(Receipt receipt) {
+        return sqlService.create(receipt);
     }
 
     public Receipt getReceipt(long receiptId) {
@@ -26,11 +25,11 @@ public class ReceiptDaoImp implements ReceiptDao {
         return null;
     }
 
-    public void updateReceipt(Receipt receipt) {
-
+    public boolean updateReceipt(Receipt receipt) {
+        return sqlService.update(receipt);
     }
 
-    public void deleteReceipt(Receipt receipt) {
-
+    public boolean deleteReceipt(Receipt receipt) {
+        return sqlService.delete(receipt);
     }
 }

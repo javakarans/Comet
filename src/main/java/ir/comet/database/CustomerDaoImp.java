@@ -9,35 +9,35 @@ import java.util.List;
  */
 public class CustomerDaoImp implements CustomerDao {
 
-    private SQLService SQLService;
+    private SQLService sqlService;
 
     public CustomerDaoImp(){
-        SQLService =new SQLService();
+        sqlService =new SQLService();
     }
 
     public void createCustomer(Customer customer) {
-        SQLService.create(customer);
+        sqlService.create(customer);
     }
 
     public Customer getCustomer(long customerId) {
-        return (Customer) SQLService.getObjectsBySpecialColumn(new Customer(),"customerId",customerId);
+        return (Customer) sqlService.getObjectsBySpecialColumn(new Customer(),"customerId",customerId).get(0);
     }
 
     public Customer getCustomerByUserNameAndPass(String userName,String password) {
-        return (Customer) SQLService.getObjectsBySpecialColumn
+        return (Customer) sqlService.getObjectsBySpecialColumn
                 (new Customer(),"userName",userName,"password",password).get(0);
     }
 
     public List<Customer> getAllCustomers() {
-        return null;
+        return sqlService.getAllObjects(new Customer());
     }
 
     public void updateCustomer(Customer customer) {
-        SQLService.update(customer);
+        sqlService.update(customer);
     }
 
     public void deleteCustomer(Customer customer) {
-        SQLService.delete(customer);
+        sqlService.delete(customer);
     }
 
 }

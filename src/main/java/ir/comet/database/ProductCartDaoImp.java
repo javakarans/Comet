@@ -7,8 +7,14 @@ import java.util.List;
 
 public class ProductCartDaoImp implements ProductCartDao {
 
-    public void createProductCart(ProductCart productCart) {
+    private SQLService sqlService;
 
+    public ProductCartDaoImp(){
+            sqlService=new SQLService();
+    }
+
+    public boolean createProductCart(ProductCart productCart) {
+            return sqlService.create(productCart);
     }
 
     public ProductCart getProductCart(long sellingListId) {
@@ -16,14 +22,14 @@ public class ProductCartDaoImp implements ProductCartDao {
     }
 
     public List<ProductCart> getAllProductCarts() {
-        return null;
+        return sqlService.getAllObjects(new ProductCart());
     }
 
-    public void updateProductCart(ProductCart productCart) {
-
+    public boolean updateProductCart(ProductCart productCart) {
+        return sqlService.update(productCart);
     }
 
-    public void deleteProductCart(ProductCart productCart) {
-
+    public boolean deleteProductCart(ProductCart productCart) {
+        return sqlService.delete(productCart);
     }
 }

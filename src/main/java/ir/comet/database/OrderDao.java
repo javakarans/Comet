@@ -1,7 +1,7 @@
 package ir.comet.database;
 
 
-import ir.comet.model.Order;
+import ir.comet.model.OrderDetail;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface OrderDao {
 
-    public void createOrder(Order order);
-    public Order getOrder(long orderId);
-    public List<Order> getAllOrders();
-    public void updateOrder(Order order);
-    public void deleteOrder(Order order);
+    public boolean createOrder(OrderDetail orderDetail);
+    public OrderDetail getOrder(long orderId);
+    public List<OrderDetail> getAllOrders();
+    public boolean updateOrder(OrderDetail orderDetail);
+    public boolean deleteOrder(OrderDetail orderDetail);
 
 }

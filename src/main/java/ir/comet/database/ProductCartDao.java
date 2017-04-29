@@ -5,9 +5,9 @@ import ir.comet.model.ProductCart;
 import java.util.List;
 
 public interface ProductCartDao {
-    public void createProductCart(ProductCart productCart);
+    public boolean createProductCart(ProductCart productCart);
     public ProductCart getProductCart(long sellingListId);
     public List<ProductCart> getAllProductCarts();
-    public void updateProductCart(ProductCart productCart);
-    public void deleteProductCart(ProductCart productCart);
+    public boolean updateProductCart(ProductCart productCart);
+    public boolean deleteProductCart(ProductCart productCart);
 }

@@ -5,6 +5,7 @@ import ir.comet.model.BranchDetails;
 import ir.comet.model.Brand;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class BranchDetailsDaoImp implements BranchDetailsDao {
@@ -32,10 +33,12 @@ public class BranchDetailsDaoImp implements BranchDetailsDao {
 
     public List<Brand> getBrandsByBranchId(long id) {
         BrandDaoImp brandDaoImp = new BrandDaoImp();
-        List<BranchDetails> branchDetailsList = SQLService.getObjectsBySpecialColumn(new BranchDetails(), "brandId", id);
-        List<Brand> brands = new ArrayList<Brand>(branchDetailsList.size());
-        for (BranchDetails branchDetails : branchDetailsList) {
-            Brand brand = brandDaoImp.getBrand(branchDetails.getBrandId());
+        List<BranchDetails> branchDetailsList = SQLService.getObjectsBySpecialColumn(new BranchDetails(), "branchId", id);
+        List<Brand> brands = new ArrayList<Brand>();
+        Iterator<BranchDetails> iterator = branchDetailsList.iterator();
+        while (iterator.hasNext()){
+            BranchDetails next = iterator.next();
+            Brand brand = brandDaoImp.getBrand(next.getBrandId());
             brands.add(brand);
         }
         return brands;

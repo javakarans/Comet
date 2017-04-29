@@ -1,5 +1,7 @@
 package ir.comet.bean;
 
+import ir.comet.database.PaymentTransaction;
+import ir.comet.model.*;
 import ir.comet.wrapper.UserProductCart;
 
 import javax.annotation.PostConstruct;
@@ -57,10 +59,27 @@ public class ReviewBean {
     }
 
     public String ConfirmOrderAndPayment(){
-        if(requestParameterMap.get("paymentType").equals("ByCash")){
-
+        if(true){
+            loadPaymentDetail("ByCash");
         }
-        return null;
+        return "";
+    }
+
+    public void loadPaymentDetail(String paymentType){
+        PaymentDetail paymentDetail=new PaymentDetail();
+        paymentDetail.setCustomerId(userSessionBean.getCustomer().getCustomerId());
+        paymentDetail.setOrderDetail(new OrderDetail());
+        paymentDetail.setUserProductCartList(userProductCartList);
+        Receipt receipt=new Receipt();
+        receipt.setTotalPrice(totalPriceWithNoDiscount());
+        receipt.setTotalPriceAfterDiscountAndTax(totalPriceByDiscount());
+        receipt.setPaymentType(paymentType);
+        receipt.setDeliveryDate("");
+        receipt.setIssueDate("");
+        receipt.setTrackingNumber(1);
+        paymentDetail.setReceipt(receipt);
+        PaymentTransaction paymentTransaction=new PaymentTransaction(paymentDetail);
+        paymentTransaction.confirmPayment();
     }
 
     public UserSessionBean getUserSessionBean() {

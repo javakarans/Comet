@@ -14,7 +14,7 @@ public class Receipt implements Serializable {
     private long receiptId;
     private long trackingNumber;
     private String issueDate;
-    private double totalPrice;
+    private long totalPrice;
     private String deliveryDate;
     private long totalPriceAfterDiscountAndTax;
     private String paymentType;
@@ -49,15 +49,6 @@ public class Receipt implements Serializable {
     }
 
     @Column
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    @Column
     public String getDeliveryDate() {
         return deliveryDate;
     }
@@ -82,5 +73,14 @@ public class Receipt implements Serializable {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
+    }
+
+    @Column
+    public long getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(long totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }
