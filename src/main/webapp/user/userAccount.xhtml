@@ -21,6 +21,7 @@
         <ui:define name="content">
 
             <link rel="stylesheet" href="../resources/css/userAccount.css"></link>
+            <script type="text/javascript" src="../resources/js/userAccount.js"></script>
 
             <b:container style="margin-top:-8px;">
 
@@ -79,25 +80,15 @@
                                 <b:row>
                                     <b:column colSm="4">
                                         <span>تعداد کل سفارشات : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.totalNumberOfOrders()}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>سفارشات در انتظار تایید : </span>
-                                        <h:outputText value="#"></h:outputText>
-                                    </b:column>
-                                    <b:column colSm="4">
-                                        <span>سفارشات در حال پردازش : </span>
-                                        <h:outputText value="#"></h:outputText>
-                                    </b:column>
-                                </b:row>
-                                <b:row style="margin-top:20px;">
-                                    <b:column colSm="4">
-                                        <span>سفارشات انصراف داده شده : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.onPendingOrders()}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>سفارشات ارسال شده : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.totalNumberOfOrderDelivered()}"></h:outputText>
                                     </b:column>
                                 </b:row>
                             </div>
@@ -112,10 +103,10 @@
 
                                 <b:tab title="سفارشات من">
                                     <div style="margin-top: 30px">
-                                        <b:dataTable id="my-orderDetail" value="#" var="#" searching="false" paginated="false"
-                                                     border="false">
+                                        <b:dataTable id="my-orderDetail" value="#{userAccountBean.customer.getOrderDetails()}" var="orderDetail" searching="false" paginated="false"
+                                                     border="false" varStatus="status">
                                             <b:dataTableColumn label="ردیف" orderable="false">
-                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                                <h:outputText value="#{userAccountBean.incRowIndex()}" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="کد" orderable="false">
@@ -123,29 +114,35 @@
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="تاریخ" orderable="false">
-                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                                <h:outputText value="#{orderDetail.issueDate}" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="مبلغ کل" orderable="false">
-                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                                <h:outputText value="#{orderDetail.totalPriceAfterDiscountAndTax}" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="وضعیت" orderable="false">
-                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                                <h:outputText value="#{orderDetail.status}" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
 
-                                            <b:dataTableColumn label="جزئیات" orderable="false">
-                                                <h:outputText value="#" style="color: #3c3c3c"></h:outputText>
+                                            <b:dataTableColumn label="جزئیات" orderable="false" style="text-align:center;">
+                                                <b:iconAwesome onclick="showOrderDetails('id#{userAccountBean.rowIndex}')" name="external-link" styleClass="detail"></b:iconAwesome>
 
-                                                <tr style="background-color: #f5f4f5">
+                                                <tr id="id#{userAccountBean.rowIndex}" style="background-color: #f5f4f5;display: none">
                                                     <td colspan="12">
-                                                        <b:dataTable searching="false" paginated="false" style="color:#000;" styleClass="order_datatable">
-                                                            <b:dataTableColumn label="مبلغ کل" orderable="false"></b:dataTableColumn>
-                                                            <b:dataTableColumn label="تخفیف کل" orderable="false"></b:dataTableColumn>
-                                                            <b:dataTableColumn label="قیمت کل" orderable="false"></b:dataTableColumn>
-                                                            <b:dataTableColumn label="قیمت واحد" orderable="false"></b:dataTableColumn>
-                                                            <b:dataTableColumn label="تعداد" orderable="false"></b:dataTableColumn>
-                                                            <b:dataTableColumn label="کالا" orderable="false" style="width:35%;"></b:dataTableColumn>
+                                                        <b:dataTable value="#{orderDetail.productOrderDetails}" var="productOrderDetails" searching="false" paginated="false" style="color:#000;" styleClass="order_datatable">
+                                                            <b:dataTableColumn label="قیمت کل" orderable="false" style="text-align:center;">
+                                                                <h:outputText value="#{productOrderDetails.totalPriceAfterDiscountAndTax}"></h:outputText>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn label="قیمت واحد" orderable="false" style="text-align:center;">
+                                                                <h:outputText value="#{userAccountBean.calPriceByDiscount(productOrderDetails.product)}"></h:outputText>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn label="تعداد" orderable="false" style="text-align:center;">
+                                                                <h:outputText value="#{productOrderDetails.quantity}"></h:outputText>
+                                                            </b:dataTableColumn>
+                                                            <b:dataTableColumn label="کالا" orderable="false" style="width:35%;text-align:center;">
+                                                                <h:outputText value="#{productOrderDetails.product.name}"></h:outputText>
+                                                            </b:dataTableColumn>
                                                         </b:dataTable>
                                                     </td>
                                                 </tr>
@@ -160,13 +157,13 @@
 
                                 <b:tab title="لیست مورد علاقه">
                                     <div style="margin-top: 30px">
-                                        <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                        <h:outputText value="موردی یافت نشد"></h:outputText>
                                     </div>
                                 </b:tab>
 
                                 <b:tab title="اطلاع رسانی ها">
                                     <div style="margin-top: 30px">
-                                        <h:outputText value="متن معرفی و بررسی محصول"></h:outputText>
+                                        <h:outputText value="موردی یافت نشد"></h:outputText>
                                     </div>
                                 </b:tab>
 
