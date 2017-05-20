@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+    <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"></link>
+    <link rel="stylesheet" href="../resources/css/confirmationPage.css"></link>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{securityBean.checkLogIn()}"></f:event>
+    </f:metadata>
+</h:head>
+
+<h:body>
+    <b:container >
+        <b:row>
+            <b:column colSm="12" style="text-align:center;">
+                    <div class="center">
+                        <h:form>
+                            <div style="color: green;font-size: 23px">
+                                <h:outputText value="خرید با موفقیت انجام شد"></h:outputText>
+                                <b:iconAwesome name="check"></b:iconAwesome>
+                            </div>
+                            <div style="font-size: 15px">
+                                <span>کد پیگری : </span>
+                                <h:outputText value="#{confirmationBean.getTrackNumber()}"></h:outputText>
+                            </div>
+                            <br></br>
+                            <b:commandButton value="ورود به کامت" style="margin-top:12px;"
+                                             look="info" action="#{confirmationBean.redirectToAccountPage()}"></b:commandButton>
+                        </h:form>
+                    </div>
+            </b:column>
+        </b:row>
+
+    </b:container>
+</h:body>
+
+</html>

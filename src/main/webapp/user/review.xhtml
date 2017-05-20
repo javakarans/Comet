@@ -9,12 +9,14 @@
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
-    <title>JSF 2.2 TUTORIALS</title>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{securityBean.checkLogIn()}"></f:event>
+    </f:metadata>
 </h:head>
 
 <h:body>
 
-    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 
@@ -47,12 +49,12 @@
 
                                     <b:column colSm="12" style="margin-top:20px;">
                                         <b:dataTable searching="false" paginated="false"
-                                                     styleClass="order_datatable" value="#{reviewBean.userProductCartList}"
+                                                     styleClass="order_datatable" value="#{userSessionBean.productOrderDetailList}"
                                                      var="cartItem">
                                             <b:dataTableColumn label="قیمت کل" orderable="false"
                                                                style="width:17%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;">
-                                                <h:outputText value="#{cartItem.productCart.totalPriceAfterDiscountAndTax}"
+                                                <h:outputText value="#{cartItem.totalPriceAfterDiscountAndTax}"
                                                               style="font-size: 25px"></h:outputText>
                                                 <span style="font-size: 10px">تومان</span>
                                             </b:dataTableColumn>
@@ -60,14 +62,14 @@
                                             <b:dataTableColumn label="قیمت واحد" orderable="false"
                                                                style="width:15%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;">
-                                                <h:outputText value="#{cartItem.calPriceByDiscount()}"
+                                                <h:outputText value="#{reviewBean.calPriceByDiscount(cartItem)}"
                                                               style="font-size: 25px"></h:outputText>
                                                 <span style="font-size: 10px">تومان</span>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="تعداد" orderable="false"
                                                                style="width:6%;" styleClass="column_content">
-                                                <h:outputText value="#{cartItem.productCart.quantity}"></h:outputText>
+                                                <h:outputText value="#{cartItem.quantity}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="شرح محصول" orderable="false"
@@ -145,7 +147,8 @@
                                                     <b:iconAwesome name="location-arrow"></b:iconAwesome>
                                                 </td>
                                                 <td>
-                                                    <h:outputText value="#{userSessionBean.customer.address}"></h:outputText>
+                                                    <h:outputText value="#{reviewBean.customer.state}،#{reviewBean.customer.city}،
+                                                    #{reviewBean.customer.address}"></h:outputText>
                                                 </td>
                                             </tr>
                                             </tbody>

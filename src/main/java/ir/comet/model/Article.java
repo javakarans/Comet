@@ -8,9 +8,10 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table
 public class Article implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long articleId;
     private String subject;
     private String content;
@@ -19,10 +20,6 @@ public class Article implements Serializable {
     private String reference;
     private String date;
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
     public long getArticleId() {
         return articleId;
     }
@@ -31,7 +28,6 @@ public class Article implements Serializable {
         this.articleId = articleId;
     }
 
-    @Column
     public String getSubject() {
         return subject;
     }
@@ -40,7 +36,6 @@ public class Article implements Serializable {
         this.subject = subject;
     }
 
-    @Column
     public String getContent() {
         return content;
     }
@@ -49,7 +44,6 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    @Column
     public String getImageUrl() {
         return imageUrl;
     }
@@ -58,7 +52,6 @@ public class Article implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    @Column
     public String getAuthor() {
         return author;
     }
@@ -67,7 +60,6 @@ public class Article implements Serializable {
         this.author = author;
     }
 
-    @Column
     public String getReference() {
         return reference;
     }

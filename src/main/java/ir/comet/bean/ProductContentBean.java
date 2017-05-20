@@ -1,24 +1,16 @@
 package ir.comet.bean;
 
-import ir.comet.controller.CommentController;
-import ir.comet.controller.ProductController;
-import ir.comet.database.BranchDetailsDaoImp;
-import ir.comet.database.CommentDao;
 import ir.comet.database.CommentDaoImp;
 import ir.comet.database.ProductDaoImp;
-import ir.comet.model.BranchDetails;
 import ir.comet.model.Comment;
 import ir.comet.model.Product;
-import ir.comet.wrapper.BranchDetailsWrapper;
-import ir.comet.wrapper.UserProductCart;
+import ir.comet.model.ProductOrderDetail;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Mohammad on 4/23/2017.
@@ -27,29 +19,71 @@ import java.util.List;
 @ViewScoped
 public class ProductContentBean {
 
+    private Product product;
+    private String categoryName;
+    private String branchName;
+    private String brandName;
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
-    private BranchDetailsWrapper branchDetailsWrapper;
-    private Product product;
-    private CommentController commentController;
-    private ProductController productController;
+    private CommentDaoImp commentDaoImp;
+    private long productId;
 
     @PostConstruct
     public void init(){
-        branchDetailsWrapper=userSessionBean.getBranchDetailsWrapper();
-        product=userSessionBean.getSelectedProduct();
-        productController=new ProductController();
-        commentController=new CommentController();
+        commentDaoImp=new CommentDaoImp();
+        loadProduct();
     }
 
-    public List<Comment> loadComments(){
-        CommentDaoImp commentDaoImp=new CommentDaoImp();
-        return commentDaoImp.getAllCommentsByProductId(product.getProductId());
+    public long getProductId(){
+        String productId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("productId");
+        if(productId!=null){
+            this.productId= Long.parseLong(productId);
+            return this.productId;
+        }
+        return userSessionBean.getURLParameter().get("productId");
     }
 
-    public String addProductToCart(Product product){
-        userSessionBean.getUserProductCartList().add(new UserProductCart(product));
-        return "/user/cart.xhtml?faces-redirect=true";
+    public void loadProduct(){
+        ProductDaoImp productDaoImp=new ProductDaoImp();
+        product=productDaoImp.getProduct(getProductId());
+        categoryName=product.getBranchBrand().getBranch().getCategory().getName();
+        branchName=product.getBranchBrand().getBranch().getBranchName();
+        brandName=product.getBranchBrand().getBrand().getName();
+    }
+
+    public long calProductPriceByDiscount(long productPrice,long discount){
+        return (productPrice-discount);
+    }
+
+    public String addProductToCart(){
+        ProductOrderDetail productOrderDetail=new ProductOrderDetail();
+        ProductDaoImp productDaoImp=new ProductDaoImp();
+        productOrderDetail.setProduct(productDaoImp.getProduct(getProductId()));
+        productOrderDetail.setQuantity(1);
+        userSessionBean.getProductOrderDetailList().add(productOrderDetail);
+        userSessionBean.setCurrentURL("/user/cart.xhtml");
+        return userSessionBean.getCurrentURL().concat("?faces-redirect=true");
+    }
+
+    public void increaseLike(long commentId){
+        Comment comment = commentDaoImp.getComment(commentId);
+        int likeCount = comment.getLikeCount()+1;
+        comment.setLikeCount(likeCount);
+        commentDaoImp.updateComment(comment);
+        reloadProductList();
+    }
+
+    public void increaseDisLike(long commentId){
+        Comment comment = commentDaoImp.getComment(commentId);
+        int disLikeCount = comment.getDisLikeCount()+1;
+        comment.setDisLikeCount(disLikeCount);
+        commentDaoImp.updateComment(comment);
+        reloadProductList();
+    }
+
+    public void reloadProductList(){
+        ProductDaoImp productDaoImp=new ProductDaoImp();
+        product=productDaoImp.getProduct(this.productId);
     }
 
     public Product getProduct() {
@@ -60,20 +94,28 @@ public class ProductContentBean {
         this.product = product;
     }
 
-    public CommentController getCommentController() {
-        return commentController;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCommentController(CommentController commentController) {
-        this.commentController = commentController;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public ProductController getProductController() {
-        return productController;
+    public String getBranchName() {
+        return branchName;
     }
 
-    public void setProductController(ProductController productController) {
-        this.productController = productController;
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     public UserSessionBean getUserSessionBean() {
@@ -84,3 +126,4 @@ public class ProductContentBean {
         this.userSessionBean = userSessionBean;
     }
 }
+

@@ -8,22 +8,22 @@ import java.io.Serializable;
  * Created by Mohammad on 2/27/2017.
  */
 @Entity
-@Table
 public class Comment implements Serializable {
-
-    private long commentId;
-    private long customerId;
-    private long productId;
-    private String text;
-    private String createdDate;
-    private String customerName;
-    private int likeCount;
-    private int disLikeCount;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
+    private long commentId;
+    private String text;
+    private String createdDate;
+    private int likeCount;
+    private int disLikeCount;
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
+
     public long getCommentId() {
         return commentId;
     }
@@ -32,7 +32,6 @@ public class Comment implements Serializable {
         this.commentId = commentId;
     }
 
-    @Column
     public String getText() {
         return text;
     }
@@ -41,7 +40,6 @@ public class Comment implements Serializable {
         this.text = text;
     }
 
-    @Column
     public String getCreatedDate() {
         return createdDate;
     }
@@ -50,34 +48,6 @@ public class Comment implements Serializable {
         this.createdDate = createdDate;
     }
 
-    @Column
-    public long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
-
-    @Column
-    public long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(long productId) {
-        this.productId = productId;
-    }
-
-    @Column
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    @Column
     public int getLikeCount() {
         return likeCount;
     }
@@ -86,12 +56,27 @@ public class Comment implements Serializable {
         this.likeCount = likeCount;
     }
 
-    @Column
     public int getDisLikeCount() {
         return disLikeCount;
     }
 
     public void setDisLikeCount(int disLikeCount) {
         this.disLikeCount = disLikeCount;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

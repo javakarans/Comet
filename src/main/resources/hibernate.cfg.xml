@@ -46,13 +46,12 @@
         <mapping class="ir.comet.model.Customer"/>
         <mapping class="ir.comet.model.OrderDetail"/>
         <mapping class="ir.comet.model.WareHouse"/>
-        <mapping class="ir.comet.model.ProductCart"/>
-        <mapping class="ir.comet.model.Receipt"/>
+        <mapping class="ir.comet.model.ProductOrderDetail"/>
         <mapping class="ir.comet.model.Product"/>
         <mapping class="ir.comet.model.Notification"/>
         <mapping class="ir.comet.model.Article"/>
         <mapping class="ir.comet.model.SlideShow"/>
-        <mapping class="ir.comet.model.BranchDetails"/>
+        <mapping class="ir.comet.model.BranchBrand"/>
 
 
     </session-factory>

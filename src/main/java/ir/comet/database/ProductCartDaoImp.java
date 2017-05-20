@@ -1,7 +1,7 @@
 package ir.comet.database;
 
 
-import ir.comet.model.ProductCart;
+import ir.comet.model.ProductOrderDetail;
 
 import java.util.List;
 
@@ -13,23 +13,23 @@ public class ProductCartDaoImp implements ProductCartDao {
             sqlService=new SQLService();
     }
 
-    public boolean createProductCart(ProductCart productCart) {
-            return sqlService.create(productCart);
+    public boolean createProductCart(ProductOrderDetail productOrderDetail) {
+            return sqlService.create(productOrderDetail);
     }
 
-    public ProductCart getProductCart(long sellingListId) {
+    public ProductOrderDetail getProductCart(long sellingListId) {
         return null;
     }
 
-    public List<ProductCart> getAllProductCarts() {
-        return sqlService.getAllObjects(new ProductCart());
+    public List<ProductOrderDetail> getAllProductCarts() {
+        return sqlService.getAllObjects(new ProductOrderDetail());
     }
 
-    public boolean updateProductCart(ProductCart productCart) {
-        return sqlService.update(productCart);
+    public boolean updateProductCart(ProductOrderDetail productOrderDetail) {
+        return sqlService.update(productOrderDetail);
     }
 
-    public boolean deleteProductCart(ProductCart productCart) {
-        return sqlService.delete(productCart);
+    public boolean deleteProductCart(ProductOrderDetail productOrderDetail) {
+        return sqlService.delete(productOrderDetail);
     }
 }

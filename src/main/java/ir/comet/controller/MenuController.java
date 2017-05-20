@@ -1,7 +1,7 @@
 package ir.comet.controller;
 
+import ir.comet.database.BranchBrandDaoImp;
 import ir.comet.database.BranchDaoImp;
-import ir.comet.database.BranchDetailsDaoImp;
 import ir.comet.database.CategoryDaoImp;
 import ir.comet.model.Branch;
 import ir.comet.model.Brand;
@@ -16,12 +16,12 @@ public class MenuController {
 
     private CategoryDaoImp categoryDaoImp;
     private BranchDaoImp branchDaoImp;
-    private BranchDetailsDaoImp branchDetailsDaoImp;
+    private BranchBrandDaoImp branchDetailsDaoImp;
 
     public MenuController(){
         categoryDaoImp=new CategoryDaoImp();
         branchDaoImp=new BranchDaoImp();
-        branchDetailsDaoImp=new BranchDetailsDaoImp();
+        branchDetailsDaoImp=new BranchBrandDaoImp();
     }
 
     public List<Category> getAllCategoryList(){

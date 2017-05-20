@@ -20,14 +20,11 @@ public class BranchDaoImp implements BranchDao{
     }
 
     public Branch getBranch(long branchId) {
-
         return (Branch) SQLService.getObjectsBySpecialColumn(new Branch(),"branchId",branchId).get(0);
     }
 
     public List<Branch> getAllBranches() {
-
-        Branch branch = new Branch();
-        return SQLService.getAllObjects(branch);
+        return SQLService.getAllObjects(new Branch());
     }
 
     public List<Branch> getBranchesByCategoryId(long id) {

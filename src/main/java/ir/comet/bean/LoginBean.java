@@ -22,29 +22,35 @@ import java.io.IOException;
 @ViewScoped
 public class LoginBean {
 
-    private LoginController loginController;
+    private String userName;
+    private String password;
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
 
-    @PostConstruct
-    public void init(){
-        loginController=new LoginController();
-    }
-
-    public String login(){
-        Customer customer = loginController.customerLogin();
-        if(customer!=null){
-            userSessionBean.setCustomer(customer);
+    public void userLogin(){
+        CustomerDaoImp customerDaoImp=new CustomerDaoImp();
+        Customer customer = customerDaoImp.getCustomerByUserNameAndPass(userName, password);
+        System.out.println(customer.getCustomerId());
+        if (customer!=null){
+            userSessionBean.setUserSessionId(customer.getCustomerId());
+            userSessionBean.setUserLogin(true);
         }
-        return "/comet.xhtml?faces-redirect=true";
     }
 
-    public LoginController getLoginController() {
-        return loginController;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLoginController(LoginController loginController) {
-        this.loginController = loginController;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public UserSessionBean getUserSessionBean() {

@@ -1,10 +1,14 @@
 package ir.comet.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,28 +16,39 @@ import java.util.Set;
  */
 
 @Entity
-@Table
 public class Product implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
     private String name;
     private String englishName;
     private String warranty;
     private long price;
+    @Type(type = "text")
     private String imageUrl;
+    @Type(type = "text")
     private String description;
     private long stock;
     private long wareHouseId;
     private int score;
     private long discount;
+    @Type(type = "text")
     private String imageLocationJson;
+    @Type(type = "text")
     private String otherDetailsJson;
-    private long branchDetailsId;
+    @Type(type = "text")
     private String colorJson;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "product")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Comment> comments=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "product")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<ProductOrderDetail> productOrderDetails=new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "branchBrandId")
+    private BranchBrand branchBrand;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
     public long getProductId() {
         return productId;
     }
@@ -42,7 +57,6 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    @Column
     public String getName() {
         return name;
     }
@@ -51,79 +65,6 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    @Column
-    public String getWarranty() {
-        return warranty;
-    }
-
-    public void setWarranty(String warranty) {
-        this.warranty = warranty;
-    }
-
-    @Column
-    public long getPrice() {
-        return price;
-    }
-
-    public void setPrice(long price) {
-        this.price = price;
-    }
-
-    @Column
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    @Column
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Column
-    public long getStock() {
-        return stock;
-    }
-
-    public void setStock(long stock) {
-        this.stock = stock;
-    }
-
-    @Column
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    @Column
-    public long getWareHouseId() {
-        return wareHouseId;
-    }
-
-    public void setWareHouseId(long wareHouseId) {
-        this.wareHouseId = wareHouseId;
-    }
-
-    @Column
-    public long getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(long discount) {
-        this.discount = discount;
-    }
-
-    @Column
     public String getEnglishName() {
         return englishName;
     }
@@ -132,8 +73,70 @@ public class Product implements Serializable {
         this.englishName = englishName;
     }
 
-    @Column
-    @Type(type = "text")
+    public String getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(String warranty) {
+        this.warranty = warranty;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public long getStock() {
+        return stock;
+    }
+
+    public void setStock(long stock) {
+        this.stock = stock;
+    }
+
+    public long getWareHouseId() {
+        return wareHouseId;
+    }
+
+    public void setWareHouseId(long wareHouseId) {
+        this.wareHouseId = wareHouseId;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public long getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(long discount) {
+        this.discount = discount;
+    }
+
     public String getImageLocationJson() {
         return imageLocationJson;
     }
@@ -142,8 +145,6 @@ public class Product implements Serializable {
         this.imageLocationJson = imageLocationJson;
     }
 
-    @Column
-    @Type(type = "text")
     public String getOtherDetailsJson() {
         return otherDetailsJson;
     }
@@ -152,22 +153,35 @@ public class Product implements Serializable {
         this.otherDetailsJson = otherDetailsJson;
     }
 
-    @Column
-    public long getBranchDetailsId() {
-        return branchDetailsId;
-    }
-
-    public void setBranchDetailsId(long branchDetailsId) {
-        this.branchDetailsId = branchDetailsId;
-    }
-
-    @Column
-    @Type(type = "text")
     public String getColorJson() {
         return colorJson;
     }
 
     public void setColorJson(String colorJson) {
         this.colorJson = colorJson;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<ProductOrderDetail> getProductOrderDetails() {
+        return productOrderDetails;
+    }
+
+    public void setProductOrderDetails(List<ProductOrderDetail> productOrderDetails) {
+        this.productOrderDetails = productOrderDetails;
+    }
+
+    public BranchBrand getBranchBrand() {
+        return branchBrand;
+    }
+
+    public void setBranchBrand(BranchBrand branchBrand) {
+        this.branchBrand = branchBrand;
     }
 }

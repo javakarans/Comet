@@ -9,12 +9,14 @@
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
-    <title>JSF 2.2 TUTORIALS</title>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{securityBean.checkLogIn()}"></f:event>
+    </f:metadata>
 </h:head>
 
 <h:body>
 
-    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 
@@ -35,35 +37,29 @@
                                 <b:row>
                                     <b:column colSm="4">
                                         <span>نام و نام خانوادگی : </span>
-                                        <h:outputText value="#{userSessionBean.customer.firstName} #{userSessionBean.customer.lastName}"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.firstName} #{userAccountBean.customer.lastName}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>آدرس الکترونیک : </span>
-                                        <h:outputText value="#{userSessionBean.customer.email}"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.email}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>کد ملی : </span>
-                                        <h:outputText value="#{userSessionBean.customer.securityNumber}"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.securityNumber}"></h:outputText>
                                     </b:column>
                                 </b:row>
                                 <b:row style="margin-top:20px;">
                                     <b:column colSm="4">
                                         <span>شماره تلفن ثابت : </span>
-                                        <h:outputText value="#{userSessionBean.customer.phoneNumber}"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.phoneNumber}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>شماره تلفن همراه : </span>
-                                        <h:outputText value="#{userSessionBean.customer.mobileNumber}"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.mobileNumber}"></h:outputText>
                                     </b:column>
                                     <b:column colSm="4">
                                         <span>تاریخ تولد : </span>
-                                        <h:outputText value="#{userSessionBean.customer.birthDate}"></h:outputText>
-                                    </b:column>
-                                </b:row>
-                                <b:row style="margin-top:20px;">
-                                    <b:column colSm="4">
-                                        <span>جنسیت : </span>
-                                        <h:outputText value="#"></h:outputText>
+                                        <h:outputText value="#{userAccountBean.customer.birthDate}"></h:outputText>
                                     </b:column>
                                 </b:row>
                             </div>

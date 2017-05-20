@@ -1,5 +1,8 @@
 package ir.comet.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,10 +14,10 @@ import java.util.Set;
  * Created by Mohammad on 2/27/2017.
  */
 @Entity
-@Table
 public class Customer implements Serializable {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long customerId;
     private String firstName;
     private String lastName;
@@ -24,15 +27,18 @@ public class Customer implements Serializable {
     private String phoneNumber;
     private String mobileNumber;
     private String birthDate;
-    private boolean gender;
     private String securityNumber;
+    private String state;
+    private String city;
     private String address;
     private String postalCode;
-    private Set<Product> favoriteList;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "customer")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<OrderDetail> orderDetails=new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "customer")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Comment> comments=new ArrayList<>();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     public long getCustomerId() {
         return customerId;
     }
@@ -41,7 +47,6 @@ public class Customer implements Serializable {
         this.customerId = customerId;
     }
 
-    @Column
     public String getFirstName() {
         return firstName;
     }
@@ -50,7 +55,6 @@ public class Customer implements Serializable {
         this.firstName = firstName;
     }
 
-    @Column
     public String getLastName() {
         return lastName;
     }
@@ -59,7 +63,6 @@ public class Customer implements Serializable {
         this.lastName = lastName;
     }
 
-    @Column
     public String getUserName() {
         return userName;
     }
@@ -68,7 +71,6 @@ public class Customer implements Serializable {
         this.userName = userName;
     }
 
-    @Column
     public String getPassword() {
         return password;
     }
@@ -77,7 +79,6 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    @Column
     public String getEmail() {
         return email;
     }
@@ -86,7 +87,6 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    @Column
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -95,7 +95,6 @@ public class Customer implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    @Column
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -104,7 +103,6 @@ public class Customer implements Serializable {
         this.mobileNumber = mobileNumber;
     }
 
-    @Column
     public String getBirthDate() {
         return birthDate;
     }
@@ -113,16 +111,6 @@ public class Customer implements Serializable {
         this.birthDate = birthDate;
     }
 
-    @Column
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
-    @Column
     public String getSecurityNumber() {
         return securityNumber;
     }
@@ -131,7 +119,6 @@ public class Customer implements Serializable {
         this.securityNumber = securityNumber;
     }
 
-    @Column
     public String getAddress() {
         return address;
     }
@@ -140,7 +127,6 @@ public class Customer implements Serializable {
         this.address = address;
     }
 
-    @Column
     public String getPostalCode() {
         return postalCode;
     }
@@ -149,13 +135,35 @@ public class Customer implements Serializable {
         this.postalCode = postalCode;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
-    public Set<Product> getFavoriteList() {
-        return favoriteList;
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setFavoriteList(Set<Product> favoriteList) {
-        this.favoriteList = favoriteList;
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }

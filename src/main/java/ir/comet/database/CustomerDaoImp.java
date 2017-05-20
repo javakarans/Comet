@@ -24,8 +24,12 @@ public class CustomerDaoImp implements CustomerDao {
     }
 
     public Customer getCustomerByUserNameAndPass(String userName,String password) {
-        return (Customer) sqlService.getObjectsBySpecialColumn
-                (new Customer(),"userName",userName,"password",password).get(0);
+        List customer = sqlService.getObjectsBySpecialColumn
+                (new Customer(), "userName", userName, "password", password);
+        if(!customer.isEmpty()){
+            return (Customer) customer.get(0);
+        }
+        return null;
     }
 
     public List<Customer> getAllCustomers() {

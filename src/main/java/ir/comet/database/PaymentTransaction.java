@@ -1,9 +1,7 @@
 package ir.comet.database;
 
 import ir.comet.model.OrderDetail;
-import ir.comet.model.PaymentDetail;
-import ir.comet.model.Receipt;
-import ir.comet.wrapper.UserProductCart;
+import ir.comet.model.ProductOrderDetail;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -16,37 +14,25 @@ import java.util.List;
  */
 public class PaymentTransaction {
 
-    private long customerId;
-    private OrderDetail orderDetail;
-    private Receipt receipt;
-    private List<UserProductCart> userProductCartList;
 
-    public PaymentTransaction(PaymentDetail paymentDetail){
-        customerId = paymentDetail.getCustomerId();
-        orderDetail = paymentDetail.getOrderDetail();
-        receipt = paymentDetail.getReceipt();
-        userProductCartList = paymentDetail.getUserProductCartList();
+    private List<ProductOrderDetail> productOrderDetailList;
+    private OrderDetail orderDetail;
+
+    public PaymentTransaction(List<ProductOrderDetail> productOrderDetailList,OrderDetail orderDetail){
+        this.productOrderDetailList=productOrderDetailList;
+        this.orderDetail=orderDetail;
     }
+
     public boolean confirmPayment(){
-        try{
+        try {
             HibernateUtil.beginTransaction();
             Session session = HibernateUtil.getSession();
-            session.save(receipt);
-            Criteria criteria = session.createCriteria(Receipt.class);
-            List<Receipt> receiptList=criteria.list();
-            long receiptId = receiptList.get(receiptList.size() - 1).getReceiptId();
-            orderDetail.setReceiptId(receiptId);
-            orderDetail.setStatus("");
-            orderDetail.setCustomerId(customerId);
             session.save(orderDetail);
-            Criteria criteria1 = session.createCriteria(OrderDetail.class);
-            List<OrderDetail> orderDetailList =criteria1.list();
-            long orderId = orderDetailList.get(orderDetailList.size() - 1).getOrderId();
-            Iterator<UserProductCart> iterator = userProductCartList.iterator();
+            Iterator<ProductOrderDetail> iterator = productOrderDetailList.iterator();
             while (iterator.hasNext()){
-                UserProductCart next = iterator.next();
-                next.getProductCart().setOrderId(orderId);
-                session.save(next.getProductCart());
+                ProductOrderDetail next = iterator.next();
+                next.setOrderDetail(orderDetail);
+                session.save(next);
             }
             HibernateUtil.commitTransaction();
             return true;
@@ -54,5 +40,21 @@ public class PaymentTransaction {
             HibernateUtil.rollbackTransaction();
         }
         return false;
+    }
+
+    public List<ProductOrderDetail> getProductOrderDetailList() {
+        return productOrderDetailList;
+    }
+
+    public void setProductOrderDetailList(List<ProductOrderDetail> productOrderDetailList) {
+        this.productOrderDetailList = productOrderDetailList;
+    }
+
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
     }
 }

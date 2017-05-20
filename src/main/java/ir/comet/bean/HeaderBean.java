@@ -1,16 +1,14 @@
 package ir.comet.bean;
 
-import ir.comet.database.BranchDetailsDaoImp;
+import ir.comet.database.CustomerDaoImp;
+import ir.comet.model.BranchBrand;
 import ir.comet.model.Customer;
-import ir.comet.wrapper.BranchDetailsWrapper;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import java.io.IOException;
 
 /**
  * Created by Mohammad on 4/13/2017.
@@ -21,29 +19,33 @@ public class HeaderBean {
 
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
+    private Customer customer;
 
     @PostConstruct
     public void init(){
+        loadUserData();
     }
 
-    public String redirectToUserAccount(){
-        return "/user/userAccount.xhtml?faces-redirect=true";
-    }
-
-    public void logout(){
-        userSessionBean.invalidUserSession();
-    }
-
-    public String redirectToProductPage(long branchId,long brandId){
-        BranchDetailsDaoImp branchDetailsDaoImp=new BranchDetailsDaoImp();
-        BranchDetailsWrapper branchDetailsWrapper=new BranchDetailsWrapper
-                (branchDetailsDaoImp.getBranchDetails(branchId,brandId).get(0));
-        userSessionBean.setBranchDetailsWrapper(branchDetailsWrapper);
-        return "/user/Product.xhtml?faces-redirect=true";
+    public void loadUserData(){
+        if(userSessionBean.isUserLogin()){
+            CustomerDaoImp customerDaoImp=new CustomerDaoImp();
+            customer = customerDaoImp.getCustomer(userSessionBean.getUserSessionId());
+        }
     }
 
     public String redirectToCartPage(){
-        return "/user/cart.xhtml?faces-redirect=true";
+        userSessionBean.setCurrentURL("/user/cart.xhtml?faces-redirect=true");
+        return userSessionBean.getCurrentURL();
+    }
+
+    public String redirectToProductPage(BranchBrand branchBrand){
+        userSessionBean.getURLParameter().put("branchBrandId",branchBrand.getBranchBrandId());
+        return "/user/product.xhtml?faces-redirect=true&id="+branchBrand.getBranchBrandId();
+    }
+
+    public String redirectToUserAccount(){
+        userSessionBean.setCurrentURL("/user/userAccount.xhtml");
+        return userSessionBean.getCurrentURL().concat("?faces-redirect=true");
     }
 
     public UserSessionBean getUserSessionBean() {
@@ -52,5 +54,13 @@ public class HeaderBean {
 
     public void setUserSessionBean(UserSessionBean userSessionBean) {
         this.userSessionBean = userSessionBean;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

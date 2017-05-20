@@ -12,11 +12,11 @@
     <title>JSF 2.2 TUTORIALS</title>
 </h:head>
 <f:metadata>
-    <f:viewAction action="#{userPageBean.checkUserStatus(userSessionBean.customer)}"></f:viewAction>
+    <f:event type="preRenderView" listener="#{userPageBean.checkUserLogin()}"></f:event>
 </f:metadata>
 <h:body>
 
-    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 

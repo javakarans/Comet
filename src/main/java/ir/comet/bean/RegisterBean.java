@@ -5,6 +5,7 @@ import ir.comet.model.Customer;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
@@ -17,6 +18,8 @@ import java.io.IOException;
 public class RegisterBean {
 
     private Customer customer;
+    @ManagedProperty(value = "#{userSessionBean}")
+    private UserSessionBean userSessionBean;
 
     @PostConstruct
     public void init(){
@@ -31,17 +34,20 @@ public class RegisterBean {
         this.customer = customer;
     }
 
-    public void registerCustomer(){
-
-        String username=customer.getEmail();
-        customer.setUserName(username);
+    public String registerCustomer(){
+        customer.setUserName(customer.getEmail());
         CustomerDaoImp customerDaoImp=new CustomerDaoImp();
         customerDaoImp.createCustomer(customer);
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customer",customer);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("../comet.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        userSessionBean.setUserSessionId(customer.getCustomerId());
+        userSessionBean.setUserLogin(true);
+        return "/comet.xhtml?faces-redirect=true";
+    }
+
+    public UserSessionBean getUserSessionBean() {
+        return userSessionBean;
+    }
+
+    public void setUserSessionBean(UserSessionBean userSessionBean) {
+        this.userSessionBean = userSessionBean;
     }
 }

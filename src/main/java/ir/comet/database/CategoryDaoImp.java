@@ -24,8 +24,7 @@ public class CategoryDaoImp implements CategoryDao {
     }
 
     public List<Category> getAllCategories() {
-        Category category = new Category();
-        return SQLService.getAllObjects(category) ;
+        return SQLService.getAllObjects(new Category()) ;
     }
 
     public void updateCategory(Category category) {

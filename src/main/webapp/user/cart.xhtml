@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 
@@ -37,7 +37,14 @@
 
                         <b:panel>
                             <b:form>
-                                <b:row>
+
+                                <b:row rendered="#{cartBean.checkProductCartListIsEmpty()}">
+                                    <b:column colSm="12">
+                                        <p style="text-align: center">هیچ محصولی در سبد خرید شما موجود نیست!</p>
+                                    </b:column>
+                                </b:row>
+
+                                <b:row rendered="#{!cartBean.checkProductCartListIsEmpty()}">
                                     <b:column colSm="12" style="margin-top:20px;">
                                         <b:iconAwesome name="caret-left"
                                                        style="margin-left:18px;"></b:iconAwesome>
@@ -50,18 +57,18 @@
                                                       style="font-size: 12px"></h:outputText>
                                         <b:commandButton value="مرحله بعد"
                                                          style="width:150px;height:40px;float:left;"
-                                                         look="success" action="#{cartBean.redirectToUserPage()}" iconAwesome="arrow-left"
+                                                         look="success" action="#{cartBean.redirectToShippingPage()}" iconAwesome="arrow-left"
                                                          iconAlign="right"></b:commandButton>
                                     </b:column>
 
                                     <b:column colSm="12">
                                         <b:dataTable searching="false" paginated="false"
-                                                     styleClass="order_datatable" value="#{cartBean.userProductCartList}"
+                                                     styleClass="order_datatable" value="#{userSessionBean.productOrderDetailList}"
                                                      var="cartItem">
                                             <b:dataTableColumn label="حذف" orderable="false"
                                                                style="width:2%;" styleClass="column_content"
                                                                contentStyle="background-color:rgb(255, 237, 238);">
-                                                <b:navCommandLink action="#{cartBean.removeItem(cartItem)}">
+                                                <b:navCommandLink action="#{cartBean.removeProduct(cartItem)}">
                                                     <b:iconAwesome name="remove"></b:iconAwesome>
                                                 </b:navCommandLink>
                                             </b:dataTableColumn>
@@ -69,7 +76,7 @@
                                             <b:dataTableColumn label="قیمت کل" orderable="false"
                                                                style="width:17%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;" >
-                                                <h:outputText value="#{cartItem.productCart.totalPriceAfterDiscountAndTax}"
+                                                <h:outputText value="#{cartBean.calTotalPriceAfterDiscountAndTax(cartItem)}"
                                                               style="font-size: 25px" id="totalPrice"></h:outputText>
                                                 <span style="font-size: 10px">تومان</span>
                                             </b:dataTableColumn>
@@ -77,15 +84,14 @@
                                             <b:dataTableColumn label="قیمت واحد" orderable="false"
                                                                style="width:15%;" styleClass="column_content"
                                                                contentStyle="direction:rtl;">
-                                                <h:outputText value="#{cartItem.calPriceByDiscount()}"
+                                                <h:outputText value="#{cartBean.calPriceByDiscount(cartItem)}"
                                                               style="font-size: 25px"></h:outputText>
                                                 <span style="font-size: 10px">تومان</span>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="تعداد" orderable="false"
                                                                style="width:6%;" styleClass="column_content">
-                                                <b:selectOneMenu style="height:auto;" value="#{cartItem.productCart.quantity}"
-                                                                 onchange="ajax:cartItem.calTotalPriceAfterDiscount()"
+                                                <b:selectOneMenu style="height:auto;" value="#{cartItem.quantity}"
                                                                     update="@form">
                                                     <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
                                                     <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>

@@ -21,12 +21,16 @@ public class ProductDaoImp implements ProductDao {
         return (Product) SQLService.getObjectsBySpecialColumn(new Product(),"productId",productId).get(0);
     }
 
-    public List<Product> getAllProducts() {
-        return SQLService.getAllObjects(new Product());
+    public List<Product> getProductByBranchBrandId(long branchBrandId) {
+        return SQLService.getObjectsBySpecialColumn(new Product(),"branchBrandId",branchBrandId);
     }
 
-    public List<Product> getProductListBybranchDetailsId(long branchDetailsId){
-        return SQLService.getObjectsBySpecialColumn(new Product(),"branchDetailsId",branchDetailsId);
+    public Product getProductByProductName(String productName) {
+        return (Product) SQLService.getObjectsBySpecialColumn(new Product(),"name",productName).get(0);
+    }
+
+    public List<Product> getAllProducts() {
+        return SQLService.getAllObjects(new Product());
     }
 
     public void updateProduct(Product product) {

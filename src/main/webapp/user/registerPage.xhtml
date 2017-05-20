@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="../templates/CommonTemplate.xhtml">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 
@@ -143,6 +143,26 @@
                                                 <b:column></b:column>
                                                 <b:column span="8" styleClass="message">
                                                     <h:message for="securityNumber"></h:message>
+                                                </b:column>
+
+                                                <h:outputText value="استان"></h:outputText>
+                                                <b:inputText id="state" span="8"
+                                                             value="#{registerBean.customer.state}"
+                                                             required="true"
+                                                             requiredMessage="*استان خود را وارد کنید"></b:inputText>
+                                                <b:column></b:column>
+                                                <b:column span="8" styleClass="message">
+                                                    <h:message for="state"></h:message>
+                                                </b:column>
+
+                                                <h:outputText value="شهر"></h:outputText>
+                                                <b:inputText id="city" span="8"
+                                                             value="#{registerBean.customer.city}"
+                                                             required="true"
+                                                             requiredMessage="*شهر خود را وارد کنید"></b:inputText>
+                                                <b:column></b:column>
+                                                <b:column span="8" styleClass="message">
+                                                    <h:message for="city"></h:message>
                                                 </b:column>
 
                                                 <h:outputText value="آدرس"></h:outputText>

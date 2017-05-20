@@ -10,7 +10,7 @@
  
 <h:head>
     <title>JSF 2.2 TUTORIALS</title>
-    <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"></link>
+    <link rel="stylesheet" href="../../resources/lib/bootstrap-rtl.min.css"></link>
 
 </h:head>
 
@@ -18,7 +18,7 @@
 
     <ui:composition>
 
-        <link rel="stylesheet" href="../resources/css/userHeader.css"></link>
+        <link rel="stylesheet" href="../../resources/css/userHeader.css"></link>
 
         <b:container fluid="true">
             <!-- Upper Header -->
@@ -31,10 +31,10 @@
                                 <h:panelGrid columns="1" columnClasses="uhCol1">
                                     <h:form>
                                         <b:dropMenu
-                                                value="سلام ، #{userSessionBean.customer.firstName} #{userSessionBean.customer.lastName}"
+                                                value="سلام ، #{headerBean.customer.firstName} #{headerBean.customer.lastName}"
                                                 iconAwesome="user-circle" styleClass="user-drop-menu">
                                             <b:navCommandLink value="ورود به پروفایل" action="#{headerBean.redirectToUserAccount()}"></b:navCommandLink>
-                                            <b:navCommandLink value="خروج" action="#{headerBean.logout()}"></b:navCommandLink>
+                                            <b:navCommandLink value="خروج" action="#{userSessionBean.invalidUserSession()}"></b:navCommandLink>
                                         </b:dropMenu>
                                     </h:form>
                                 </h:panelGrid>
@@ -46,7 +46,7 @@
                                         <b:commandButton style="width:150px;" look="success" action="#{headerBean.redirectToCartPage()}">
                                             <b:iconAwesome name="shopping-cart" size=""></b:iconAwesome>
                                             <span style="margin-right: 10px">سبد خرید</span>
-                                            <b:badge value="#{userSessionBean.userProductCartList.size()}" style="margin-right:10px;"></b:badge>
+                                            <b:badge value="#{userSessionBean.productOrderDetailList.size()}" style="margin-right:10px;"></b:badge>
                                         </b:commandButton>
                                     </h:form>
                                     <h:form style="margin-top: 10px;margin-right: 20px">
@@ -73,17 +73,17 @@
 
                         <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
 
-                        <ui:repeat value="#{applicationBean.menuController.allCategoryList}" var="category">
+                        <ui:repeat value="#{applicationBean.categories}" var="category">
                             <b:dropMenu value="#{category.name}">
                                 <ui:repeat
-                                        value="#{applicationBean.menuController.getBranchesByCategoryId(category.categoryId)}"
+                                        value="#{category.branches}"
                                         var="branch">
                                     <b:navLink header="#{branch.branchName}" styleClass="menu-bar-header"></b:navLink>
                                     <ui:repeat
-                                            value="#{applicationBean.menuController.getBrandsByBranchId(branch.branchId)}"
-                                            var="brand">
-                                        <b:navCommandLink contentClass="dropdown_link" value="#{brand.name}"
-                                                          action="#{headerBean.redirectToProductPage(branch.branchId,brand.brandId)}"></b:navCommandLink>
+                                            value="#{branch.branchBrands}"
+                                            var="branchBrands">
+                                        <b:navCommandLink contentClass="dropdown_link" value="#{branchBrands.brand.name}"
+                                                          action="#{headerBean.redirectToProductPage(branchBrands)}"></b:navCommandLink>
                                     </ui:repeat>
                                 </ui:repeat>
                             </b:dropMenu>
@@ -98,7 +98,7 @@
 
         <!-- LoginModal -->
         <b:modal id="loginModal" title="ورود به کامت">
-            <ui:include src="../user/loginPage.xhtml"></ui:include>
+            <ui:include src="../../user/loginPage.xhtml"></ui:include>
         </b:modal>
 
     </ui:composition>

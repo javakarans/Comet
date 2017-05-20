@@ -1,12 +1,12 @@
 package ir.comet.bean;
 
-import ir.comet.controller.MenuController;
-import ir.comet.controller.ProductController;
+import ir.comet.database.CategoryDaoImp;
 import ir.comet.model.*;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,30 +16,24 @@ import java.util.List;
 @ApplicationScoped
 public class ApplicationBean {
 
-    String template="";
-    private MenuController menuController;
+    private List<Category> categories;
 
     @PostConstruct
     public void init(){
-        menuController=new MenuController();
+        categories=new ArrayList<>();
+        autoCreateMenu();
     }
 
-    public String loadTemplate(Customer customer){
-        if(customer==null){
-            template="/templates/CommonTemplate.xhtml";
-        }else {
-            template="/templates/UserTemplate.xhtml";
-        }
-        return template;
+    public void autoCreateMenu(){
+        CategoryDaoImp categoryDaoImp=new CategoryDaoImp();
+        categories = categoryDaoImp.getAllCategories();
     }
 
-
-    public MenuController getMenuController() {
-        return menuController;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setMenuController(MenuController menuController) {
-        this.menuController = menuController;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
-
 }

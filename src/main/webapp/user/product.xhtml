@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 
@@ -33,11 +33,11 @@
                         <b:panel collapsible="false" styleClass="contentPanel">
                             <div class="page-header">
                                 <b:iconAwesome name="th-large"></b:iconAwesome>
-                                <h:outputText value="#{productBean.branchDetailsWrapper.categoryName}" style="margin-right: 10px"></h:outputText>
+                                <h:outputText value="#{productBean.categoryName}" style="margin-right: 10px"></h:outputText>
                                 <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                                <h:outputText value="#{productBean.branchDetailsWrapper.branchName}" style="margin-right: 10px"></h:outputText>
+                                <h:outputText value="#{productBean.branchName}" style="margin-right: 10px"></h:outputText>
                                 <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                                <h:outputText value="#{productBean.branchDetailsWrapper.brandName}" style="margin-right: 10px"></h:outputText>
+                                <h:outputText value="#{productBean.brandName}" style="margin-right: 10px"></h:outputText>
                             </div>
                             <p:dataGrid id="product_datagrid" value="#{productBean.productList}" var="productItem"
                                         paginator="true" layout="grid" columns="3"
@@ -71,7 +71,7 @@
                                             <b:column colXs="12" style="margin-top:10px;">
                                                 <b:commandButton iconAwesome="cart-plus" look="success"
                                                                  size="xs" style="float:left;"
-                                                                 action="#{productBean.redirectToProductContent(productItem)}"></b:commandButton>
+                                                                 action="#{productBean.redirectToProductContent(productItem.productId)}"></b:commandButton>
                                             </b:column>
 
                                         </b:row>

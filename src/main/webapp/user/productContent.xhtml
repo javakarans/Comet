@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="#{applicationBean.loadTemplate(customer)}">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 
@@ -26,13 +26,13 @@
                     <b:column colSm="12">
                         <b:panel collapsible="false" styleClass="topPanel">
                             <b:iconAwesome name="th-large"></b:iconAwesome>
-                            <h:outputText value="لوازم الکترونیکی 1" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.categoryName}" style="margin-right: 10px"></h:outputText>
                             <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                            <h:outputText value="برند 1" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.branchName}" style="margin-right: 10px"></h:outputText>
                             <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                            <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.brandName}" style="margin-right: 10px"></h:outputText>
                             <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                            <h:outputText value="محصول 1" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.product.englishName}" style="margin-right: 10px"></h:outputText>
                         </b:panel>
                     </b:column>
 
@@ -110,8 +110,7 @@
                                             <b:row style="margin-top:50px;">
                                                 <b:column colSm="12">
                                                     <span style="font-size: 20px">قیمت برای شما : </span>
-                                                    <h:outputText value="#{productContentBean.productController
-                                                    .calProductPriceByDiscount(productContentBean.product.price
+                                                    <h:outputText value="#{productContentBean.calProductPriceByDiscount(productContentBean.product.price
                                                     ,productContentBean.product.discount)}"
                                                                   style="font-size: 20px">
                                                         <f:convertNumber pattern="#"></f:convertNumber>
@@ -121,7 +120,7 @@
                                             </b:row>
                                             <b:row style="margin-top:40px;">
                                                 <b:column colSm="12">
-                                                    <b:commandButton style="width:165px;" look="success" action="#{productContentBean.addProductToCart(productContentBean.product)}">
+                                                    <b:commandButton style="width:165px;" look="success" action="#{productContentBean.addProductToCart()}">
                                                         <b:iconAwesome name="cart-plus" size=""></b:iconAwesome>
                                                         <span style="margin-right: 10px">افزودن به سبد خرید</span>
                                                     </b:commandButton>
@@ -199,7 +198,7 @@
                                     </b:row>
                                     <div style="margin-top: 20px">
                                         <b:form>
-                                            <ui:repeat value="#{productContentBean.loadComments()}" var="userComment">
+                                            <ui:repeat value="#{productContentBean.product.comments}" var="userComment">
                                                 <b:row style="margin-top:20px;">
                                                     <b:column colSm="12">
                                                         <b:panel collapsible="false" styleClass="userComment-panel">
@@ -207,7 +206,7 @@
                                                                 <b:row>
                                                                     <b:column colSm="8">
                                                                         <h:outputText
-                                                                                value="#{userComment.customerName}"></h:outputText>
+                                                                                value="#{userComment.customer.firstName}"></h:outputText>
                                                                         <h5>#{userComment.createdDate}</h5>
                                                                     </b:column>
                                                                     <b:column colSm="4">
@@ -224,7 +223,7 @@
                                                                                     iconAwesome="thumbs-o-up"
                                                                                     look="success" size="xs"
                                                                                     update="@form"
-                                                                                    action="#{productContentBean.commentController.increaseLike(userComment.commentId)}">
+                                                                                    action="#{productContentBean.increaseLike(userComment.commentId)}">
                                                                             </b:commandButton>
 
                                                                             <b:commandButton
@@ -232,7 +231,7 @@
                                                                                     iconAwesome="thumbs-o-down"
                                                                                     look="danger" size="xs"
                                                                                     update="@form"
-                                                                                    action="#{productContentBean.commentController.increaseDisLike(userComment.commentId)}">
+                                                                                    action="#{productContentBean.increaseDisLike(userComment.commentId)}">
                                                                             </b:commandButton>
 
                                                                         </h:panelGrid>

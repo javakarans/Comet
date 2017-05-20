@@ -1,16 +1,14 @@
 package ir.comet.bean;
 
-import ir.comet.model.BranchDetails;
-import ir.comet.model.Customer;
-import ir.comet.model.Product;
-import ir.comet.wrapper.BranchDetailsWrapper;
-import ir.comet.wrapper.UserProductCart;
+
+import ir.comet.model.ProductOrderDetail;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,54 +18,72 @@ import java.util.List;
 @SessionScoped
 public class UserSessionBean {
 
-    private Customer customer;
-    private Product selectedProduct;
-    private BranchDetailsWrapper branchDetailsWrapper;
-    private List<UserProductCart> userProductCartList;
+    private long userSessionId;
+    private boolean userLogin;
+    private HashMap<String,Long> URLParameter;
+    private String currentURL;
+    private List<ProductOrderDetail> productOrderDetailList;
 
     @PostConstruct
     public void init(){
-        userProductCartList=new ArrayList<UserProductCart>();
+        URLParameter=new HashMap<>();
+        productOrderDetailList=new ArrayList<>();
     }
 
-//    public void loadCustomer(){
-//        customer=new Customer();
-//        this.customer= (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
-//    }
+    public String loadTemplate(){
+        if(userLogin){
+            return "/templates/user/userTemplate.xhtml";
+        }
+        return "/templates/common/commonTemplate.xhtml";
+    }
+
+    public void reloadProductOrderDetailList(){
+        productOrderDetailList.clear();
+        URLParameter.clear();
+        currentURL="";
+    }
 
     public void invalidUserSession(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public long getUserSessionId() {
+        return userSessionId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUserSessionId(long userSessionId) {
+        this.userSessionId = userSessionId;
     }
 
-    public Product getSelectedProduct() {
-        return selectedProduct;
+    public boolean isUserLogin() {
+        return userLogin;
     }
 
-    public void setSelectedProduct(Product selectedProduct) {
-        this.selectedProduct = selectedProduct;
+    public void setUserLogin(boolean userLogin) {
+        this.userLogin = userLogin;
     }
 
-    public BranchDetailsWrapper getBranchDetailsWrapper() {
-        return branchDetailsWrapper;
+    public HashMap<String, Long> getURLParameter() {
+        return URLParameter;
     }
 
-    public void setBranchDetailsWrapper(BranchDetailsWrapper branchDetailsWrapper) {
-        this.branchDetailsWrapper = branchDetailsWrapper;
+    public void setURLParameter(HashMap<String, Long> URLParameter) {
+        this.URLParameter = URLParameter;
     }
 
-    public List<UserProductCart> getUserProductCartList() {
-        return userProductCartList;
+    public List<ProductOrderDetail> getProductOrderDetailList() {
+        return productOrderDetailList;
     }
 
-    public void setUserProductCartList(List<UserProductCart> userProductCartList) {
-        this.userProductCartList = userProductCartList;
+    public void setProductOrderDetailList(List<ProductOrderDetail> productOrderDetailList) {
+        this.productOrderDetailList = productOrderDetailList;
+    }
+
+    public String getCurrentURL() {
+        return currentURL;
+    }
+
+    public void setCurrentURL(String currentURL) {
+        this.currentURL = currentURL;
     }
 }

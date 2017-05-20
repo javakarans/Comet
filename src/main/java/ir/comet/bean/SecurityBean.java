@@ -1,38 +1,30 @@
 package ir.comet.bean;
 
-import ir.comet.model.Customer;
-
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 
 /**
- * Created by Mohammad on 4/26/2017.
+ * Created by Mohammad on 5/15/2017.
  */
 @ManagedBean
-@ViewScoped
-public class UserPageBean {
+@RequestScoped
+public class SecurityBean {
 
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
+    private String loginURL="/user/user.xhtml";
 
-    public void checkUserLogin(){
-        if(userSessionBean.isUserLogin()){
-            String currentURL = userSessionBean.getCurrentURL();
+    public void checkLogIn(){
+        if(userSessionBean==null || !userSessionBean.isUserLogin()){
             try {
-                System.out.println(currentURL);
-                FacesContext.getCurrentInstance().getExternalContext().redirect(currentURL);
+                FacesContext.getCurrentInstance().getExternalContext().redirect(loginURL);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    public String redirectToRegisterPage(){
-        return "registerPage.xhtml?faces-redirect=true";
     }
 
     public UserSessionBean getUserSessionBean() {

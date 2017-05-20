@@ -8,19 +8,21 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table
-public class ProductCart implements Serializable {
-
-    private long productCartId;
-    private long productId;
-    private long orderId;
-    private int quantity;
-    private long totalPrice;
-    private long totalPriceAfterDiscountAndTax;
+public class ProductOrderDetail implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
+    private long productCartId;
+    private int quantity;
+    private long totalPrice;
+    private long totalPriceAfterDiscountAndTax;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "orderDetailId")
+    private OrderDetail orderDetail;
+
     public long getProductCartId() {
         return productCartId;
     }
@@ -29,7 +31,6 @@ public class ProductCart implements Serializable {
         this.productCartId = productCartId;
     }
 
-    @Column
     public int getQuantity() {
         return quantity;
     }
@@ -38,7 +39,6 @@ public class ProductCart implements Serializable {
         this.quantity = quantity;
     }
 
-    @Column
     public long getTotalPrice() {
         return totalPrice;
     }
@@ -47,7 +47,6 @@ public class ProductCart implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    @Column
     public long getTotalPriceAfterDiscountAndTax() {
         return totalPriceAfterDiscountAndTax;
     }
@@ -56,21 +55,19 @@ public class ProductCart implements Serializable {
         this.totalPriceAfterDiscountAndTax = totalPriceAfterDiscountAndTax;
     }
 
-    @Column
-    public long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    @Column
-    public long getOrderId() {
-        return orderId;
+    public OrderDetail getOrderDetail() {
+        return orderDetail;
     }
 
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
+    public void setOrderDetail(OrderDetail orderDetail) {
+        this.orderDetail = orderDetail;
     }
 }

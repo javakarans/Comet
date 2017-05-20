@@ -1,23 +1,29 @@
 package ir.comet.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by Mohammad on 2/27/2017.
  */
 @Entity
-@Table
 public class Category implements Serializable {
-
-    private long categoryId;
-    private String name;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
+    private long categoryId;
+    private String name;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "category")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Branch> branches=new ArrayList<>();
+
     public long getCategoryId() {
         return categoryId;
     }
@@ -26,7 +32,6 @@ public class Category implements Serializable {
         this.categoryId = categoryId;
     }
 
-    @Column
     public String getName() {
         return name;
     }
@@ -35,4 +40,11 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    public List<Branch> getBranches() {
+        return branches;
+    }
+
+    public void setBranches(List<Branch> branches) {
+        this.branches = branches;
+    }
 }

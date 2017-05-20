@@ -1,20 +1,15 @@
 package ir.comet.bean;
-
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import ir.comet.database.BranchDetailsDaoImp;
+import ir.comet.database.BranchBrandDaoImp;
 import ir.comet.database.ProductDaoImp;
-import ir.comet.model.BranchDetails;
+import ir.comet.model.BranchBrand;
 import ir.comet.model.Product;
-import ir.comet.wrapper.BranchDetailsWrapper;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.*;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mohammad on 3/31/2017.
@@ -24,24 +19,39 @@ import java.util.List;
 public class ProductBean implements Serializable{
 
     private List<Product> productList;
-    private BranchDetailsWrapper branchDetailsWrapper;
+    private String categoryName;
+    private String branchName;
+    private String brandName;
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
 
     @PostConstruct
-    public void init() {
-        branchDetailsWrapper=userSessionBean.getBranchDetailsWrapper();
+    public void init(){
+        productList=new ArrayList<>();
         loadProductList();
     }
 
-    public void loadProductList() {
-        ProductDaoImp productDaoImp=new ProductDaoImp();
-        this.productList=productDaoImp.getProductListBybranchDetailsId(branchDetailsWrapper.getBranchDetailsWrapperId());
+    public long getBranchBrandId(){
+        String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+        if(id!=null){
+            return Long.parseLong(id);
+        }
+        return userSessionBean.getURLParameter().get("branchBrandId");
     }
 
-    public String redirectToProductContent(Product product){
-        userSessionBean.setSelectedProduct(product);
-        return "/user/productContent.xhtml?faces-redirect=true";
+    public void loadProductList(){
+        BranchBrandDaoImp branchBrandDaoImp=new BranchBrandDaoImp();
+        BranchBrand branchBrand = branchBrandDaoImp.getBranchBrand(getBranchBrandId());
+        categoryName=branchBrand.getBranch().getCategory().getName();
+        branchName=branchBrand.getBranch().getBranchName();
+        brandName=branchBrand.getBrand().getName();
+        productList=branchBrand.getProducts();
+    }
+
+    public String redirectToProductContent(long productId){
+        userSessionBean.getURLParameter().put("productId",productId);
+        userSessionBean.setCurrentURL("/user/productContent.xhtml?"+"productId="+productId);
+        return "/user/productContent.xhtml?faces-redirect=true&"+"productId="+productId;
     }
 
     public List<Product> getProductList() {
@@ -52,12 +62,28 @@ public class ProductBean implements Serializable{
         this.productList = productList;
     }
 
-    public BranchDetailsWrapper getBranchDetailsWrapper() {
-        return branchDetailsWrapper;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setBranchDetailsWrapper(BranchDetailsWrapper branchDetailsWrapper) {
-        this.branchDetailsWrapper = branchDetailsWrapper;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
     public UserSessionBean getUserSessionBean() {

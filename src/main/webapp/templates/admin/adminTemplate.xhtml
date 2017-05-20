@@ -4,20 +4,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
  
 <h:head>
-    <title>User Template</title>
-    <link rel="stylesheet" href="../resources/lib/bootstrap-rtl.min.css"></link>
-    <link rel="stylesheet" href="../resources/css/userTemplate.css"></link>
+    <title>JSF 2.2 TUTORIALS</title>
+    <link rel="stylesheet" href="../../resources/lib/bootstrap-rtl.min.css"></link>
+    <link rel="stylesheet" href="../../resources/css/adminTemplate.css"></link>
 </h:head>
 
 <h:body>
 
     <div id="header">
         <ui:insert name="header">
-            <ui:include src="commonHeader.xhtml"/>
+            <ui:include src="adminHeader.xhtml"/>
         </ui:insert>
     </div>
 
@@ -27,7 +26,7 @@
 
     <div id="footer">
         <ui:insert name="footer">
-            <ui:include src="commonFooter.xhtml"/>
+            <ui:include src="../common/commonFooter.xhtml"/>
         </ui:insert>
     </div>
 

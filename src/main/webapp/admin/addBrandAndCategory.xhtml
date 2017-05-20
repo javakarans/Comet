@@ -38,7 +38,7 @@
                     </b:panelGrid>
                 </b:column>
                 <b:column colSm="3">
-                    <b:commandButton update=":branchDetails,@form" ajax="true" value="افزودن زیر دسته" actionListener="#{dtAddBrandAndCategory.addBranch}"/>
+                    <b:commandButton update=":branchBrand,@form" ajax="true" value="افزودن زیر دسته" actionListener="#{dtAddBrandAndCategory.addBranch}"/>
                 </b:column>
             </b:form>
         </b:row>
@@ -52,13 +52,13 @@
                     </b:panelGrid>
                 </b:column>
                 <b:column colSm="3">
-                    <b:commandButton update=":branchDetails,@form"  ajax="true" value="افزودن  برند" actionListener="#{dtAddBrandAndCategory.addBrand}"/>
+                    <b:commandButton update=":branchBrand,@form"  ajax="true" value="افزودن  برند" actionListener="#{dtAddBrandAndCategory.addBrand}"/>
                 </b:column>
             </b:form>
         </b:row>
 
         <b:row>
-            <b:form id="branchDetails">
+            <b:form id="branchBrand">
                 <b:column colSm="9">
                     <b:panelGrid colSpans="4,2,2,2,2" size="xs">
                         <h:outputText value="افزودن برندها در زیر  دسته ها"/>

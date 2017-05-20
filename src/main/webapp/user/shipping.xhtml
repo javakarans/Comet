@@ -14,7 +14,7 @@
 
 <h:body>
 
-    <ui:composition template="#{applicationBean.loadTemplate(userSessionBean.customer)}">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
         <ui:define name="content">
 
@@ -53,7 +53,7 @@
                                     <b:column colSm="12" style="margin-top:10px;">
                                         <b:dataTable searching="false" paginated="false"
                                                      styleClass="order_datatable"
-                                                     value="#{userSessionBean.customer}" var="customer">
+                                                     value="#{shippingBean.customer}" var="customer">
 
                                             <b:dataTableColumn label="" orderable="false"
                                                                style="width:2%;" styleClass="column_content">
@@ -66,7 +66,7 @@
 
                                             <b:dataTableColumn label="شماره تلفن همراه" orderable="false"
                                                                style="width:10%;" styleClass="column_content">
-                                                <h:outputText value="#{customer.phoneNumber}"></h:outputText>
+                                                <h:outputText value="#{customer.mobileNumber}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="شماره تلفن ثابت" orderable="false"
@@ -83,12 +83,12 @@
 
                                             <b:dataTableColumn label="شهر" orderable="false"
                                                                style="width:7%;" styleClass="column_content">
-
+                                                <h:outputText value="#{customer.city}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="استان" orderable="false"
                                                                style="width:7%;" styleClass="column_content">
-
+                                                <h:outputText value="#{customer.state}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="خریدار" orderable="false"
@@ -111,7 +111,7 @@
                                             <table class="payment_table">
                                                 <tr>
                                                     <th style="width: 5px;">
-                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="ByCreditCard"
+                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="#{shippingBean.byCreditCard}"
                                                                        style="margin:auto;"/>
                                                     </th>
                                                     <th style="text-align: right">
@@ -122,7 +122,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>
-                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="ByCash"
+                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="#{shippingBean.byCash}"
                                                                        style="margin:auto;"/>
                                                     </th>
                                                     <th style="text-align: right">
