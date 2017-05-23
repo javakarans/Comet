@@ -6,9 +6,9 @@ import ir.comet.model.Article;
 import java.util.List;
 
 public interface ArticleDao {
-    public void createArticle(Article article);
-    public ArticleDao getArticle(long articleId);
+    public boolean createArticle(Article article);
+    public Article getArticle(long articleId);
     public List<Article> getAllArticles();
-    public void updateArticle(Article article);
-    public void deleteArticle(Article article);
+    public boolean updateArticle(Article article);
+    public boolean deleteArticle(Article article);
 }

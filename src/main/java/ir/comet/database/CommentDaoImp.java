@@ -1,5 +1,6 @@
 package ir.comet.database;
 
+import ir.comet.model.Article;
 import ir.comet.model.Comment;
 
 import java.util.List;

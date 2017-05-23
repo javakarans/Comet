@@ -12,6 +12,7 @@ public class SlideShow implements Serializable {
     private long slideId;
     private String slideText;
     private String slideTitle;
+    private String imageLocation;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class SlideShow implements Serializable {
         this.slideId = slideId;
     }
 
+    @Column
     @Type(type = "text")
     public String getSlideText() {
         return slideText;
@@ -38,7 +40,17 @@ public class SlideShow implements Serializable {
         return slideTitle;
     }
 
-    public void setSlideTitle(String slideTitile) {
-        this.slideTitle = slideTitile;
+    public void setSlideTitle(String slideTitle) {
+        this.slideTitle = slideTitle;
+    }
+
+    @Column
+    @Type(type = "text")
+    public String getImageLocation() {
+        return imageLocation;
+    }
+
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 }

@@ -4,9 +4,118 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
 
-</ui:composition>
+<h:body>
+    <ui:composition template="../templates/admin/adminTemplate.xhtml">
+        <ui:define name="content">
+            <link href="../resources/lib/summernote-0.8.3/summernote.css" rel="stylesheet"/>
+            <script type="text/javascript" src="../resources/lib/summernote-0.8.3/summernote.js"></script>
+            <b:container>
+                <b:growl id="messages" showDetail="false"/>
+                <b:row>
+                    <b:column colSm="12">
+                        <b:panel title="افزودن مقاله" collapsible="false">
+                            <h:form enctype="multipart/form-data">
+                                <b:panelGrid colSpans="3,9">
+                                    <h:outputText value="موضوع"/>
+                                    <b:inputText required="true" requiredMessage="لطفا موضوع رو وارد کنید" value="#{addArticleBean.article.subject}"/>
+                                    <h:outputText value="نویسنده"/>
+                                    <b:inputText rendered="true" requiredMessage="لطفا نام نویسنده را وارد کنید" value="#{addArticleBean.article.author}"/>
+                                    <h:outputText value="منبع"/>
+                                    <b:inputText value="#{addArticleBean.article.reference}"/>
+                                    <h:outputText value="محتوا"/>
+                                    <b:inputTextarea required="true" requiredMessage="لطفا محتوا را وارد کنید" id="summernote" styleClass="summernote" value="#{addArticleBean.article.content}"/>
+                                    <script type="text/javascript">
+                                        $(document).ready(function () {
+                                            $('.summernote').summernote();
+                                        });
+                                    </script>
+                                </b:panelGrid>
+                                <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
+                                    <h:outputText value="عکس"/>
+                                    <p:fileUpload required="true" requiredMessage="عکس را آپلود کنید" style="width: auto"
+                                                  fileUploadListener="#{addArticleBean.processFileUploadEdit}" mode="advanced"
+                                                  dragDropSupport="false"
+                                                  sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                </b:panelGrid>
+                                <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                    <b:commandButton value="ذخیره" update="list" actionListener="#{addArticleBean.saveArticle}"/>
+                                </b:panelGrid>
+                            </h:form>
+                        </b:panel>
+                    </b:column>
+                </b:row>
+
+                <b:row id="list">
+                    <b:column colSm="12">
+                        <b:panel title="لیست مقاله ها" collapsible="false">
+                            <b:form id="articleTable">
+                                <b:dataTable class="editableCarTable1" value="#{addArticleBean.articleList}" var="article">
+                                    <b:dataTableColumn value="#{article.subject}"/>
+                                    <b:dataTableColumn label="remove" style="text-align:center;">
+                                        <b:commandButton value="حذف" icon="remove"
+                                                         actionListener="#{addArticleBean.removeArticle(article)}" update="@form"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="update" style="text-align:center;">
+                                        <b:commandButton ajax="true" value="وبرایش" icon="update"
+                                                         action="#{addArticleBean.showArticleEditModal(article)}"/>
+                                    </b:dataTableColumn>
+                                </b:dataTable>
+                            </b:form>
+                        </b:panel>
+                    </b:column>
+                </b:row>
+
+
+                <b:modal id="updateArticle" title="وبرایش" closable="false">
+                    <b:row>
+                        <b:column colSm="12">
+                                <h:form enctype="multipart/form-data">
+                                    <b:panelGrid colSpans="3,9">
+                                        <h:outputText value="Subject :"/>
+                                        <b:inputText value="#{addArticleBean.article.subject}"/>
+                                        <h:outputText value="author"/>
+                                        <b:inputText value="#{addArticleBean.article.author}"/>
+                                        <h:outputText value="reference"/>
+                                        <b:inputText value="#{addArticleBean.article.reference}"/>
+                                        <h:outputText value="content"/>
+                                        <b:inputTextarea id="summernote" styleClass="summernote" value="#{addArticleBean.article.content}"/>
+                                        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                $('.summernote').summernote();
+                                            });
+                                        </script>
+                                    </b:panelGrid>
+                                    <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
+                                        <h:outputText value="Image :"/>
+                                        <p:fileUpload style="width: auto"
+                                                      fileUploadListener="#{addArticleBean.processFileUploadEdit}" mode="advanced"
+                                                      dragDropSupport="false"
+                                                      sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                                    </b:panelGrid>
+                                    <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                        <b:commandButton value="Save" actionListener="#{addArticleBean.saveArticle}"/>
+                                    </b:panelGrid>
+
+                                <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                    <b:commandButton value="Update" action="#{addArticleBean.editArticle()}"/>
+                                </b:panelGrid>
+                                </h:form>
+                        </b:column>
+                    </b:row>
+                </b:modal>
+
+            </b:container>
+        </ui:define>
+
+    </ui:composition>
+</h:body>
+
 </html>

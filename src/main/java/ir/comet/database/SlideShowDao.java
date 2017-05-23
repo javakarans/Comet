@@ -7,9 +7,9 @@ import ir.comet.model.SlideShow;
 import java.util.List;
 
 public interface SlideShowDao {
-    public int createSlideShow(SlideShow slideShow);
+    public boolean createSlideShow(SlideShow slideShow);
     public SlideShow getSlideShow(long slideShowId);
     public List<SlideShow> getAllSlideShow();
-    public int updateSlideShow(SlideShow slideShow);
-    public int deleteSlideShow(SlideShow slideShow);
+    public boolean updateSlideShow(SlideShow slideShow);
+    public boolean deleteSlideShow(SlideShow slideShow);
 }
