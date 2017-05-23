@@ -30,13 +30,20 @@
                             <f:facet name="heading">
                                 <span>تازه ترین خبر ها</span>
                             </f:facet>
-                            <h:panelGrid columns="1">
-                                <p:repeat value="#{cometBean.articleList}" var="article" size="6">
-                                    <b:image value="#{article.imageUrl}" styleClass="image">
-                                        <span style="margin-right: 20px">#{article.subject}</span>
-                                    </b:image>
-                                    <br></br>
-                                </p:repeat>
+                            <h:panelGrid columns="2" styleClass="article-panel">
+                                <h:form>
+                                    <ui:repeat value="#{cometBean.articleList}" var="article">
+                                        <h:commandLink style="text-decoration: none;color: #252525" action="#{cometBean.redirectToArticlePage(article)}">
+                                            <div style="display: table-row">
+                                                <b:image value="#{article.imageUrl}" styleClass="image" style="float:right;">
+                                                </b:image>
+                                                <div class="article-text">
+                                                    #{article.subject}
+                                                </div>
+                                            </div>
+                                        </h:commandLink>
+                                    </ui:repeat>
+                                </h:form>
                             </h:panelGrid>
                         </b:panel>
                     </b:column>
@@ -44,18 +51,12 @@
                         <!-- SlidePanel -->
                         <b:panel styleClass="slidePanel">
                                 <b:carousel id="parque">
-                                    <!-- Slide1 -->
-                                    <b:carouselItem>
-                                        <img src="resources/images/slide1.jpg" alt="Valladolid" style="width: 850px;height: 300px"/>
-                                    </b:carouselItem>
-                                    <!-- Slide2 -->
-                                    <b:carouselItem>
-                                        <img src="resources/images/slide2.gif" alt="Valladolid" style="width: 850px;height: 300px"/>
-                                    </b:carouselItem>
-                                    <!-- Slide3 -->
-                                    <b:carouselItem>
-                                        <img src="resources/images/slide3.jpg" alt="Valladolid" style="width: 850px;height: 300px"/>
-                                    </b:carouselItem>
+                                    <ui:repeat value="#{cometBean.allSlideShow}" var="slideShow">
+                                        <!-- Slide1 -->
+                                        <b:carouselItem>
+                                            <img src="#{slideShow.imageLocation}" alt="Valladolid" style="width: 850px;height: 300px"/>
+                                        </b:carouselItem>
+                                    </ui:repeat>
                                 </b:carousel>
                         </b:panel>
                         <!-- MostSellingPanel -->

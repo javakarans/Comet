@@ -14,7 +14,7 @@
 
 <h:body >
 
-    <ui:composition template="../templates/UserTemplate.xhtml">
+    <ui:composition template="#{userSessionBean.loadTemplate()}">
 
 
 
@@ -26,12 +26,12 @@
                 <b:panel style="margin-top:-15px;" id="content_panel">
                     <div class="page-header" style="text-align: center;margin-top: -10px">
                         <h3 style="font-family: YJ, NYJ;text-align: right">
-                            <h:outputText value="موضوع"></h:outputText>
+                            <h:outputText value="#{productArticleBean.article.subject}"></h:outputText>
                         </h3>
                         <h5 style="font-family: YJ, NYJ;" class="post_info">
                             <h:panelGrid columns="2" columnClasses="pACol1,pACol2">
-                                <h:outputText value="نویسنده:"></h:outputText>
-                                <h:outputText value="تاریخ"></h:outputText>
+                                <h:outputText value="نویسنده: #{productArticleBean.article.author}"></h:outputText>
+                                <h:outputText value="#{productArticleBean.article.date}"></h:outputText>
                             </h:panelGrid>
                         </h5>
                     </div>
@@ -39,26 +39,25 @@
 
                         <b:row>
                             <b:column colSm="12">
-                                <h:outputText value="متن و عکس"></h:outputText>
-                                <br></br>
-                                <h:outputText value="متن و عکس"></h:outputText>
-                                <br></br>
-                                <h:outputText value="متن و عکس"></h:outputText>
-                                <br></br>
-                                <h:outputText value="متن و عکس"></h:outputText>
-                                <br></br>
-                                <h:outputText value="متن و عکس"></h:outputText>
-                                <br></br>
-                                <h:outputText value="متن و عکس"></h:outputText>
-                                <br></br>
-                                <h:outputText value="متن و عکس"></h:outputText>
-                                <br></br>
-                                <h:outputText value="متن و عکس"></h:outputText>
+                                <b:row>
+                                    <b:column colMd="12" colXs="12" style="text-align: justify">
+                                        <b:image value="#{productArticleBean.article.imageUrl}" alt="" colXs="12" colMd="6" colSm="6"></b:image>
+                                        <h:outputText value="#{productArticleBean.showArticleContent()}"></h:outputText>
+                                    </b:column>
+                                </b:row>
+                                <b:row style="margin-top:20px;text-align:justify;">
+                                    <b:column colXs="12">
+
+                                    </b:column>
+                                </b:row>
+                                <b:row style="margin-top:20px;">
+                                    <b:column style="color:#428bca;">
+                                        <h:outputText value="منبع : #{productArticleBean.article.reference}"></h:outputText>
+                                    </b:column>
+                                </b:row>
                             </b:column>
                         </b:row>
-
                     </div>
-
                     <f:facet name="footer">
                         <b:socialShare shares="telegram,googleplus"
                                        showLabel="false" show-count="false"

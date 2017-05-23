@@ -1,5 +1,6 @@
 package ir.comet.bean;
 
+import ir.comet.Utilities.SolarCalendar;
 import ir.comet.database.ArticleDaoImp;
 import ir.comet.database.SQLService;
 import ir.comet.model.Article;
@@ -33,6 +34,7 @@ public class AddArticleBean{
     private UploadedFile uploadedFile;
     private static String image_location = StaticSettings.imageUrl;
     private String filename;
+    private SolarCalendar solarCalendar;
 
     @PostConstruct
     public void init()
@@ -40,6 +42,7 @@ public class AddArticleBean{
         uniqueID = UUID.randomUUID().toString();
         articleDaoImp = new ArticleDaoImp();
         article = new Article();
+        solarCalendar=new SolarCalendar();
         articleList = articleDaoImp.getAllArticles();
     }
 
@@ -64,7 +67,7 @@ public class AddArticleBean{
     public void saveArticle()
     {
         article.setImageUrl(filename);
-        article.setDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()).toString());
+        article.setDate(solarCalendar.getCurrentShamsidate());
         boolean result = articleDaoImp.createArticle(article);
         if (result) {
 
