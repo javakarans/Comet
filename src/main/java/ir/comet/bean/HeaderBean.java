@@ -23,7 +23,7 @@ public class HeaderBean {
 
     @PostConstruct
     public void init(){
-        loadUserData();
+//        loadUserData();
     }
 
     public void loadUserData(){

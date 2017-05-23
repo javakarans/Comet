@@ -32,6 +32,15 @@ public class CustomerDaoImp implements CustomerDao {
         return null;
     }
 
+    public Customer getCustomerByUsername(String userName){
+        List customer = sqlService.getObjectsBySpecialColumn
+                (new Customer(), "userName", userName);
+        if(!customer.isEmpty()){
+            return (Customer) customer.get(0);
+        }
+        return null;
+    }
+
     public List<Customer> getAllCustomers() {
         return sqlService.getAllObjects(new Customer());
     }

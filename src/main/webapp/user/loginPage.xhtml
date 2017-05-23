@@ -25,13 +25,13 @@
                     <h:panelGrid columns="2" columnClasses="lgCol1,lgCol2">
                         <h:outputText value="پست الکترونیک"></h:outputText>
                         <b:inputText id="email-input" style="margin-top:12px;" value="#{loginBean.userName}"
-                                     required="true" requiredMessage="*پست الکترونیکی خود را وارد کنید"></b:inputText>
+                                     required="true" requiredMessage="*پست الکترونیکی خود را وارد کنید" placeholder="email"></b:inputText>
                         <b:column></b:column>
                         <h:message for="email-input" styleClass="message"></h:message>
 
                         <h:outputText value="کلمه عبور"></h:outputText>
-                        <b:inputText id="pass-input" style="margin-top:12px;" value="#{loginBean.password}"
-                                     required="true" requiredMessage="*کلمه عبور خود را وارد کنید"></b:inputText>
+                        <b:inputSecret id="pass-input" style="margin-top:12px;" value="#{loginBean.password}"
+                                     required="true" requiredMessage="*کلمه عبور خود را وارد کنید" placeholder="password" binding="#{loginBean.component}"></b:inputSecret>
                         <b:column></b:column>
                         <h:message for="pass-input" styleClass="message"></h:message>
 
@@ -46,7 +46,7 @@
 
                         <b:column></b:column>
                         <b:commandButton value="ورود به کامت" style="margin-top:12px;"
-                                         look="info" action="#{loginBean.userLogin()}"></b:commandButton>
+                                         look="info" action="#{loginBean.userLogin()}" update="@form"></b:commandButton>
                     </h:panelGrid>
                 </h:form>
             </b:container>

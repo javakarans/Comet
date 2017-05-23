@@ -85,11 +85,10 @@
                                                 <h:outputText value="ایمیل"></h:outputText>
                                                 <b:inputText id="email" span="8" value="#{registerBean.customer.email}"
                                                              required="true" requiredMessage="*ایمیل خود را وارد کنید"
-                                                             type="email"></b:inputText>
+                                                             type="email" binding="#{registerBean.component}"></b:inputText>
                                                 <b:column></b:column>
                                                 <b:column span="8" styleClass="message">
                                                     <h:message for="email"></h:message>
-                                                    <h:outputText value=""></h:outputText>
                                                 </b:column>
 
                                                 <h:outputText value="کلمه عبور"></h:outputText>

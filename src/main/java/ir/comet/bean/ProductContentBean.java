@@ -1,16 +1,21 @@
 package ir.comet.bean;
 
+import ir.comet.Utilities.SolarCalendar;
 import ir.comet.database.CommentDaoImp;
+import ir.comet.database.CustomerDaoImp;
 import ir.comet.database.ProductDaoImp;
 import ir.comet.model.Comment;
+import ir.comet.model.Customer;
 import ir.comet.model.Product;
 import ir.comet.model.ProductOrderDetail;
+import org.jsoup.Jsoup;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.util.Collections;
 
 /**
  * Created by Mohammad on 4/23/2017.
@@ -27,6 +32,7 @@ public class ProductContentBean {
     private UserSessionBean userSessionBean;
     private CommentDaoImp commentDaoImp;
     private long productId;
+    private String commentText;
 
     @PostConstruct
     public void init(){
@@ -46,6 +52,7 @@ public class ProductContentBean {
     public void loadProduct(){
         ProductDaoImp productDaoImp=new ProductDaoImp();
         product=productDaoImp.getProduct(getProductId());
+        Collections.reverse(product.getComments());
         categoryName=product.getBranchBrand().getBranch().getCategory().getName();
         branchName=product.getBranchBrand().getBranch().getBranchName();
         brandName=product.getBranchBrand().getBrand().getName();
@@ -81,9 +88,34 @@ public class ProductContentBean {
         reloadProductList();
     }
 
+    public void createComment(){
+        CustomerDaoImp customerDaoImp=new CustomerDaoImp();
+        Customer customer = customerDaoImp.getCustomer(userSessionBean.getUserSessionId());
+        Comment comment=new Comment();
+        comment.setCustomer(customer);
+        comment.setProduct(product);
+        comment.setText(commentText);
+        SolarCalendar solarCalendar=new SolarCalendar();
+        String date=solarCalendar.getDate()+" "+solarCalendar.strMonth+" "+solarCalendar.getYear();
+        comment.setCreatedDate(date);
+        comment.setLikeCount(0);
+        comment.setDisLikeCount(0);
+        commentDaoImp.createComment(comment);
+        refreshComments();
+    }
+
+    public String showCommentText(String text){
+        return Jsoup.parse(text).text();
+    }
+
     public void reloadProductList(){
         ProductDaoImp productDaoImp=new ProductDaoImp();
         product=productDaoImp.getProduct(this.productId);
+    }
+
+    private void refreshComments(){
+        commentText="";
+        loadProduct();
     }
 
     public Product getProduct() {
@@ -124,6 +156,14 @@ public class ProductContentBean {
 
     public void setUserSessionBean(UserSessionBean userSessionBean) {
         this.userSessionBean = userSessionBean;
+    }
+
+    public String getCommentText() {
+        return commentText;
+    }
+
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 }
 

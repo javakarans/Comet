@@ -48,6 +48,14 @@ public class ProductBean implements Serializable{
         productList=branchBrand.getProducts();
     }
 
+    public long calPriceByDiscount(Product product){
+        return (product.getPrice()-product.getDiscount());
+    }
+
+    public boolean productListIsEmpty(){
+        return productList.isEmpty();
+    }
+
     public String redirectToProductContent(long productId){
         userSessionBean.getURLParameter().put("productId",productId);
         userSessionBean.setCurrentURL("/user/productContent.xhtml?"+"productId="+productId);

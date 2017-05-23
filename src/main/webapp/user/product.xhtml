@@ -39,10 +39,15 @@
                                 <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
                                 <h:outputText value="#{productBean.brandName}" style="margin-right: 10px"></h:outputText>
                             </div>
+                            <b:row>
+                                <b:column colSm="12" rendered="#{productBean.productListIsEmpty()}">
+                                    <p style="text-align: center">هیچ محصولی موجود یافت نشد!</p>
+                                </b:column>
+                            </b:row>
                             <p:dataGrid id="product_datagrid" value="#{productBean.productList}" var="productItem"
                                         paginator="true" layout="grid" columns="3"
                                         paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
-                                        rowsPerPageTemplate="6,12,16" rendered="true">
+                                        rowsPerPageTemplate="6,12,16" rendered="#{!productBean.productListIsEmpty()}">
 
                                 <b:thumbnail styleClass="product-panel">
                                     <b:form>
@@ -57,10 +62,13 @@
                                             </b:column>
 
                                             <b:column colXs="12" style="margin-top:15px;">
-                                                <h:outputText value="بدون تخفیف"
-                                                              style="font-size: 15px;color: rgba(139,0,0,0.82)"></h:outputText>
-                                                <br></br>
-                                                <h:outputText value="#{productItem.price} تومان"
+                                                <b:row rendered="#{productItem.discount ne 0}">
+                                                    <b:column colXs="12">
+                                                        <h:outputText value="#{productItem.price}تومان"
+                                                                      style="font-size: 15px;color: rgba(139,0,0,0.82);text-decoration: line-through;"></h:outputText>
+                                                    </b:column>
+                                                </b:row>
+                                                <h:outputText value="#{productBean.calPriceByDiscount(productItem)} تومان"
                                                               style="font-size: 19px;color: rgba(44, 143, 12, 0.67)"></h:outputText>
                                             </b:column>
 

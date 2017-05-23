@@ -19,6 +19,8 @@
         <ui:define name="content">
 
             <link rel="stylesheet" href="../resources/css/productContent.css"></link>
+            <link href="../resources/lib/summernote-0.8.3/summernote.css" rel="stylesheet"/>
+            <script type="text/javascript" src="../resources/lib/summernote-0.8.3/summernote.js"></script>
 
             <b:container style="margin-top:-8px;">
 
@@ -26,13 +28,17 @@
                     <b:column colSm="12">
                         <b:panel collapsible="false" styleClass="topPanel">
                             <b:iconAwesome name="th-large"></b:iconAwesome>
-                            <h:outputText value="#{productContentBean.categoryName}" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.categoryName}"
+                                          style="margin-right: 10px"></h:outputText>
                             <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                            <h:outputText value="#{productContentBean.branchName}" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.branchName}"
+                                          style="margin-right: 10px"></h:outputText>
                             <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                            <h:outputText value="#{productContentBean.brandName}" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.brandName}"
+                                          style="margin-right: 10px"></h:outputText>
                             <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                            <h:outputText value="#{productContentBean.product.englishName}" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="#{productContentBean.product.englishName}"
+                                          style="margin-right: 10px"></h:outputText>
                         </b:panel>
                     </b:column>
 
@@ -102,8 +108,7 @@
                                                         <f:convertNumber pattern="#"></f:convertNumber>
                                                     </h:outputText>
                                                     <b:label severity="danger"
-                                                             text="تخفیف : #{productContentBean.product.discount}">
-                                                        <!--<f:convertNumber pattern="#"></f:convertNumber>-->
+                                                             text="تخفیف : #{productContentBean.product.discount}تومان">
                                                     </b:label>
                                                 </b:column>
                                             </b:row>
@@ -120,7 +125,8 @@
                                             </b:row>
                                             <b:row style="margin-top:40px;">
                                                 <b:column colSm="12">
-                                                    <b:commandButton style="width:165px;" look="success" action="#{productContentBean.addProductToCart()}">
+                                                    <b:commandButton style="width:165px;" look="success"
+                                                                     action="#{productContentBean.addProductToCart()}">
                                                         <b:iconAwesome name="cart-plus" size=""></b:iconAwesome>
                                                         <span style="margin-right: 10px">افزودن به سبد خرید</span>
                                                     </b:commandButton>
@@ -142,8 +148,11 @@
 
                                 <b:tab title="معرفی و بررسی محصول">
                                     <f:facet name="anchor"><b:iconAwesome name="pencil-square-o"/></f:facet>
-                                    <div style="margin-top: 30px">
-                                        <h:outputText value="#{productContentBean.product.description}"></h:outputText>
+                                    <div style="margin-top: 30px;text-align: justify">
+                                        <h:outputText value="#{productContentBean.product.name}"
+                                                      style="display: block;padding-bottom: 20px;color: darkgray"></h:outputText>
+                                        <h:outputText value="#{productContentBean.product.description}"
+                                                      style="line-height: 35px;"></h:outputText>
                                     </div>
                                 </b:tab>
 
@@ -182,22 +191,34 @@
 
                                 <b:tab title="نظرات کاربران">
                                     <f:facet name="anchor"><b:iconAwesome name="comments-o"/></f:facet>
-                                    <b:row style="margin-top: 30px" rendered="false">
+                                    <b:row style="margin-top: 30px" rendered="#{!userSessionBean.userLogin}">
                                         <b:column colSm="12">
                                             <span>برای ثبت نظر جدید ابتدا وارد کامت شوید!</span>
                                         </b:column>
                                     </b:row>
-                                    <b:row style="margin-top: 20px" rendered="true">
-                                        <b:column colSm="12">
-                                            <button id="btrigger" class="btn btn-info btn-md"
-                                                    onclick="PF('dlg2').show();">
-                                                <b:iconAwesome name="edit"></b:iconAwesome>
-                                                <span>ثبت نظر</span>
-                                            </button>
-                                        </b:column>
+                                    <b:row style="margin-top: 20px" rendered="#{userSessionBean.userLogin}">
+                                        <h:form>
+                                            <b:column colSm="12">
+
+                                                <h:commandLink styleClass="btn btn-info btn-md"
+                                                               actionListener="#{productContentBean.createComment()}">
+                                                    <b:iconAwesome name="edit"></b:iconAwesome>
+                                                    <span>ثبت نظر</span>
+                                                    <f:ajax execute="@form" render="form1"></f:ajax>
+                                                </h:commandLink>
+                                            </b:column>
+                                            <b:column colSm="12" style="margin-top:10px;">
+                                                <b:inputTextarea id="summernote" styleClass="summernote" value="#{productContentBean.commentText}"></b:inputTextarea>
+                                                <script type="text/javascript">
+                                                    $(document).ready(function () {
+                                                        $('.summernote').summernote();
+                                                    });
+                                                </script>
+                                            </b:column>
+                                        </h:form>
                                     </b:row>
                                     <div style="margin-top: 20px">
-                                        <b:form>
+                                        <b:form id="form1">
                                             <ui:repeat value="#{productContentBean.product.comments}" var="userComment">
                                                 <b:row style="margin-top:20px;">
                                                     <b:column colSm="12">
@@ -207,7 +228,7 @@
                                                                     <b:column colSm="8">
                                                                         <h:outputText
                                                                                 value="#{userComment.customer.firstName}"></h:outputText>
-                                                                        <h5>#{userComment.createdDate}</h5>
+                                                                        <h5 style="direction: rtl">#{userComment.createdDate}</h5>
                                                                     </b:column>
                                                                     <b:column colSm="4">
 
@@ -241,7 +262,7 @@
                                                             </f:facet>
                                                             <div>
                                                                 <h:outputText
-                                                                        value="#{userComment.text}"></h:outputText>
+                                                                        value="#{productContentBean.showCommentText(userComment.text)}"></h:outputText>
                                                             </div>
                                                         </b:panel>
                                                     </b:column>

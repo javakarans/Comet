@@ -26,14 +26,17 @@ public class LoginBean {
     private String password;
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
+    private UIComponent component;
 
     public void userLogin(){
         CustomerDaoImp customerDaoImp=new CustomerDaoImp();
         Customer customer = customerDaoImp.getCustomerByUserNameAndPass(userName, password);
-        System.out.println(customer.getCustomerId());
         if (customer!=null){
             userSessionBean.setUserSessionId(customer.getCustomerId());
             userSessionBean.setUserLogin(true);
+        }else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(component.getClientId(), new FacesMessage("*نام کاربری یا کلمه عبور اشتباه است"));
         }
     }
 
@@ -59,5 +62,13 @@ public class LoginBean {
 
     public void setUserSessionBean(UserSessionBean userSessionBean) {
         this.userSessionBean = userSessionBean;
+    }
+
+    public UIComponent getComponent() {
+        return component;
+    }
+
+    public void setComponent(UIComponent component) {
+        this.component = component;
     }
 }
