@@ -1,5 +1,7 @@
 package ir.comet.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.PrintStream;
 import java.io.Serializable;
@@ -13,6 +15,7 @@ public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
+    @Type(type = "text")
     private String text;
     private String createdDate;
     private int likeCount;

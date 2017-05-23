@@ -31,19 +31,13 @@
                                 <span>تازه ترین خبر ها</span>
                             </f:facet>
                             <h:panelGrid columns="1">
-                                <b:image value="resources/images/slide1.jpg" styleClass="image">
-                                    <span style="margin-right: 20px">خبر شماره 1</span>
-                                </b:image>
-                                <br></br>
-                                <b:image value="resources/images/slide2.gif" styleClass="image">
-                                    <span style="margin-right: 20px">خبر شماره 2</span>
-                                </b:image>
-                                <br></br>
-                                <b:image value="resources/images/slide3.jpg" styleClass="image">
-                                    <span style="margin-right: 20px">خبر شماره 3</span>
-                                </b:image>
+                                <p:repeat value="#{cometBean.articleList}" var="article" size="6">
+                                    <b:image value="#{article.imageUrl}" styleClass="image">
+                                        <span style="margin-right: 20px">#{article.subject}</span>
+                                    </b:image>
+                                    <br></br>
+                                </p:repeat>
                             </h:panelGrid>
-
                         </b:panel>
                     </b:column>
                     <b:column colSm="9">

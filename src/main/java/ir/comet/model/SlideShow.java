@@ -9,14 +9,17 @@ import java.io.Serializable;
 @Entity
 @Table
 public class SlideShow implements Serializable {
-    private long slideId;
-    private String slideText;
-    private String slideTitle;
-    private String imageLocation;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true,nullable = false)
+    private long slideId;
+    @Type(type = "text")
+    private String slideText;
+    @Type(type = "text")
+    private String slideTitle;
+    @Type(type = "text")
+    private String imageLocation;
+
     public long getSlideId() {
         return slideId;
     }
@@ -25,8 +28,6 @@ public class SlideShow implements Serializable {
         this.slideId = slideId;
     }
 
-    @Column
-    @Type(type = "text")
     public String getSlideText() {
         return slideText;
     }
@@ -35,7 +36,6 @@ public class SlideShow implements Serializable {
         this.slideText = slideText;
     }
 
-    @Column
     public String getSlideTitle() {
         return slideTitle;
     }
@@ -44,8 +44,6 @@ public class SlideShow implements Serializable {
         this.slideTitle = slideTitle;
     }
 
-    @Column
-    @Type(type = "text")
     public String getImageLocation() {
         return imageLocation;
     }

@@ -16,13 +16,14 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long articleId;
     private String subject;
+    @Type(type = "text")
     private String content;
+    @Type(type = "text")
     private String imageUrl;
     private String author;
     private String reference;
     private String date;
 
-    @Column
     public long getArticleId() {
         return articleId;
     }
@@ -31,8 +32,6 @@ public class Article implements Serializable {
         this.articleId = articleId;
     }
 
-    @Column
-    @Type(type = "text")
     public String getSubject() {
         return subject;
     }
@@ -41,8 +40,6 @@ public class Article implements Serializable {
         this.subject = subject;
     }
 
-    @Column
-    @Type(type = "text")
     public String getContent() {
         return content;
     }
@@ -51,8 +48,6 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    @Column
-    @Type(type = "text")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -61,8 +56,6 @@ public class Article implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    @Column
-    @Type(type = "text")
     public String getAuthor() {
         return author;
     }
@@ -71,8 +64,6 @@ public class Article implements Serializable {
         this.author = author;
     }
 
-    @Column
-    @Type(type = "text")
     public String getReference() {
         return reference;
     }
@@ -81,8 +72,6 @@ public class Article implements Serializable {
         this.reference = reference;
     }
 
-    @Column
-    @Type(type = "text")
     public String getDate() {
         return date;
     }
