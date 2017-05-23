@@ -27,12 +27,25 @@ public class ShippingBean{
 
     @PostConstruct
     public void init(){
+        checkAuthority();
         loadCustomer();
     }
 
     public void loadCustomer(){
         CustomerDaoImp customerDaoImp=new CustomerDaoImp();
         customer=customerDaoImp.getCustomer(userSessionBean.getUserSessionId());
+    }
+
+    public boolean checkAuthority(){
+        boolean listIsEmpty=userSessionBean.getProductOrderDetailList().isEmpty();
+        if(listIsEmpty){
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/user/cart.xhtml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 
     public String redirectToReviewPage(){
@@ -78,4 +91,5 @@ public class ShippingBean{
     public void setByCash(String byCash) {
         this.byCash = byCash;
     }
+
 }

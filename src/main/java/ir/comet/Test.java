@@ -1,6 +1,8 @@
 package ir.comet;
 
 import ir.comet.Utilities.TrackNumber;
+import ir.comet.database.CustomerDaoImp;
+import ir.comet.model.Customer;
 
 import java.util.Date;
 import java.util.UUID;
@@ -11,8 +13,9 @@ import java.util.UUID;
 public class Test {
 
     public static void main(String[] args) {
-        TrackNumber trackNumber=new TrackNumber();
-        String generate = trackNumber.generate(1);
-        System.out.println(generate);
+        Customer customer=new Customer();
+        customer.setEmail("good");
+        CustomerDaoImp customerDaoImp=new CustomerDaoImp();
+        customerDaoImp.createCustomer(customer);
     }
 }

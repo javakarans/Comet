@@ -165,5 +165,6 @@ public class ProductContentBean {
     public void setCommentText(String commentText) {
         this.commentText = commentText;
     }
+
 }
 

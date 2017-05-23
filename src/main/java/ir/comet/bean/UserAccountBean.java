@@ -88,4 +88,5 @@ public class UserAccountBean {
     public void setRowIndex(int rowIndex) {
         this.rowIndex = rowIndex;
     }
+
 }

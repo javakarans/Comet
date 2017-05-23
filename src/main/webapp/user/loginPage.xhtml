@@ -46,7 +46,8 @@
 
                         <b:column></b:column>
                         <b:commandButton value="ورود به کامت" style="margin-top:12px;"
-                                         look="info" action="#{loginBean.userLogin()}" update="@form"></b:commandButton>
+                                         look="info" actionListener="#{loginBean.userLogin()}" update="@form">
+                        </b:commandButton>
                     </h:panelGrid>
                 </h:form>
             </b:container>

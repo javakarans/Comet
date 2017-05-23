@@ -30,21 +30,46 @@ public class ReviewBean{
 
     @PostConstruct
     public void init(){
+        checkOrderIsDone();
         checkAuthority();
-        solarCalendar=new SolarCalendar();
         loadCustomer();
+        solarCalendar=new SolarCalendar();
         payment=getPaymentType();
     }
 
-    private void checkAuthority(){
-        if(userSessionBean.getCurrentURL().equals("/user/confirmationPage.xhtml")){
+
+    public boolean checkOrderIsDone(){
+        boolean orderIsDone = userSessionBean.isOrderIsDone();
+        if(orderIsDone){
             try {
-                userSessionBean.reloadProductOrderDetailList();
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/user/userAccount.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        return false;
+    }
+//    private void checkAuthority(){
+//        if(userSessionBean.getCurrentURL().equals("/user/confirmationPage.xhtml")){
+//            try {
+//                userSessionBean.reloadProductOrderDetailList();
+//                FacesContext.getCurrentInstance().getExternalContext().redirect("/user/userAccount.xhtml");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+    private boolean checkAuthority(){
+        boolean listIsEmpty=userSessionBean.getProductOrderDetailList().isEmpty();
+        if(listIsEmpty){
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/user/cart.xhtml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 
     public long totalDiscountPrice(){
@@ -136,4 +161,5 @@ public class ReviewBean{
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
 }

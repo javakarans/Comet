@@ -34,7 +34,7 @@
                                                 value="سلام ، #{headerBean.customer.firstName} #{headerBean.customer.lastName}"
                                                 iconAwesome="user-circle" styleClass="user-drop-menu">
                                             <b:navCommandLink value="ورود به پروفایل" action="#{headerBean.redirectToUserAccount()}"></b:navCommandLink>
-                                            <b:navCommandLink value="خروج" action="#{userSessionBean.invalidUserSession()}"></b:navCommandLink>
+                                            <b:navCommandLink value="خروج" action="#{headerBean.logoutUser()}"></b:navCommandLink>
                                         </b:dropMenu>
                                     </h:form>
                                 </h:panelGrid>
@@ -71,7 +71,7 @@
                 <b:form>
                     <b:navbarLinks>
 
-                        <b:navLink value="خانه" href="../comet.xhtml"></b:navLink>
+                        <b:navLink value="خانه" href="../"></b:navLink>
 
                         <ui:repeat value="#{applicationBean.categories}" var="category">
                             <b:dropMenu value="#{category.name}">

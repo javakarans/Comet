@@ -14,13 +14,15 @@ public class ConfirmationBean {
 
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
+    private String orderTrackNumber;
 
     @PostConstruct
     public void init(){
-        userSessionBean.setCurrentURL("/user/confirmationPage.xhtml");
+        orderTrackNumber=loadTrackNumber();
+        userSessionBean.getProductOrderDetailList().clear();
     }
 
-    public String getTrackNumber(){
+    public String loadTrackNumber(){
         return userSessionBean.getProductOrderDetailList().get(0).getOrderDetail().getTrackingNumber();
     }
 
@@ -35,5 +37,13 @@ public class ConfirmationBean {
 
     public void setUserSessionBean(UserSessionBean userSessionBean) {
         this.userSessionBean = userSessionBean;
+    }
+
+    public String getOrderTrackNumber() {
+        return orderTrackNumber;
+    }
+
+    public void setOrderTrackNumber(String orderTrackNumber) {
+        this.orderTrackNumber = orderTrackNumber;
     }
 }

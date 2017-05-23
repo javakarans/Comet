@@ -101,4 +101,5 @@ public class ProductBean implements Serializable{
     public void setUserSessionBean(UserSessionBean userSessionBean) {
         this.userSessionBean = userSessionBean;
     }
+
 }

@@ -34,6 +34,11 @@ public class LoginBean {
         if (customer!=null){
             userSessionBean.setUserSessionId(customer.getCustomerId());
             userSessionBean.setUserLogin(true);
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(component.getClientId(), new FacesMessage("*نام کاربری یا کلمه عبور اشتباه است"));
@@ -71,4 +76,5 @@ public class LoginBean {
     public void setComponent(UIComponent component) {
         this.component = component;
     }
+
 }

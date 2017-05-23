@@ -9,7 +9,9 @@
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
-    <title>JSF 2.2 TUTORIALS</title>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{securityBean.checkLogIn()}"></f:event>
+    </f:metadata>
 </h:head>
 
 <h:body>

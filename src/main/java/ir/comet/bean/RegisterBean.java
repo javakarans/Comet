@@ -39,18 +39,21 @@ public class RegisterBean {
         this.customer = customer;
     }
 
-    public String registerCustomer(){
+    public void registerCustomer(){
         boolean customer = findCustomer(this.customer.getEmail());
         if(!customer){
             this.customer.setUserName(this.customer.getEmail());
             customerDaoImp.createCustomer(this.customer);
             userSessionBean.setUserSessionId(this.customer.getCustomerId());
             userSessionBean.setUserLogin(true);
-            return "/comet.xhtml?faces-redirect=true";
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(component.getClientId(), new FacesMessage("*این ایمیل قبلا ثبت شده است"));
-            return "";
         }
     }
 
@@ -77,4 +80,5 @@ public class RegisterBean {
     public void setComponent(UIComponent component) {
         this.component = component;
     }
+
 }

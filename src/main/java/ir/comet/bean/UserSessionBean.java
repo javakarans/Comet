@@ -5,6 +5,7 @@ import ir.comet.model.ProductOrderDetail;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class UserSessionBean {
 
     private long userSessionId;
     private boolean userLogin;
+    private boolean orderIsDone;
     private HashMap<String,Long> URLParameter;
     private String currentURL;
     private List<ProductOrderDetail> productOrderDetailList;
@@ -85,5 +87,13 @@ public class UserSessionBean {
 
     public void setCurrentURL(String currentURL) {
         this.currentURL = currentURL;
+    }
+
+    public boolean isOrderIsDone() {
+        return orderIsDone;
+    }
+
+    public void setOrderIsDone(boolean orderIsDone) {
+        this.orderIsDone = orderIsDone;
     }
 }

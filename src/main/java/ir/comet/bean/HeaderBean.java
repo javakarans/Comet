@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import java.io.IOException;
 
 /**
  * Created by Mohammad on 4/13/2017.
@@ -23,13 +24,22 @@ public class HeaderBean {
 
     @PostConstruct
     public void init(){
-//        loadUserData();
+        loadUserData();
     }
 
     public void loadUserData(){
         if(userSessionBean.isUserLogin()){
             CustomerDaoImp customerDaoImp=new CustomerDaoImp();
             customer = customerDaoImp.getCustomer(userSessionBean.getUserSessionId());
+        }
+    }
+
+    public void logoutUser(){
+        userSessionBean.invalidUserSession();
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -44,8 +54,7 @@ public class HeaderBean {
     }
 
     public String redirectToUserAccount(){
-        userSessionBean.setCurrentURL("/user/userAccount.xhtml");
-        return userSessionBean.getCurrentURL().concat("?faces-redirect=true");
+        return "/user/userAccount.xhtml?faces-redirect=true";
     }
 
     public UserSessionBean getUserSessionBean() {
