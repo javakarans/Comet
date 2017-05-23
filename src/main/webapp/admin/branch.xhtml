@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<h:head>
+    <title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="../templates/admin/adminTemplate.xhtml">
+        <ui:define name="content">
+            <b:container>
+                <b:growl id="growl" showDetail="false"/>
+                <b:form>
+                    <b:row>
+                        <b:column colSm="12">
+                            <b:panel title="افزودن زیر دسته جدید" collapsible="false">
+                                <b:panelGrid colSpans="3,9">
+                                    <h:outputText value="انتخاب دسته"/>
+                                    <b:selectOneMenu update="subcattable,addSubCategory"
+                                                     onchange="ajax:adminSubCategoryEdit.onChange()"
+                                                     value="#{branchBean.selectedCategory}">
+                                        <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue="" />
+                                        <f:selectItems value="#{branchBean.categories}" itemValue="#{categoty}"
+                                                       var="categoty"
+                                                       itemLabel="#{categoty.name.toString()}"/>
+                                    </b:selectOneMenu>
+                                </b:panelGrid>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                </b:form>
+                <h:form id="addSubCategory" >
+                    <b:row>
+                        <b:column colSm="12">
+                            <b:panel title="اضافه کردن زیر دسته" collapsible="false">
+                                <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
+                                    <h:outputText value="نام"/>
+                                    <b:inputText value="#{branchBean.branch.branchName}"/>
+                                </b:panelGrid>
+                                <b:panelGrid colSpans="12" style="text-align:center;">
+                                    <b:commandButton value="save" actionListener="#{branchBean.addBranch}"/>
+                                </b:panelGrid>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                </h:form>
+                <b:form id="subcattable">
+                    <b:row >
+                        <b:column colSm="12">
+                            <b:panel title="#{branchBean.selectedCategory.name}زیر دست های دسته "
+                                     collapsible="false">
+                                <b:dataTable value="#{branchBean.branchList}" var="branch">
+                                    <b:dataTableColumn value="#{branch.branchName}"/>
+                                </b:dataTable>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                </b:form>
+            </b:container>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

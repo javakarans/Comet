@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface CategoryDao {
 
-    public void createCategory(Category category);
+    public boolean createCategory(Category category);
     public Category getCategory(long categoryId);
     public List<Category> getAllCategories();
     public void updateCategory(Category category);

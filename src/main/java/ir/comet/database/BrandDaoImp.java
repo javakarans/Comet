@@ -13,8 +13,8 @@ public class BrandDaoImp implements BrandDao {
         SQLService =new SQLService();
     }
 
-    public void createBrand(Brand brand) {
-          SQLService.create(brand);
+    public boolean createBrand(Brand brand) {
+          return SQLService.create(brand);
     }
 
     public Brand getBrand(long brandId) {

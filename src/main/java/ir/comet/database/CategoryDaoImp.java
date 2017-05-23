@@ -15,8 +15,8 @@ public class CategoryDaoImp implements CategoryDao {
         SQLService =new SQLService();
     }
 
-    public void createCategory(Category category) {
-        SQLService.create(category);
+    public boolean createCategory(Category category) {
+        return SQLService.create(category);
     }
 
     public Category getCategory(long categoryId) {

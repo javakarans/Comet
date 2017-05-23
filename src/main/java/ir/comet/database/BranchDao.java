@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface BranchDao {
 
-    public void createBranch(Branch branch);
+    public boolean createBranch(Branch branch);
     public Branch getBranch(long branchId);
     public List<Branch> getAllBranches();
     public List<Branch> getBranchesByCategoryId(long id);
