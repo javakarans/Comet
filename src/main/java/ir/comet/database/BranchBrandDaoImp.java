@@ -16,9 +16,8 @@ public class BranchBrandDaoImp implements BranchBrandDao {
         SQLService =new SQLService();
     }
 
-    public int createBranchBrand(BranchBrand branchBrand) {
-        SQLService.create(branchBrand);
-        return 0;
+    public boolean createBranchBrand(BranchBrand branchBrand) {
+        return SQLService.create(branchBrand);
     }
 
     public BranchBrand getBranchBrand(long branchBrandId) {

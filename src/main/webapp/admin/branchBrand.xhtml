@@ -9,13 +9,56 @@
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
-    <title>JSF 2.2 TUTORIALS</title>
+    <title>افزودن شاخه محصولات</title>
 </h:head>
 
 <h:body>
     <ui:composition template="../templates/admin/adminTemplate.xhtml">
         <ui:define name="content">
-
+                <b:container>
+                    <b:row>
+                        <b:column colSm="12">
+                            <h:form>
+                                <b:panel title="افزودن شاخه محصولات" collapsible="false">
+                                    <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
+                                        <h:outputText value="انتخاب برند"/>
+                                        <b:selectOneMenu value="#{branchBrandBean.selectedBrand}">
+                                            <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue=""/>
+                                            <f:selectItems value="#{branchBrandBean.brandList}" var="brand"
+                                                           itemValue="#{brand}" itemLabel="#{brand.name}"/>
+                                        </b:selectOneMenu>
+                                        <h:outputText value="انتخاب زیر دسته"/>
+                                        <b:selectOneMenu value="#{branchBrandBean.selectedBranch}">
+                                            <f:selectItem itemValue="" itemLabel="(لطفا انتخاب کنید)"/>
+                                            <f:selectItems value="#{branchBrandBean.branchList}" var="branch"
+                                                           itemLabel="#{branch.branchName}/#{branch.category.name}"
+                                                           itemValue="#{branch}"/>
+                                        </b:selectOneMenu>
+                                    </b:panelGrid>
+                                    <b:panelGrid colSpans="12" style="text-align:center;">
+                                        <b:commandButton value="اضافه کردن" actionListener="#{branchBrandBean.addBranchBrand}" />
+                                    </b:panelGrid>
+                                </b:panel>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column colSm="12">
+                            <b:panel title="لبست شاخه محصولات" collapsible="false">
+                                <h:form>
+                                    <b:dataTable value="#{branchBrandBean.branchBrandList}" var="branchBrand">
+                                        <b:dataTableColumn label="نام زیر دسته">
+                                            <h:outputText value="#{branchBrand.branch.branchName}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="نام برند">
+                                            <h:outputText value="#{branchBrand.brand.name}"/>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
+                                </h:form>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                </b:container>
         </ui:define>
     </ui:composition>
 </h:body>
