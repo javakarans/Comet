@@ -13,8 +13,8 @@ public class ProductDaoImp implements ProductDao {
         SQLService =new SQLService();
     }
 
-    public void createProduct(Product product) {
-        SQLService.create(product);
+    public boolean createProduct(Product product) {
+        return SQLService.create(product);
     }
 
     public Product getProduct(long productId) {

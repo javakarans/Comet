@@ -15,9 +15,115 @@
 <h:body>
     <ui:composition template="../templates/admin/adminTemplate.xhtml">
         <ui:define name="content">
-
+            <link href="../resources/lib/summernote-0.8.3/summernote.css" rel="stylesheet"/>
+            <script type="text/javascript" src="../resources/lib/summernote-0.8.3/summernote.js"></script>
+                <b:container>
+                    <p:growl id="messages" showDetail="false" />
+                    <b:row>
+                        <b:column colSm="12">
+                            <b:panel title="افزودن کالا" collapsible="false">
+                                <h:form>
+                                    <b:panelGrid colSpans="3,9" >
+                                        <h:outputText value="نام کالا"/>
+                                        <b:inputText value="#{addProductBran.product.name}" span="5" style="margin-top:-5px;"/>
+                                        <h:outputText value="نام انگلیسی"/>
+                                        <b:inputText value="#{addProductBran.product.englishName}" span="5" style="margin-top:-5px;"/>
+                                        <h:outputText value="انتخاب طبقه بندی کالا"/>
+                                        <b:selectOneMenu id="selectedBranchBrand" value="#{addProductBran.product.branchBrand}"  style="height:auto;">
+                                            <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue=""/>
+                                            <f:selectItems value="#{addProductBran.branchBrandList}" var="branchBrand" itemValue="#{branchBrand}" itemLabel="#{branchBrand.branch.branchName}/#{branchBrand.brand.name}"/>
+                                        </b:selectOneMenu>
+                                        <h:outputText value="قیمت"/>
+                                        <b:inputText value="#{addProductBran.product.price}" span="5" style="margin-top:-5px;"/>
+                                        <h:outputText value="شرکت گارانتی کننده"/>
+                                        <b:inputText value="#{addProductBran.product.warranty}" span="5" style="margin-top:-5px;"/>
+                                        <h:outputText value="رنگ"/>
+                                        <b:inputText tags="true" value="#{addProductBran.product.colorJson}" tiny-screen="full-width"
+                                                     render-label="true"/>
+                                        <h:outputText value="تخفیف"/>
+                                        <b:inputText value="#{addProductBran.product.discount}" span="5" style="margin-top:-5px;"/>
+                                        <h:outputText value="افزودن مشخصات فنی"/>
+                                        <b:button value="افزودن مشخصات فنی"  onclick="$('.modalPseudoClass1').modal();return false;"/>
+                                        <h:outputText value="توضیحات"/>
+                                        <b:inputTextarea  id="summernote" styleClass="summernote" value="#{addProductBran.product.description}"/>
+                                        <script type="text/javascript">
+                                            $(document).ready(function () {
+                                                $('.summernote').summernote();
+                                            });
+                                        </script>
+                                    </b:panelGrid>
+                                    <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
+                                        <h:outputText value="آپلود ایکون کالا"/>
+                                        <p:fileUpload style="width: auto"  fileUploadListener="#{addProductBran.processFileUploadIcon}" mode="advanced" dragDropSupport="false"
+                                                      update="messages" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                                        <h:outputText value="افزودن عکس ها"/>
+                                        <p:fileUpload style="width: auto"  fileUploadListener="#{addProductBran.processFileUploadImage}" mode="advanced" dragDropSupport="false"
+                                                      update="messages" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                                    </b:panelGrid>
+                                    <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                        <b:commandButton value="اضافه کردن محصول" action="#{addProductBran.addProduct}" />
+                                    </b:panelGrid>
+                                </h:form>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                    <b:modal id="amodal1" title="مشخصات" styleClass="modalPseudoClass1">
+                        <b:row>
+                            <b:column colSm="12">
+                                <b:panel title="افزودن مشخصه جدید" collapsible="false">
+                                    <h:form>
+                                        <b:panelGrid colSpans="3,9">
+                                            <h:outputText value="نام مشخصه"/>
+                                            <b:inputText value="#{addProductBran.item.itemName}"/>
+                                            <h:outputText value="نام جزییات"/>
+                                            <b:inputText tags="true" value="#{addProductBran.item.keys}" tiny-screen="full-width"
+                                                         render-label="true"/>
+                                            <h:outputText value="مقدار جزییات"/>
+                                            <b:inputText tags="true" value="#{addProductBran.item.values}" tiny-screen="full-width"
+                                                         render-label="true"/>
+                                        </b:panelGrid>
+                                        <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                            <b:commandButton value="اضافه کردن مشخصه جدید" actionListener="#{addProductBran.addItemToOtherDetails}" update="detailsList"/>
+                                        </b:panelGrid>
+                                    </h:form>
+                                </b:panel>
+                            </b:column>
+                        </b:row>
+                        <b:row id="detailsList">
+                            <b:column colSm="12">
+                                <b:panel title="لیست مشخصات" collapsible="false">
+                                    <h:form>
+                                        <b:dataTable value="#{addProductBran.otherDetails.items}" var="item">
+                                            <b:dataTableColumn label="نام">
+                                                <h:outputText value="#{item.itemName}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn label=" نام جزییات">
+                                                <h:outputText value="#{item.keys}"/>
+                                            </b:dataTableColumn>
+                                            <b:dataTableColumn label="مقدار جزییات">
+                                                <h:outputText value="#{item.values}"/>
+                                            </b:dataTableColumn>
+                                        </b:dataTable>
+                                    </h:form>
+                                </b:panel>
+                            </b:column>
+                        </b:row>
+                    </b:modal>
+                    <b:row>
+                        <b:column colSm="12">
+                            <b:panel title="لیست محصولات" collapsible="false">
+                                <h:form>
+                                    <b:dataTable value="#{addProductBran.productList}" var="product">
+                                        <b:dataTableColumn label="نام محصول">
+                                            <h:outputText value="#{product.name}"/>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
+                                </h:form>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                </b:container>
         </ui:define>
     </ui:composition>
 </h:body>
-
 </html>

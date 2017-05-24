@@ -5,7 +5,7 @@ import ir.comet.model.Product;
 import java.util.List;
 
 public interface ProductDao {
-    public void createProduct(Product product);
+    public boolean createProduct(Product product);
     public Product getProduct(long productId);
     public List<Product> getProductByBranchBrandId(long branchBrandId);
     public Product getProductByProductName(String productName);
