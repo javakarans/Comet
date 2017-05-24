@@ -3,8 +3,12 @@ package ir.comet.model;
 public class SettingsData {
     private static SettingsData settingsData ;
 
+
+
     private SettingsData()
-    {}
+    {
+
+    }
 
     public SettingsData getInstance()
     {
