@@ -1,6 +1,7 @@
 package ir.comet.bean;
 
 import ir.comet.database.CategoryDaoImp;
+import ir.comet.database.ProductDaoImp;
 import ir.comet.model.*;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +28,10 @@ public class ApplicationBean {
     public void autoCreateMenu(){
         CategoryDaoImp categoryDaoImp=new CategoryDaoImp();
         categories = categoryDaoImp.getAllCategories();
+    }
+
+    public void loadNewProductList(){
+        ProductDaoImp productDaoImp=new ProductDaoImp();
     }
 
     public List<Category> getCategories() {

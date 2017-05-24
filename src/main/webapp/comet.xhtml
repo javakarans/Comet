@@ -34,9 +34,11 @@
                             <h:panelGrid columns="2" styleClass="article-panel">
                                 <h:form>
                                     <ui:repeat value="#{cometBean.articleList}" var="article">
-                                        <h:commandLink style="text-decoration: none;color: #252525" action="#{cometBean.redirectToArticlePage(article)}">
+                                        <h:commandLink style="text-decoration: none;color: #252525"
+                                                       action="#{cometBean.redirectToArticlePage(article)}">
                                             <div style="display: table-row">
-                                                <b:image value="#{article.imageUrl}" styleClass="image" style="float:right;">
+                                                <b:image value="#{article.imageUrl}" styleClass="image"
+                                                         style="float:right;">
                                                 </b:image>
                                                 <div class="article-text">
                                                     #{article.subject}
@@ -50,32 +52,76 @@
                     </b:column>
                     <b:column colSm="9">
                         <!-- SlidePanel -->
-                        <b:panel styleClass="slidePanel">
-                                <b:carousel id="parque">
-                                    <c:forEach items="#{cometBean.allSlideShow}" var="item">
-                                        <b:carouselItem>
-                                            <img src="#{item.imageLocation}" alt="Valladolid" />
-                                        </b:carouselItem>
-                                    </c:forEach>
-                                </b:carousel>
+                        <b:panel styleClass="slidePanel" rendered="false">
+                            <b:carousel id="parque">
+                                <c:forEach items="#{cometBean.allSlideShow}" var="item">
+                                    <b:carouselItem>
+                                        <img src="#{item.imageLocation}" alt="Valladolid"/>
+                                    </b:carouselItem>
+                                </c:forEach>
+                            </b:carousel>
                         </b:panel>
                         <!-- MostSellingPanel -->
                         <b:panel collapsible="false" styleClass="contentPanel">
                             <f:facet name="heading">
                                 <span>پر فروش ترین ها</span>
                             </f:facet>
-                        </b:panel>
-                        <!-- MostviewPanel -->
-                        <b:panel collapsible="false" styleClass="contentPanel">
-                            <f:facet name="heading">
-                                <span>پر بازدید ترین ها</span>
-                            </f:facet>
+                            <b:row>
+                                <b:column colSm="12">
+                                    <div class="product-slide-bg">
+                                        <div class="product-slide">
+                                            <div class="nav-right">
+                                                <img src="resources/images/right-arrow.png" alt="img"/>
+                                            </div>
+                                            <div class="product-slide-content">
+                                                <div class="product-panel">
+                                                    <img alt="img" src="resources/images/sample1.jpg"
+                                                         style="width: 180px;"></img>
+                                                    <div style="width: 180px">
+                                                        <p class="product-name">محمد حسین</p>
+                                                        <div style="margin-top: -8px"><p>قیمت اصلی</p></div>
+                                                        <p style="margin-top: 4px;color: #00a100">قیمت با تخفیف</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="nav-left">
+                                                <img src="resources/images/left-arrow.png" alt="img"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b:column>
+                            </b:row>
                         </b:panel>
                         <!-- NewProductPanel -->
                         <b:panel collapsible="false" styleClass="contentPanel">
                             <f:facet name="heading">
                                 <span>جدید ترین ها</span>
                             </f:facet>
+                            <b:row>
+                                <b:column colSm="12">
+                                    <div class="product-slide-bg">
+                                        <div class="product-slide">
+                                            <div class="nav-right">
+                                                <img src="resources/images/right-arrow.png" alt="img"/>
+                                            </div>
+                                            <div class="product-slide-content">
+                                                <div class="product-panel">
+                                                    <img alt="img" src="resources/images/sample1.jpg"
+                                                         style="width: 180px;"></img>
+                                                    <div style="width: 180px">
+                                                        <p class="product-name">محمد حسین</p>
+                                                        <div style="margin-top: -8px"><p>قیمت اصلی</p></div>
+                                                        <p style="margin-top: 4px;color: #00a100">قیمت با تخفیف</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="nav-left">
+                                                <img src="resources/images/left-arrow.png" alt="img"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </b:column>
+                            </b:row>
                         </b:panel>
 
                     </b:column>
