@@ -3,6 +3,7 @@ package ir.comet.bean;
 import ir.comet.controller.LoginController;
 import ir.comet.database.CustomerDaoImp;
 import ir.comet.model.Customer;
+import ir.comet.model.SettingsData;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -29,11 +30,12 @@ public class LoginBean {
     private UIComponent component;
     @ManagedProperty(value = "#{adminSessionBean}")
     private AdminSessionBean adminSessionBean;
+    private SettingsData settingsData = SettingsData.getInstance();
 
     public void userLogin(){
-        if (userName.equals("ali11396"))
+        if (userName.equals(settingsData.getSettings().getAdminUsername()))
         {
-            if (password.equals("1234"))
+            if (password.equals(settingsData.getSettings().getAdminPassword()))
             {
                 adminSessionBean.setLogin(true);
                 System.out.println("ok");
