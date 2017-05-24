@@ -22,19 +22,23 @@
     <ui:composition>
         <link rel="stylesheet" href="../../resources/css/userHeader.css"/>
         <b:container fluid="true">
-            <b:navBar brand="کامت" brandHref="#">
-                <b:navbarLinks>
-                    <b:navLink value="مقاله"  href="../../admin/addArticle.xhtml"/>
-                    <b:navLink value="اسلاید" href="../../admin/addSlideShow.xhtml"/>
-                    <b:navLink value="دسته ها" href="../../admin/category.xhtml"/>
-                    <b:navLink value="زیر دسته ها" href="../../admin/branch.xhtml"/>
-                    <b:navLink value="شاخه های محصولات" href="../../admin/branchBrand.xhtml"/>
-                    <b:navLink value="برند" href="../../admin/brand.xhtml"/>
-                    <b:navLink value="محصولات" href="../../admin/product.xhtml"/>
-                    <b:navLink value="سفارشات" href="../../admin/orders.xhtml"/>
-                    <b:navLink value="تنظیمات" href="../../admin/settings.xhtml"/>
-                </b:navbarLinks>
-            </b:navBar>
+            <h:form>
+                <b:navBar brand="کامت" brandHref="#">
+                    <b:navbarLinks>
+                        <b:navLink value="مقاله"  href="../../admin/addArticle.xhtml"/>
+                        <b:navLink value="اسلاید" href="../../admin/addSlideShow.xhtml"/>
+                        <b:navLink value="دسته ها" href="../../admin/category.xhtml"/>
+                        <b:navLink value="زیر دسته ها" href="../../admin/branch.xhtml"/>
+                        <b:navLink value="شاخه های محصولات" href="../../admin/branchBrand.xhtml"/>
+                        <b:navLink value="برند" href="../../admin/brand.xhtml"/>
+                        <b:navLink value="محصولات" href="../../admin/product.xhtml"/>
+                        <b:navLink value="سفارشات" href="../../admin/orders.xhtml"/>
+                        <b:navLink value="تنظیمات" href="../../admin/settings.xhtml"/>
+                        <b:commandButton action="#{adminSessionBean.logout}" value="خروج" style="text-align:left;"/>
+                    </b:navbarLinks>
+
+                </b:navBar>
+            </h:form>
         </b:container>
     </ui:composition>
 </h:body>

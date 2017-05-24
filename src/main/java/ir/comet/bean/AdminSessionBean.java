@@ -22,6 +22,13 @@ public class AdminSessionBean {
 
     }
 
+    public String logout()
+    {
+        login = false;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return redirectToCometPage();
+    }
+
     public void checkAdminLogin()
     {
         if(!login){
