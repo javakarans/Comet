@@ -19,7 +19,7 @@ public class LoginController {
         if(userName.equals("admin"))
         {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../admin/adminPage.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../admin/orders.xhtml");
             } catch (IOException e) {
                 e.printStackTrace();
             }
