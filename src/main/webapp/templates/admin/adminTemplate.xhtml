@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
  
 <h:head>
     <title>پنل ادمین</title>
@@ -12,7 +13,13 @@
     <link rel="stylesheet" href="../../resources/css/adminTemplate.css"></link>
 </h:head>
 
+
+
 <h:body>
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{adminSessionBean.checkAdminLogin}"/>
+    </f:metadata>
 
     <div id="header">
         <ui:insert name="header">

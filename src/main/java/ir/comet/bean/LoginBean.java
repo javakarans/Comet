@@ -27,21 +27,39 @@ public class LoginBean {
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
     private UIComponent component;
+    @ManagedProperty(value = "#{adminSessionBean}")
+    private AdminSessionBean adminSessionBean;
 
     public void userLogin(){
-        CustomerDaoImp customerDaoImp=new CustomerDaoImp();
-        Customer customer = customerDaoImp.getCustomerByUserNameAndPass(userName, password);
-        if (customer!=null){
-            userSessionBean.setUserSessionId(customer.getCustomerId());
-            userSessionBean.setUserLogin(true);
-            try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/");
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (userName.equals("ali11396"))
+        {
+            if (password.equals("1234"))
+            {
+                adminSessionBean.setLogin(true);
+                System.out.println("ok");
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/admin/orders.xhtml?faces-redirect=true");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }else {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(component.getClientId(), new FacesMessage("*نام کاربری یا کلمه عبور اشتباه است"));
+        }
+        else
+        {
+            CustomerDaoImp customerDaoImp=new CustomerDaoImp();
+            Customer customer = customerDaoImp.getCustomerByUserNameAndPass(userName, password);
+            if (customer!=null){
+                userSessionBean.setUserSessionId(customer.getCustomerId());
+                userSessionBean.setUserLogin(true);
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(component.getClientId(), new FacesMessage("*نام کاربری یا کلمه عبور اشتباه است"));
+            }
         }
     }
 
@@ -77,4 +95,11 @@ public class LoginBean {
         this.component = component;
     }
 
+    public AdminSessionBean getAdminSessionBean() {
+        return adminSessionBean;
+    }
+
+    public void setAdminSessionBean(AdminSessionBean adminSessionBean) {
+        this.adminSessionBean = adminSessionBean;
+    }
 }
