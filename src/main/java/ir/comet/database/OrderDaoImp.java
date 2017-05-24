@@ -24,7 +24,7 @@ public class OrderDaoImp implements OrderDao {
     }
 
     public List<OrderDetail> getAllOrders() {
-        return null;
+        return sqlService.getAllObjects(new OrderDetail());
     }
 
     public boolean updateOrder(OrderDetail orderDetail) {

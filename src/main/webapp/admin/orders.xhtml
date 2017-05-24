@@ -22,8 +22,12 @@
                             <h:form>
                                 <b:panelGrid colSpans="3,9">
                                     <h:outputText value="نوع سفارش :"/>
-                                    <b:selectOneMenu value="">
-
+                                    <b:selectOneMenu value="#{ordersBean.selectedStatus}">
+                                        <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue=""/>
+                                        <f:selectItem itemLabel="#{ordersBean.allStatus}" itemValue="#{ordersBean.allStatus}"/>
+                                        <f:selectItem itemLabel="#{ordersBean.onPending}" itemValue="#{ordersBean.onPending}"/>
+                                        <f:selectItem itemLabel="#{ordersBean.confirmed}" itemValue="#{ordersBean.confirmed}"/>
+                                        <f:selectItem itemLabel="#{ordersBean.delivered}" itemValue="#{ordersBean.delivered}"/>
                                     </b:selectOneMenu>
                                 </b:panelGrid>
                             </h:form>
@@ -35,14 +39,89 @@
                         <b:panel title="لیست سفارشات" collapsible="false">
                             <h:form>
                                 <b:dataTable value="#{ordersBean.orderDetailList}" var="order">
-                                    <b:dataTableColumn>
+                                    <b:dataTableColumn label="شماره مرجع">
                                         <h:outputText value="#{order.orderDetailId}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="شماره سفارش">
+                                        <h:outputText value="#{order.trackingNumber}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="مشخصات مشتری">
+                                        <b:commandButton action="#{ordersBean.showCustomer(order.customer)}" update="customerModal" value="برای مشخصات مشتری کلیک کنید"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="کالا ها">
+                                        <b:commandButton action="#{ordersBean.showProductList(order.productOrderDetails)}" update="productModal" value="برای مشاهده کالا ها کلیک کنید"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="نوع پرداخت">
+                                        <h:outputText value="#{order.paymentType}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="جمع کل مبلغ">
+                                        <h:outputText value="#{order.totalPrice}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="وضعیت سفارش">
+                                        <h:outputText value="#{order.status}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="مبلغ کل با احتساب مالیات">
+                                        <h:outputText value="#{order.totalPriceAfterDiscountAndTax}"/>
                                     </b:dataTableColumn>
                                 </b:dataTable>
                             </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
+                <b:modal closable="false" id="customerModal"  styleClass="modalPseudoClass">
+                    <b:row>
+                        <b:column colSm="12">
+                              <b:panel title="مشخصات مشتری" collapsible="false">
+                                  <h:form>
+                                      <b:panelGrid colSpans="3,9">
+                                          <h:outputText value="نام کوچک مشتری"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.firstName}"/>
+                                          <h:outputText value="نام بزرگ"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.lastName}"/>
+                                          <h:outputText value="آدرس مشتری"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.address}"/>
+                                          <h:outputText value="شماره موبایل"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.mobileNumber}"/>
+                                          <h:outputText value="شماره تلفن"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.phoneNumber}"/>
+                                          <h:outputText value="کد پستی"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.postalCode}"/>
+                                          <h:outputText value="شهر مشتری"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.city}"/>
+                                          <h:outputText value="آدرس ایمیل"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.email}"/>
+                                          <h:outputText value="وضعیت مشتری"/>
+                                          <h:outputText value="#{ordersBean.selectedCustomer.state}"/>
+                                      </b:panelGrid>
+                                  </h:form>
+                              </b:panel>
+                        </b:column>
+                    </b:row>
+                </b:modal>
+                <b:modal closable="false" id="productModal"  styleClass="modalPseudoClass">
+                    <b:row>
+                        <b:column colSm="12">
+                            <b:panel title="مشخصات کالاهاس سفارش داده شده" collapsible="false">
+                                <h:form>
+                                    <b:dataTable value="#{ordersBean.productOrderDetailList}" var="product">
+                                        <b:dataTableColumn label="کد کالا">
+                                            <h:outputText value="#{product.product.productId}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="نام کالا">
+                                            <h:outputText value="#{product.product.name}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="تعدا سفارش داده شده">
+                                            <h:outputText value="#{product.quantity}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="شماره سبد خرید">
+                                            <h:outputText value="#{product.productCartId}"/>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
+                                </h:form>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                </b:modal>
             </b:container>
         </ui:define>
     </ui:composition>
