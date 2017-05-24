@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
 public class Settings implements Serializable {
 
     @Id
@@ -14,7 +13,6 @@ public class Settings implements Serializable {
     private String adminUsername;
     private String adminPassword;
 
-    @Column
     public String getAdminUsername() {
         return adminUsername;
     }
@@ -23,7 +21,6 @@ public class Settings implements Serializable {
         this.adminUsername = adminUsername;
     }
 
-    @Column
     public String getAdminPassword() {
         return adminPassword;
     }
@@ -32,7 +29,6 @@ public class Settings implements Serializable {
         this.adminPassword = adminPassword;
     }
 
-    @Column
     public long getAdminId() {
         return adminId;
     }
