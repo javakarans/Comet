@@ -9,7 +9,7 @@
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
-    <title>JSF 2.2 TUTORIALS</title>
+    <title>پنل ادمین</title>
 </h:head>
 
 <h:body>
@@ -43,7 +43,7 @@
                                         <h:outputText value="تخفیف"/>
                                         <b:inputText value="#{addProductBran.product.discount}" span="5" style="margin-top:-5px;"/>
                                         <h:outputText value="افزودن مشخصات فنی"/>
-                                        <b:button value="افزودن مشخصات فنی"  onclick="$('.modalPseudoClass1').modal();return false;"/>
+                                        <b:button value="افزودن مشخصات فنی"  onclick="$('#addTSModal').modal()"/>
                                         <h:outputText value="توضیحات"/>
                                         <b:inputTextarea  id="summernote" styleClass="summernote" value="#{addProductBran.product.description}"/>
                                         <script type="text/javascript">
@@ -61,59 +61,42 @@
                                                       update="messages" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                                     </b:panelGrid>
                                     <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                        <b:commandButton value="اضافه کردن محصول" action="#{addProductBran.addProduct}" />
+                                        <b:commandButton update="@form" value="اضافه کردن محصول" actionListener="#{addProductBran.addProduct}" />
                                     </b:panelGrid>
                                 </h:form>
                             </b:panel>
                         </b:column>
                     </b:row>
-                    <b:modal id="amodal1" title="مشخصات" styleClass="modalPseudoClass1">
+                    <b:modal closable="false" id="addTSModal"  styleClass="modalPseudoClass">
                         <b:row>
                             <b:column colSm="12">
-                                <b:panel title="افزودن مشخصه جدید" collapsible="false">
-                                    <h:form>
-                                        <b:panelGrid colSpans="3,9">
-                                            <h:outputText value="نام مشخصه"/>
-                                            <b:inputText value="#{addProductBran.item.itemName}"/>
-                                            <h:outputText value="نام جزییات"/>
-                                            <b:inputText tags="true" value="#{addProductBran.item.keys}" tiny-screen="full-width"
-                                                         render-label="true"/>
-                                            <h:outputText value="مقدار جزییات"/>
-                                            <b:inputText tags="true" value="#{addProductBran.item.values}" tiny-screen="full-width"
-                                                         render-label="true"/>
+                                <h:form id="addTSForm">
+                                        <b:panelGrid colSpans="3,3,6">
+                                            <h:outputText value="نام مشخصه جدید"/>
+                                            <b:inputText value="#{addProductBran.technicalSpecification.name}"/>
+                                            <b:commandButton value="اضافه کردن مشخصه" actionListener="#{addProductBran.addTSToOrder}" update="@form"/>
                                         </b:panelGrid>
-                                        <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                            <b:commandButton value="اضافه کردن مشخصه جدید" actionListener="#{addProductBran.addItemToOtherDetails}" update="detailsList"/>
-                                        </b:panelGrid>
-                                    </h:form>
-                                </b:panel>
+                                </h:form>
                             </b:column>
                         </b:row>
-                        <b:row id="detailsList">
+                    </b:modal>
+                    <b:modal closable="false" id="addTSDModal"  styleClass="modalPseudoClass">
+                        <b:row>
                             <b:column colSm="12">
-                                <b:panel title="لیست مشخصات" collapsible="false">
-                                    <h:form>
-                                        <b:dataTable value="#{addProductBran.otherDetails.items}" var="item">
-                                            <b:dataTableColumn label="نام">
-                                                <h:outputText value="#{item.itemName}"/>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn label=" نام جزییات">
-                                                <h:outputText value="#{item.keys}"/>
-                                            </b:dataTableColumn>
-                                            <b:dataTableColumn label="مقدار جزییات">
-                                                <h:outputText value="#{item.values}"/>
-                                            </b:dataTableColumn>
-                                        </b:dataTable>
-                                    </h:form>
-                                </b:panel>
+                                <h:form id="addTsDForm">
+
+                                </h:form>
                             </b:column>
                         </b:row>
                     </b:modal>
                     <b:row>
                         <b:column colSm="12">
                             <b:panel title="لیست محصولات" collapsible="false">
-                                <h:form>
+                                <h:form id="productListForm">
                                     <b:dataTable value="#{addProductBran.productList}" var="product">
+                                        <b:dataTableColumn label="کد کالا">
+                                            <h:outputText value="#{product.productId}"/>
+                                        </b:dataTableColumn>
                                         <b:dataTableColumn label="نام محصول">
                                             <h:outputText value="#{product.name}"/>
                                         </b:dataTableColumn>

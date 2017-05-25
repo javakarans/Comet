@@ -49,6 +49,9 @@ public class Product implements Serializable {
     @JoinColumn(name = "branchBrandId")
     private BranchBrand branchBrand;
     private long soldCount;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "product")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<TechnicalSpecification> technicalSpecificationList = new ArrayList<>();
 
     public long getProductId() {
         return productId;
@@ -192,5 +195,13 @@ public class Product implements Serializable {
 
     public void setSoldCount(long soldCount) {
         this.soldCount = soldCount;
+    }
+
+    public List<TechnicalSpecification> getTechnicalSpecificationList() {
+        return technicalSpecificationList;
+    }
+
+    public void setTechnicalSpecificationList(List<TechnicalSpecification> technicalSpecificationList) {
+        this.technicalSpecificationList = technicalSpecificationList;
     }
 }

@@ -3,10 +3,7 @@ package ir.comet.bean;
 
 import ir.comet.database.BranchBrandDaoImp;
 import ir.comet.database.ProductDaoImp;
-import ir.comet.model.BranchBrand;
-import ir.comet.model.Item;
-import ir.comet.model.OtherDetails;
-import ir.comet.model.Product;
+import ir.comet.model.*;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -36,24 +33,21 @@ public class AddProductBran {
     private String iconFilename;
     private String uniqueID;
     private OtherDetails otherDetails;
-    private Item item;
+    private TechnicalSpecification technicalSpecification;
+    private TechnicalSpecificationDetails technicalSpecificationDetails;
+
 
     @PostConstruct
     public void init()
     {
-        item = new Item();
+        technicalSpecification = new TechnicalSpecification();
+        technicalSpecificationDetails = new TechnicalSpecificationDetails();
         otherDetails = new OtherDetails();
         product = new Product();
         productDaoImp = new ProductDaoImp();
         productList = productDaoImp.getAllProducts();
         branchBrandDaoImp = new BranchBrandDaoImp();
         branchBrandList = branchBrandDaoImp.getAlBranchBrand();
-    }
-
-    public void addItemToOtherDetails()
-    {
-        otherDetails.getItems().add(item);
-        item = new Item();
     }
 
     public void addProduct()
@@ -72,6 +66,14 @@ public class AddProductBran {
         {
 
         }
+    }
+
+    public void addTSToOrder()
+    {
+        technicalSpecification.setProduct(product);
+
+        product = productDaoImp.getProduct(product.getProductId());
+
     }
 
     public void processFileUploadIcon(FileUploadEvent event) throws IOException {
@@ -132,19 +134,27 @@ public class AddProductBran {
         this.branchBrandList = branchBrandList;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
     public OtherDetails getOtherDetails() {
         return otherDetails;
     }
 
     public void setOtherDetails(OtherDetails otherDetails) {
         this.otherDetails = otherDetails;
+    }
+
+    public TechnicalSpecification getTechnicalSpecification() {
+        return technicalSpecification;
+    }
+
+    public void setTechnicalSpecification(TechnicalSpecification technicalSpecification) {
+        this.technicalSpecification = technicalSpecification;
+    }
+
+    public TechnicalSpecificationDetails getTechnicalSpecificationDetails() {
+        return technicalSpecificationDetails;
+    }
+
+    public void setTechnicalSpecificationDetails(TechnicalSpecificationDetails technicalSpecificationDetails) {
+        this.technicalSpecificationDetails = technicalSpecificationDetails;
     }
 }
