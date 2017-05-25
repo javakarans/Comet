@@ -35,6 +35,7 @@ public class AddArticleBean{
     private static String image_location = StaticSettings.imageUrl;
     private String filename;
     private SolarCalendar solarCalendar;
+    private Article selectedArticle;
 
     @PostConstruct
     public void init()
@@ -85,9 +86,9 @@ public class AddArticleBean{
 
     public void editArticle()
     {
-        article.setImageUrl(filename);
-        article.setDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()).toString());
-        boolean result = articleDaoImp.updateArticle(article);
+        selectedArticle.setImageUrl(filename);
+        selectedArticle.setDate(new java.sql.Date(Calendar.getInstance().getTimeInMillis()).toString());
+        boolean result = articleDaoImp.updateArticle(selectedArticle);
 
 
         article = new Article();
@@ -131,5 +132,21 @@ public class AddArticleBean{
 
     public void setArticleList(List<Article> articleList) {
         this.articleList = articleList;
+    }
+
+    public Article getSelectedArticle() {
+        return selectedArticle;
+    }
+
+    public void setSelectedArticle(Article selectedArticle) {
+        this.selectedArticle = selectedArticle;
+    }
+
+    public UploadedFile getUploadedFile() {
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(UploadedFile uploadedFile) {
+        this.uploadedFile = uploadedFile;
     }
 }

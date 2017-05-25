@@ -9,7 +9,7 @@
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
-    <title>JSF 2.2 TUTORIALS</title>
+    <title>پنل ادمین</title>
 </h:head>
 
 <h:body>
@@ -27,9 +27,9 @@
                                     <h:outputText value="موضوع"/>
                                     <b:inputText required="true" requiredMessage="لطفا موضوع رو وارد کنید" value="#{addArticleBean.article.subject}"/>
                                     <h:outputText value="نویسنده"/>
-                                    <b:inputText rendered="true" requiredMessage="لطفا نام نویسنده را وارد کنید" value="#{addArticleBean.article.author}"/>
+                                    <b:inputText required="true" requiredMessage="لطفا نام نویسنده را وارد کنید" value="#{addArticleBean.article.author}"/>
                                     <h:outputText value="منبع"/>
-                                    <b:inputText value="#{addArticleBean.article.reference}"/>
+                                    <b:inputText required="true" requiredMessage="لطفا منبع را وارد کنید" value="#{addArticleBean.article.reference}"/>
                                     <h:outputText value="محتوا"/>
                                     <b:inputTextarea required="true" requiredMessage="لطفا محتوا را وارد کنید" id="summernote" styleClass="summernote" value="#{addArticleBean.article.content}"/>
                                     <script type="text/javascript">
@@ -40,53 +40,53 @@
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
                                     <h:outputText value="عکس"/>
-                                    <p:fileUpload required="true" requiredMessage="عکس را آپلود کنید" style="width: auto"
+                                    <p:fileUpload update="@form" required="true" requiredMessage="عکس را آپلود کنید" style="width: auto"
                                                   fileUploadListener="#{addArticleBean.processFileUploadEdit}" mode="advanced"
                                                   dragDropSupport="false"
                                                   sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                    <b:commandButton value="ذخیره" update="list" actionListener="#{addArticleBean.saveArticle}"/>
+                                    <b:commandButton disabled="#{addArticleBean.uploadedFile eq null}" value="ذخیره" update="@form,articleTable,messages" actionListener="#{addArticleBean.saveArticle}"/>
                                 </b:panelGrid>
                             </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
-
-                <b:row id="list">
+                <b:row>
                     <b:column colSm="12">
                         <b:panel title="لیست مقاله ها" collapsible="false">
                             <b:form id="articleTable">
                                 <b:dataTable class="editableCarTable1" value="#{addArticleBean.articleList}" var="article">
-                                    <b:dataTableColumn value="#{article.subject}"/>
-                                    <b:dataTableColumn label="remove" style="text-align:center;">
+                                    <b:dataTableColumn label="موضوع">
+                                        <h:outputText value="#{article.subject}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="حذف" style="text-align:center;">
                                         <b:commandButton value="حذف" icon="remove"
                                                          actionListener="#{addArticleBean.removeArticle(article)}" update="@form"/>
                                     </b:dataTableColumn>
-                                    <b:dataTableColumn label="update" style="text-align:center;">
-                                        <b:commandButton ajax="true" value="وبرایش" icon="update"
-                                                         action="#{addArticleBean.showArticleEditModal(article)}"/>
+                                    <b:dataTableColumn label="به روز رسانی" style="text-align:center;">
+                                        <b:commandButton update="@form,editArticleForm" value="وبرایش" oncomplete="$('#updateArticle').modal()" icon="update">
+                                            <f:setPropertyActionListener value="#{article}" target="#{addArticleBean.selectedArticle}"/>
+                                        </b:commandButton>
                                     </b:dataTableColumn>
                                 </b:dataTable>
                             </b:form>
                         </b:panel>
                     </b:column>
                 </b:row>
-
-
                 <b:modal id="updateArticle" title="وبرایش" closable="false">
                     <b:row>
                         <b:column colSm="12">
-                                <h:form enctype="multipart/form-data">
+                                <h:form id="editArticleForm">
                                     <b:panelGrid colSpans="3,9">
-                                        <h:outputText value="Subject :"/>
-                                        <b:inputText value="#{addArticleBean.article.subject}"/>
-                                        <h:outputText value="author"/>
-                                        <b:inputText value="#{addArticleBean.article.author}"/>
-                                        <h:outputText value="reference"/>
-                                        <b:inputText value="#{addArticleBean.article.reference}"/>
-                                        <h:outputText value="content"/>
-                                        <b:inputTextarea id="summernote" styleClass="summernote" value="#{addArticleBean.article.content}"/>
+                                        <h:outputText value="موضوع"/>
+                                        <b:inputText value="#{addArticleBean.selectedArticle.subject}"/>
+                                        <h:outputText value="نویسنده"/>
+                                        <b:inputText value="#{addArticleBean.selectedArticle.author}"/>
+                                        <h:outputText value="منبع"/>
+                                        <b:inputText value="#{addArticleBean.selectedArticle.reference}"/>
+                                        <h:outputText value="محتوا"/>
+                                        <b:inputTextarea id="summernote" styleClass="summernote" value="#{addArticleBean.selectedArticle.content}"/>
                                         <script type="text/javascript">
                                             $(document).ready(function () {
                                                 $('.summernote').summernote();
@@ -94,27 +94,22 @@
                                         </script>
                                     </b:panelGrid>
                                     <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
-                                        <h:outputText value="Image :"/>
+                                        <h:outputText value="عکس"/>
                                         <p:fileUpload style="width: auto"
+                                                      update="@form"
                                                       fileUploadListener="#{addArticleBean.processFileUploadEdit}" mode="advanced"
                                                       dragDropSupport="false"
                                                       sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                                     </b:panelGrid>
-                                    <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                        <b:commandButton value="Save" actionListener="#{addArticleBean.saveArticle}"/>
-                                    </b:panelGrid>
-
                                 <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                    <b:commandButton value="Update" action="#{addArticleBean.editArticle()}"/>
+                                    <b:commandButton disabled="#{addArticleBean.uploadedFile eq null}" value="به روز رسانی" update="@form,articleTable" actionListener="#{addArticleBean.editArticle()}"/>
                                 </b:panelGrid>
                                 </h:form>
                         </b:column>
                     </b:row>
                 </b:modal>
-
             </b:container>
         </ui:define>
-
     </ui:composition>
 </h:body>
 
