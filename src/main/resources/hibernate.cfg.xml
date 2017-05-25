@@ -53,6 +53,8 @@
         <mapping class="ir.comet.model.SlideShow"/>
         <mapping class="ir.comet.model.BranchBrand"/>
         <mapping class="ir.comet.model.Settings"/>
+        <mapping class="ir.comet.model.TechnicalSpecification"/>
+        <mapping class="ir.comet.model.TechnicalSpecificationDetails"/>
 
 
     </session-factory>
