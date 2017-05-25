@@ -20,7 +20,14 @@ public class OrderDaoImp implements OrderDao {
     }
 
     public OrderDetail getOrder(long orderId) {
-        return (OrderDetail) sqlService.getObjectsBySpecialColumn(this.getClass(), "orderId", orderId).get(0);
+        List result = sqlService.getObjectsBySpecialColumn(new OrderDetail(),"orderDetailId", orderId);
+        if (result.isEmpty()) return null;
+        else return (OrderDetail) result.get(0);
+    }
+
+    public List<OrderDetail> getOrderByStatus(String status)
+    {
+        return sqlService.getObjectsBySpecialColumn(new OrderDetail(),"status",status);
     }
 
     public List<OrderDetail> getAllOrders() {
