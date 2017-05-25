@@ -25,27 +25,55 @@
                             <h:form enctype="multipart/form-data">
                                 <b:panelGrid colSpans="3,9">
                                     <h:outputText value="نام"/>
-                                    <b:inputText required="true" requiredMessage="لطفا موضوع رو وارد کنید" value="#{categoryBean.category.name}"/>
+                                    <b:inputText required="true" requiredMessage="لطفا نام دسته را وارد کنید" value="#{categoryBean.category.name}"/>
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                    <b:commandButton value="ذخیره" update="list" actionListener="#{categoryBean.addCategory}"/>
+                                    <b:commandButton value="ذخیره" update="categoryTable,messages" actionListener="#{categoryBean.addCategory}"/>
                                 </b:panelGrid>
                             </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
 
-                <b:row id="list">
+                <b:row >
                     <b:column colSm="12">
                         <b:panel title="لیست دسته ها" collapsible="false">
-                            <b:form id="articleTable">
+                            <b:form id="categoryTable">
                                 <b:dataTable class="editableCarTable1" value="#{categoryBean.categoryList}" var="category">
-                                    <b:dataTableColumn value="#{category.name}"/>
+                                    <b:dataTableColumn label="کد دسته">
+                                        <h:outputText value="#{category.categoryId}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="نام دسته دسته">
+                                        <h:outputText value="#{category.name}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="خذف">
+                                        <b:commandButton value="حذف" update="@form,messages" actionListener="#{categoryBean.removeCategory(category)}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="به روز رسانی">
+                                        <b:commandButton value="به روز رسانی" oncomplete="$('#editCategoryModal').modal()" update="@form,messages,editCategoryForm">
+                                            <f:setPropertyActionListener value="#{category}" target="#{categoryBean.selectedCategory}"/>
+                                        </b:commandButton>
+                                    </b:dataTableColumn>
                                 </b:dataTable>
                             </b:form>
                         </b:panel>
                     </b:column>
                 </b:row>
+                <b:modal closable="false" id="editCategoryModal"  styleClass="modalPseudoClass">
+                    <b:row>
+                        <b:column colSm="12">
+                            <h:form id="editCategoryForm">
+                                <b:panelGrid colSpans="3,9">
+                                    <h:outputText value="نام دسته"/>
+                                    <b:inputText required="true" requiredMessage="لطفا نام دسته را وارد کنید" value="#{categoryBean.selectedCategory.name}"/>
+                                </b:panelGrid>
+                                <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                    <b:commandButton value="به روز رسانی" update="categoryTable,messages" actionListener="#{categoryBean.editCategory}"/>
+                                </b:panelGrid>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:modal>
             </b:container>
         </ui:define>
     </ui:composition>

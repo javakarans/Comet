@@ -27,11 +27,11 @@ public class CategoryDaoImp implements CategoryDao {
         return SQLService.getAllObjects(new Category()) ;
     }
 
-    public void updateCategory(Category category) {
-        SQLService.update(category);
+    public boolean updateCategory(Category category) {
+        return SQLService.update(category);
     }
 
-    public void deleteCategory(Category category) {
-        SQLService.delete(category);
+    public boolean deleteCategory(Category category) {
+        return SQLService.delete(category);
     }
 }

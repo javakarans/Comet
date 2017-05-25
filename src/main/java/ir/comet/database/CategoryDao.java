@@ -12,7 +12,7 @@ public interface CategoryDao {
     public boolean createCategory(Category category);
     public Category getCategory(long categoryId);
     public List<Category> getAllCategories();
-    public void updateCategory(Category category);
-    public void deleteCategory(Category category);
+    public boolean updateCategory(Category category);
+    public boolean deleteCategory(Category category);
 
 }
