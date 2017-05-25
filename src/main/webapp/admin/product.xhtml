@@ -6,7 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:H="http://java.sun.com/jsf/html">
  
 <h:head>
     <title>پنل ادمین</title>
@@ -61,8 +61,29 @@
                                                       update="messages" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
                                     </b:panelGrid>
                                     <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                        <b:commandButton update="@form" value="اضافه کردن محصول" actionListener="#{addProductBran.addProduct}" />
+                                        <b:commandButton update="@form,productListForm" value="اضافه کردن محصول" actionListener="#{addProductBran.addProduct}" />
                                     </b:panelGrid>
+                                </h:form>
+                            </b:panel>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column colSm="12">
+                            <b:panel title="لیست مخصات" collapsible="false">
+                                <h:form id="TSListForm">
+                                    <b:dataTable value="#{addProductBran.product.technicalSpecificationList}" var="TS">
+                                        <b:dataTableColumn label="نام مشخصه">
+                                            <h:outputText value="#{TS.name}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="حذف مشخصه">
+                                            <b:commandButton value="حذف" update="@form" actionListener="#{addProductBran.removeTS(TS)}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="تفزودن جزییات مشخصه">
+                                            <b:commandButton value="اضافه کردن جزییات" oncomplete="$('#addTSDModal').modal()" update="@form,addTSDForm">
+                                                <f:setPropertyActionListener value="#{TS}" target="#{addProductBran.selectedTechnicalSpecification}"/>
+                                            </b:commandButton>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
                                 </h:form>
                             </b:panel>
                         </b:column>
@@ -70,21 +91,50 @@
                     <b:modal closable="false" id="addTSModal"  styleClass="modalPseudoClass">
                         <b:row>
                             <b:column colSm="12">
-                                <h:form id="addTSForm">
+                                <b:panel collapsible="false" title="اضافه کردن مشخصه جدید">
+                                    <h:form id="addTSForm">
                                         <b:panelGrid colSpans="3,3,6">
                                             <h:outputText value="نام مشخصه جدید"/>
                                             <b:inputText value="#{addProductBran.technicalSpecification.name}"/>
-                                            <b:commandButton value="اضافه کردن مشخصه" actionListener="#{addProductBran.addTSToOrder}" update="@form"/>
+                                            <b:commandButton value="اضافه کردن مشخصه" actionListener="#{addProductBran.addTSToProduct}" update="@form,TSListForm"/>
                                         </b:panelGrid>
-                                </h:form>
+                                    </h:form>
+                                </b:panel>
                             </b:column>
                         </b:row>
                     </b:modal>
                     <b:modal closable="false" id="addTSDModal"  styleClass="modalPseudoClass">
                         <b:row>
                             <b:column colSm="12">
-                                <h:form id="addTsDForm">
-
+                                <b:panel title="اضافه کردن مشخصه جزیی جدید" collapsible="false">
+                                    <h:form>
+                                        <b:panelGrid colSpans="3,9">
+                                            <h:outputText value="نام مشخصه جزیی جدید"/>
+                                            <b:inputText value="#{addProductBran.technicalSpecificationDetails.key}"/>
+                                            <h:outputText value="مقدار مشخصه جزیی جدید"/>
+                                            <b:inputText value="#{addProductBran.technicalSpecificationDetails.value}"/>
+                                        </b:panelGrid>
+                                        <b:panelGrid colSpans="12">
+                                            <b:commandButton value="اضافه کردن" update="@form,addTSDForm" actionListener="#{addProductBran.addTSDToProduct}"/>
+                                        </b:panelGrid>
+                                    </h:form>
+                                </b:panel>
+                            </b:column>
+                        </b:row>
+                        <b:row>
+                            <b:column colSm="12">
+                                <h:form id="addTSDForm">
+                                    <b:dataTable value="#{addProductBran.selectedTechnicalSpecification.technicalSpecificationDetailss}" var="TSD">
+                                        <b:dataTableColumn label="نام مشخصه کلی">
+                                            <h:outputText value="#{TSD.technicalSpecification.name}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="نام مشخصه جزیی">
+                                            <h:outputText value="#{TSD.key}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="مقدار مشخصه کلی">
+                                            <h:outputText value="#{TSD.value}"/>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
                                 </h:form>
                             </b:column>
                         </b:row>

@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,15 +36,16 @@ public class AddProductBran {
     private OtherDetails otherDetails;
     private TechnicalSpecification technicalSpecification;
     private TechnicalSpecificationDetails technicalSpecificationDetails;
+    private TechnicalSpecification selectedTechnicalSpecification;
 
 
     @PostConstruct
     public void init()
     {
+        product = new Product();
         technicalSpecification = new TechnicalSpecification();
         technicalSpecificationDetails = new TechnicalSpecificationDetails();
         otherDetails = new OtherDetails();
-        product = new Product();
         productDaoImp = new ProductDaoImp();
         productList = productDaoImp.getAllProducts();
         branchBrandDaoImp = new BranchBrandDaoImp();
@@ -68,12 +70,23 @@ public class AddProductBran {
         }
     }
 
-    public void addTSToOrder()
+    public void removeTS(TechnicalSpecification technicalSpecification)
+    {
+        product.getTechnicalSpecificationList().remove(technicalSpecification);
+    }
+
+    public void addTSToProduct()
     {
         technicalSpecification.setProduct(product);
+        product.getTechnicalSpecificationList().add(technicalSpecification);
+        technicalSpecification = new TechnicalSpecification();
+    }
 
-        product = productDaoImp.getProduct(product.getProductId());
-
+    public void addTSDToProduct()
+    {
+        technicalSpecificationDetails.setTechnicalSpecification(selectedTechnicalSpecification);
+        selectedTechnicalSpecification.getTechnicalSpecificationDetailss().add(technicalSpecificationDetails);
+        technicalSpecificationDetails = new TechnicalSpecificationDetails();
     }
 
     public void processFileUploadIcon(FileUploadEvent event) throws IOException {
@@ -156,5 +169,13 @@ public class AddProductBran {
 
     public void setTechnicalSpecificationDetails(TechnicalSpecificationDetails technicalSpecificationDetails) {
         this.technicalSpecificationDetails = technicalSpecificationDetails;
+    }
+
+    public TechnicalSpecification getSelectedTechnicalSpecification() {
+        return selectedTechnicalSpecification;
+    }
+
+    public void setSelectedTechnicalSpecification(TechnicalSpecification selectedTechnicalSpecification) {
+        this.selectedTechnicalSpecification = selectedTechnicalSpecification;
     }
 }
