@@ -33,7 +33,7 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create all database on startup -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>

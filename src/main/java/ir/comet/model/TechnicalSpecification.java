@@ -20,7 +20,7 @@ public class TechnicalSpecification implements Serializable {
     @ManyToOne
     @JoinColumn(name = "productId")
     private Product product;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "TechnicalSpecification")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "technicalSpecification")
     @Fetch(FetchMode.SUBSELECT)
     private List<TechnicalSpecificationDetails> technicalSpecificationDetailss = new ArrayList<>();
 
