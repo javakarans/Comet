@@ -6,6 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
@@ -61,7 +62,7 @@
                                                          iconAlign="right"></b:commandButton>
                                     </b:column>
 
-                                    <b:column colSm="12">
+                                    <b:column colXs="12">
                                         <b:dataTable searching="false" paginated="false"
                                                      styleClass="order_datatable" value="#{userSessionBean.productOrderDetailList}"
                                                      var="cartItem">
@@ -93,11 +94,9 @@
                                                                style="width:6%;" styleClass="column_content">
                                                 <b:selectOneMenu style="height:auto;" value="#{cartItem.quantity}"
                                                                     update="@form">
-                                                    <f:selectItem itemLabel="1" itemValue="1"></f:selectItem>
-                                                    <f:selectItem itemLabel="2" itemValue="2"></f:selectItem>
-                                                    <f:selectItem itemLabel="3" itemValue="3"></f:selectItem>
-                                                    <f:selectItem itemLabel="4" itemValue="4"></f:selectItem>
-                                                    <f:selectItem itemLabel="5" itemValue="5"></f:selectItem>
+                                                    <c:forEach begin="1" end="30" varStatus="item">
+                                                        <f:selectItem itemLabel="#{item.index}" itemValue="#{item.index}"></f:selectItem>
+                                                    </c:forEach>
                                                 </b:selectOneMenu>
                                             </b:dataTableColumn>
 
@@ -112,20 +111,20 @@
                                             <b:dataTableColumn label="شرح محصول" orderable="false"
                                                                style="width:35%;" headerStyle="text-align:center;">
                                                 <b:row dir="rtl">
-                                                    <b:column colXs="5">
-                                                        <b:image value="#{cartItem.product.imageUrl}" colXs="12"></b:image>
+                                                    <b:column colLg="6" colMd="6">
+                                                        <b:image value="#{cartItem.product.imageUrl}" colLg="12" colMd="12" colSm="12" colXs="12"></b:image>
                                                     </b:column>
-                                                    <b:column colXs="7" style="word-wrap:break-word;">
+                                                    <b:column colLg="6" colMd="6" colSm="12" colXs="12" style="word-wrap:break-word;">
                                                         <div style="color: rgba(19,19,19,0.88)">
-                                                            <h5 style="font-family: YJ, NYJ">
+                                                            <h5 style="font-family: YJ, NYJ;line-height: 20px">
                                                                 #{cartItem.product.name}
                                                             </h5>
-                                                            <h5>
+                                                            <h5 style="line-height: 20px;padding-bottom: 15px">
                                                                 #{cartItem.product.englishName}
                                                             </h5>
                                                         </div>
-                                                        <div style="margin-top: 15px;color: #464646">
-                                                            <h:outputText value="رنگ : #{'زرد'}"
+                                                        <div style="color: #464646;padding-bottom: 5px">
+                                                            <h:outputText value="رنگ : #{cartItem.color}"
                                                                           style="font-size: 12px"></h:outputText>
                                                         </div>
                                                     </b:column>

@@ -140,8 +140,14 @@
                                                             <b:dataTableColumn label="تعداد" orderable="false" style="text-align:center;">
                                                                 <h:outputText value="#{productOrderDetails.quantity}"></h:outputText>
                                                             </b:dataTableColumn>
-                                                            <b:dataTableColumn label="کالا" orderable="false" style="width:35%;text-align:center;">
-                                                                <h:outputText value="#{productOrderDetails.product.name}"></h:outputText>
+                                                            <b:dataTableColumn label="کالا" orderable="false" style="text-align:right;">
+                                                                <b:column colLg="4">
+                                                                    <img src="#{productOrderDetails.product.imageUrl}" alt="" width="100%"/>
+                                                                </b:column>
+                                                                <b:column colLg="8" style="direction:rtl">
+                                                                    <h:outputText value="#{productOrderDetails.product.name}"></h:outputText>
+                                                                    <h:outputText value="رنگ : #{productOrderDetails.color}" style="display: block"></h:outputText>
+                                                                </b:column>
                                                             </b:dataTableColumn>
                                                         </b:dataTable>
                                                     </td>

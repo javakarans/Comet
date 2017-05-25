@@ -33,6 +33,7 @@ public class ProductContentBean {
     private CommentDaoImp commentDaoImp;
     private long productId;
     private String commentText;
+    private String color;
 
     @PostConstruct
     public void init(){
@@ -58,6 +59,11 @@ public class ProductContentBean {
         brandName=product.getBranchBrand().getBrand().getName();
     }
 
+    public String[] loadProductColors(){
+        String colors = product.getColorJson();
+        return colors.split(",");
+    }
+
     public long calProductPriceByDiscount(long productPrice,long discount){
         return (productPrice-discount);
     }
@@ -67,7 +73,24 @@ public class ProductContentBean {
         ProductDaoImp productDaoImp=new ProductDaoImp();
         productOrderDetail.setProduct(productDaoImp.getProduct(getProductId()));
         productOrderDetail.setQuantity(1);
-        userSessionBean.getProductOrderDetailList().add(productOrderDetail);
+        productOrderDetail.setColor(color);
+        if(!userSessionBean.getProductOrderDetailList().isEmpty()){
+            for (ProductOrderDetail detail:userSessionBean.getProductOrderDetailList()
+                    ) {
+                if(detail.getProduct().getProductId()==productOrderDetail.getProduct().getProductId()){
+                    if(detail.getColor().equals(productOrderDetail.getColor())){
+                        detail.setQuantity(detail.getQuantity()+1);
+                    }else {
+                        userSessionBean.getProductOrderDetailList().add(productOrderDetail);
+                    }
+                }else {
+                    userSessionBean.getProductOrderDetailList().add(productOrderDetail);
+                }
+            }
+        }else {
+            userSessionBean.getProductOrderDetailList().add(productOrderDetail);
+        }
+
         userSessionBean.setCurrentURL("/user/cart.xhtml");
         return userSessionBean.getCurrentURL().concat("?faces-redirect=true");
     }
@@ -170,5 +193,12 @@ public class ProductContentBean {
         this.commentText = commentText;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }
 

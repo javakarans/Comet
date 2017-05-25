@@ -25,9 +25,9 @@ public class Test {
 
     public static void main(String[] args) {
 
-        ProductDaoImp productDaoImp=new ProductDaoImp();
-        List<Product> productId = productDaoImp.getTopProductsByColumn("productId", 10);
-        System.out.println(productId);
+        String name="2500K,3500K,4200K";
+
+        String[] split = name.split(",");
 
 
     }
