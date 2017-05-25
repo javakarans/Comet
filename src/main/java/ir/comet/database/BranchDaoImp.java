@@ -31,11 +31,11 @@ public class BranchDaoImp implements BranchDao{
         return SQLService.getObjectsBySpecialColumn(new Branch(),"categoryId",id);
     }
 
-    public void updateBranch(Branch branch) {
-        SQLService.update(branch);
+    public boolean updateBranch(Branch branch) {
+        return SQLService.update(branch);
     }
 
-    public void deleteBranch(Branch branch) {
-        SQLService.delete(branch);
+    public boolean deleteBranch(Branch branch) {
+        return SQLService.delete(branch);
     }
 }

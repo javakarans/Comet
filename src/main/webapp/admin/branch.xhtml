@@ -9,7 +9,7 @@
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
-    <title>JSF 2.2 TUTORIALS</title>
+    <title>پنل ادمین</title>
 </h:head>
 
 <h:body>
@@ -17,52 +17,84 @@
         <ui:define name="content">
             <b:container>
                 <b:growl id="growl" showDetail="false"/>
-                <b:form>
                     <b:row>
                         <b:column colSm="12">
-                            <b:panel title="افزودن زیر دسته جدید" collapsible="false">
-                                <b:panelGrid colSpans="3,9">
-                                    <h:outputText value="انتخاب دسته"/>
-                                    <b:selectOneMenu update="subcattable,addSubCategory"
-                                                     onchange="ajax:adminSubCategoryEdit.onChange()"
-                                                     value="#{branchBean.selectedCategory}">
-                                        <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue="" />
-                                        <f:selectItems value="#{branchBean.categories}" itemValue="#{categoty}"
-                                                       var="categoty"
-                                                       itemLabel="#{categoty.name.toString()}"/>
-                                    </b:selectOneMenu>
-                                </b:panelGrid>
+                            <b:panel title="انتخاب دسته" collapsible="false">
+                                <h:form id="selectedCategory">
+                                    <b:panelGrid colSpans="3,9">
+                                        <h:outputText value="انتخاب دسته"/>
+                                        <b:selectOneMenu update="subcattable,addSubCategory"
+                                                         value="#{branchBean.selectedCategory}">
+                                            <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue="" />
+                                            <f:selectItems value="#{branchBean.categories}" itemValue="#{categoty}"
+                                                           var="categoty"
+                                                           itemLabel="#{categoty.name.toString()}"/>
+                                            <f:ajax execute="@form addSubCategory subcattable" render="@form addSubCategory subcattable" listener="#{branchBean.onChange}"/>
+                                        </b:selectOneMenu>
+                                    </b:panelGrid>
+                                </h:form>
                             </b:panel>
                         </b:column>
                     </b:row>
-                </b:form>
-                <h:form id="addSubCategory" >
                     <b:row>
                         <b:column colSm="12">
                             <b:panel title="اضافه کردن زیر دسته" collapsible="false">
-                                <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
-                                    <h:outputText value="نام"/>
-                                    <b:inputText value="#{branchBean.branch.branchName}"/>
-                                </b:panelGrid>
-                                <b:panelGrid colSpans="12" style="text-align:center;">
-                                    <b:commandButton value="save" actionListener="#{branchBean.addBranch}"/>
-                                </b:panelGrid>
+                                <h:form id="addSubCategory" >
+                                    <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
+                                        <h:outputText value="نام"/>
+                                        <b:inputText required="true" requiredMessage="لطفا نام زیر دسته را وارد کنید" value="#{branchBean.branch.branchName}"/>
+                                        <h:outputText value="نام دسته"/>
+                                        <h:outputText value="#{branchBean.selectedCategory.name}"/>
+                                    </b:panelGrid>
+                                    <b:panelGrid colSpans="12" style="text-align:center;">
+                                        <b:commandButton disabled="#{branchBean.selectedCategory  eq null}" update="@form,subcattable,growl" value="ذخیره" actionListener="#{branchBean.addBranch}"/>
+                                    </b:panelGrid>
+                                </h:form>
                             </b:panel>
                         </b:column>
                     </b:row>
-                </h:form>
-                <b:form id="subcattable">
                     <b:row >
                         <b:column colSm="12">
-                            <b:panel title="#{branchBean.selectedCategory.name}زیر دست های دسته "
-                                     collapsible="false">
-                                <b:dataTable value="#{branchBean.branchList}" var="branch">
-                                    <b:dataTableColumn value="#{branch.branchName}"/>
-                                </b:dataTable>
-                            </b:panel>
+                            <h:form id="subcattable">
+                                <b:panel title=" زیر دسته های دسته #{branchBean.selectedCategory.name} " collapsible="false">
+                                    <b:dataTable value="#{branchBean.branchList}" var="branch">
+                                        <b:dataTableColumn label="کد زیر دسته">
+                                            <h:outputText value="#{branch.branchId}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="نام زیر دسته">
+                                            <h:outputText value="#{branch.branchName}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="نام دسته زیر دسته">
+                                            <h:outputText value="#{branch.category.name}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="حذف">
+                                            <b:commandButton value="حذف" update="@form,growl" actionListener="#{branchBean.removeBranch(branch)}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="به روز رسانی">
+                                            <b:commandButton value="به روز رسانی" oncomplete="$('#editBranchModal').modal()" update="editBranchForm">
+                                                <f:setPropertyActionListener value="#{branch}" target="#{branchBean.selectedBranch}"/>
+                                            </b:commandButton>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
+                                </b:panel>
+                            </h:form>
                         </b:column>
                     </b:row>
-                </b:form>
+                <b:modal closable="false" id="editBranchModal"  styleClass="modalPseudoClass">
+                    <b:row>
+                        <b:column colSm="12">
+                            <h:form id="editBranchForm">
+                                <b:panelGrid colSpans="3,9">
+                                    <h:outputText value="نام زیر دسته"/>
+                                    <b:inputText required="true" requiredMessage="لطفا نام زیر دسته را وارد کنید" value="#{branchBean.selectedBranch.branchName}"/>
+                                </b:panelGrid>
+                                <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                    <b:commandButton value="به روز رسانی" update="subcattable,growl" actionListener="#{branchBean.editBranch}"/>
+                                </b:panelGrid>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:modal>
             </b:container>
         </ui:define>
     </ui:composition>

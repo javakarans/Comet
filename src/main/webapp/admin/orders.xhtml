@@ -22,19 +22,20 @@
                             <h:form>
                                 <b:panelGrid colSpans="3,9">
                                     <h:outputText value="نوع سفارش :"/>
-                                    <b:selectOneMenu value="#{ordersBean.selectedStatus}">
+                                    <b:selectOneMenu update="ordersList" value="#{ordersBean.selectedStatus}">
                                         <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue=""/>
                                         <f:selectItem itemLabel="#{ordersBean.allStatus}" itemValue="#{ordersBean.allStatus}"/>
                                         <f:selectItem itemLabel="#{ordersBean.onPending}" itemValue="#{ordersBean.onPending}"/>
                                         <f:selectItem itemLabel="#{ordersBean.confirmed}" itemValue="#{ordersBean.confirmed}"/>
                                         <f:selectItem itemLabel="#{ordersBean.delivered}" itemValue="#{ordersBean.delivered}"/>
+                                        <f:ajax listener="#{ordersBean.changeList}" execute="@form ordersList" render="@form ordersList"/>
                                     </b:selectOneMenu>
                                 </b:panelGrid>
                             </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
-                <b:row>
+                <b:row id="ordersList">
                     <b:column>
                         <b:panel title="لیست سفارشات" collapsible="false">
                             <h:form>
@@ -57,8 +58,13 @@
                                     <b:dataTableColumn label="جمع کل مبلغ">
                                         <h:outputText value="#{order.totalPrice}"/>
                                     </b:dataTableColumn>
-                                    <b:dataTableColumn label="وضعیت سفارش">
-                                        <h:outputText value="#{order.status}"/>
+                                    <b:dataTableColumn label="وضعیت">
+                                        <b:selectOneMenu update="@form" value="#{order.status}">
+                                            <f:selectItem itemValue="#{ordersBean.confirmed}" itemLabel="#{ordersBean.confirmed}"/>
+                                            <f:selectItem itemValue="#{ordersBean.onPending}" itemLabel="#{ordersBean.onPending}"/>
+                                            <f:selectItem itemValue="#{ordersBean.delivered}" itemLabel="#{ordersBean.delivered}"/>
+                                            <f:ajax  listener="#{ordersBean.saveChangeStatus(order)}"/>
+                                        </b:selectOneMenu>
                                     </b:dataTableColumn>
                                     <b:dataTableColumn label="مبلغ کل با احتساب مالیات">
                                         <h:outputText value="#{order.totalPriceAfterDiscountAndTax}"/>

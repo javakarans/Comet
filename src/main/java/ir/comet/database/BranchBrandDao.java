@@ -13,5 +13,5 @@ public interface BranchBrandDao {
     public List<BranchBrand> getAlBranchBrand();
     public List<Brand> getBrandsByBranchId(long id);
     public int updateBranchBrand(BranchBrand branchBrand);
-    public int deleteBranchBrand(BranchBrand branchBrand);
+    public boolean deleteBranchBrand(BranchBrand branchBrand);
 }

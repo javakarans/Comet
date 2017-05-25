@@ -26,11 +26,11 @@ public class BrandDaoImp implements BrandDao {
         return SQLService.getAllObjects(brand);
     }
 
-    public void updateBrand(Brand brand) {
-        SQLService.update(brand);
+    public boolean updateBrand(Brand brand) {
+        return SQLService.update(brand);
     }
 
-    public void deleteBrand(Brand brand) {
-        SQLService.delete(brand);
+    public boolean deleteBrand(Brand brand) {
+        return SQLService.delete(brand);
     }
 }

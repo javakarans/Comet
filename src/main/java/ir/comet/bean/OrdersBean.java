@@ -31,6 +31,7 @@ public class OrdersBean {
     {
         orderDaoImp = new OrderDaoImp();
         orderDetailList = orderDaoImp.getAllOrders();
+        selectedOrderDetail = new OrderDetail();
     }
 
     public void showCustomer(Customer customer)
@@ -46,6 +47,25 @@ public class OrdersBean {
         RequestContext requestContext = RequestContext.getCurrentInstance();
         requestContext.execute("$('#productModal').modal()");
 
+    }
+
+    public void saveChangeStatus(OrderDetail orderDetail)
+    {
+        boolean result = orderDaoImp.updateOrder(orderDetail);
+        if (result)
+        {
+            orderDetailList = orderDaoImp.getAllOrders();
+        }
+        else
+        {
+        }
+    }
+
+    public void changeList()
+    {
+        if (selectedStatus.equals(allStatus))
+            orderDetailList = orderDaoImp.getAllOrders();
+        else orderDetailList = orderDaoImp.getOrderByStatus(selectedStatus);
     }
 
     public List<OrderDetail> getOrderDetailList() {

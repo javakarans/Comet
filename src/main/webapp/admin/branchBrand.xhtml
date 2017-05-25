@@ -16,19 +16,20 @@
     <ui:composition template="../templates/admin/adminTemplate.xhtml">
         <ui:define name="content">
                 <b:container>
+                    <b:growl id="messages" showDetail="false"/>
                     <b:row>
                         <b:column colSm="12">
                             <h:form>
                                 <b:panel title="افزودن شاخه محصولات" collapsible="false">
                                     <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
                                         <h:outputText value="انتخاب برند"/>
-                                        <b:selectOneMenu value="#{branchBrandBean.selectedBrand}">
+                                        <b:selectOneMenu update="@form" value="#{branchBrandBean.selectedBrand}">
                                             <f:selectItem itemLabel="(لطفا انتخاب کنید)" itemValue=""/>
                                             <f:selectItems value="#{branchBrandBean.brandList}" var="brand"
                                                            itemValue="#{brand}" itemLabel="#{brand.name}"/>
                                         </b:selectOneMenu>
                                         <h:outputText value="انتخاب زیر دسته"/>
-                                        <b:selectOneMenu value="#{branchBrandBean.selectedBranch}">
+                                        <b:selectOneMenu update="@form" value="#{branchBrandBean.selectedBranch}">
                                             <f:selectItem itemValue="" itemLabel="(لطفا انتخاب کنید)"/>
                                             <f:selectItems value="#{branchBrandBean.branchList}" var="branch"
                                                            itemLabel="#{branch.branchName}/#{branch.category.name}"
@@ -36,7 +37,7 @@
                                         </b:selectOneMenu>
                                     </b:panelGrid>
                                     <b:panelGrid colSpans="12" style="text-align:center;">
-                                        <b:commandButton value="اضافه کردن" actionListener="#{branchBrandBean.addBranchBrand}" />
+                                        <b:commandButton disabled="#{branchBrandBean.selectedBranch eq null or branchBrandBean.selectedBrand eq null}" update="@form,branchBranListForm,messages" value="اضافه کردن" actionListener="#{branchBrandBean.addBranchBrand}" />
                                     </b:panelGrid>
                                 </b:panel>
                             </h:form>
@@ -45,13 +46,19 @@
                     <b:row>
                         <b:column colSm="12">
                             <b:panel title="لبست شاخه محصولات" collapsible="false">
-                                <h:form>
+                                <h:form id="branchBranListForm">
                                     <b:dataTable value="#{branchBrandBean.branchBrandList}" var="branchBrand">
+                                        <b:dataTableColumn label="کد شاخه محصول">
+                                            <h:outputText value="#{branchBrand.branchBrandId}"/>
+                                        </b:dataTableColumn>
                                         <b:dataTableColumn label="نام زیر دسته">
                                             <h:outputText value="#{branchBrand.branch.branchName}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn label="نام برند">
                                             <h:outputText value="#{branchBrand.brand.name}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="حذف">
+                                            <b:commandButton value="حذف" update="@form,messages" actionListener="#{branchBrandBean.removeBranchBrand(branchBrand)}"/>
                                         </b:dataTableColumn>
                                     </b:dataTable>
                                 </h:form>
