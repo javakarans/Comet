@@ -16,20 +16,21 @@
     <ui:composition template="../templates/admin/adminTemplate.xhtml">
         <ui:define name="content">
             <b:container>
+                <b:growl id="messages" showDetail="false"/>
                 <b:row>
                     <b:column colSm="12">
-                        <b:panel title="تغییر کلمه عبور">
+                        <b:panel collapsible="false" title="تغییر کلمه عبور">
                             <h:form>
                                 <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
                                     <h:outputText value="کلمه عبور فعلی را وارد کنید"/>
-                                    <b:inputSecret value="#{settingsBean.currentPassWord}"/>
+                                    <b:inputSecret required="true" requiredMessage="لطفا رمز فعلی را وارد کنید" value="#{settingsBean.currentPassWord}"/>
                                     <h:outputText value="کلمه عبور جدید را وارد کنید"/>
-                                    <b:inputSecret value="#{settingsBean.firstNewPassWord}"/>
-                                    <h:outputText value="کلمه عبور جدید  را تکرار کنید"/>
-                                    <b:inputSecret value="#{settingsBean.secondNewPassWord}"/>
+                                    <b:inputSecret required="true" requiredMessage="لطفا رمز جدید را وارد کنید" value="#{settingsBean.firstNewPassWord}"/>
+                                    <h:outputText  value="کلمه عبور جدید  را تکرار کنید"/>
+                                    <b:inputSecret required="true" requiredMessage="لطفا رمز جدید را مجداد وارد کنید" value="#{settingsBean.secondNewPassWord}"/>
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                    <b:commandButton value="تغییر پسورد" action="#{settingsBean.changePassword()}"/>
+                                    <b:commandButton update="@form,messages" value="تغییر پسورد" action="#{settingsBean.changePassword()}"/>
                                 </b:panelGrid>
                             </h:form>
                         </b:panel>
@@ -39,9 +40,10 @@
                     <b:column>
                         <b:panel collapsible="false">
                             <h:form>
-                                <b:panelGrid colSpans="3,9">
-                                    <b:inputText value="#{settingsBean.settings.adminUsername}"/>
-                                    <b:commandButton value="تغییر نام کاربری" action="#{settingsBean.changeUserName()}"/>
+                                <b:panelGrid colSpans="3,3,6">
+                                    <h:outputText value="نام کاربری"/>
+                                    <b:inputText required="true" requiredMessage="نام کاربری نمی تواند خالی باشد" value="#{settingsBean.settings.adminUsername}"/>
+                                    <b:commandButton update="@form,messages" value="تغییر نام کاربری" action="#{settingsBean.changeUserName()}"/>
                                 </b:panelGrid>
                             </h:form>
                         </b:panel>
