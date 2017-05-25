@@ -8,6 +8,6 @@ public interface BrandDao {
     public boolean createBrand(Brand brand);
     public Brand getBrand(long brandId);
     public List<Brand> getAllBrands();
-    public void updateBrand(Brand brand);
-    public void deleteBrand(Brand brand);
+    public boolean updateBrand(Brand brand);
+    public boolean deleteBrand(Brand brand);
 }

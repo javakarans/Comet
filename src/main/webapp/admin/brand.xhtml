@@ -25,27 +25,57 @@
                             <h:form enctype="multipart/form-data">
                                 <b:panelGrid colSpans="3,9">
                                     <h:outputText value="نام"/>
-                                    <b:inputText required="true" requiredMessage="لطفا نام رو وارد کنید" value="#{brandBean.brand.name}"/>
+                                    <b:inputText required="true" requiredMessage="لطفا نام برند رو وارد کنید" value="#{brandBean.brand.name}"/>
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                    <b:commandButton value="ذخیره" update="list" actionListener="#{brandBean.addBrand}"/>
+                                    <b:commandButton value="ذخیره" update="brandTable,messages" actionListener="#{brandBean.addBrand}"/>
                                 </b:panelGrid>
                             </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
 
-                <b:row id="list">
+                <b:row>
                     <b:column colSm="12">
                         <b:panel title="لیست برندها" collapsible="false">
-                            <b:form id="articleTable">
-                                <b:dataTable class="editableCarTable1" value="#{brandBean.brandList}" var="brand">
-                                    <b:dataTableColumn value="#{brand.name}"/>
-                                </b:dataTable>
-                            </b:form>
+                            <h:form id="brandTable">
+                                <b:panelGrid colSpans="12">
+                                    <b:dataTable class="editableCarTable1" value="#{brandBean.brandList}" var="brand">
+                                        <b:dataTableColumn label="کد برند">
+                                            <h:outputText value="#{brand.brandId}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="نام برند">
+                                            <h:outputText value="#{brand.name}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="حذف برند">
+                                            <b:commandButton update="@form,messages" value="حذف برند"  actionListener="#{brandBean.removeBrand(brand)}"/>
+                                        </b:dataTableColumn>
+                                        <b:dataTableColumn label="به روز رسانی">
+                                            <b:commandButton update="editBrandForm" oncomplete="$('#editBrandModal').modal()"  value="به روز رسانی" >
+                                                <f:setPropertyActionListener value="#{brand}" target="#{brandBean.selectedBrand}"/>
+                                            </b:commandButton>
+                                        </b:dataTableColumn>
+                                    </b:dataTable>
+                                </b:panelGrid>
+                            </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
+                <b:modal closable="false" id="editBrandModal"  styleClass="modalPseudoClass">
+                    <b:row>
+                        <b:column colSm="12">
+                                <h:form id="editBrandForm">
+                                    <b:panelGrid colSpans="3,9">
+                                        <h:outputText value="نام برند"/>
+                                        <b:inputText required="true" requiredMessage="لطفا نام برند را وارد کنید" value="#{brandBean.selectedBrand.name}"/>
+                                    </b:panelGrid>
+                                    <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
+                                        <b:commandButton value="به روز رسانی" update="brandTable,messages" actionListener="#{brandBean.updateBrand}"/>
+                                    </b:panelGrid>
+                                </h:form>
+                        </b:column>
+                    </b:row>
+                </b:modal>
             </b:container>
         </ui:define>
     </ui:composition>
