@@ -51,9 +51,8 @@ public class BranchBrandDaoImp implements BranchBrandDao {
         return 0;
     }
 
-    public int deleteBranchBrand(BranchBrand branchBrand) {
-        SQLService.delete(branchBrand);
-        return 0;
+    public boolean deleteBranchBrand(BranchBrand branchBrand) {
+        return SQLService.delete(branchBrand);
     }
 
 }
