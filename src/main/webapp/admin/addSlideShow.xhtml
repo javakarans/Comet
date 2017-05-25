@@ -22,7 +22,7 @@
                 <b:row>
                     <b:column colSm="12">
                         <b:panel title="افزودن اسلاید" collapsible="false">
-                            <h:form enctype="multipart/form-data">
+                            <h:form >
                                 <b:panelGrid colSpans="3,9">
                                     <h:outputText value="عنوان"/>
                                     <b:inputText required="true" requiredMessage="لطفا موضوع رو وارد کنید" value="#{addSlideShowBean.slideShow.slideTitle}"/>
@@ -36,50 +36,54 @@
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
                                     <h:outputText value="عکس"/>
-                                    <p:fileUpload required="true" requiredMessage="عکس را آپلود کنید" style="width: auto"
+                                    <p:fileUpload  style="width: auto"
                                                   fileUploadListener="#{addSlideShowBean.processFileUploadEdit}" mode="advanced"
                                                   dragDropSupport="false"
                                                   sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                    <b:commandButton value="ذخیره" update="@form,messages,list" actionListener="#{addSlideShowBean.addSlide}"/>
+                                    <b:commandButton value="ذخیره" update="@form,slideTable,messages" actionListener="#{addSlideShowBean.addSlide}"/>
                                 </b:panelGrid>
                             </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
-
-                <b:row id="list">
+                <b:row>
                     <b:column colSm="12">
                         <b:panel title="لیست اسلاید ها" collapsible="false">
                             <h:form id="slideTable">
-                                <b:dataTable class="editableCarTable1" value="#{addSlideShowBean.slideShowList}" var="slide">
-                                    <b:dataTableColumn value="#{slide.slideTitle}"/>
-                                    <b:dataTableColumn label="remove" style="text-align:center;">
-                                        <b:commandButton value="حذف" icon="remove"
+                                <b:dataTable value="#{addSlideShowBean.slideShowList}" var="slide">
+                                    <b:dataTableColumn label="کد اسلاید">
+                                        <h:outputText value="#{slide.slideId}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="عنوان اسلاید">
+                                        <h:outputText value="#{slide.slideTitle}"/>
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn label="حذف" style="text-align:center;">
+                                        <b:commandButton value="حذف"
                                                          actionListener="#{addSlideShowBean.removeSlide(slide)}" update="@form,messages"/>
                                     </b:dataTableColumn>
-                                    <b:dataTableColumn label="update" style="text-align:center;">
-                                        <b:commandButton ajax="true" value="وبرایش" icon="update"
-                                                         update="@form,messages,updateSlide"
-                                                         action="#{addSlideShowBean.showArticleEditModal(slide)}"/>
+                                    <b:dataTableColumn label="به روز رسانی" style="text-align:center;">
+                                        <b:commandButton  value="وبرایش"
+                                                          oncomplete="$('#updateSlide').modal()"
+                                                          update="editSlidForm">
+                                            <f:setPropertyActionListener value="#{slide}" target="#{addSlideShowBean.selectedSlide}"/>
+                                        </b:commandButton>
                                     </b:dataTableColumn>
                                 </b:dataTable>
                             </h:form>
                         </b:panel>
                     </b:column>
                 </b:row>
-
-
                 <b:modal id="updateSlide" title="وبرایش" closable="false">
                     <b:row>
                         <b:column colSm="12">
-                            <h:form enctype="multipart/form-data">
+                            <h:form id="editSlidForm">
                                 <b:panelGrid colSpans="3,9">
                                     <h:outputText value="عنوان"/>
-                                    <b:inputText required="true" requiredMessage="لطفا عنوان را وارد کنید" value="#{addSlideShowBean.slideShow.slideTitle}"/>
+                                    <b:inputText required="true" requiredMessage="لطفا عنوان را وارد کنید" value="#{addSlideShowBean.selectedSlide.slideTitle}"/>
                                     <h:outputText value="محتوا"/>
-                                    <b:inputTextarea required="true" requiredMessage="لطفا محتوا را وارد کنید" id="summernote" styleClass="summernote" value="#{addSlideShowBean.slideShow.slideText}"/>
+                                    <b:inputTextarea required="true" requiredMessage="لطفا محتوا را وارد کنید" id="summernote" styleClass="summernote" value="#{addSlideShowBean.selectedSlide.slideText}"/>
                                     <script type="text/javascript">
                                         $(document).ready(function () {
                                             $('.summernote').summernote();
@@ -88,23 +92,20 @@
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="3,9" style="margin-bottom:20px;">
                                     <h:outputText value="عکس"/>
-                                    <p:fileUpload required="true" requiredMessage="لطفا عکس را آپلود کنید" style="width: auto"
+                                    <p:fileUpload style="width: auto"
                                                   fileUploadListener="#{addSlideShowBean.processFileUploadEdit}" mode="advanced"
                                                   dragDropSupport="false"
                                                   sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                                 </b:panelGrid>
                                 <b:panelGrid colSpans="12" style="text-align:center;margin-bottom:20px;">
-                                    <b:commandButton value="Update" action="#{addSlideShowBean.editSlide}"/>
+                                    <b:commandButton value="به روز رسانی" update="slideTable,messages"  actionListener="#{addSlideShowBean.editSlide}"/>
                                 </b:panelGrid>
                             </h:form>
                         </b:column>
                     </b:row>
                 </b:modal>
-
             </b:container>
         </ui:define>
-
     </ui:composition>
 </h:body>
-
 </html>

@@ -11,6 +11,7 @@ import org.primefaces.model.UploadedFile;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 @ManagedBean
-@javax.faces.bean.ViewScoped
+@ViewScoped
 public class AddSlideShowBean implements Serializable {
 
     private SlideShow slideShow;
@@ -32,6 +33,8 @@ public class AddSlideShowBean implements Serializable {
     private static String image_location = StaticSettings.imageUrl;
     private String filename;
     private String uniqueID;
+    private FacesMessage msg;
+    private SlideShow selectedSlide;
 
     @PostConstruct
     public void init()
@@ -42,8 +45,7 @@ public class AddSlideShowBean implements Serializable {
     }
 
     public void addSlide(){
-        FacesMessage msg;
-        System.out.println(filename);
+        System.out.println("222222222222222222222222222222222222222222222");
         slideShow.setImageLocation(filename);
         boolean result = slideShowDaoImp.createSlideShow(slideShow);
         if (result)
@@ -62,13 +64,13 @@ public class AddSlideShowBean implements Serializable {
 
     public void removeSlide(SlideShow slideShow)
     {
-        FacesMessage msg;
+        System.out.println("asdfghjkl;'lkjhgfdsfghjkl;kjhgfdsadfdfhj");
         boolean result = slideShowDaoImp.deleteSlideShow(slideShow);
         if (result)
         {
+            slideShowList = slideShowDaoImp.getAllSlideShow();
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "حذف شد", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
-            slideShowList = slideShowDaoImp.getAllSlideShow();
         }
         {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ناموفق", "");
@@ -78,9 +80,8 @@ public class AddSlideShowBean implements Serializable {
 
     public void editSlide()
     {
-        FacesMessage msg;
-        slideShow.setImageLocation(filename);
-        boolean result = slideShowDaoImp.updateSlideShow(slideShow);
+        selectedSlide.setImageLocation(filename);
+        boolean result = slideShowDaoImp.updateSlideShow(selectedSlide);
         if (result)
         {
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "به روز رسانی شد", "");
@@ -91,14 +92,6 @@ public class AddSlideShowBean implements Serializable {
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ناموفق", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-        slideShow = new SlideShow();
-    }
-
-    public void showArticleEditModal(SlideShow slideShow)
-    {
-        this.slideShow = slideShow;
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.execute("$('#updateSlide').modal()");
     }
 
     public void processFileUploadEdit(FileUploadEvent event) throws IOException {
@@ -132,5 +125,13 @@ public class AddSlideShowBean implements Serializable {
 
     public void setSlideShowList(List<SlideShow> slideShowList) {
         this.slideShowList = slideShowList;
+    }
+
+    public SlideShow getSelectedSlide() {
+        return selectedSlide;
+    }
+
+    public void setSelectedSlide(SlideShow selectedSlide) {
+        this.selectedSlide = selectedSlide;
     }
 }
