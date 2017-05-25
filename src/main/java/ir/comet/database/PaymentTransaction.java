@@ -32,7 +32,7 @@ public class PaymentTransaction {
             while (iterator.hasNext()){
                 ProductOrderDetail next = iterator.next();
                 long soldCount = next.getProduct().getSoldCount();
-                next.getProduct().setSoldCount(soldCount+1);
+                next.getProduct().setSoldCount(soldCount);
                 next.setOrderDetail(orderDetail);
                 session.save(next);
             }

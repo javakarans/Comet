@@ -52,7 +52,7 @@
                                                      styleClass="order_datatable" value="#{userSessionBean.productOrderDetailList}"
                                                      var="cartItem">
                                             <b:dataTableColumn label="قیمت کل" orderable="false"
-                                                               style="width:17%;" styleClass="column_content"
+                                                               styleClass="column_content"
                                                                contentStyle="direction:rtl;">
                                                 <h:outputText value="#{cartItem.totalPriceAfterDiscountAndTax}"
                                                               style="font-size: 25px"></h:outputText>
@@ -60,7 +60,7 @@
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="قیمت واحد" orderable="false"
-                                                               style="width:15%;" styleClass="column_content"
+                                                               styleClass="column_content"
                                                                contentStyle="direction:rtl;">
                                                 <h:outputText value="#{reviewBean.calPriceByDiscount(cartItem)}"
                                                               style="font-size: 25px"></h:outputText>
@@ -68,27 +68,27 @@
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="تعداد" orderable="false"
-                                                               style="width:6%;" styleClass="column_content">
+                                                               styleClass="column_content">
                                                 <h:outputText value="#{cartItem.quantity}"></h:outputText>
                                             </b:dataTableColumn>
 
                                             <b:dataTableColumn label="شرح محصول" orderable="false"
-                                                               style="width:35%;" headerStyle="text-align:center;">
+                                                               headerStyle="text-align:center;">
                                                 <b:row dir="rtl">
-                                                    <b:column colXs="5">
-                                                        <b:image value="#{cartItem.product.imageUrl}" colXs="12"></b:image>
+                                                    <b:column colLg="4" colMd="5">
+                                                        <b:image value="#{cartItem.product.imageUrl}" colLg="12" colMd="12" colSm="7" colXs="12"></b:image>
                                                     </b:column>
-                                                    <b:column colXs="7" style="word-wrap:break-word;">
+                                                    <b:column colLg="8" colMd="7" colSm="5" colXs="12" style="word-wrap:break-word;">
                                                         <div style="color: rgba(19,19,19,0.88)">
-                                                            <h5 style="font-family: YJ, NYJ">
+                                                            <h5 style="font-family: YJ, NYJ;line-height: 20px">
                                                                 #{cartItem.product.name}
                                                             </h5>
-                                                            <h5>
+                                                            <h5 style="line-height: 20px">
                                                                 #{cartItem.product.englishName}
                                                             </h5>
                                                         </div>
-                                                        <div style="margin-top: 15px;color: #464646">
-                                                            <h:outputText value="رنگ : #{'زرد'}"
+                                                        <div style="color: #464646">
+                                                            <h:outputText value="رنگ : #{cartItem.color}"
                                                                           style="font-size: 12px"></h:outputText>
                                                         </div>
                                                     </b:column>

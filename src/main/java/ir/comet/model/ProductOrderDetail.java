@@ -14,6 +14,7 @@ public class ProductOrderDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productCartId;
     private int quantity;
+    private String color;
     private long totalPrice;
     private long totalPriceAfterDiscountAndTax;
     @ManyToOne
@@ -69,5 +70,13 @@ public class ProductOrderDetail implements Serializable {
 
     public void setOrderDetail(OrderDetail orderDetail) {
         this.orderDetail = orderDetail;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

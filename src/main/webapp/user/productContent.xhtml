@@ -6,6 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:h="http://java.sun.com/jsf/html">
  
 <h:head>
@@ -80,10 +81,11 @@
                                             </div>
                                             <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:selectOneMenu span="5" style="height:auto;" label="انتخاب رنگ"
-                                                                 labelStyle="color:#848484;">
-                                                    <f:selectItem itemLabel="لطفا انتخاب کنید" itemValue=""/>
-                                                    <f:selectItem itemLabel="رنگ 1" itemValue="1"/>
-                                                    <f:selectItem itemLabel="زنگ 2" itemValue="2"/>
+                                                                 labelStyle="color:#848484;" update="@form" value="#{productContentBean.color}">
+                                                    <f:selectItem itemLabel="لطفاانتخاب کنید" itemValue=""/>
+                                                    <c:forEach items="#{productContentBean.loadProductColors()}" var="item">
+                                                        <f:selectItem itemLabel="#{item}" itemValue="#{item}"/>
+                                                    </c:forEach>
                                                 </b:selectOneMenu>
                                             </b:row>
                                             <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
