@@ -7,6 +7,7 @@ import ir.comet.model.Category;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.util.List;
@@ -22,6 +23,8 @@ public class CategoryBean {
     private List<Category> categoryList;
     private Category selectedCategory;
     private FacesMessage msg;
+    @ManagedProperty(value = "#{applicationBean}")
+    private ApplicationBean applicationBean;
 
     @PostConstruct
     public void init()
@@ -38,6 +41,7 @@ public class CategoryBean {
         {
             categoryList = categoryDaoImp.getAllCategories();
             category = new Category();
+            applicationBean.autoCreateMenu();
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "ذخیره شد", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
@@ -54,6 +58,7 @@ public class CategoryBean {
         if (result)
         {
             categoryList = categoryDaoImp.getAllCategories();
+            applicationBean.autoCreateMenu();
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "حذف شد", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
@@ -71,6 +76,7 @@ public class CategoryBean {
         if (result)
         {
             categoryList = categoryDaoImp.getAllCategories();
+            applicationBean.autoCreateMenu();
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "به روز رسانی شد", "");
             FacesContext.getCurrentInstance().addMessage(null, msg);
 
@@ -104,5 +110,13 @@ public class CategoryBean {
 
     public void setSelectedCategory(Category selectedCategory) {
         this.selectedCategory = selectedCategory;
+    }
+
+    public ApplicationBean getApplicationBean() {
+        return applicationBean;
+    }
+
+    public void setApplicationBean(ApplicationBean applicationBean) {
+        this.applicationBean = applicationBean;
     }
 }
