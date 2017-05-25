@@ -1,5 +1,6 @@
 package ir.comet.database;
 
+import ir.comet.model.Product;
 import ir.comet.model.ProductOrderDetail;
 
 import java.util.List;

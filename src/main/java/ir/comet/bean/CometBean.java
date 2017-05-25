@@ -1,8 +1,10 @@
 package ir.comet.bean;
 
 import ir.comet.database.ArticleDaoImp;
+import ir.comet.database.ProductDaoImp;
 import ir.comet.database.SlideShowDaoImp;
 import ir.comet.model.Article;
+import ir.comet.model.Product;
 import ir.comet.model.SlideShow;
 
 import javax.annotation.PostConstruct;
@@ -19,14 +21,19 @@ import java.util.List;
 @ViewScoped
 public class CometBean {
 
-
     private List<Article> articleList;
     private List<SlideShow> allSlideShow;
+    private List<Product> mostProductSoldList;
+    private List<Product> newProductsList;
+    private ProductDaoImp productDaoImp;
 
     @PostConstruct
     public void init(){
+        productDaoImp=new ProductDaoImp();
         loadSlideShow();
         loadArticle();
+        loadMostProductSold();
+        loadNewProducts();
     }
 
     public void loadArticle(){
@@ -49,6 +56,14 @@ public class CometBean {
         allSlideShow = slideShowDaoImp.getAllSlideShow();
     }
 
+    public void loadMostProductSold(){
+        mostProductSoldList = productDaoImp.getTopProductsByColumn("soldCount", 10);
+    }
+
+    public void loadNewProducts(){
+        newProductsList = productDaoImp.getTopProductsByColumn("productId",10);
+    }
+
     public String redirectToArticlePage(Article article){
         return "/user/productArticle.xhtml?faces-redirect=true&articleId="+article.getArticleId();
     }
@@ -68,4 +83,22 @@ public class CometBean {
     public void setAllSlideShow(List<SlideShow> allSlideShow) {
         this.allSlideShow = allSlideShow;
     }
+
+    public List<Product> getMostProductSoldList() {
+        return mostProductSoldList;
+    }
+
+    public void setMostProductSoldList(List<Product> mostProductSoldList) {
+        this.mostProductSoldList = mostProductSoldList;
+    }
+
+    public List<Product> getNewProductsList() {
+        return newProductsList;
+    }
+
+    public void setNewProductsList(List<Product> newProductsList) {
+        this.newProductsList = newProductsList;
+    }
+
+
 }

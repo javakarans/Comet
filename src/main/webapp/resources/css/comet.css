@@ -64,7 +64,7 @@
     text-align: center;
 }
 .product-panel div{
-    margin-top: 1px;
+    margin-top: 8px;
     line-height: 10px;
 }
 .product-panel div div{
@@ -76,9 +76,10 @@
     text-line-through-color: rgba(128, 128, 128, 0.55);
 }
 .product-name{
+    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    line-height: 20px;
+    height: 17px;
 }
 .nav-right img{
     margin-top: 116px;

@@ -48,6 +48,7 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "branchBrandId")
     private BranchBrand branchBrand;
+    private long soldCount;
 
     public long getProductId() {
         return productId;
@@ -183,5 +184,13 @@ public class Product implements Serializable {
 
     public void setBranchBrand(BranchBrand branchBrand) {
         this.branchBrand = branchBrand;
+    }
+
+    public long getSoldCount() {
+        return soldCount;
+    }
+
+    public void setSoldCount(long soldCount) {
+        this.soldCount = soldCount;
     }
 }

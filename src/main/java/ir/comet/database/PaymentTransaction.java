@@ -31,6 +31,8 @@ public class PaymentTransaction {
             Iterator<ProductOrderDetail> iterator = productOrderDetailList.iterator();
             while (iterator.hasNext()){
                 ProductOrderDetail next = iterator.next();
+                long soldCount = next.getProduct().getSoldCount();
+                next.getProduct().setSoldCount(soldCount+1);
                 next.setOrderDetail(orderDetail);
                 session.save(next);
             }

@@ -20,6 +20,7 @@
         <ui:define name="content">
 
             <link href="resources/css/comet.css" rel="stylesheet"></link>
+            <script type="text/javascript" src="resources/js/comet.js"></script>
 
             <b:container style="margin-top:-8px;">
 
@@ -53,7 +54,12 @@
                     <b:column colSm="9">
                         <!-- SlidePanel -->
                         <b:panel styleClass="slidePanel" rendered="true">
-                            <b:carousel id="parque">
+                            <b:row rendered="#{empty cometBean.allSlideShow}">
+                                <b:column colSm="12">
+                                    <p style="text-align: center;margin-top: 5px">هیچ اسلایدی یافت نشد!</p>
+                                </b:column>
+                            </b:row>
+                            <b:carousel id="parque" rendered="#{not empty cometBean.allSlideShow}">
                                 <c:forEach items="#{cometBean.allSlideShow}" var="item">
                                     <b:carouselItem>
                                         <img src="#{item.imageLocation}" alt="Valladolid"/>
@@ -66,26 +72,33 @@
                             <f:facet name="heading">
                                 <span>پر فروش ترین ها</span>
                             </f:facet>
-                            <b:row>
+                            <b:row rendered="#{empty cometBean.mostProductSoldList}">
+                                <b:column colSm="12">
+                                    <p style="text-align: center">هیچ محصولی یافت نشد!</p>
+                                </b:column>
+                            </b:row>
+                            <b:row rendered="#{not empty cometBean.mostProductSoldList}">
                                 <b:column colSm="12">
                                     <div class="product-slide-bg">
-                                        <div class="product-slide">
+                                        <div class="product-slide" id="slide1">
                                             <div class="nav-right">
-                                                <img src="resources/images/right-arrow.png" alt="img"/>
+                                                <img src="resources/images/right-arrow.png" alt="img" onclick="goToRight('slide1')"/>
                                             </div>
                                             <div class="product-slide-content">
-                                                <div class="product-panel">
-                                                    <img alt="img" src="resources/images/sample1.jpg"
-                                                         style="width: 180px;"></img>
-                                                    <div style="width: 180px">
-                                                        <p class="product-name">محمد حسین</p>
-                                                        <div style="margin-top: -8px"><p>قیمت اصلی</p></div>
-                                                        <p style="margin-top: 4px;color: #00a100">قیمت با تخفیف</p>
+                                                <c:forEach items="#{cometBean.mostProductSoldList}" var="item">
+                                                    <div class="product-panel">
+                                                        <img alt="img" src="#{item.imageUrl}"
+                                                             style="width: 180px;"></img>
+                                                        <div style="width: 180px">
+                                                            <p class="product-name">#{item.name}</p>
+                                                            <div style="margin-top: -8px"><p>#{item.price}</p></div>
+                                                            <p style="margin-top: 4px;color: #00a100">#{(item.price-item.discount)}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </c:forEach>
                                             </div>
                                             <div class="nav-left">
-                                                <img src="resources/images/left-arrow.png" alt="img"/>
+                                                <img src="resources/images/left-arrow.png" alt="img" onclick="goToLeft('slide1')"/>
                                             </div>
                                         </div>
                                     </div>
@@ -97,26 +110,33 @@
                             <f:facet name="heading">
                                 <span>جدید ترین ها</span>
                             </f:facet>
-                            <b:row>
+                            <b:row rendered="#{empty cometBean.newProductsList}">
+                                <b:column colSm="12">
+                                    <p style="text-align: center;margin-top: 5px">هیچ اسلایدی یافت نشد!</p>
+                                </b:column>
+                            </b:row>
+                            <b:row rendered="#{not empty cometBean.newProductsList}">
                                 <b:column colSm="12">
                                     <div class="product-slide-bg">
-                                        <div class="product-slide">
+                                        <div class="product-slide" id="slide2">
                                             <div class="nav-right">
-                                                <img src="resources/images/right-arrow.png" alt="img"/>
+                                                <img src="resources/images/right-arrow.png" alt="img" onclick="goToRight('slide2')"/>
                                             </div>
                                             <div class="product-slide-content">
-                                                <div class="product-panel">
-                                                    <img alt="img" src="resources/images/sample1.jpg"
-                                                         style="width: 180px;"></img>
-                                                    <div style="width: 180px">
-                                                        <p class="product-name">محمد حسین</p>
-                                                        <div style="margin-top: -8px"><p>قیمت اصلی</p></div>
-                                                        <p style="margin-top: 4px;color: #00a100">قیمت با تخفیف</p>
+                                                <c:forEach items="#{cometBean.newProductsList}" var="item">
+                                                    <div class="product-panel">
+                                                        <img alt="img" src="#{item.imageUrl}"
+                                                             style="width: 180px;"></img>
+                                                        <div style="width: 180px">
+                                                            <p class="product-name">#{item.name}</p>
+                                                            <div style="margin-top: -8px"><p>#{item.price}</p></div>
+                                                            <p style="margin-top: 4px;color: #00a100">#{(item.price-item.discount)}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </c:forEach>
                                             </div>
                                             <div class="nav-left">
-                                                <img src="resources/images/left-arrow.png" alt="img"/>
+                                                <img src="resources/images/left-arrow.png" alt="img" onclick="goToLeft('slide2')"/>
                                             </div>
                                         </div>
                                     </div>

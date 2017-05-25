@@ -1,10 +1,10 @@
 package ir.comet.database;
 
+import ir.comet.model.Product;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 
 import java.util.List;
 
@@ -72,6 +72,19 @@ public class SQLService {
         Criteria criteria = HibernateUtil.getSession().createCriteria(object.getClass());
         criteria.add(Restrictions.eq(firstColumn,firstValue));
         criteria.add(Restrictions.eq(secondColumn,secondValue));
+        List<T> list=criteria.list();
+        HibernateUtil.commitTransaction();
+        return list;
+    }
+
+    public <T> List getTopObjectsByColumn(T object,String column,int count){
+        HibernateUtil.beginTransaction();
+        Session session = HibernateUtil.getSession();
+        Criteria criteria = session.createCriteria(object.getClass());
+        long value=0;
+        criteria.add(Property.forName(column).ne(value));
+        criteria.addOrder(Order.desc(column));
+        criteria.setMaxResults(count);
         List<T> list=criteria.list();
         HibernateUtil.commitTransaction();
         return list;

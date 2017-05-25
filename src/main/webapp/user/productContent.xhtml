@@ -78,7 +78,7 @@
                                                 <span class="first">#{productContentBean.product.name}</span>
                                                 <h5><span>#{productContentBean.product.englishName}</span></h5>
                                             </div>
-                                            <b:row style="margin-top:25px;">
+                                            <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:selectOneMenu span="5" style="height:auto;" label="انتخاب رنگ"
                                                                  labelStyle="color:#848484;">
                                                     <f:selectItem itemLabel="لطفا انتخاب کنید" itemValue=""/>
@@ -86,7 +86,7 @@
                                                     <f:selectItem itemLabel="زنگ 2" itemValue="2"/>
                                                 </b:selectOneMenu>
                                             </b:row>
-                                            <b:row style="margin-top:25px;">
+                                            <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:selectOneMenu span="5" style="height:auto;" label="انتخاب گارانتی"
                                                                  labelStyle="color:#848484;">
                                                     <f:selectItem itemLabel="لطفا انتخاب کنید" itemValue=""/>
@@ -94,13 +94,13 @@
                                                                   itemValue="#{productContentBean.product.warranty}"/>
                                                 </b:selectOneMenu>
                                             </b:row>
-                                            <b:row style="margin-top:25px;">
+                                            <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:selectOneMenu span="5" style="height:auto;" label="انتخاب فروشنده"
                                                                  labelStyle="color:#848484;">
                                                     <f:selectItem itemLabel="کامت" itemValue="کامت"/>
                                                 </b:selectOneMenu>
                                             </b:row>
-                                            <b:row style="margin-top:25px;">
+                                            <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:column colSm="12">
                                                     <span style="color:#848484;margin-left: 10px">قیمت : </span>
                                                     <h:outputText value="#{productContentBean.product.price} تومان"
@@ -112,7 +112,7 @@
                                                     </b:label>
                                                 </b:column>
                                             </b:row>
-                                            <b:row style="margin-top:50px;">
+                                            <b:row style="margin-top:50px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:column colSm="12">
                                                     <span style="font-size: 20px">قیمت برای شما : </span>
                                                     <h:outputText value="#{productContentBean.calProductPriceByDiscount(productContentBean.product.price
@@ -123,13 +123,18 @@
                                                     <span style="font-size: 20px">تومان </span>
                                                 </b:column>
                                             </b:row>
-                                            <b:row style="margin-top:40px;">
+                                            <b:row style="margin-top:40px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:column colSm="12">
                                                     <b:commandButton style="width:165px;" look="success"
                                                                      action="#{productContentBean.addProductToCart()}">
                                                         <b:iconAwesome name="cart-plus" size=""></b:iconAwesome>
                                                         <span style="margin-right: 10px">افزودن به سبد خرید</span>
                                                     </b:commandButton>
+                                                </b:column>
+                                            </b:row>
+                                            <b:row rendered="#{productContentBean.product.stock eq 0}">
+                                                <b:column colSm="12">
+                                                    <div class="btn1">محصول موجود نیست</div>
                                                 </b:column>
                                             </b:row>
                                         </b:panelGrid>
@@ -151,7 +156,7 @@
                                     <div style="margin-top: 30px;text-align: justify">
                                         <h:outputText value="#{productContentBean.product.name}"
                                                       style="display: block;padding-bottom: 20px;color: darkgray"></h:outputText>
-                                        <h:outputText value="#{productContentBean.product.description}"
+                                        <h:outputText value="#{productContentBean.showProductContent()}"
                                                       style="line-height: 35px;"></h:outputText>
                                     </div>
                                 </b:tab>

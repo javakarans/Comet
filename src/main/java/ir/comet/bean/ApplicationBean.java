@@ -30,6 +30,7 @@ public class ApplicationBean {
         categories = categoryDaoImp.getAllCategories();
     }
 
+
     public void loadNewProductList(){
         ProductDaoImp productDaoImp=new ProductDaoImp();
     }

@@ -1,33 +1,33 @@
-#product_datagrid .ui-widget-header{
+.product_datagrid .ui-widget-header{
     background: white;
     border: 0;
     font-family: NYJ;
     float: left;
 }
-#product_datagrid .ui-widget-content{
+.product_datagrid .ui-widget-content{
     border: 0;
     margin-top: 20px;
 }
-#product_datagrid_paginator_top{
+.product_datagrid_paginator_top{
     margin-bottom: 9px;
 }
-#product_datagrid_paginator_bottom{
+.product_datagrid_paginator_bottom{
     margin-top: -10px;
 }
-#product_datagrid .ui-paginator .ui-paginator-current, .ui-paginator .ui-paginator-rpp-options{
+.product_datagrid .ui-paginator .ui-paginator-current, .ui-paginator .ui-paginator-rpp-options{
     font-family: NYJ;
 }
-#product_datagrid .ui-icon-seek-prev{
+.product_datagrid .ui-icon-seek-prev{
     background: url("../images/prevPage.png") no-repeat center;
     background-size: 60px;
 
 }
-#product_datagrid .ui-icon-seek-next{
+.product_datagrid .ui-icon-seek-next{
     background: url("../images/nextPage.png") no-repeat center;
     background-size: 60px;
     color: rgba(0, 0, 0, 0);
 }
-#product_datagrid .ui-icon{
+.product_datagrid .ui-icon{
     width: 60px;
 }
 .contentPanel .page-header{
@@ -38,8 +38,47 @@
 .product-panel .product-image{
     -webkit-filter: drop-shadow(0px 5px 0px rgba(44, 143, 12, 0.67));
     filter: drop-shadow(0px 5px 0px rgba(44, 143, 12, 0.67));
+    padding-bottom: 10px;
+}
+.product-panel .product-name{
+    font-size: 14px;
+    color: #555555;
+    padding-bottom: 5px;
 }
 .product-panel{
     font-family: YJ, NYJ;
     background-color: rgba(235, 235, 235, 0.18);
+}
+@media screen and (min-width:768px){
+    .product-panel .product-name{
+        font-size: 12px;
+    }
+    .product-panel .product-discount{
+        font-size: 13px;
+    }
+    .product-panel .product-price{
+        font-size: 14px;
+    }
+}
+@media screen and (min-width:992px){
+    .product-panel .product-name{
+        font-size: 15px;
+    }
+    .product-panel .product-discount{
+        font-size: 15px;
+    }
+    .product-panel .product-price{
+        font-size: 19px;
+    }
+}
+@media screen and (max-width: 768px){
+    .product-panel .product-name{
+        font-size: 13px;
+    }
+    .product-panel .product-discount{
+        font-size: 13px;
+    }
+    .product-panel .product-price{
+        font-size: 17px;
+    }
 }

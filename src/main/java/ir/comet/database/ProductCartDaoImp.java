@@ -1,7 +1,9 @@
 package ir.comet.database;
 
 
+import ir.comet.model.Product;
 import ir.comet.model.ProductOrderDetail;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -32,4 +34,5 @@ public class ProductCartDaoImp implements ProductCartDao {
     public boolean deleteProductCart(ProductOrderDetail productOrderDetail) {
         return sqlService.delete(productOrderDetail);
     }
+
 }

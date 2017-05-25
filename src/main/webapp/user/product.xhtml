@@ -44,49 +44,113 @@
                                     <p style="text-align: center">هیچ محصولی موجود یافت نشد!</p>
                                 </b:column>
                             </b:row>
-                            <p:dataGrid id="product_datagrid" value="#{productBean.productList}" var="productItem"
-                                        paginator="true" layout="grid" columns="3"
-                                        paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
-                                        rowsPerPageTemplate="6,12,16" rendered="#{!productBean.productListIsEmpty()}">
+                            <b:row>
+                                <b:column visible="lg">
+                                    <p:dataGrid styleClass="product_datagrid" value="#{productBean.productList}" var="productItem"
+                                                paginator="true" layout="grid" columns="4"
+                                                paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                                                rowsPerPageTemplate="6,12,16" rendered="#{!productBean.productListIsEmpty()}">
 
-                                <b:thumbnail styleClass="product-panel">
-                                    <b:form>
-                                        <b:row>
+                                        <b:thumbnail styleClass="product-panel">
+                                            <b:form>
+                                                <b:row>
 
-                                            <b:image value="#{productItem.imageUrl}" colXs="12"
-                                                     styleClass="product-image"></b:image>
+                                                    <b:image value="#{productItem.imageUrl}" colMd="12" colSm="12"
+                                                             styleClass="product-image"></b:image>
 
-                                            <b:column colXs="12" style="margin-top:10px;">
-                                                <h:outputText value="#{productItem.name}"
-                                                              style="font-size: 17px;color: #555555"></h:outputText>
-                                            </b:column>
-
-                                            <b:column colXs="12" style="margin-top:15px;">
-                                                <b:row rendered="#{productItem.discount ne 0}">
-                                                    <b:column colXs="12">
-                                                        <h:outputText value="#{productItem.price}تومان"
-                                                                      style="font-size: 15px;color: rgba(139,0,0,0.82);text-decoration: line-through;"></h:outputText>
+                                                    <b:column colMd="12" colSm="12" colXs="12">
+                                                        <h:outputText value="#{productItem.name}"
+                                                                      styleClass="product-name"></h:outputText>
                                                     </b:column>
+
+                                                    <b:column colMd="12" colSm="12" colXs="12" style="margin-bottom:5px;">
+                                                        <b:row rendered="#{productItem.stock ne 0}">
+                                                            <b:column colMd="12" colSm="12" rendered="#{productItem.discount ne 0}">
+                                                                <h:outputText value="#{productItem.price}تومان"
+                                                                              style="color: rgba(139,0,0,0.82);text-decoration: line-through;" styleClass="product-discount"></h:outputText>
+                                                            </b:column>
+                                                            <b:column colMd="12" colSm="12">
+                                                                <h:outputText value="#{productBean.calPriceByDiscount(productItem)} تومان"
+                                                                              style="color: rgba(44, 143, 12, 0.67)" styleClass="product-price"></h:outputText>
+                                                            </b:column>
+                                                        </b:row>
+                                                        <b:row rendered="#{productItem.stock eq 0}" style="margin-top:22.5px;">
+                                                            <h:outputText value="موجود نیست"
+                                                                          style="color: rgba(44, 143, 12, 0.67);margin-right: 15px" styleClass="product-price"></h:outputText>
+                                                        </b:row>
+                                                    </b:column>
+
+                                                    <b:column colMd="12" colSm="12">
+                                                        <p:rating value="#{productItem.score}" readonly="true"></p:rating>
+                                                    </b:column>
+
+                                                    <b:column colMd="12" colSm="12" style="margin-top:10px;">
+                                                        <b:commandButton iconAwesome="cart-plus" look="success"
+                                                                         size="xs" style="float:left;"
+                                                                         action="#{productBean.redirectToProductContent(productItem.productId)}"></b:commandButton>
+                                                    </b:column>
+
                                                 </b:row>
-                                                <h:outputText value="#{productBean.calPriceByDiscount(productItem)} تومان"
-                                                              style="font-size: 19px;color: rgba(44, 143, 12, 0.67)"></h:outputText>
-                                            </b:column>
+                                            </b:form>
+                                        </b:thumbnail>
 
-                                            <b:column colXs="12" style="margin-top:10px;">
-                                                <p:rating value="#{productItem.score}" readonly="true"></p:rating>
-                                            </b:column>
+                                    </p:dataGrid>
+                                </b:column>
+                            </b:row>
 
-                                            <b:column colXs="12" style="margin-top:10px;">
-                                                <b:commandButton iconAwesome="cart-plus" look="success"
-                                                                 size="xs" style="float:left;"
-                                                                 action="#{productBean.redirectToProductContent(productItem.productId)}"></b:commandButton>
-                                            </b:column>
+                            <b:row>
+                                <b:column visible="md,sm,xs">
+                                    <p:dataGrid styleClass="product_datagrid" value="#{productBean.productList}" var="productItem"
+                                                paginator="true" layout="grid" columns="3"
+                                                paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                                                rowsPerPageTemplate="6,12,16" rendered="#{!productBean.productListIsEmpty()}">
 
-                                        </b:row>
-                                    </b:form>
-                                </b:thumbnail>
+                                        <b:thumbnail styleClass="product-panel">
+                                            <b:form>
+                                                <b:row>
 
-                            </p:dataGrid>
+                                                    <b:image value="#{productItem.imageUrl}" colMd="12" colSm="12" colXs="12"
+                                                             styleClass="product-image"></b:image>
+
+                                                    <b:column colMd="12" colSm="12">
+                                                        <h:outputText value="#{productItem.name}"
+                                                                      styleClass="product-name"></h:outputText>
+                                                    </b:column>
+
+                                                    <b:column colMd="12" colSm="12" colXs="12" style="margin-bottom:5px;">
+                                                        <b:row rendered="#{productItem.stock ne 0}">
+                                                            <b:column colMd="12" colSm="12" rendered="#{productItem.discount ne 0}">
+                                                                <h:outputText value="#{productItem.price}تومان"
+                                                                              style="color: rgba(139,0,0,0.82);text-decoration: line-through;" styleClass="product-discount"></h:outputText>
+                                                            </b:column>
+                                                            <b:column colMd="12" colSm="12">
+                                                                <h:outputText value="#{productBean.calPriceByDiscount(productItem)} تومان"
+                                                                              style="color: rgba(44, 143, 12, 0.67)" styleClass="product-price"></h:outputText>
+                                                            </b:column>
+                                                        </b:row>
+                                                        <b:row rendered="#{productItem.stock eq 0}" style="margin-top:22.5px;">
+                                                            <h:outputText value="موجود نیست"
+                                                                          style="color: rgba(44, 143, 12, 0.67);margin-right: 15px" styleClass="product-price"></h:outputText>
+                                                        </b:row>
+                                                    </b:column>
+
+                                                    <b:column colMd="12" colSm="12" colXs="12">
+                                                        <p:rating value="#{productItem.score}" readonly="true"></p:rating>
+                                                    </b:column>
+
+                                                    <b:column colMd="12" colSm="12" colXs="12" style="margin-top:10px;">
+                                                        <b:commandButton iconAwesome="cart-plus" look="success"
+                                                                         size="xs" style="float:left;"
+                                                                         action="#{productBean.redirectToProductContent(productItem.productId)}"></b:commandButton>
+                                                    </b:column>
+
+                                                </b:row>
+                                            </b:form>
+                                        </b:thumbnail>
+
+                                    </p:dataGrid>
+                                </b:column>
+                            </b:row>
                         </b:panel>
                     </b:column>
                 </b:row>

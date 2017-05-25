@@ -41,4 +41,8 @@ public class ProductDaoImp implements ProductDao {
     public void deleteProduct(Product product) {
         SQLService.delete(product);
     }
+
+    public List<Product> getTopProductsByColumn(String column,int count) {
+        return SQLService.getTopObjectsByColumn(new Product(), column, count);
+    }
 }

@@ -12,4 +12,5 @@ public interface ProductDao {
     public List<Product> getAllProducts();
     public void updateProduct(Product product);
     public void deleteProduct(Product product);
+    public List<Product> getTopProductsByColumn(String column,int count);
 }

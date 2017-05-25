@@ -118,6 +118,10 @@ public class ProductContentBean {
         loadProduct();
     }
 
+    public String showProductContent(){
+        return Jsoup.parse(product.getDescription()).text();
+    }
+
     public Product getProduct() {
         return product;
     }

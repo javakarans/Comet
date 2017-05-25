@@ -27,7 +27,6 @@ public class SlideShowDaoImp implements SlideShowDao {
     }
 
     public List<SlideShow> getAllSlideShow() {
-
         return SQLService.getAllObjects(new SlideShow());
     }
 
