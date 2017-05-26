@@ -22,7 +22,7 @@ public class OrdersBean {
     private String confirmed = Status.CONFIRMED;
     private String allStatus = Status.ALL_Status;
     private OrderDetail selectedOrderDetail;
-    private String selectedStatus;
+    private String selectedStatus = "";
     private Customer selectedCustomer;
     private List<ProductOrderDetail> productOrderDetailList;
 
@@ -34,24 +34,10 @@ public class OrdersBean {
         selectedOrderDetail = new OrderDetail();
     }
 
-    public void showCustomer(Customer customer)
-    {
-        this.selectedCustomer = customer;
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.execute("$('#customerModal').modal()");
-    }
 
-    public void showProductList(List<ProductOrderDetail> productOrderDetailList)
+    public void saveChangeStatus()
     {
-        this.productOrderDetailList = productOrderDetailList;
-        RequestContext requestContext = RequestContext.getCurrentInstance();
-        requestContext.execute("$('#productModal').modal()");
-
-    }
-
-    public void saveChangeStatus(OrderDetail orderDetail)
-    {
-        boolean result = orderDaoImp.updateOrder(orderDetail);
+        boolean result = orderDaoImp.updateOrder(selectedOrderDetail);
         if (result)
         {
             orderDetailList = orderDaoImp.getAllOrders();
@@ -61,11 +47,12 @@ public class OrdersBean {
         }
     }
 
-    public void changeList()
+
+    public List<OrderDetail> filterOrderByStatus()
     {
-        if (selectedStatus.equals(allStatus))
-            orderDetailList = orderDaoImp.getAllOrders();
-        else orderDetailList = orderDaoImp.getOrderByStatus(selectedStatus);
+        if (selectedStatus.equals("") || selectedStatus==null || selectedStatus.equals(allStatus))
+            return orderDaoImp.getAllOrders();
+        else return orderDaoImp.getOrderByStatus(selectedStatus);
     }
 
     public List<OrderDetail> getOrderDetailList() {
