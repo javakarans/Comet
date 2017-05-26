@@ -20,16 +20,16 @@
 <hibernate-configuration>
     <session-factory>
 
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost/comet</property>
-        <property name="hibernate.connection.username">comet</property>
-        <property name="hibernate.connection.password">comet</property>
-
-         <!--Connection settings-->
         <!--<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>-->
         <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost/comet</property>-->
-        <!--<property name="hibernate.connection.username">moosavi</property>-->
-        <!--<property name="hibernate.connection.password">moosaviali7489</property>-->
+        <!--<property name="hibernate.connection.username">comet</property>-->
+        <!--<property name="hibernate.connection.password">comet</property>-->
+
+        <!--Connection settings-->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost/comet</property>
+        <property name="hibernate.connection.username">moosavi</property>
+        <property name="hibernate.connection.password">moosaviali7489</property>
 
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
@@ -38,7 +38,7 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create all database on startup -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>

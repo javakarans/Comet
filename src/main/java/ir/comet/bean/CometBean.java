@@ -56,6 +56,10 @@ public class CometBean {
         allSlideShow = slideShowDaoImp.getAllSlideShow();
     }
 
+    public String redirectToProductContent(long productId){
+        return "/user/productContent.xhtml?faces-redirect=true&productId="+productId;
+    }
+
     public void loadMostProductSold(){
         mostProductSoldList = productDaoImp.getTopProductsByColumn("soldCount", 10);
     }
