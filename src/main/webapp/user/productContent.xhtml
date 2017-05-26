@@ -166,26 +166,26 @@
                                 <b:tab title="مشخصات فنی">
                                     <f:facet name="anchor"><b:iconAwesome name="cog"/></f:facet>
                                     <div style="margin-top: 30px">
-                                        <ui:repeat value="#" var="itemHeader">
+                                        <ui:repeat value="#{productContentBean.product.technicalSpecificationList}" var="technicalSpecification">
                                             <b:row>
                                                 <b:column colSm="12">
                                                     <b:iconAwesome name="caret-left"
                                                                    style="margin-left:20px;"></b:iconAwesome>
-                                                    <h:outputText value="نوع مشخصات"
+                                                    <h:outputText value="#{technicalSpecification.name}"
                                                                   style="font-size: 20px"></h:outputText>
                                                 </b:column>
                                             </b:row>
                                             <b:row style="margin-top:30px;margin-bottom:30px;">
-                                                <ui:repeat value="#" var="item">
+                                                <ui:repeat value="#{technicalSpecification.technicalSpecificationDetailss}" var="technicalSpecificationDetails">
                                                     <div>
                                                         <b:column colSm="3">
                                                             <div class="item-right">
-                                                                <h:outputText value="آیتم"></h:outputText>
+                                                                <h:outputText value="#{technicalSpecificationDetails.key}"></h:outputText>
                                                             </div>
                                                         </b:column>
                                                         <b:column colSm="9" style="margin-bottom:10px;">
                                                             <div class="item-left">
-                                                                <h:outputText value="مقدار"></h:outputText>
+                                                                <h:outputText value="#{technicalSpecificationDetails.value}"></h:outputText>
                                                             </div>
                                                         </b:column>
                                                     </div>
