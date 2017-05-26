@@ -20,11 +20,16 @@
 <hibernate-configuration>
     <session-factory>
 
-        <!-- Connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost/comet</property>
         <property name="hibernate.connection.username">comet</property>
         <property name="hibernate.connection.password">comet</property>
+
+        <!-- Connection settings -->
+        <!--<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>-->
+        <!--<property name="hibernate.connection.url">jdbc:postgresql://localhost/comet</property>-->
+        <!--<property name="hibernate.connection.username">moosavi</property>-->
+        <!--<property name="hibernate.connection.password">moosaviali7489</property>-->
 
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
