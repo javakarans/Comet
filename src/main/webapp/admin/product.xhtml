@@ -71,7 +71,7 @@
                         <b:column colSm="12">
                             <b:panel title="لیست مخصات" collapsible="false">
                                 <h:form id="TSListForm">
-                                    <b:dataTable value="#{addProductBran.product.technicalSpecificationList}" var="TS">
+                                    <b:dataTable value="#{addProductBran.specificationList}" var="TS">
                                         <b:dataTableColumn label="نام مشخصه">
                                             <h:outputText value="#{TS.name}"/>
                                         </b:dataTableColumn>
@@ -124,7 +124,7 @@
                         <b:row>
                             <b:column colSm="12">
                                 <h:form id="addTSDForm">
-                                    <b:dataTable value="#{addProductBran.selectedTechnicalSpecification.technicalSpecificationDetailss}" var="TSD">
+                                    <b:dataTable value="#{addProductBran.filterTechnicalSpecificationList()}" var="TSD">
                                         <b:dataTableColumn label="نام مشخصه کلی">
                                             <h:outputText value="#{TSD.technicalSpecification.name}"/>
                                         </b:dataTableColumn>

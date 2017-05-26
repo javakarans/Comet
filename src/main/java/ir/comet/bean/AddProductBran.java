@@ -3,6 +3,8 @@ package ir.comet.bean;
 
 import ir.comet.database.BranchBrandDaoImp;
 import ir.comet.database.ProductDaoImp;
+import ir.comet.database.TechnicalSpecificationDaoImp;
+import ir.comet.database.TechnicalSpecificationDetailsDaoImp;
 import ir.comet.model.*;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -37,6 +39,8 @@ public class AddProductBran {
     private TechnicalSpecification technicalSpecification;
     private TechnicalSpecificationDetails technicalSpecificationDetails;
     private TechnicalSpecification selectedTechnicalSpecification;
+    private List<TechnicalSpecification> specificationList;
+    private List<TechnicalSpecificationDetails> detailsList;
 
 
     @PostConstruct
@@ -50,24 +54,44 @@ public class AddProductBran {
         productList = productDaoImp.getAllProducts();
         branchBrandDaoImp = new BranchBrandDaoImp();
         branchBrandList = branchBrandDaoImp.getAlBranchBrand();
+        specificationList=new ArrayList<>();
+        detailsList=new ArrayList<>();
     }
 
     public void addProduct()
     {
+        TechnicalSpecificationDaoImp technicalSpecificationDaoImp=new TechnicalSpecificationDaoImp();
+        TechnicalSpecificationDetailsDaoImp technicalSpecificationDetailsDaoImp=new TechnicalSpecificationDetailsDaoImp();
         product.setImageUrl(iconFilename);
         product.setImageLocationJson(imageFilename);
-        product.setOtherDetailsJson(otherDetails.otherDetailsToJson());
         boolean result = productDaoImp.createProduct(product);
         if (result)
         {
+            for (TechnicalSpecification specification:specificationList
+                 ) {
+                technicalSpecificationDaoImp.createTechnicalSpecification(specification);
+            }
+            for (TechnicalSpecificationDetails details:detailsList
+                 ) {
+                technicalSpecificationDetailsDaoImp.createTechnicalSpecificationDetails(details);
+            }
             productList = productDaoImp.getAllProducts();
             product = new Product();
-            otherDetails = new OtherDetails();
         }
         else
         {
 
         }
+    }
+
+    public List<TechnicalSpecificationDetails> filterTechnicalSpecificationList(){
+        List<TechnicalSpecificationDetails> list=new ArrayList<>();
+        for (TechnicalSpecificationDetails details:detailsList){
+            if(details.getTechnicalSpecification().equals(selectedTechnicalSpecification)){
+                list.add(details);
+            }
+        }
+        return list;
     }
 
     public void removeTS(TechnicalSpecification technicalSpecification)
@@ -78,14 +102,16 @@ public class AddProductBran {
     public void addTSToProduct()
     {
         technicalSpecification.setProduct(product);
-        product.getTechnicalSpecificationList().add(technicalSpecification);
+        specificationList.add(technicalSpecification);
+//        product.getTechnicalSpecificationList().add(technicalSpecification);
         technicalSpecification = new TechnicalSpecification();
     }
 
     public void addTSDToProduct()
     {
         technicalSpecificationDetails.setTechnicalSpecification(selectedTechnicalSpecification);
-        selectedTechnicalSpecification.getTechnicalSpecificationDetailss().add(technicalSpecificationDetails);
+        detailsList.add(technicalSpecificationDetails);
+//        selectedTechnicalSpecification.getTechnicalSpecificationDetailss().add(technicalSpecificationDetails);
         technicalSpecificationDetails = new TechnicalSpecificationDetails();
     }
 
@@ -177,5 +203,21 @@ public class AddProductBran {
 
     public void setSelectedTechnicalSpecification(TechnicalSpecification selectedTechnicalSpecification) {
         this.selectedTechnicalSpecification = selectedTechnicalSpecification;
+    }
+
+    public List<TechnicalSpecification> getSpecificationList() {
+        return specificationList;
+    }
+
+    public void setSpecificationList(List<TechnicalSpecification> specificationList) {
+        this.specificationList = specificationList;
+    }
+
+    public List<TechnicalSpecificationDetails> getDetailsList() {
+        return detailsList;
+    }
+
+    public void setDetailsList(List<TechnicalSpecificationDetails> detailsList) {
+        this.detailsList = detailsList;
     }
 }
