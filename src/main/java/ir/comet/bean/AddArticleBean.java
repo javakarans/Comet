@@ -2,7 +2,6 @@ package ir.comet.bean;
 
 import ir.comet.Utilities.SolarCalendar;
 import ir.comet.database.ArticleDaoImp;
-import ir.comet.database.SQLService;
 import ir.comet.model.Article;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
@@ -32,7 +31,7 @@ public class AddArticleBean{
     private List<Article> articleList;
     private String uniqueID;
     private UploadedFile uploadedFile;
-    private static String image_location = StaticSettings.imageUrl;
+    private static String image_location = StaticSettings.imageUrlServer;
     private String filename;
     private SolarCalendar solarCalendar;
     private Article selectedArticle;

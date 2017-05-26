@@ -31,7 +31,8 @@ public class AddProductBran {
     private List<BranchBrand> branchBrandList;
     private BranchBrandDaoImp branchBrandDaoImp;
     private UploadedFile uploadedFile;
-    private static String image_location = StaticSettings.imageUrl;
+    private static String image_locationServer = StaticSettings.imageUrlServer;
+    private static String image_locationDB = StaticSettings.imageUrlDB;
     private String imageFilename;
     private String iconFilename;
     private String uniqueID;
@@ -122,8 +123,8 @@ public class AddProductBran {
         String fileExtention = tokens[1];
         try {
             InputStream inputStream = event.getFile().getInputstream();
-            iconFilename = image_location+uniqueID+"."+fileExtention;
-            Path des = Paths.get(iconFilename);
+            iconFilename=image_locationDB + uniqueID + "."+fileExtention;
+            Path des = Paths.get(image_locationServer +uniqueID+"."+fileExtention);
             Files.copy(inputStream,des);
 
         } catch (Exception e) {
@@ -139,8 +140,8 @@ public class AddProductBran {
         String fileExtention = tokens[1];
         try {
             InputStream inputStream = event.getFile().getInputstream();
-            imageFilename = image_location+uniqueID+"."+fileExtention;
-            Path des = Paths.get(imageFilename);
+            imageFilename = image_locationDB + uniqueID + "."+fileExtention;
+            Path des = Paths.get(image_locationServer +uniqueID+"."+fileExtention);
             Files.copy(inputStream,des);
 
         } catch (Exception e) {

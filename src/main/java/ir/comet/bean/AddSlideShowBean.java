@@ -2,9 +2,7 @@ package ir.comet.bean;
 
 
 import ir.comet.database.SlideShowDaoImp;
-import ir.comet.model.Article;
 import ir.comet.model.SlideShow;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -30,7 +28,7 @@ public class AddSlideShowBean implements Serializable {
     private SlideShowDaoImp slideShowDaoImp;
     private List<SlideShow> slideShowList;
     private UploadedFile uploadedFile;
-    private static String image_location = StaticSettings.imageUrl;
+    private static String image_location = StaticSettings.imageUrlServer;
     private String filename;
     private String uniqueID;
     private FacesMessage msg;
