@@ -104,7 +104,7 @@
                                 <b:tab title="سفارشات من">
                                     <div style="margin-top: 30px">
                                         <b:dataTable id="my-orderDetail" value="#{userAccountBean.customer.getOrderDetails()}" var="orderDetail" searching="false" paginated="false"
-                                                     border="false" varStatus="status">
+                                                     border="false" varStatus="status" responsive="true">
                                             <b:dataTableColumn label="ردیف" orderable="false">
                                                 <h:outputText value="#{userAccountBean.incRowIndex()}" style="color: #3c3c3c"></h:outputText>
                                             </b:dataTableColumn>
@@ -130,7 +130,7 @@
 
                                                 <tr id="id#{userAccountBean.rowIndex}" style="background-color: #f5f4f5;display: none">
                                                     <td colspan="12">
-                                                        <b:dataTable value="#{orderDetail.productOrderDetails}" var="productOrderDetails" searching="false" paginated="false" style="color:#000;" styleClass="order_datatable">
+                                                        <b:dataTable value="#{orderDetail.productOrderDetails}" var="productOrderDetails" searching="false" paginated="false" style="color:#000;" styleClass="order_datatable" responsive="true">
                                                             <b:dataTableColumn label="قیمت کل" orderable="false" style="text-align:center;">
                                                                 <h:outputText value="#{productOrderDetails.totalPriceAfterDiscountAndTax}"></h:outputText>
                                                             </b:dataTableColumn>

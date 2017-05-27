@@ -33,10 +33,7 @@ public class ProductBean implements Serializable{
 
     public long getBranchBrandId(){
         String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-        if(id!=null){
             return Long.parseLong(id);
-        }
-        return userSessionBean.getURLParameter().get("branchBrandId");
     }
 
     public void loadProductList(){
@@ -57,7 +54,6 @@ public class ProductBean implements Serializable{
     }
 
     public String redirectToProductContent(long productId){
-        userSessionBean.getURLParameter().put("productId",productId);
         userSessionBean.setCurrentURL("/user/productContent.xhtml?"+"productId="+productId);
         return "/user/productContent.xhtml?faces-redirect=true&"+"productId="+productId;
     }

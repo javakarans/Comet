@@ -26,7 +26,8 @@
                     <b:column colSm="3">
                         <b:panel collapsible="false" styleClass="topPanel">
                             <b:iconAwesome name="filter"></b:iconAwesome>
-                            <h:outputText value="نوع 1" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="فیلتر" style="margin-right: 10px"></h:outputText>
+                            <h:outputText value="موجود نیست" style="display: block;margin-top: 20px;color: dimgray"></h:outputText>
                         </b:panel>
                     </b:column>
                     <b:column colSm="9">
@@ -59,11 +60,13 @@
                                                              styleClass="product-image"></b:image>
 
                                                     <b:column colMd="12" colSm="12" colXs="12">
-                                                        <h:outputText value="#{productItem.name}"
-                                                                      styleClass="product-name"></h:outputText>
+                                                        <div class="product-name-bg">
+                                                            <h:outputText value="#{productItem.name}"
+                                                                          styleClass="product-name"></h:outputText>
+                                                        </div>
                                                     </b:column>
 
-                                                    <b:column colMd="12" colSm="12" colXs="12" style="margin-bottom:5px;">
+                                                    <b:column colMd="12" colSm="12" colXs="12">
                                                         <b:row rendered="#{productItem.stock ne 0}">
                                                             <b:column colMd="12" colSm="12" rendered="#{productItem.discount ne 0}">
                                                                 <h:outputText value="#{productItem.price}تومان"
@@ -113,8 +116,10 @@
                                                              styleClass="product-image"></b:image>
 
                                                     <b:column colMd="12" colSm="12">
-                                                        <h:outputText value="#{productItem.name}"
-                                                                      styleClass="product-name"></h:outputText>
+                                                        <div class="product-name-bg">
+                                                            <h:outputText value="#{productItem.name}"
+                                                                          styleClass="product-name"></h:outputText>
+                                                        </div>
                                                     </b:column>
 
                                                     <b:column colMd="12" colSm="12" colXs="12" style="margin-bottom:5px;">

@@ -70,8 +70,11 @@
                                                 <h5><span>#{productContentBean.product.englishName}</span></h5>
                                             </div>
                                             <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
-                                                <b:selectOneMenu span="5" style="height:auto;" label="انتخاب رنگ"
-                                                                 labelStyle="color:#848484;" update="@form" value="#{productContentBean.color}">
+                                                <b:column colSm="12">
+                                                    <h:outputText style="float: right;margin-bottom: 5px;color:#848484;" value="انتخاب رنگ"></h:outputText>
+                                                </b:column>
+                                                <b:selectOneMenu span="5" style="height:auto;"
+                                                                 update="@form" value="#{productContentBean.color}" required="true">
                                                     <f:selectItem itemLabel="لطفاانتخاب کنید" itemValue=""/>
                                                     <c:forEach items="#{productContentBean.loadProductColors()}" var="item">
                                                         <f:selectItem itemLabel="#{item}" itemValue="#{item}"/>
@@ -79,16 +82,22 @@
                                                 </b:selectOneMenu>
                                             </b:row>
                                             <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
-                                                <b:selectOneMenu span="5" style="height:auto;" label="انتخاب گارانتی"
-                                                                 labelStyle="color:#848484;">
+                                                <b:column colSm="12">
+                                                    <h:outputText style="float: right;margin-bottom: 5px;color:#848484;" value="انتخاب گارانتی"></h:outputText>
+                                                </b:column>
+                                                <b:selectOneMenu span="5" style="height:auto;"
+                                                                 required="true">
                                                     <f:selectItem itemLabel="لطفا انتخاب کنید" itemValue=""/>
                                                     <f:selectItem itemLabel="#{productContentBean.product.warranty}"
                                                                   itemValue="#{productContentBean.product.warranty}"/>
                                                 </b:selectOneMenu>
                                             </b:row>
                                             <b:row style="margin-top:25px;" rendered="#{productContentBean.product.stock ne 0}">
-                                                <b:selectOneMenu span="5" style="height:auto;" label="انتخاب فروشنده"
-                                                                 labelStyle="color:#848484;">
+                                                <b:column colSm="12">
+                                                    <h:outputText style="float: right;margin-bottom: 5px;color:#848484;" value="انتخاب فروشنده"></h:outputText>
+                                                </b:column>
+                                                <b:selectOneMenu span="5" style="height:auto;"
+                                                                 required="true">
                                                     <f:selectItem itemLabel="کامت" itemValue="کامت"/>
                                                 </b:selectOneMenu>
                                             </b:row>
@@ -118,7 +127,7 @@
                                             <b:row style="margin-top:40px;" rendered="#{productContentBean.product.stock ne 0}">
                                                 <b:column colSm="12">
                                                     <b:commandButton style="width:165px;" look="success"
-                                                                     action="#{productContentBean.addProductToCart()}">
+                                                                     action="#{productContentBean.addProductToCart()}" update="@form">
                                                         <b:iconAwesome name="cart-plus" size=""></b:iconAwesome>
                                                         <span style="margin-right: 10px">افزودن به سبد خرید</span>
                                                     </b:commandButton>

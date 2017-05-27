@@ -54,7 +54,7 @@
 
                                     <b:column colSm="12" style="margin-top:10px;">
                                         <b:dataTable searching="false" paginated="false"
-                                                     styleClass="order_datatable"
+                                                     styleClass="order_datatable" responsive="true"
                                                      value="#{shippingBean.customer}" var="customer">
 
                                             <b:dataTableColumn label="" orderable="false"
@@ -112,9 +112,19 @@
 
                                             <table class="payment_table">
                                                 <tr>
+                                                    <th>
+                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="#{shippingBean.byCash}"
+                                                                       style="margin:auto;" required="true"/>
+                                                    </th>
+                                                    <th style="text-align: right">
+                                                        <h:outputText value="پرداخت نقدی"></h:outputText>
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
                                                     <th style="width: 5px;">
                                                         <b:radiobutton value="#{shippingBean.paymentType}" itemValue="#{shippingBean.byCreditCard}"
-                                                                       style="margin:auto;"/>
+                                                                       style="margin:auto;" disabled="true"/>
                                                     </th>
                                                     <th style="text-align: right">
                                                         <h:outputText
@@ -122,15 +132,7 @@
                                                         <span style="color: darkgray">غیر فعال</span>
                                                     </th>
                                                 </tr>
-                                                <tr>
-                                                    <th>
-                                                        <b:radiobutton value="#{shippingBean.paymentType}" itemValue="#{shippingBean.byCash}"
-                                                                       style="margin:auto;"/>
-                                                    </th>
-                                                    <th style="text-align: right">
-                                                        <h:outputText value="پرداخت نقدی"></h:outputText>
-                                                    </th>
-                                                </tr>
+
                                             </table>
 
                                         </b:column>
@@ -143,7 +145,7 @@
                                             <b:commandButton value="ثبت اطلاعات و ادامه خرید"
                                                              style="width:170px;height:40px;float:left;"
                                                              look="success" action="#{shippingBean.redirectToReviewPage()}" iconAwesome="arrow-left"
-                                                             iconAlign="right"></b:commandButton>
+                                                             iconAlign="right" update="@form"></b:commandButton>
 
                                         </b:column>
                                     </b:form>

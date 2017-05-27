@@ -65,7 +65,7 @@
                                     <b:column colXs="12">
                                         <b:dataTable searching="false" paginated="false"
                                                      styleClass="order_datatable" value="#{userSessionBean.productOrderDetailList}"
-                                                     var="cartItem">
+                                                     var="cartItem" responsive="true">
                                             <b:dataTableColumn label="حذف" orderable="false"
                                                                style="width:2%;" styleClass="column_content"
                                                                contentStyle="background-color:rgb(255, 237, 238);">
@@ -134,9 +134,14 @@
                                         </b:dataTable>
                                     </b:column>
 
-                                    <b:column colSm="12" style="text-align:left;margin-top:-20px;">
+                                    <b:column hidden="xs" colSm="12" colXs="12" style="text-align:left;margin-top:-20px;">
                                         <h:outputText value="مبلغ قابل پرداخت : #{cartBean.calTotalPrice()} تومان"
                                                       style="font-size: 20px;color: rgba(44, 143, 12, 0.67)"></h:outputText>
+                                    </b:column>
+
+                                    <b:column visible="xs" colXs="12" style="text-align:left;margin-top:-20px;">
+                                        <h:outputText value="مبلغ قابل پرداخت : #{cartBean.calTotalPrice()} تومان"
+                                                      style="font-size: 15px;color: rgba(44, 143, 12, 0.67)"></h:outputText>
                                     </b:column>
 
                                     <b:column colSm="12">

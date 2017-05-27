@@ -43,11 +43,8 @@ public class ProductContentBean {
 
     public long getProductId(){
         String productId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("productId");
-        if(productId!=null){
             this.productId= Long.parseLong(productId);
             return this.productId;
-        }
-        return userSessionBean.getURLParameter().get("productId");
     }
 
     public void loadProduct(){
@@ -71,7 +68,7 @@ public class ProductContentBean {
     public String addProductToCart(){
         ProductOrderDetail productOrderDetail=new ProductOrderDetail();
         ProductDaoImp productDaoImp=new ProductDaoImp();
-        productOrderDetail.setProduct(productDaoImp.getProduct(getProductId()));
+        productOrderDetail.setProduct(productDaoImp.getProduct(productId));
         productOrderDetail.setQuantity(1);
         productOrderDetail.setColor(color);
         if(!userSessionBean.getProductOrderDetailList().isEmpty()){

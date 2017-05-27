@@ -49,7 +49,6 @@ public class HeaderBean {
     }
 
     public String redirectToProductPage(BranchBrand branchBrand){
-        userSessionBean.getURLParameter().put("branchBrandId",branchBrand.getBranchBrandId());
         return "/user/product.xhtml?faces-redirect=true&id="+branchBrand.getBranchBrandId();
     }
 
