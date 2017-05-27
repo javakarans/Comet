@@ -86,7 +86,7 @@
                                                      onclick="goToRight('slide1')"/>
                                             </div>
                                             <div class="product-slide-content">
-                                                <b:form>
+                                                <b:form style="display:inline-flex;">
                                                     <c:forEach items="#{cometBean.mostProductSoldList}" var="item">
                                                                 styleClass="product-slide-link">
                                                             <div class="product-panel">
@@ -132,7 +132,7 @@
                                                      onclick="goToRight('slide2')"/>
                                             </div>
                                             <div class="product-slide-content">
-                                                <b:form>
+                                                <b:form style="display:inline-flex;">
                                                     <c:forEach items="#{cometBean.newProductsList}" var="item">
                                                             <div class="product-panel">
                                                                 <b:navCommandLink action="#{cometBean.redirectToProductContent(item.productId)}">
@@ -146,6 +146,18 @@
                                                                     <p style="margin-top: 4px;color: #00a100">#{(item.price-item.discount)}</p>
                                                                 </div>
                                                             </div>
+                                                    <div class="product-panel">
+                                                        <b:navCommandLink action="#{cometBean.redirectToProductContent(item.productId)}">
+                                                            <img alt="img" src="#{item.imageUrl}"
+                                                                 style="width: 180px;"></img>
+                                                        </b:navCommandLink>
+                                                        <div style="width: 180px">
+                                                            <p class="product-name">#{item.name}</p>
+                                                            <div style="margin-top: -8px"><p>#{item.price}</p>
+                                                            </div>
+                                                            <p style="margin-top: 4px;color: #00a100">#{(item.price-item.discount)}</p>
+                                                        </div>
+                                                    </div>
                                                     </c:forEach>
                                                 </b:form>
                                             </div>

@@ -29,6 +29,7 @@ public class AddSlideShowBean implements Serializable {
     private List<SlideShow> slideShowList;
     private UploadedFile uploadedFile;
     private static String image_location = StaticSettings.imageUrlServer;
+    private static String image_locationDB = StaticSettings.imageUrlDB;
     private String filename;
     private String uniqueID;
     private FacesMessage msg;
@@ -99,8 +100,8 @@ public class AddSlideShowBean implements Serializable {
         String fileExtention = tokens[1];
         try {
             InputStream inputStream = event.getFile().getInputstream();
-            filename = image_location+uniqueID+"."+fileExtention;
-            Path des = Paths.get(filename);
+            filename = image_locationDB+uniqueID+"."+fileExtention;
+            Path des = Paths.get(image_location+uniqueID+"."+fileExtention);
             Files.copy(inputStream,des);
 
         } catch (Exception e) {
