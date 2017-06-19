@@ -48,6 +48,12 @@
 .product-panel{
     font-family: YJ, NYJ;
     background-color: rgba(235, 235, 235, 0.18);
+    transition: 0.6s;
+}
+.product-panel:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 12px 0px #c9c9c9;
+    transition: 0.6s;
 }
 .product-panel .product-name-bg{
     height: 53px;

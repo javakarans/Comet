@@ -141,9 +141,12 @@
                                                                 </b:navCommandLink>
                                                                 <div style="width: 180px">
                                                                     <p class="product-name">#{item.name}</p>
-                                                                    <div style="margin-top: -8px"><p>#{item.price}</p>
-                                                                    </div>
-                                                                    <p style="margin-top: 4px;color: #00a100">#{(item.price-item.discount)}</p>
+                                                                    <c:if test="#{item.discount ne 0}">
+                                                                        <div style="margin-top: -8px"><p>#{item.price} تومان </p>
+                                                                        </div>
+                                                                        <p style="margin-top: 4px;color: #00a100">#{(item.price-item.discount)} تومان </p>
+                                                                    </c:if>
+                                                                    <p style="margin-top: 4px;color: #00a100">#{(item.price-item.discount)} تومان</p>
                                                                 </div>
                                                             </div>
                                                     </c:forEach>
