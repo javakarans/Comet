@@ -73,7 +73,7 @@
 
                         <b:navLink value="خانه" href="../"></b:navLink>
 
-                        <ui:repeat value="#{applicationBean.categories}" var="category">
+                        <ui:repeat value="#{applicationBean.categories}" var="category" status="asd">
                             <b:dropMenu value="#{category.name}">
                                 <ui:repeat
                                         value="#{category.branches}"
