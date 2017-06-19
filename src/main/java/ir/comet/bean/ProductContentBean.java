@@ -71,20 +71,23 @@ public class ProductContentBean {
         productOrderDetail.setProduct(productDaoImp.getProduct(productId));
         productOrderDetail.setQuantity(1);
         productOrderDetail.setColor(color);
+        boolean addProduct=true;
         if(!userSessionBean.getProductOrderDetailList().isEmpty()){
             for (ProductOrderDetail detail:userSessionBean.getProductOrderDetailList()
-                    ) {
+                 ) {
                 if(detail.getProduct().getProductId()==productOrderDetail.getProduct().getProductId()){
                     if(detail.getColor().equals(productOrderDetail.getColor())){
                         detail.setQuantity(detail.getQuantity()+1);
-                    }else {
-                        userSessionBean.getProductOrderDetailList().add(productOrderDetail);
+                        addProduct=false;
+                        break;
                     }
-                }else {
-                    userSessionBean.getProductOrderDetailList().add(productOrderDetail);
                 }
             }
-        }else {
+            if(addProduct){
+                userSessionBean.getProductOrderDetailList().add(productOrderDetail);
+            }
+        }
+        else{
             userSessionBean.getProductOrderDetailList().add(productOrderDetail);
         }
 
