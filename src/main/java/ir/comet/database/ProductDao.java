@@ -10,7 +10,7 @@ public interface ProductDao {
     public List<Product> getProductByBranchBrandId(long branchBrandId);
     public Product getProductByProductName(String productName);
     public List<Product> getAllProducts();
-    public void updateProduct(Product product);
-    public void deleteProduct(Product product);
+    public boolean updateProduct(Product product);
+    public boolean deleteProduct(Product product);
     public List<Product> getTopProductsByColumn(String column,int count);
 }

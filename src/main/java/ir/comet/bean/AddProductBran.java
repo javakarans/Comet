@@ -42,6 +42,8 @@ public class AddProductBran {
     private TechnicalSpecification selectedTechnicalSpecification;
     private List<TechnicalSpecification> specificationList;
     private List<TechnicalSpecificationDetails> detailsList;
+    private Product selectedProduct;
+    private FilesLocations filesLocations;
 
 
     @PostConstruct
@@ -57,6 +59,7 @@ public class AddProductBran {
         branchBrandList = branchBrandDaoImp.getAlBranchBrand();
         specificationList=new ArrayList<>();
         detailsList=new ArrayList<>();
+        filesLocations = new FilesLocations();
     }
 
     public void addProduct()
@@ -64,7 +67,8 @@ public class AddProductBran {
         TechnicalSpecificationDaoImp technicalSpecificationDaoImp=new TechnicalSpecificationDaoImp();
         TechnicalSpecificationDetailsDaoImp technicalSpecificationDetailsDaoImp=new TechnicalSpecificationDetailsDaoImp();
         product.setImageUrl(iconFilename);
-        product.setImageLocationJson(imageFilename);
+        filesLocations.setFileName(product.getEnglishName());
+        product.setImageLocationJson(filesLocations.filesLocationsToJson());
         boolean result = productDaoImp.createProduct(product);
         if (result)
         {
@@ -78,6 +82,7 @@ public class AddProductBran {
             }
             productList = productDaoImp.getAllProducts();
             product = new Product();
+            filesLocations = new FilesLocations();
         }
         else
         {
@@ -141,6 +146,7 @@ public class AddProductBran {
         try {
             InputStream inputStream = event.getFile().getInputstream();
             imageFilename = image_locationDB + uniqueID + "."+fileExtention;
+            filesLocations.getFilesList().add(imageFilename);
             Path des = Paths.get(image_locationServer +uniqueID+"."+fileExtention);
             Files.copy(inputStream,des);
 
@@ -148,6 +154,32 @@ public class AddProductBran {
             e.printStackTrace();
         }
         System.out.println("done");
+    }
+
+    public void removeProduct(Product product)
+    {
+        boolean result = productDaoImp.deleteProduct(product);
+        if (result)
+        {
+            productList = productDaoImp.getAllProducts();
+        }
+        else
+        {
+
+        }
+    }
+
+    public void editProduct()
+    {
+        boolean result = productDaoImp.updateProduct(selectedProduct);
+        if (result)
+        {
+            productList = productDaoImp.getAllProducts();
+        }
+        else
+        {
+
+        }
     }
 
     public Product getProduct() {
@@ -220,5 +252,13 @@ public class AddProductBran {
 
     public void setDetailsList(List<TechnicalSpecificationDetails> detailsList) {
         this.detailsList = detailsList;
+    }
+
+    public Product getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(Product selectedProduct) {
+        this.selectedProduct = selectedProduct;
     }
 }
