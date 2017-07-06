@@ -77,6 +77,15 @@ public class SQLService {
         return list;
     }
 
+    public <T> List getObjectsByContainValue(T object,String column,String value){
+        HibernateUtil.beginTransaction();
+        Criteria criteria = HibernateUtil.getSession().createCriteria(object.getClass());
+        criteria.add(Restrictions.like(column,value,MatchMode.ANYWHERE).ignoreCase());
+        List<T> list = criteria.list();
+        HibernateUtil.commitTransaction();
+        return list;
+    }
+
     public <T> List getTopObjectsByColumn(T object,String column,int count){
         HibernateUtil.beginTransaction();
         Session session = HibernateUtil.getSession();

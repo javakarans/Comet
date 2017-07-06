@@ -21,10 +21,20 @@ public class HeaderBean {
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
     private Customer customer;
+    private String searchTextField;
 
     @PostConstruct
     public void init(){
         loadUserData();
+    }
+
+    public void doSearch(){
+        System.out.println("search...");
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/user/product.xhtml?searchBy="+searchTextField);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadUserData(){
@@ -70,5 +80,14 @@ public class HeaderBean {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+
+    public String getSearchTextField() {
+        return searchTextField;
+    }
+
+    public void setSearchTextField(String searchTextField) {
+        this.searchTextField = searchTextField;
     }
 }

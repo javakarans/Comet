@@ -8,7 +8,7 @@ import java.io.File;
  */
 public class StaticSettings {
     
-//    public static final String imageUrlServer = "/opt/tomcat/webapps/image/";
-    public static final String imageUrlServer = "C:/image/";
+    public static final String imageUrlServer = "/opt/tomcat/webapps/image/";
+//    public static final String imageUrlServer = "C:/image/";
     public static final String imageUrlDB = "/image/";
 }

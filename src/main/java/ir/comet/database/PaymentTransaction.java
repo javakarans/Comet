@@ -31,9 +31,12 @@ public class PaymentTransaction {
             Iterator<ProductOrderDetail> iterator = productOrderDetailList.iterator();
             while (iterator.hasNext()){
                 ProductOrderDetail next = iterator.next();
-                long soldCount = next.getProduct().getSoldCount();
+                long soldCount = next.getProduct().getSoldCount()+1;
                 next.getProduct().setSoldCount(soldCount);
+                long stock = next.getProduct().getStock()-1;
+                next.getProduct().setStock(stock);
                 next.setOrderDetail(orderDetail);
+                session.update(next.getProduct());
                 session.save(next);
             }
             HibernateUtil.commitTransaction();

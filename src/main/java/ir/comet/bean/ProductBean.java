@@ -31,19 +31,45 @@ public class ProductBean implements Serializable{
         loadProductList();
     }
 
+    public void loadProductList(){
+        Map<String, String> urlParam = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        boolean searchBy = urlParam.containsKey("searchBy");
+        boolean id = urlParam.containsKey("id");
+        if(searchBy){
+            loadProductBySearch(urlParam.get("searchBy"));
+        }
+        if(id){
+            loadProductByBranchBrand(getBranchBrandId());
+        }
+    }
+
     public long getBranchBrandId(){
         String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
             return Long.parseLong(id);
     }
 
-    public void loadProductList(){
+    public void loadProductBySearch(String searchBy){
+        ProductDaoImp productDaoImp=new ProductDaoImp();
+        productList= productDaoImp.getProductsByContainValue(searchBy);
+    }
+
+    public void loadProductByBranchBrand(long branchBrandId){
         BranchBrandDaoImp branchBrandDaoImp=new BranchBrandDaoImp();
-        BranchBrand branchBrand = branchBrandDaoImp.getBranchBrand(getBranchBrandId());
+        BranchBrand branchBrand = branchBrandDaoImp.getBranchBrand(branchBrandId);
         categoryName=branchBrand.getBranch().getCategory().getName();
         branchName=branchBrand.getBranch().getBranchName();
         brandName=branchBrand.getBrand().getName();
         productList=branchBrand.getProducts();
     }
+
+//    public void loadProductList(){
+//        BranchBrandDaoImp branchBrandDaoImp=new BranchBrandDaoImp();
+//        BranchBrand branchBrand = branchBrandDaoImp.getBranchBrand(getBranchBrandId());
+//        categoryName=branchBrand.getBranch().getCategory().getName();
+//        branchName=branchBrand.getBranch().getBranchName();
+//        brandName=branchBrand.getBrand().getName();
+//        productList=branchBrand.getProducts();
+//    }
 
     public long calPriceByDiscount(Product product){
         return (product.getPrice()-product.getDiscount());

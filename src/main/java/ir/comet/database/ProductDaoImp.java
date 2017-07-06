@@ -45,4 +45,8 @@ public class ProductDaoImp implements ProductDao {
     public List<Product> getTopProductsByColumn(String column,int count) {
         return SQLService.getTopObjectsByColumn(new Product(), column, count);
     }
+
+    public List<Product> getProductsByContainValue(String containValue){
+        return SQLService.getObjectsByContainValue(new Product(), "name", containValue);
+    }
 }

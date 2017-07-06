@@ -50,7 +50,9 @@
                                         </b:commandButton>
                                     </h:form>
                                     <h:form style="margin-top: 10px;margin-right: 20px">
-                                        <b:inputText size="50" placeholder="محصول مورد نظرتان را جستجو کنید ...">
+                                        <p:remoteCommand name="doSearch" actionListener="#{headerBean.doSearch()}"/>
+                                        <b:inputText size="50" placeholder="محصول مورد نظرتان را جستجو کنید ..." value="#{headerBean.searchTextField}"
+                                                     onkeypress="if (event.keyCode == 13) { doSearch(); return false; }">
                                             <f:facet name="append">
                                                 <b:iconAwesome name="search"></b:iconAwesome>
                                             </f:facet>

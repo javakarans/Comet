@@ -130,7 +130,7 @@
 
                                                 <tr id="id#{userAccountBean.rowIndex}" style="background-color: #f5f4f5;display: none">
                                                     <td colspan="12">
-                                                        <b:dataTable value="#{orderDetail.productOrderDetails}" var="productOrderDetails" searching="false" paginated="false" style="color:#000;" styleClass="order_datatable" responsive="true">
+                                                        <b:dataTable value="#{orderDetail.productOrderDetails}" var="productOrderDetails" searching="false" paginated="false" style="color:#000;" styleClass="order_datatable">
                                                             <b:dataTableColumn label="قیمت کل" orderable="false" style="text-align:center;">
                                                                 <h:outputText value="#{productOrderDetails.totalPriceAfterDiscountAndTax}"></h:outputText>
                                                             </b:dataTableColumn>
