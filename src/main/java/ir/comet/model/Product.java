@@ -36,6 +36,8 @@ public class Product implements Serializable {
     @Type(type = "text")
     private String imageLocationJson;
     @Type(type = "text")
+    private String bodyColor;
+    @Type(type = "text")
     private String otherDetailsJson;
     @Type(type = "text")
     private String colorJson;
@@ -203,5 +205,13 @@ public class Product implements Serializable {
 
     public void setTechnicalSpecificationList(List<TechnicalSpecification> technicalSpecificationList) {
         this.technicalSpecificationList = technicalSpecificationList;
+    }
+
+    public String getBodyColor() {
+        return bodyColor;
+    }
+
+    public void setBodyColor(String bodyColor) {
+        this.bodyColor = bodyColor;
     }
 }

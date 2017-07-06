@@ -33,13 +33,13 @@ public class ProductDaoImp implements ProductDao {
         return SQLService.getAllObjects(new Product());
     }
 
-    public void updateProduct(Product product) {
+    public boolean updateProduct(Product product) {
 
-        SQLService.update(product);
+       return SQLService.update(product);
     }
 
-    public void deleteProduct(Product product) {
-        SQLService.delete(product);
+    public boolean deleteProduct(Product product) {
+        return SQLService.delete(product);
     }
 
     public List<Product> getTopProductsByColumn(String column,int count) {
