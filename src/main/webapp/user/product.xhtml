@@ -33,12 +33,21 @@
                     <b:column colSm="9">
                         <b:panel collapsible="false" styleClass="contentPanel">
                             <div class="page-header">
-                                <b:iconAwesome name="th-large"></b:iconAwesome>
-                                <h:outputText value="#{productBean.categoryName}" style="margin-right: 10px"></h:outputText>
-                                <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                                <h:outputText value="#{productBean.branchName}" style="margin-right: 10px"></h:outputText>
-                                <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
-                                <h:outputText value="#{productBean.brandName}" style="margin-right: 10px"></h:outputText>
+                                <b:row>
+                                    <b:column rendered="#{!productBean.resultPage}">
+                                        <b:iconAwesome name="th-large"></b:iconAwesome>
+                                        <h:outputText value="#{productBean.categoryName}" style="margin-right: 10px"></h:outputText>
+                                        <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                                        <h:outputText value="#{productBean.branchName}" style="margin-right: 10px"></h:outputText>
+                                        <b:iconAwesome name="caret-left" style="margin-right:20px;"></b:iconAwesome>
+                                        <h:outputText value="#{productBean.brandName}" style="margin-right: 10px"></h:outputText>
+                                    </b:column>
+                                    <b:column rendered="#{productBean.resultPage}">
+                                        <b:iconAwesome name="th-large"></b:iconAwesome>
+                                        <h:outputText value="نتایج جستجو" style="margin-right: 10px"></h:outputText>
+                                    </b:column>
+                                </b:row>
+
                             </div>
                             <b:row>
                                 <b:column colSm="12" rendered="#{productBean.productListIsEmpty()}">

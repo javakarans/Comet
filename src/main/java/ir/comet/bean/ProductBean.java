@@ -22,6 +22,7 @@ public class ProductBean implements Serializable{
     private String categoryName;
     private String branchName;
     private String brandName;
+    private boolean resultPage;
     @ManagedProperty(value = "#{userSessionBean}")
     private UserSessionBean userSessionBean;
 
@@ -36,9 +37,11 @@ public class ProductBean implements Serializable{
         boolean searchBy = urlParam.containsKey("searchBy");
         boolean id = urlParam.containsKey("id");
         if(searchBy){
+            resultPage=true;
             loadProductBySearch(urlParam.get("searchBy"));
         }
         if(id){
+            resultPage=false;
             loadProductByBranchBrand(getBranchBrandId());
         }
     }
@@ -61,15 +64,6 @@ public class ProductBean implements Serializable{
         brandName=branchBrand.getBrand().getName();
         productList=branchBrand.getProducts();
     }
-
-//    public void loadProductList(){
-//        BranchBrandDaoImp branchBrandDaoImp=new BranchBrandDaoImp();
-//        BranchBrand branchBrand = branchBrandDaoImp.getBranchBrand(getBranchBrandId());
-//        categoryName=branchBrand.getBranch().getCategory().getName();
-//        branchName=branchBrand.getBranch().getBranchName();
-//        brandName=branchBrand.getBrand().getName();
-//        productList=branchBrand.getProducts();
-//    }
 
     public long calPriceByDiscount(Product product){
         return (product.getPrice()-product.getDiscount());
@@ -124,4 +118,11 @@ public class ProductBean implements Serializable{
         this.userSessionBean = userSessionBean;
     }
 
+    public boolean isResultPage() {
+        return resultPage;
+    }
+
+    public void setResultPage(boolean resultPage) {
+        this.resultPage = resultPage;
+    }
 }
