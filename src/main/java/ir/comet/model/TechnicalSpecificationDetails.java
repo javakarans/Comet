@@ -9,7 +9,6 @@ import java.io.Serializable;
  * Created by amir on 5/25/2017.
  */
 @Entity
-@Table
 public class TechnicalSpecificationDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
