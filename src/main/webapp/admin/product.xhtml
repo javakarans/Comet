@@ -115,9 +115,9 @@
                                     <h:form>
                                         <b:panelGrid colSpans="3,9">
                                             <h:outputText value="نام مشخصه جزیی جدید"/>
-                                            <b:inputText value="#{addProductBran.technicalSpecificationDetails.key}"/>
+                                            <b:inputText value="#{addProductBran.technicalSpecificationDetails.name}"/>
                                             <h:outputText value="مقدار مشخصه جزیی جدید"/>
-                                            <b:inputText value="#{addProductBran.technicalSpecificationDetails.value}"/>
+                                            <b:inputText value="#{addProductBran.technicalSpecificationDetails.valence}"/>
                                         </b:panelGrid>
                                         <b:panelGrid colSpans="12">
                                             <b:commandButton value="اضافه کردن" update="@form,addTSDForm" actionListener="#{addProductBran.addTSDToProduct}"/>
@@ -134,10 +134,10 @@
                                             <h:outputText value="#{TSD.technicalSpecification.name}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn label="نام مشخصه جزیی">
-                                            <h:outputText value="#{TSD.key}"/>
+                                            <h:outputText value="#{TSD.name}"/>
                                         </b:dataTableColumn>
                                         <b:dataTableColumn label="مقدار مشخصه کلی">
-                                            <h:outputText value="#{TSD.value}"/>
+                                            <h:outputText value="#{TSD.valence}"/>
                                         </b:dataTableColumn>
                                     </b:dataTable>
                                 </h:form>

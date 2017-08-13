@@ -1,7 +1,5 @@
 package ir.comet.model;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,8 +11,8 @@ public class TechnicalSpecificationDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long technicalSpecificationDetailsId;
-    private String key;
-    private String value;
+    private String name;
+    private String valence;
     @ManyToOne
     @JoinColumn(name = "technicalSpecificationId")
     private TechnicalSpecification technicalSpecification;
@@ -27,20 +25,20 @@ public class TechnicalSpecificationDetails implements Serializable {
         this.technicalSpecificationDetailsId = technicalSpecificationDetailsId;
     }
 
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setName(String key) {
+        this.name = key;
     }
 
-    public String getValue() {
-        return value;
+    public String getValence() {
+        return valence;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setValence(String value) {
+        this.valence = value;
     }
 
     public TechnicalSpecification getTechnicalSpecification() {
